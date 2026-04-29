@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>TinyUseful — a pocket knife for your browser</title>
+<meta name="description" content="Ten small tools. One page. No account. No saved input. No AI. For when you don't need AI — just the answer." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper:    #FAF8F2;
+    --ink:      #111111;
+    --ink-2:    #555;
+    --ink-3:    #999;
+    --rule:     #111;
+    --rule-soft:#D8D4C8;
+    --red:      #C8102E;     /* swiss red */
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Newsreader', 'Iowan Old Style', Georgia, serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+  /* ─── PAGE FRAME ─── */
+  .page { max-width: 920px; margin: 0 auto; padding: 28px 28px 64px; }
+
+  /* ─── BANNER (newspaper masthead) ─── */
+  .masthead {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--rule);
+  }
+  .wordmark {
+    display: inline-flex; align-items: baseline; gap: 10px;
+    font-family: 'Newsreader', serif;
+    font-weight: 600; font-size: 22px; letter-spacing: -0.01em;
+  }
+  .knife {
+    display: inline-block;
+    width: 22px; height: 22px;
+    background: var(--red);
+    position: relative;
+    transform: translateY(2px);
+  }
+  .knife::before, .knife::after {
+    content: ""; position: absolute; background: var(--paper);
+  }
+  .knife::before { left: 10px; top: 4px; width: 2px; height: 14px; }
+  .knife::after  { left: 4px; top: 10px; width: 14px; height: 2px; }
+  .issue {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-2);
+  }
+
+  /* ─── MANIFESTO HERO ─── */
+  .manifesto {
+    padding: 38px 0 28px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .manifesto h1 {
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: clamp(40px, 5.4vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.018em;
+    margin-bottom: 18px;
+  }
+  .manifesto h1 .red { color: var(--red); }
+  .manifesto .lede {
+    font-size: clamp(17px, 1.4vw, 19px);
+    color: var(--ink);
+    line-height: 1.5;
+    max-width: 60ch;
+  }
+  .manifesto .promises {
+    margin-top: 22px;
+    display: flex; flex-wrap: wrap; gap: 6px 22px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .manifesto .promises span::before {
+    content: "✓"; color: var(--red); margin-right: 6px;
+    font-family: 'Newsreader', serif; font-weight: 700;
+  }
+
+  /* ─── INDEX (table of contents) ─── */
+  .index {
+    border-bottom: 1px solid var(--rule);
+    padding: 14px 0;
+    display: flex; flex-wrap: wrap; gap: 4px 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .index .label { color: var(--ink-2); }
+  .index a {
+    color: var(--ink); text-decoration: none;
+    border-bottom: 1px dotted var(--ink-3);
+    padding-bottom: 1px;
+  }
+  .index a:hover { border-bottom-style: solid; border-bottom-color: var(--red); color: var(--red); }
+
+  /* ─── SECTIONS ─── */
+  section.tools {
+    padding: 36px 0 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+  section.tools:last-of-type { border-bottom: 2px solid var(--rule); }
+  .section-head {
+    display: flex; align-items: baseline; gap: 18px;
+    margin-bottom: 24px;
+  }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 0.18em;
+    color: var(--red);
+  }
+  .section-head h2 {
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: clamp(28px, 3.4vw, 38px);
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+  .section-head .desc {
+    font-style: italic;
+    color: var(--ink-2);
+    font-size: 15px;
+    margin-left: auto;
+    max-width: 32ch;
+    text-align: right;
+  }
+
+  /* ─── TOOL ROWS ─── */
+  .tool {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 28px;
+    padding: 22px 0;
+    border-top: 1px solid var(--rule-soft);
+    align-items: start;
+  }
+  .tool:first-of-type { border-top: 0; padding-top: 4px; }
+
+  .tool-meta h3 {
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    margin-bottom: 4px;
+  }
+  .tool-meta .tool-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.18em;
+    color: var(--red);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .tool-meta .desc {
+    font-size: 14px;
+    color: var(--ink-2);
+    font-style: italic;
+    line-height: 1.45;
+  }
+
+  .tool-form .row {
+    display: flex; gap: 10px; margin-bottom: 8px; flex-wrap: wrap;
+  }
+  .tool-form label {
+    flex: 1; min-width: 0;
+    display: flex; flex-direction: column; gap: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .tool-form input,
+  .tool-form select,
+  .tool-form textarea {
+    border: 0; border-bottom: 1.5px solid var(--ink);
+    background: transparent;
+    padding: 7px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--ink);
+    width: 100%;
+    border-radius: 0;
+    -webkit-appearance: none; appearance: none;
+  }
+  .tool-form select {
+    background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%);
+    background-position: calc(100% - 8px) 14px, calc(100% - 4px) 14px;
+    background-size: 4px 4px, 4px 4px;
+    background-repeat: no-repeat;
+    padding-right: 18px;
+  }
+  .tool-form textarea {
+    border: 1px solid var(--rule-soft);
+    padding: 10px;
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.5;
+    min-height: 70px;
+    resize: vertical;
+  }
+  .tool-form input:focus,
+  .tool-form select:focus,
+  .tool-form textarea:focus {
+    outline: 0;
+    border-bottom-color: var(--red);
+    border-color: var(--red);
+  }
+  .tool-form button {
+    background: var(--ink); color: var(--paper);
+    border: 0;
+    padding: 8px 16px;
+    margin-top: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    cursor: pointer;
+  }
+  .tool-form button:hover { background: var(--red); }
+
+  /* ─── OUTPUT ─── */
+  .out {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--rule-soft);
+  }
+  .out .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-2);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .out .big {
+    display: block;
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .out .breakdown {
+    display: block;
+    font-size: 13px;
+    color: var(--ink-2);
+    margin-top: 6px;
+    font-style: italic;
+    line-height: 1.4;
+  }
+  .out.text-out {
+    white-space: pre-wrap;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  /* ─── POS-specific ─── */
+  .pos-out .word-display {
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .pos-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+  .pos-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    background: var(--ink); color: var(--paper);
+    padding: 2px 7px;
+  }
+  .pos-tag.alt { background: transparent; color: var(--ink-2); border: 1px solid var(--rule-soft); }
+  .pos-examples { font-size: 14px; color: var(--ink-2); line-height: 1.55; font-style: italic; }
+  .pos-examples .ex { margin: 3px 0; }
+  .pos-examples .ex strong {
+    font-style: normal; font-weight: 500; color: var(--ink);
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase; margin-right: 6px;
+  }
+
+  /* syllable */
+  .syl-display {
+    font-family: 'Newsreader', serif;
+    font-size: 18px; line-height: 1.5;
+    word-break: break-word;
+    margin-bottom: 8px;
+  }
+  .syl-display .sep { color: var(--red); }
+  .syl-display .count {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--ink-3); font-size: 12px;
+    margin-left: 8px;
+  }
+  .syl-stats { font-size: 13px; color: var(--ink-2); font-style: italic; }
+  .syl-stats strong {
+    font-style: normal;
+    color: var(--ink);
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: 18px;
+  }
+
+  /* ─── DISCLOSURE BLOCK (manifest tail) ─── */
+  .disclosure {
+    margin-top: 32px;
+    padding: 28px 0 22px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 28px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .disclosure h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+  }
+  .disclosure p {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  /* ─── COLOPHON ─── */
+  .colophon {
+    margin-top: 24px;
+    padding-top: 14px;
+    display: flex; justify-content: space-between; align-items: baseline; gap: 14px;
+    flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .colophon a { color: inherit; border-bottom: 1px dotted var(--ink-3); text-decoration: none; padding-bottom: 1px; }
+  .colophon a:hover { color: var(--red); border-color: var(--red); }
+
+  /* ─── ADVERTISEMENT (declared, not hidden) ─── */
+  .ad-block {
+    margin: 36px 0 0;
+    padding: 24px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    text-align: center;
+  }
+  .ad-block::before {
+    content: "Advertisement";
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 14px;
+  }
+  .ad-block .placeholder {
+    display: inline-block;
+    padding: 32px 60px;
+    border: 1px dashed var(--rule-soft);
+    color: var(--ink-3);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 720px) {
+    .page { padding: 20px 18px 48px; }
+    .masthead { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .manifesto { padding: 24px 0 20px; }
+    .section-head { flex-direction: column; gap: 8px; }
+    .section-head .desc { margin-left: 0; text-align: left; max-width: 100%; }
+    .tool { grid-template-columns: 1fr; gap: 14px; }
+    .tool-form .row { flex-direction: column; gap: 12px; }
+    .index { gap: 4px 14px; }
+  }
+
+  /* print: makes the philosophical point — it works on paper too */
+  @media print {
+    body { background: white; }
+    .ad-block, .colophon { display: none; }
+    .tool-form button { display: none; }
+  }
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <!-- ─── MASTHEAD ─── -->
+  <header class="masthead">
+    <span class="wordmark">
+      <span class="knife" aria-hidden="true"></span>
+      TinyUseful
+    </span>
+    <span class="issue">No. 1 — April 2026</span>
+  </header>
+
+  <!-- ─── MANIFESTO ─── -->
+  <section class="manifesto">
+    <h1>A pocket knife<br>for your <span class="red">browser</span>.</h1>
+    <p class="lede">
+      Ten small tools on a single page. They calculate numbers and explain words.
+      That's it. No account, no saved input, no AI guessing.
+      <strong>For when you don't need AI &mdash; just the answer.</strong>
+    </p>
+    <div class="promises">
+      <span>No account</span>
+      <span>No saved input</span>
+      <span>No AI</span>
+      <span>No tracking</span>
+      <span>Works offline after first load</span>
+    </div>
+  </section>
+
+  <!-- ─── INDEX ─── -->
+  <nav class="index" aria-label="Index">
+    <span class="label">Index</span>
+    <a href="#numbers">01 · Numbers (6)</a>
+    <a href="#words">02 · Words (4)</a>
+    <a href="#how">How it works</a>
+    <a href="#why">Why no AI</a>
+  </nav>
+
+  <!-- ─── 01 NUMBERS ─── -->
+  <section class="tools" id="numbers">
+    <div class="section-head">
+      <span class="section-num">§ 01</span>
+      <h2>Numbers</h2>
+      <span class="desc">Math you actually do — six tools, deterministic, computed in your browser.</span>
+    </div>
+
+    <!-- 1. PERCENTAGE -->
+    <div class="tool" data-tool="percentage">
+      <div class="tool-meta">
+        <span class="tool-num">No. 01</span>
+        <h3>Percentage</h3>
+        <p class="desc">% of, X is what % of Y, and % change between two numbers.</p>
+      </div>
+      <div class="tool-form">
+        <div class="row">
+          <label>X<input type="number" id="pct-x" value="15" step="any"></label>
+          <label>Mode
+            <select id="pct-mode">
+              <option value="of">% of Y</option>
+              <option value="isof">X is what % of Y</option>
+              <option value="change">% change Y → X</option>
+            </select>
+          </label>
+          <label>Y<input type="number" id="pct-y" value="80" step="any"></label>
+        </div>
+        <button onclick="pctCalc()">Calculate</button>
+        <div class="out" id="pct-out"><span class="label">Result</span><span class="big">12</span></div>
+      </div>
+    </div>
+
+    <!-- 2. SALES TAX -->
+    <div class="tool" data-tool="vat">
+      <div class="tool-meta">
+        <span class="tool-num">No. 02</span>
+        <h3>Sales Tax / VAT</h3>
+        <p class="desc">Add tax to a net price, or remove tax to find the original net.</p>
+      </div>
+      <div class="tool-form">
+        <div class="row">
+          <label>Price<input type="number" id="vat-price" value="100" step="any"></label>
+          <label>Rate %<input type="number" id="vat-rate" value="8.875" step="any"></label>
+          <label>Mode
+            <select id="vat-mode">
+              <option value="add">Add tax</option>
+              <option value="remove">Remove tax</option>
+            </select>
+          </label>
+        </div>
+        <button onclick="vatCalc()">Calculate</button>
+        <div class="out" id="vat-out"><span class="label">After tax</span><span class="big">$108.88</span><span class="breakdown">Tax amount $8.88</span></div>
+      </div>
+    </div>
+
+    <!-- 3. MORTGAGE -->
+    <div class="tool" data-tool="mortgage">
+      <div class="tool-meta">
+        <span class="tool-num">No. 03</span>
+        <h3>Mortgage</h3>
+        <p class="desc">Monthly principal &amp; interest using the standard amortization formula.</p>
+      </div>
+      <div class="tool-form">
+        <div class="row">
+          <label>Loan ($)<input type="number" id="mtg-loan" value="450000" step="any"></label>
+          <label>Rate %<input type="number" id="mtg-rate" value="6.75" step="any"></label>
+          <label>Years<input type="number" id="mtg-years" value="30" step="any"></label>
+        </div>
+        <button onclick="mtgCalc()">Calculate</button>
+        <div class="out" id="mtg-out"><span class="label">Monthly payment</span><span class="big">$2,919</span><span class="breakdown">Total interest $600,765 · Total paid $1,050,765</span></div>
+      </div>
+    </div>
+
+    <!-- 4. LOAN -->
+    <div class="tool" data-tool="loan">
+      <div class="tool-meta">
+        <span class="tool-num">No. 04</span>
+        <h3>Loan</h3>
+        <p class="desc">Auto, student or personal — fixed-rate, fully amortized.</p>
+      </div>
+      <div class="tool-form">
+        <div class="row">
+          <label>Amount ($)<input type="number" id="loan-amt" value="25000" step="any"></label>
+          <label>APR %<input type="number" id="loan-apr" value="7.5" step="any"></label>
+          <label>Months<input type="number" id="loan-months" value="60" step="any"></label>
+        </div>
+        <button onclick="loanCalc()">Calculate</button>
+        <div class="out" id="loan-out"><span class="label">Monthly</span><span class="big">$501</span><span class="breakdown">Total interest $5,059 · Total paid $30,059</span></div>
+      </div>
+    </div>
+
+    <!-- 5. COMPOUND INTEREST -->
+    <div class="tool" data-tool="compound">
+      <div class="tool-meta">
+        <span class="tool-num">No. 05</span>
+        <h3>Compound Interest</h3>
+        <p class="desc">Future value of a starting balance plus monthly contributions.</p>
+      </div>
+      <div class="tool-form">
+        <div class="row">
+          <label>Start ($)<input type="number" id="ci-start" value="10000" step="any"></label>
+          <label>Monthly<input type="number" id="ci-monthly" value="500" step="any"></label>
+          <label>APR %<input type="number" id="ci-apr" value="7" step="any"></label>
+          <label>Years<input type="number" id="ci-years" value="20" step="any"></label>
+        </div>
+        <button onclick="ciCalc()">Calculate</button>
+        <div class="out" id="ci-out"><span class="label">Future value</span><span class="big">$300,123</span><span class="breakdown">Contributed $130,000 · Interest earned $170,123</span></div>
+      </div>
+    </div>
+
+    <!-- 6. RENT -->
+    <div class="tool" data-tool="rent">
+      <div class="tool-meta">
+        <span class="tool-num">No. 06</span>
+        <h3>Rent Affordability</h3>
+        <p class="desc">The 30%-rule, adjusted for monthly debt obligations.</p>
+      </div>
+      <div class="tool-form">
+        <div class="row">
+          <label>Income/mo ($)<input type="number" id="rent-inc" value="6500" step="any"></label>
+          <label>Debts/mo ($)<input type="number" id="rent-debt" value="450" step="any"></label>
+          <label>Rule %<input type="number" id="rent-rule" value="30" step="any"></label>
+        </div>
+        <button onclick="rentCalc()">Calculate</button>
+        <div class="out" id="rent-out"><span class="label">Suggested max rent</span><span class="big">$1,500</span><span class="breakdown">Conservative $1,300 · Stretch $1,815 · Based on the 30% rule</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── AD BLOCK ─── -->
+  <div class="ad-block">
+    <div class="placeholder">728 × 90 leaderboard placement</div>
+  </div>
+
+  <!-- ─── 02 WORDS ─── -->
+  <section class="tools" id="words">
+    <div class="section-head">
+      <span class="section-num">§ 02</span>
+      <h2>Words</h2>
+      <span class="desc">Understand the language you're using — four tools, no dictionary lookup needed.</span>
+    </div>
+
+    <!-- 7. TYPE OF WORD -->
+    <div class="tool" data-tool="typeofword">
+      <div class="tool-meta">
+        <span class="tool-num">No. 07</span>
+        <h3>Type of Word</h3>
+        <p class="desc">Identify the part of speech with example sentences.</p>
+      </div>
+      <div class="tool-form">
+        <div class="row">
+          <label>Word<input type="text" id="pos-in" placeholder="run" autocapitalize="off" autocorrect="off"></label>
+        </div>
+        <button onclick="posCalc()">Identify</button>
+        <div class="out pos-out" id="pos-out">
+          <span class="label">Part of speech</span>
+          <span class="word-display">run</span>
+          <div class="pos-tags">
+            <span class="pos-tag">verb</span>
+            <span class="pos-tag">noun</span>
+          </div>
+          <div class="pos-examples">
+            <p class="ex"><strong>verb</strong> She runs every morning before work.</p>
+            <p class="ex"><strong>noun</strong> They went for a long run in the park.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. SYLLABLE -->
+    <div class="tool" data-tool="syllable">
+      <div class="tool-meta">
+        <span class="tool-num">No. 08</span>
+        <h3>Syllable Counter</h3>
+        <p class="desc">Counts syllables per line — useful for haiku, songwriting, ESL practice.</p>
+      </div>
+      <div class="tool-form">
+        <label>Text<textarea id="syl-in" oninput="sylCalc()">An old silent pond
+A frog jumps into the pond
+splash again silence</textarea></label>
+        <div class="out" id="syl-out">
+          <span class="label">Result</span>
+          <div class="syl-display"></div>
+          <div class="syl-stats"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. WORD COUNTER -->
+    <div class="tool" data-tool="wordcount">
+      <div class="tool-meta">
+        <span class="tool-num">No. 09</span>
+        <h3>Word Counter</h3>
+        <p class="desc">Live word count with sentences and reading time.</p>
+      </div>
+      <div class="tool-form">
+        <label>Text<textarea id="wc-in" placeholder="Start typing..." oninput="wcCalc()"></textarea></label>
+        <div class="out" id="wc-out">
+          <span class="label">Stats</span>
+          <span class="big">0 <span style="font-size:18px; color: var(--ink-2);">words</span></span>
+          <span class="breakdown">0 sentences · 0 min read</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. CHARACTER COUNTER -->
+    <div class="tool" data-tool="charcount">
+      <div class="tool-meta">
+        <span class="tool-num">No. 10</span>
+        <h3>Character Counter</h3>
+        <p class="desc">Live character count with platform limits — Twitter, LinkedIn, SMS.</p>
+      </div>
+      <div class="tool-form">
+        <label>Text<textarea id="cc-in" placeholder="Start typing..." oninput="ccCalc()"></textarea></label>
+        <div class="out" id="cc-out">
+          <span class="label">Characters</span>
+          <span class="big">0</span>
+          <span class="breakdown">0 with spaces · 0 without · Twitter 280 · SMS 160 · Meta description 160</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── DISCLOSURE / MANIFEST TAIL ─── -->
+  <section class="disclosure" id="how">
+    <div>
+      <h4>How it works</h4>
+      <p>
+        Every number tool uses the same formula your bank uses, computed entirely in your browser using JavaScript.
+        Word tools use a built-in dictionary and standard syllable rules — no external lookup, no API call.
+        Open the page once, and it works offline forever.
+      </p>
+    </div>
+    <div id="why">
+      <h4>Why no AI</h4>
+      <p>
+        AI is great at writing emails. It is a wasteful, unverifiable tool for arithmetic and grammar.
+        These ten tools have one correct answer each. No probability, no hallucination, no "let me try that again."
+        For when you don't need a chat — just an answer.
+      </p>
+    </div>
+    <div>
+      <h4>What we sell</h4>
+      <p>
+        One advertisement, declared. No tracking pixels, no fingerprinting, no email gates, no popups.
+        We sell attention to advertisers in one clearly labelled box. That is the entire business model.
+        Your inputs never leave your browser.
+      </p>
+    </div>
+  </section>
+
+  <!-- ─── COLOPHON ─── -->
+  <footer class="colophon">
+    <span>TinyUseful · Issue No. 1 · April 2026 · Made for the open web</span>
+    <span><a href="#">Privacy</a> &nbsp; <a href="#">Contact</a> &nbsp; v0.3</span>
+  </footer>
+
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const fmt  = (n, d=2) => n.toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
+  const fmt0 = n => n.toLocaleString('en-US', {maximumFractionDigits: 0});
+  function setOut(id, label, big, breakdown='') {
+    $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
+  }
+
+  /* NUMBERS */
+  function pctCalc() {
+    const x = +$('pct-x').value, y = +$('pct-y').value, mode = $('pct-mode').value;
+    let label, big, br='';
+    if (mode === 'of')      { const r = x/100*y; label = `${x}% of ${y}`; big = fmt(r); }
+    else if (mode==='isof') { const r = y===0?0:(x/y)*100; label = `${x} is what % of ${y}`; big = fmt(r,2)+' %'; }
+    else                    { const r = y===0?0:((x-y)/y)*100; label = `${y} → ${x}`; big = (r>=0?'+':'')+fmt(r,2)+' %'; br = `Absolute change: ${fmt(x-y)}`; }
+    setOut('pct-out', label, big, br);
+  }
+  function vatCalc() {
+    const price=+$('vat-price').value, rate=+$('vat-rate').value, mode=$('vat-mode').value;
+    if (mode === 'add') { const tax=price*rate/100, gross=price+tax;
+      setOut('vat-out','After tax','$'+fmt(gross),`Tax amount $${fmt(tax)} · Net $${fmt(price)}`); }
+    else { const net=price/(1+rate/100), tax=price-net;
+      setOut('vat-out','Before tax','$'+fmt(net),`Tax amount $${fmt(tax)} · Total $${fmt(price)}`); }
+  }
+  function mtgCalc() {
+    const P=+$('mtg-loan').value, r=+$('mtg-rate').value/100/12, n=+$('mtg-years').value*12;
+    const M = r===0 ? P/n : P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+    setOut('mtg-out','Monthly payment','$'+fmt0(M),`Total interest $${fmt0(M*n-P)} · Total paid $${fmt0(M*n)}`);
+  }
+  function loanCalc() {
+    const P=+$('loan-amt').value, r=+$('loan-apr').value/100/12, n=+$('loan-months').value;
+    const M = r===0 ? P/n : P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+    setOut('loan-out','Monthly','$'+fmt0(M),`Total interest $${fmt0(M*n-P)} · Total paid $${fmt0(M*n)}`);
+  }
+  function ciCalc() {
+    const P=+$('ci-start').value, m=+$('ci-monthly').value, r=+$('ci-apr').value/100/12, n=+$('ci-years').value*12;
+    let bal = P; for (let i=0;i<n;i++){ bal = bal*(1+r) + m; }
+    const contrib = P + m*n;
+    setOut('ci-out','Future value','$'+fmt0(bal),`Contributed $${fmt0(contrib)} · Interest earned $${fmt0(bal-contrib)}`);
+  }
+  function rentCalc() {
+    const inc=+$('rent-inc').value, debt=+$('rent-debt').value, rule=+$('rent-rule').value;
+    const adjusted = inc*rule/100 - debt*0.5;
+    setOut('rent-out','Suggested max rent','$'+fmt0(Math.max(0,adjusted)),
+      `Conservative $${fmt0(inc*0.20)} · Stretch $${fmt0(inc*(rule+5)/100)} · Based on the ${rule}% rule`);
+  }
+
+  /* WORDS — Type of Word */
+  const POS_DICT = {
+    "run":[{p:"verb",ex:"She runs every morning before work."},{p:"noun",ex:"They went for a long run in the park."}],
+    "light":[{p:"noun",ex:"Turn on the light, please."},{p:"verb",ex:"She lit a candle."},{p:"adjective",ex:"This bag is very light."}],
+    "back":[{p:"noun",ex:"My back hurts after the flight."},{p:"adverb",ex:"Step back from the edge."},{p:"verb",ex:"I'll back you in this argument."},{p:"adjective",ex:"Use the back door."}],
+    "right":[{p:"adjective",ex:"That's the right answer."},{p:"noun",ex:"You have the right to remain silent."},{p:"adverb",ex:"Turn right at the corner."}],
+    "well":[{p:"adverb",ex:"She speaks Italian well."},{p:"noun",ex:"They drew water from the well."},{p:"adjective",ex:"I don't feel well today."}],
+    "fast":[{p:"adjective",ex:"It's a fast car."},{p:"adverb",ex:"He runs fast."},{p:"verb",ex:"Muslims fast during Ramadan."},{p:"noun",ex:"He broke his fast at sunset."}],
+    "love":[{p:"noun",ex:"Love is patient."},{p:"verb",ex:"I love this song."}],
+    "water":[{p:"noun",ex:"Drink more water."},{p:"verb",ex:"Don't forget to water the plants."}],
+    "play":[{p:"verb",ex:"Children play in the yard."},{p:"noun",ex:"We saw a play at the theater."}],
+    "work":[{p:"verb",ex:"I work from home."},{p:"noun",ex:"The work is almost done."}],
+    "look":[{p:"verb",ex:"Look at the stars."},{p:"noun",ex:"She gave me a strange look."}],
+    "help":[{p:"verb",ex:"Can you help me?"},{p:"noun",ex:"I need your help."}],
+    "like":[{p:"verb",ex:"I like coffee."},{p:"preposition",ex:"He swims like a fish."}],
+    "make":[{p:"verb",ex:"Make a wish."},{p:"noun",ex:"What make is your car?"}],
+    "want":[{p:"verb",ex:"I want pizza tonight."},{p:"noun",ex:"They lived in want for years."}],
+    "need":[{p:"verb",ex:"I need a break."},{p:"noun",ex:"There's a need for clarity."}],
+    "time":[{p:"noun",ex:"Time flies."},{p:"verb",ex:"Time the cooking carefully."}],
+    "hand":[{p:"noun",ex:"Raise your hand."},{p:"verb",ex:"Hand me the salt."}],
+    "house":[{p:"noun",ex:"Their house is on the hill."},{p:"verb",ex:"The museum houses rare books."}],
+    "book":[{p:"noun",ex:"Read a good book."},{p:"verb",ex:"Book the flight today."}],
+    "park":[{p:"noun",ex:"Meet me at the park."},{p:"verb",ex:"Park the car here."}],
+    "fly":[{p:"verb",ex:"Birds fly south for winter."},{p:"noun",ex:"There's a fly in my soup."}],
+    "kind":[{p:"adjective",ex:"She is very kind."},{p:"noun",ex:"What kind of bread is this?"}],
+    "near":[{p:"preposition",ex:"The store is near the park."},{p:"adjective",ex:"In the near future."}],
+    "fair":[{p:"adjective",ex:"That's a fair price."},{p:"noun",ex:"We met at the county fair."}],
+    "mean":[{p:"verb",ex:"What does that mean?"},{p:"adjective",ex:"Don't be mean."},{p:"noun",ex:"The mean of the data is 7."}],
+    "down":[{p:"adverb",ex:"Sit down, please."},{p:"preposition",ex:"Run down the hill."},{p:"adjective",ex:"The system is down."}],
+    "up":[{p:"adverb",ex:"Look up at the sky."},{p:"preposition",ex:"Climb up the ladder."},{p:"adjective",ex:"Stocks are up today."}],
+    "set":[{p:"verb",ex:"Set the table."},{p:"noun",ex:"A set of tools."},{p:"adjective",ex:"He's set in his ways."}],
+    "bear":[{p:"verb",ex:"I cannot bear the noise."},{p:"noun",ex:"A bear roamed the woods."}],
+    "watch":[{p:"verb",ex:"Watch the road carefully."},{p:"noun",ex:"My watch is broken."}],
+    "stand":[{p:"verb",ex:"Please stand up."},{p:"noun",ex:"She took a stand on the issue."}],
+    "drink":[{p:"verb",ex:"Drink your milk."},{p:"noun",ex:"Order a drink."}],
+    "fish":[{p:"noun",ex:"Fish swim in schools."},{p:"verb",ex:"They fish at dawn."}],
+    "rest":[{p:"verb",ex:"Rest before the meeting."},{p:"noun",ex:"The rest is history."}],
+    "match":[{p:"noun",ex:"They watched the tennis match."},{p:"verb",ex:"Your shoes match your belt."}],
+    "save":[{p:"verb",ex:"Save your work often."},{p:"noun",ex:"The goalie made a great save."}],
+    "answer":[{p:"verb",ex:"Please answer the phone."},{p:"noun",ex:"Your answer was correct."}],
+    "change":[{p:"verb",ex:"People change over time."},{p:"noun",ex:"Bring some change for parking."}],
+    "open":[{p:"verb",ex:"Open the window."},{p:"adjective",ex:"The shop is open."}],
+    "close":[{p:"verb",ex:"Close the door behind you."},{p:"adjective",ex:"They are close friends."}],
+    "happy":[{p:"adjective",ex:"She looks happy today."}],
+    "quickly":[{p:"adverb",ex:"He answered quickly."}],
+    "beautiful":[{p:"adjective",ex:"That's a beautiful painting."}],
+    "table":[{p:"noun",ex:"Set the table for dinner."}],
+    "chair":[{p:"noun",ex:"Pull up a chair."}],
+    "always":[{p:"adverb",ex:"He always arrives on time."}],
+    "sometimes":[{p:"adverb",ex:"Sometimes I walk to work."}],
+    "however":[{p:"adverb",ex:"It's late; however, we should keep going."}],
+    "because":[{p:"conjunction",ex:"I left because it was raining."}],
+    "and":[{p:"conjunction",ex:"Bread and butter."}],
+    "but":[{p:"conjunction",ex:"Small but mighty."}],
+    "or":[{p:"conjunction",ex:"Tea or coffee?"}],
+    "the":[{p:"article",ex:"The book is on the table."}],
+    "a":[{p:"article",ex:"A cat sat on the mat."}],
+    "an":[{p:"article",ex:"An apple a day."}],
+    "in":[{p:"preposition",ex:"He's in the kitchen."}],
+    "on":[{p:"preposition",ex:"The cup is on the shelf."}],
+    "with":[{p:"preposition",ex:"Coffee with milk, please."}],
+    "she":[{p:"pronoun",ex:"She is my sister."}],
+    "he":[{p:"pronoun",ex:"He arrived early."}],
+    "they":[{p:"pronoun",ex:"They went home."}],
+    "we":[{p:"pronoun",ex:"We are ready."}],
+    "i":[{p:"pronoun",ex:"I agree with you."}],
+    "wow":[{p:"interjection",ex:"Wow, that's amazing!"}],
+    "ouch":[{p:"interjection",ex:"Ouch, that hurt!"}],
+    "hello":[{p:"interjection",ex:"Hello, how are you?"}]
+  };
+  function inferPos(w) {
+    const word = w.toLowerCase(), guesses = [];
+    if (/^[A-Z]/.test(w)) guesses.push({p:"proper noun",ex:`${w} is likely a proper noun.`});
+    if (/ly$/.test(word) && !/^(fly|ally|rely|reply|imply|apply)$/.test(word)) guesses.push({p:"adverb",ex:`Ends in "-ly" — typically an adverb.`});
+    if (/(tion|sion|ness|ity|ment|ship|hood|ance|ence)$/.test(word)) guesses.push({p:"noun",ex:`Ends in a noun-forming suffix.`});
+    if (/(ize|ise|ate|ify|en)$/.test(word) && word.length>4) guesses.push({p:"verb",ex:`Ends in a verb-forming suffix.`});
+    if (/(able|ible|ous|ive|ful|less|ish|ic)$/.test(word) && word.length>5) guesses.push({p:"adjective",ex:`Ends in an adjective-forming suffix.`});
+    if (/ing$/.test(word) && word.length>4) guesses.push({p:"verb (gerund)",ex:`Likely a gerund or present participle.`});
+    if (/ed$/.test(word) && word.length>3) guesses.push({p:"verb (past)",ex:`Likely a past-tense verb.`});
+    return guesses.length ? guesses : [{p:"unknown",ex:"Couldn't identify. Try a more common word."}];
+  }
+  function posCalc() {
+    const raw = $('pos-in').value.trim(); if (!raw) return;
+    const word = raw.toLowerCase();
+    const dict = POS_DICT[word];
+    const entries = dict || inferPos(raw);
+    const tags = entries.map((e,i) => `<span class="pos-tag${i>0?' alt':''}">${e.p}</span>`).join('');
+    const examples = entries.map(e => `<p class="ex"><strong>${e.p}</strong> ${e.ex}</p>`).join('');
+    const inferred = !dict ? '<p class="ex" style="opacity:.6; font-size:11px; margin-top:8px;">Inferred from word structure. For exact data, check a dictionary.</p>' : '';
+    $('pos-out').innerHTML = `
+      <span class="label">Part of speech</span>
+      <span class="word-display">${raw}</span>
+      <div class="pos-tags">${tags}</div>
+      <div class="pos-examples">${examples}${inferred}</div>`;
+  }
+  $('pos-in').addEventListener('keydown', e => { if (e.key === 'Enter') posCalc(); });
+
+  /* WORDS — Syllable */
+  function countSyllables(word) {
+    word = word.toLowerCase().replace(/[^a-z]/g, '');
+    if (!word) return 0;
+    if (word.length <= 3) return 1;
+    word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '');
+    word = word.replace(/^y/, '');
+    const matches = word.match(/[aeiouy]{1,2}/g);
+    return matches ? matches.length : 1;
+  }
+  function splitSyllables(word) {
+    word = word.toLowerCase();
+    const n = countSyllables(word);
+    if (n <= 1) return word;
+    let parts = [], chunk = '';
+    for (let i = 0; i < word.length; i++) {
+      chunk += word[i];
+      if (/[aeiouy]/.test(word[i]) && /[bcdfghjklmnpqrstvwxz]/.test(word[i+1] || '') && /[aeiouy]/.test(word[i+2] || '')) {
+        parts.push(chunk); chunk = '';
+      }
+    }
+    if (chunk) parts.push(chunk);
+    while (parts.length > n) parts[parts.length-2] += parts.pop();
+    return parts.join('·');
+  }
+  function sylCalc() {
+    const text = $('syl-in').value;
+    const display = $('syl-out').querySelector('.syl-display');
+    const stats   = $('syl-out').querySelector('.syl-stats');
+    if (!text.trim()) { display.innerHTML = '<span style="color:var(--ink-3);">Type something.</span>'; stats.innerHTML = '0 syllables · 0 words'; return; }
+    const lines = text.split(/\n/);
+    let totalSyl = 0, totalWords = 0, longest = {w:'',s:0};
+    const lineCounts = [];
+    const html = lines.map(line => {
+      const words = line.split(/\s+/).filter(Boolean);
+      let lineSyl = 0;
+      const wordHtml = words.map(w => {
+        const cleaned = w.replace(/[^A-Za-z']/g, '');
+        if (!cleaned) return w;
+        const s = countSyllables(cleaned);
+        lineSyl += s;
+        if (s > longest.s) longest = {w:cleaned, s};
+        const split = splitSyllables(cleaned).split('·').join('<span class="sep">·</span>');
+        const punct = w.match(/[^A-Za-z']+$/);
+        return split + (punct ? punct[0] : '');
+      }).join(' ');
+      totalSyl += lineSyl;
+      totalWords += words.length;
+      lineCounts.push(lineSyl);
+      return `<div>${wordHtml} <span class="count">${lineSyl}</span></div>`;
+    }).join('');
+    display.innerHTML = html;
+    const isHaiku = lineCounts.length === 3 && lineCounts[0] === 5 && lineCounts[1] === 7 && lineCounts[2] === 5;
+    const haikuNote = isHaiku ? ' &mdash; <strong style="color:var(--red);">valid haiku</strong>' : '';
+    stats.innerHTML = `<strong>${totalSyl} syllables</strong> · ${totalWords} word${totalWords===1?'':'s'}${haikuNote} · longest: <em>${longest.w || '—'}</em> (${longest.s})`;
+  }
+
+  /* WORDS — Word counter */
+  function wcCalc() {
+    const t = $('wc-in').value;
+    const words = t.trim() ? t.trim().split(/\s+/).length : 0;
+    const sentences = t.trim() ? (t.match(/[.!?]+/g) || []).length || 1 : 0;
+    const minutes = Math.max(1, Math.ceil(words/200));
+    $('wc-out').innerHTML = `<span class="label">Stats</span><span class="big">${fmt0(words)} <span style="font-size:18px;color:var(--ink-2);">words</span></span><span class="breakdown">${sentences} sentence${sentences===1?'':'s'} · ${minutes} min read</span>`;
+  }
+
+  /* WORDS — Character counter */
+  function ccCalc() {
+    const t = $('cc-in').value;
+    const withSp = t.length;
+    const noSp = t.replace(/\s/g, '').length;
+    const tw = 280 - withSp;
+    const sms = 160 - withSp;
+    const meta = 160 - withSp;
+    const fmtRem = n => n >= 0 ? `${n} left` : `${Math.abs(n)} over`;
+    $('cc-out').innerHTML = `<span class="label">Characters</span><span class="big">${fmt0(withSp)}</span><span class="breakdown">${fmt0(noSp)} without spaces · Twitter ${fmtRem(tw)} · SMS ${fmtRem(sms)} · Meta description ${fmtRem(meta)}</span>`;
+  }
+
+  /* INIT */
+  pctCalc(); vatCalc(); mtgCalc(); loanCalc(); ciCalc(); rentCalc();
+  posCalc(); sylCalc(); wcCalc(); ccCalc();
+</script>
+
+</body>
+</html>
