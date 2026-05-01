@@ -4,367 +4,38 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>TinyUseful — small tools for everyday questions</title>
-<meta name="description" content="Eleven small tools — money calculators, unit converter, date and time zone converters. One page. No account. No tracking. No AI." />
+<meta name="description" content="Eleven small tools — money calculators, unit converter, date and time zone converters. One page per tool. No account. No tracking. No AI." />
+<link rel="canonical" href="https://www.tinyuseful.app/">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="TinyUseful — small tools for everyday questions">
+<meta property="og:description" content="Eleven small tools — money calculators, unit converter, date and time zone converters. No account. No tracking. No AI.">
+<meta property="og:url" content="https://www.tinyuseful.app/">
+<meta property="og:site_name" content="TinyUseful">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TinyUseful — small tools for everyday questions">
+<meta name="twitter:description" content="Eleven small tools. No account. No tracking. No AI.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-<style>
-  :root {
-    --paper:    #FAF8F2;
-    --ink:      #111111;
-    --ink-2:    #555;
-    --ink-3:    #999;
-    --rule:     #111;
-    --rule-soft:#D8D4C8;
-    --red:      #C8102E;     /* swiss red */
-  }
+<link rel="stylesheet" href="/style.css">
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'Newsreader', 'Iowan Old Style', Georgia, serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-size: 17px;
-    line-height: 1.45;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
-
-  /* ─── PAGE FRAME ─── */
-  .page { max-width: 920px; margin: 0 auto; padding: 28px 28px 64px; }
-
-  /* ─── BANNER (newspaper masthead) ─── */
-  .masthead {
-    display: flex; justify-content: space-between; align-items: baseline;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--rule);
-  }
-  .wordmark {
-    display: inline-flex; align-items: baseline; gap: 10px;
-    font-family: 'Newsreader', serif;
-    font-weight: 600; font-size: 22px; letter-spacing: -0.01em;
-  }
-  .knife {
-    display: inline-block;
-    width: 22px; height: 22px;
-    background: var(--red);
-    position: relative;
-    transform: translateY(2px);
-  }
-  .knife::before, .knife::after {
-    content: ""; position: absolute; background: var(--paper);
-  }
-  .knife::before { left: 10px; top: 4px; width: 2px; height: 14px; }
-  .knife::after  { left: 4px; top: 10px; width: 14px; height: 2px; }
-  .issue {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; letter-spacing: 0.14em;
-    text-transform: uppercase; color: var(--ink-2);
-  }
-
-  /* ─── MANIFESTO HERO ─── */
-  .manifesto {
-    padding: 38px 0 28px;
-    border-bottom: 1px solid var(--rule);
-  }
-  .manifesto h1 {
-    font-family: 'Newsreader', serif;
-    font-weight: 500;
-    font-size: clamp(40px, 5.4vw, 64px);
-    line-height: 1.05;
-    letter-spacing: -0.018em;
-    margin-bottom: 18px;
-  }
-  .manifesto h1 .red { color: var(--red); }
-  .manifesto .subtitle {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px; letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-2);
-    margin-bottom: 18px;
-  }
-  .manifesto .subtitle .dot { color: var(--red); margin: 0 6px; }
-  .manifesto .lede {
-    font-size: clamp(17px, 1.4vw, 19px);
-    color: var(--ink);
-    line-height: 1.5;
-    max-width: 60ch;
-  }
-  .manifesto .promises {
-    margin-top: 22px;
-    display: flex; flex-wrap: wrap; gap: 6px 22px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--ink-2);
-  }
-  .manifesto .promises span::before {
-    content: "✓"; color: var(--red); margin-right: 6px;
-    font-family: 'Newsreader', serif; font-weight: 700;
-  }
-
-  /* ─── INDEX (table of contents) ─── */
-  .index {
-    border-bottom: 1px solid var(--rule);
-    padding: 14px 0;
-    display: flex; flex-wrap: wrap; gap: 4px 24px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-  }
-  .index .label { color: var(--ink-2); }
-  .index a {
-    color: var(--ink); text-decoration: none;
-    border-bottom: 1px dotted var(--ink-3);
-    padding-bottom: 1px;
-  }
-  .index a:hover { border-bottom-style: solid; border-bottom-color: var(--red); color: var(--red); }
-
-  /* ─── SECTIONS ─── */
-  section.tools {
-    padding: 36px 0 8px;
-    border-bottom: 1px solid var(--rule);
-  }
-  section.tools:last-of-type { border-bottom: 2px solid var(--rule); }
-  .section-head {
-    display: flex; align-items: baseline; gap: 18px;
-    margin-bottom: 24px;
-  }
-  .section-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px; letter-spacing: 0.18em;
-    color: var(--red);
-  }
-  .section-head h2 {
-    font-family: 'Newsreader', serif;
-    font-weight: 500;
-    font-size: clamp(28px, 3.4vw, 38px);
-    letter-spacing: -0.01em;
-    line-height: 1;
-  }
-  .section-head .desc {
-    font-style: italic;
-    color: var(--ink-2);
-    font-size: 15px;
-    margin-left: auto;
-    max-width: 32ch;
-    text-align: right;
-  }
-
-  /* ─── TOOL ROWS ─── */
-  .tool {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 28px;
-    padding: 22px 0;
-    border-top: 1px solid var(--rule-soft);
-    align-items: start;
-  }
-  .tool:first-of-type { border-top: 0; padding-top: 4px; }
-
-  .tool-meta h3 {
-    font-family: 'Newsreader', serif;
-    font-weight: 500;
-    font-size: 22px;
-    line-height: 1.15;
-    letter-spacing: -0.005em;
-    margin-bottom: 4px;
-  }
-  .tool-meta .tool-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; letter-spacing: 0.18em;
-    color: var(--red);
-    display: block;
-    margin-bottom: 6px;
-  }
-  .tool-meta .desc {
-    font-size: 14px;
-    color: var(--ink-2);
-    font-style: italic;
-    line-height: 1.45;
-  }
-
-  .tool-form .row {
-    display: flex; gap: 10px; margin-bottom: 8px; flex-wrap: wrap;
-  }
-  .tool-form label {
-    flex: 1; min-width: 0;
-    display: flex; flex-direction: column; gap: 4px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--ink-2);
-  }
-  .tool-form input,
-  .tool-form select,
-  .tool-form textarea {
-    border: 0; border-bottom: 1.5px solid var(--ink);
-    background: transparent;
-    padding: 7px 0;
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 500;
-    font-size: 16px;
-    color: var(--ink);
-    width: 100%;
-    border-radius: 0;
-    -webkit-appearance: none; appearance: none;
-  }
-  .tool-form select {
-    background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%);
-    background-position: calc(100% - 8px) 14px, calc(100% - 4px) 14px;
-    background-size: 4px 4px, 4px 4px;
-    background-repeat: no-repeat;
-    padding-right: 18px;
-  }
-  .tool-form textarea {
-    border: 1px solid var(--rule-soft);
-    padding: 10px;
-    font-family: 'Newsreader', serif;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 1.5;
-    min-height: 70px;
-    resize: vertical;
-  }
-  .tool-form input:focus,
-  .tool-form select:focus,
-  .tool-form textarea:focus {
-    outline: 0;
-    border-bottom-color: var(--red);
-    border-color: var(--red);
-  }
-  .tool-form button {
-    background: var(--ink); color: var(--paper);
-    border: 0;
-    padding: 8px 16px;
-    margin-top: 10px;
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 500;
-    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-    cursor: pointer;
-  }
-  .tool-form button:hover { background: var(--red); }
-
-  /* ─── OUTPUT ─── */
-  .out {
-    margin-top: 14px;
-    padding-top: 12px;
-    border-top: 1px dashed var(--rule-soft);
-  }
-  .out .label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--ink-2);
-    display: block;
-    margin-bottom: 4px;
-  }
-  .out .big {
-    display: block;
-    font-family: 'Newsreader', serif;
-    font-weight: 500;
-    font-size: 30px;
-    line-height: 1.05;
-    letter-spacing: -0.015em;
-    color: var(--ink);
-  }
-  .out .breakdown {
-    display: block;
-    font-size: 13px;
-    color: var(--ink-2);
-    margin-top: 6px;
-    font-style: italic;
-    line-height: 1.4;
-  }
-  .out.text-out {
-    white-space: pre-wrap;
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--ink);
-  }
-
-  /* ─── DISCLOSURE BLOCK (manifest tail) ─── */
-  .disclosure {
-    margin-top: 32px;
-    padding: 28px 0 22px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 28px;
-    border-bottom: 1px solid var(--rule);
-  }
-  .disclosure h4 {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 8px;
-  }
-  .disclosure p {
-    font-size: 15px;
-    line-height: 1.5;
-    color: var(--ink);
-  }
-
-  /* ─── COLOPHON ─── */
-  .colophon {
-    margin-top: 24px;
-    padding-top: 14px;
-    display: flex; justify-content: space-between; align-items: baseline; gap: 14px;
-    flex-wrap: wrap;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--ink-2);
-  }
-  .colophon a { color: inherit; border-bottom: 1px dotted var(--ink-3); text-decoration: none; padding-bottom: 1px; }
-  .colophon a:hover { color: var(--red); border-color: var(--red); }
-
-  /* ─── ADVERTISEMENT (declared, not hidden) ─── */
-  .ad-block {
-    margin: 36px 0 0;
-    padding: 24px 0;
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-    text-align: center;
-  }
-  .ad-block::before {
-    content: "Advertisement";
-    display: block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--ink-3);
-    margin-bottom: 14px;
-  }
-  .ad-block .placeholder {
-    display: inline-block;
-    padding: 32px 60px;
-    border: 1px dashed var(--rule-soft);
-    color: var(--ink-3);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-  }
-
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 720px) {
-    .page { padding: 20px 18px 48px; }
-    .masthead { flex-direction: column; align-items: flex-start; gap: 6px; }
-    .manifesto { padding: 24px 0 20px; }
-    .section-head { flex-direction: column; gap: 8px; }
-    .section-head .desc { margin-left: 0; text-align: left; max-width: 100%; }
-    .tool { grid-template-columns: 1fr; gap: 14px; }
-    .tool-form .row { flex-direction: column; gap: 12px; }
-    .index { gap: 4px 14px; }
-  }
-
-  /* print: makes the philosophical point — it works on paper too */
-  @media print {
-    body { background: white; }
-    .ad-block, .colophon { display: none; }
-    .tool-form button { display: none; }
-  }
-</style>
+<!-- Structured data: WebSite -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "TinyUseful",
+  "url": "https://www.tinyuseful.app/",
+  "description": "Small browser-based tools — money calculators, unit converter, date and time zone converters. No account, no tracking, no AI."
+}
+</script>
 </head>
 
 <body>
@@ -372,10 +43,10 @@
 
   <!-- ─── MASTHEAD ─── -->
   <header class="masthead">
-    <span class="wordmark">
+    <a class="wordmark" href="/">
       <span class="knife" aria-hidden="true"></span>
       TinyUseful
-    </span>
+    </a>
     <span class="issue">No. 1 — April 2026</span>
   </header>
 
@@ -384,7 +55,7 @@
     <h1>Small tools for<br>everyday <span class="red">questions</span>.</h1>
     <p class="subtitle">Small tools<span class="dot">·</span>No accounts<span class="dot">·</span>No AI</p>
     <p class="lede">
-      Eleven small tools on a single page — money, units, dates, time zones.
+      Eleven small tools on their own pages — money, units, dates, time zones.
       That's it.
       <strong>For when you don't need a chat &mdash; just the answer.</strong>
     </p>
@@ -397,176 +68,54 @@
     </div>
   </section>
 
-  <!-- ─── INDEX ─── -->
-  <nav class="index" aria-label="Index">
-    <span class="label">Index</span>
-    <a href="#money">01 · Money (8)</a>
-    <a href="#conversions">02 · Conversions (3)</a>
-    <a href="#how">How it works</a>
-    <a href="#why">Why no AI</a>
-  </nav>
-
-  <!-- ─── 01 MONEY ─── -->
-  <section class="tools" id="money">
-    <div class="section-head">
-      <span class="section-num">§ 01</span>
+  <!-- ─── 01 MONEY (catalog) ─── -->
+  <section class="catalog-section">
+    <div class="catalog-head">
+      <span class="num">§ 01</span>
       <h2>Money</h2>
       <span class="desc">Math you actually do — deterministic, computed in your browser.</span>
     </div>
-
-    <!-- 1. PERCENTAGE -->
-    <div class="tool" data-tool="percentage">
-      <div class="tool-meta">
-        <span class="tool-num">No. 01</span>
+    <div class="catalog-grid">
+      <a class="catalog-card first-row" href="/percentage-calculator/">
+        <span class="card-num">No. 01</span>
         <h3>Percentage</h3>
-        <p class="desc">% of, X is what % of Y, and % change between two numbers.</p>
-      </div>
-      <div class="tool-form">
-        <div class="row">
-          <label>X<input type="number" id="pct-x" value="15" step="any"></label>
-          <label>Mode
-            <select id="pct-mode">
-              <option value="of">% of Y</option>
-              <option value="isof">X is what % of Y</option>
-              <option value="change">% change Y → X</option>
-            </select>
-          </label>
-          <label>Y<input type="number" id="pct-y" value="80" step="any"></label>
-        </div>
-        <button onclick="pctCalc()">Calculate</button>
-        <div class="out" id="pct-out"><span class="label">Result</span><span class="big">12</span></div>
-      </div>
-    </div>
-
-    <!-- 2. SALES TAX -->
-    <div class="tool" data-tool="vat">
-      <div class="tool-meta">
-        <span class="tool-num">No. 02</span>
+        <p class="card-desc">% of, X is what % of Y, % change.</p>
+      </a>
+      <a class="catalog-card first-row" href="/sales-tax-calculator/">
+        <span class="card-num">No. 02</span>
         <h3>Sales Tax / VAT</h3>
-        <p class="desc">Add tax to a net price, or remove tax to find the original net.</p>
-      </div>
-      <div class="tool-form">
-        <div class="row">
-          <label>Price<input type="number" id="vat-price" value="100" step="any"></label>
-          <label>Rate %<input type="number" id="vat-rate" value="8.875" step="any"></label>
-          <label>Mode
-            <select id="vat-mode">
-              <option value="add">Add tax</option>
-              <option value="remove">Remove tax</option>
-            </select>
-          </label>
-        </div>
-        <button onclick="vatCalc()">Calculate</button>
-        <div class="out" id="vat-out"><span class="label">After tax</span><span class="big">$108.88</span><span class="breakdown">Tax amount $8.88</span></div>
-      </div>
-    </div>
-
-    <!-- 3. MORTGAGE -->
-    <div class="tool" data-tool="mortgage">
-      <div class="tool-meta">
-        <span class="tool-num">No. 03</span>
+        <p class="card-desc">Add tax to a price, or remove it.</p>
+      </a>
+      <a class="catalog-card first-row" href="/mortgage-calculator/">
+        <span class="card-num">No. 03</span>
         <h3>Mortgage</h3>
-        <p class="desc">Monthly principal &amp; interest using the standard amortization formula.</p>
-      </div>
-      <div class="tool-form">
-        <div class="row">
-          <label>Loan ($)<input type="number" id="mtg-loan" value="450000" step="any"></label>
-          <label>Rate %<input type="number" id="mtg-rate" value="6.75" step="any"></label>
-          <label>Years<input type="number" id="mtg-years" value="30" step="any"></label>
-        </div>
-        <button onclick="mtgCalc()">Calculate</button>
-        <div class="out" id="mtg-out"><span class="label">Monthly payment</span><span class="big">$2,919</span><span class="breakdown">Total interest $600,765 · Total paid $1,050,765</span></div>
-      </div>
-    </div>
-
-    <!-- 4. LOAN -->
-    <div class="tool" data-tool="loan">
-      <div class="tool-meta">
-        <span class="tool-num">No. 04</span>
+        <p class="card-desc">Monthly principal &amp; interest.</p>
+      </a>
+      <a class="catalog-card first-row" href="/loan-calculator/">
+        <span class="card-num">No. 04</span>
         <h3>Loan</h3>
-        <p class="desc">Auto, student or personal — fixed-rate, fully amortized.</p>
-      </div>
-      <div class="tool-form">
-        <div class="row">
-          <label>Amount ($)<input type="number" id="loan-amt" value="25000" step="any"></label>
-          <label>APR %<input type="number" id="loan-apr" value="7.5" step="any"></label>
-          <label>Months<input type="number" id="loan-months" value="60" step="any"></label>
-        </div>
-        <button onclick="loanCalc()">Calculate</button>
-        <div class="out" id="loan-out"><span class="label">Monthly</span><span class="big">$501</span><span class="breakdown">Total interest $5,059 · Total paid $30,059</span></div>
-      </div>
-    </div>
-
-    <!-- 5. COMPOUND INTEREST -->
-    <div class="tool" data-tool="compound">
-      <div class="tool-meta">
-        <span class="tool-num">No. 05</span>
+        <p class="card-desc">Auto, student, personal — fixed rate.</p>
+      </a>
+      <a class="catalog-card" href="/compound-interest-calculator/">
+        <span class="card-num">No. 05</span>
         <h3>Compound Interest</h3>
-        <p class="desc">Future value of a starting balance plus monthly contributions.</p>
-      </div>
-      <div class="tool-form">
-        <div class="row">
-          <label>Start ($)<input type="number" id="ci-start" value="10000" step="any"></label>
-          <label>Monthly<input type="number" id="ci-monthly" value="500" step="any"></label>
-          <label>APR %<input type="number" id="ci-apr" value="7" step="any"></label>
-          <label>Years<input type="number" id="ci-years" value="20" step="any"></label>
-        </div>
-        <button onclick="ciCalc()">Calculate</button>
-        <div class="out" id="ci-out"><span class="label">Future value</span><span class="big">$300,123</span><span class="breakdown">Contributed $130,000 · Interest earned $170,123</span></div>
-      </div>
-    </div>
-
-    <!-- 6. RENT -->
-    <div class="tool" data-tool="rent">
-      <div class="tool-meta">
-        <span class="tool-num">No. 06</span>
+        <p class="card-desc">Future value with monthly contributions.</p>
+      </a>
+      <a class="catalog-card" href="/rent-affordability-calculator/">
+        <span class="card-num">No. 06</span>
         <h3>Rent Affordability</h3>
-        <p class="desc">The 30%-rule, adjusted for monthly debt obligations.</p>
-      </div>
-      <div class="tool-form">
-        <div class="row">
-          <label>Income/mo ($)<input type="number" id="rent-inc" value="6500" step="any"></label>
-          <label>Debts/mo ($)<input type="number" id="rent-debt" value="450" step="any"></label>
-          <label>Rule %<input type="number" id="rent-rule" value="30" step="any"></label>
-        </div>
-        <button onclick="rentCalc()">Calculate</button>
-        <div class="out" id="rent-out"><span class="label">Suggested max rent</span><span class="big">$1,500</span><span class="breakdown">Conservative $1,300 · Stretch $1,815 · Based on the 30% rule</span></div>
-      </div>
-    </div>
-
-    <!-- 7. TIP -->
-    <div class="tool" data-tool="tip">
-      <div class="tool-meta">
-        <span class="tool-num">No. 07</span>
+        <p class="card-desc">The 30%-rule, adjusted for debts.</p>
+      </a>
+      <a class="catalog-card" href="/tip-calculator/">
+        <span class="card-num">No. 07</span>
         <h3>Tip Calculator</h3>
-        <p class="desc">Restaurant tip with optional split between people.</p>
-      </div>
-      <div class="tool-form">
-        <div class="row">
-          <label>Bill ($)<input type="number" id="tip-bill" value="50" step="any"></label>
-          <label>Tip %<input type="number" id="tip-pct" value="18" step="any"></label>
-          <label>Split<input type="number" id="tip-split" value="2" step="1" min="1"></label>
-        </div>
-        <button onclick="tipCalc()">Calculate</button>
-        <div class="out" id="tip-out"><span class="label">Total</span><span class="big">$59.00</span><span class="breakdown">Tip $9.00 · Per person $29.50</span></div>
-      </div>
-    </div>
-
-    <!-- 8. DISCOUNT -->
-    <div class="tool" data-tool="discount">
-      <div class="tool-meta">
-        <span class="tool-num">No. 08</span>
+        <p class="card-desc">Restaurant tip, optional split.</p>
+      </a>
+      <a class="catalog-card" href="/discount-calculator/">
+        <span class="card-num">No. 08</span>
         <h3>Discount</h3>
-        <p class="desc">Take X% off a price — final price and what you save.</p>
-      </div>
-      <div class="tool-form">
-        <div class="row">
-          <label>Price ($)<input type="number" id="disc-price" value="80" step="any"></label>
-          <label>Discount %<input type="number" id="disc-pct" value="25" step="any"></label>
-        </div>
-        <button onclick="discCalc()">Calculate</button>
-        <div class="out" id="disc-out"><span class="label">Final price</span><span class="big">$60.00</span><span class="breakdown">You save $20.00 · 25% off $80.00</span></div>
-      </div>
+        <p class="card-desc">X% off — final price and savings.</p>
+      </a>
     </div>
   </section>
 
@@ -575,107 +124,29 @@
     <div class="placeholder">728 × 90 leaderboard placement</div>
   </div>
 
-  <!-- ─── 02 CONVERSIONS ─── -->
-  <section class="tools" id="conversions">
-    <div class="section-head">
-      <span class="section-num">§ 02</span>
+  <!-- ─── 02 CONVERSIONS (catalog) ─── -->
+  <section class="catalog-section">
+    <div class="catalog-head">
+      <span class="num">§ 02</span>
       <h2>Conversions</h2>
       <span class="desc">Units, dates, time zones — everyday translations.</span>
     </div>
-
-    <!-- 9. UNIT CONVERTER -->
-    <div class="tool" data-tool="unit">
-      <div class="tool-meta">
-        <span class="tool-num">No. 09</span>
+    <div class="catalog-grid">
+      <a class="catalog-card first-row" href="/unit-converter/">
+        <span class="card-num">No. 09</span>
         <h3>Unit Converter</h3>
-        <p class="desc">Length, weight, and temperature — metric ↔ imperial.</p>
-      </div>
-      <div class="tool-form">
-        <div class="row">
-          <label>Category
-            <select id="unit-cat" onchange="unitUpdateOptions()">
-              <option value="length">Length</option>
-              <option value="weight">Weight</option>
-              <option value="temp">Temperature</option>
-            </select>
-          </label>
-          <label>Value<input type="number" id="unit-val" value="1" step="any"></label>
-        </div>
-        <div class="row">
-          <label>From<select id="unit-from"></select></label>
-          <label>To<select id="unit-to"></select></label>
-        </div>
-        <button onclick="unitCalc()">Convert</button>
-        <div class="out" id="unit-out"><span class="label">Result</span><span class="big">3.281</span><span class="breakdown">1 m = 3.281 ft</span></div>
-      </div>
-    </div>
-
-    <!-- 10. DATE CALCULATOR -->
-    <div class="tool" data-tool="date">
-      <div class="tool-meta">
-        <span class="tool-num">No. 10</span>
+        <p class="card-desc">Length, weight, temperature — metric ↔ imperial.</p>
+      </a>
+      <a class="catalog-card first-row" href="/date-calculator/">
+        <span class="card-num">No. 10</span>
         <h3>Date Calculator</h3>
-        <p class="desc">Days between two dates, or a date X days from today.</p>
-      </div>
-      <div class="tool-form">
-        <div class="row">
-          <label>Mode
-            <select id="date-mode" onchange="dateUpdateUI()">
-              <option value="between">Days between</option>
-              <option value="addto">Days from today</option>
-            </select>
-          </label>
-        </div>
-        <div class="row" id="date-row-between">
-          <label>From<input type="date" id="date-from"></label>
-          <label>To<input type="date" id="date-to"></label>
-        </div>
-        <div class="row" id="date-row-addto" style="display:none;">
-          <label>Days (+/−)<input type="number" id="date-days" value="100" step="1"></label>
-        </div>
-        <button onclick="dateCalc()">Calculate</button>
-        <div class="out" id="date-out"><span class="label">Result</span><span class="big">—</span><span class="breakdown">Pick dates and press Calculate.</span></div>
-      </div>
-    </div>
-
-    <!-- 11. TIME ZONE -->
-    <div class="tool" data-tool="timezone">
-      <div class="tool-meta">
-        <span class="tool-num">No. 11</span>
+        <p class="card-desc">Days between dates, or days from today.</p>
+      </a>
+      <a class="catalog-card first-row" href="/time-zone-converter/">
+        <span class="card-num">No. 11</span>
         <h3>Time Zone Converter</h3>
-        <p class="desc">Convert a time between major world time zones.</p>
-      </div>
-      <div class="tool-form">
-        <div class="row">
-          <label>Time (HH:MM)<input type="time" id="tz-time" value="14:00"></label>
-          <label>From
-            <select id="tz-from">
-              <option value="UTC">UTC</option>
-              <option value="America/New_York">New York (ET)</option>
-              <option value="America/Los_Angeles">Los Angeles (PT)</option>
-              <option value="Europe/London">London (GMT/BST)</option>
-              <option value="Europe/Prague" selected>Prague (CET/CEST)</option>
-              <option value="Asia/Dubai">Dubai (GST)</option>
-              <option value="Asia/Tokyo">Tokyo (JST)</option>
-              <option value="Australia/Sydney">Sydney (AET)</option>
-            </select>
-          </label>
-          <label>To
-            <select id="tz-to">
-              <option value="UTC">UTC</option>
-              <option value="America/New_York" selected>New York (ET)</option>
-              <option value="America/Los_Angeles">Los Angeles (PT)</option>
-              <option value="Europe/London">London (GMT/BST)</option>
-              <option value="Europe/Prague">Prague (CET/CEST)</option>
-              <option value="Asia/Dubai">Dubai (GST)</option>
-              <option value="Asia/Tokyo">Tokyo (JST)</option>
-              <option value="Australia/Sydney">Sydney (AET)</option>
-            </select>
-          </label>
-        </div>
-        <button onclick="tzCalc()">Convert</button>
-        <div class="out" id="tz-out"><span class="label">Time in target zone</span><span class="big">—</span><span class="breakdown">Press Convert.</span></div>
-      </div>
+        <p class="card-desc">Convert time between major world zones.</p>
+      </a>
     </div>
   </section>
 
@@ -709,160 +180,9 @@
   <!-- ─── COLOPHON ─── -->
   <footer class="colophon">
     <span>TinyUseful · Issue No. 1 · April 2026 · Made for the open web</span>
-    <span><a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp; <a href="mailto:lukasaustralie@gmail.com">Contact</a> &nbsp; v0.3</span>
+    <span><a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp; <a href="mailto:lukasaustralie@gmail.com">Contact</a> &nbsp; v0.4</span>
   </footer>
 
 </div>
-
-<script>
-  const $ = id => document.getElementById(id);
-  const fmt  = (n, d=2) => n.toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
-  const fmt0 = n => n.toLocaleString('en-US', {maximumFractionDigits: 0});
-  function setOut(id, label, big, breakdown='') {
-    $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
-  }
-
-  /* NUMBERS */
-  function pctCalc() {
-    const x = +$('pct-x').value, y = +$('pct-y').value, mode = $('pct-mode').value;
-    let label, big, br='';
-    if (mode === 'of')      { const r = x/100*y; label = `${x}% of ${y}`; big = fmt(r); }
-    else if (mode==='isof') { const r = y===0?0:(x/y)*100; label = `${x} is what % of ${y}`; big = fmt(r,2)+' %'; }
-    else                    { const r = y===0?0:((x-y)/y)*100; label = `${y} → ${x}`; big = (r>=0?'+':'')+fmt(r,2)+' %'; br = `Absolute change: ${fmt(x-y)}`; }
-    setOut('pct-out', label, big, br);
-  }
-  function vatCalc() {
-    const price=+$('vat-price').value, rate=+$('vat-rate').value, mode=$('vat-mode').value;
-    if (mode === 'add') { const tax=price*rate/100, gross=price+tax;
-      setOut('vat-out','After tax','$'+fmt(gross),`Tax amount $${fmt(tax)} · Net $${fmt(price)}`); }
-    else { const net=price/(1+rate/100), tax=price-net;
-      setOut('vat-out','Before tax','$'+fmt(net),`Tax amount $${fmt(tax)} · Total $${fmt(price)}`); }
-  }
-  function mtgCalc() {
-    const P=+$('mtg-loan').value, r=+$('mtg-rate').value/100/12, n=+$('mtg-years').value*12;
-    const M = r===0 ? P/n : P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
-    setOut('mtg-out','Monthly payment','$'+fmt0(M),`Total interest $${fmt0(M*n-P)} · Total paid $${fmt0(M*n)}`);
-  }
-  function loanCalc() {
-    const P=+$('loan-amt').value, r=+$('loan-apr').value/100/12, n=+$('loan-months').value;
-    const M = r===0 ? P/n : P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
-    setOut('loan-out','Monthly','$'+fmt0(M),`Total interest $${fmt0(M*n-P)} · Total paid $${fmt0(M*n)}`);
-  }
-  function ciCalc() {
-    const P=+$('ci-start').value, m=+$('ci-monthly').value, r=+$('ci-apr').value/100/12, n=+$('ci-years').value*12;
-    let bal = P; for (let i=0;i<n;i++){ bal = bal*(1+r) + m; }
-    const contrib = P + m*n;
-    setOut('ci-out','Future value','$'+fmt0(bal),`Contributed $${fmt0(contrib)} · Interest earned $${fmt0(bal-contrib)}`);
-  }
-  function rentCalc() {
-    const inc=+$('rent-inc').value, debt=+$('rent-debt').value, rule=+$('rent-rule').value;
-    const adjusted = inc*rule/100 - debt*0.5;
-    setOut('rent-out','Suggested max rent','$'+fmt0(Math.max(0,adjusted)),
-      `Conservative $${fmt0(inc*0.20)} · Stretch $${fmt0(inc*(rule+5)/100)} · Based on the ${rule}% rule`);
-  }
-  function tipCalc() {
-    const bill=+$('tip-bill').value, pct=+$('tip-pct').value, split=Math.max(1, Math.floor(+$('tip-split').value)||1);
-    const tip = bill*pct/100, total = bill+tip, perPerson = total/split;
-    setOut('tip-out','Total','$'+fmt(total),
-      `Tip $${fmt(tip)}${split>1?` · Per person $${fmt(perPerson)}`:''}`);
-  }
-  function discCalc() {
-    const price=+$('disc-price').value, pct=+$('disc-pct').value;
-    const save = price*pct/100, final = price-save;
-    setOut('disc-out','Final price','$'+fmt(final),
-      `You save $${fmt(save)} · ${pct}% off $${fmt(price)}`);
-  }
-
-  /* CONVERSIONS — Unit Converter */
-  const UNIT_DEFS = {
-    length: { label:'Length', units:[['m','meter'],['cm','centimeter'],['mm','millimeter'],['km','kilometer'],['in','inch'],['ft','foot'],['yd','yard'],['mi','mile']],
-              toBase:{m:1, cm:0.01, mm:0.001, km:1000, in:0.0254, ft:0.3048, yd:0.9144, mi:1609.344} },
-    weight: { label:'Weight', units:[['kg','kilogram'],['g','gram'],['mg','milligram'],['lb','pound'],['oz','ounce'],['t','tonne (metric)']],
-              toBase:{kg:1, g:0.001, mg:0.000001, lb:0.45359237, oz:0.0283495231, t:1000} },
-    temp:   { label:'Temperature', units:[['C','Celsius'],['F','Fahrenheit'],['K','Kelvin']] }
-  };
-  function unitFillSelect(sel, units, defaultIdx) {
-    sel.innerHTML = units.map(([u,name],i)=>`<option value="${u}"${i===defaultIdx?' selected':''}>${u} (${name})</option>`).join('');
-  }
-  function unitUpdateOptions() {
-    const cat = $('unit-cat').value, def = UNIT_DEFS[cat];
-    unitFillSelect($('unit-from'), def.units, 0);
-    unitFillSelect($('unit-to'),   def.units, cat==='temp' ? 1 : (cat==='length' ? 5 : 3));
-    unitCalc();
-  }
-  function unitConvertTemp(val, from, to) {
-    let c; if (from==='C') c=val; else if (from==='F') c=(val-32)*5/9; else c=val-273.15;
-    if (to==='C') return c; if (to==='F') return c*9/5+32; return c+273.15;
-  }
-  function unitCalc() {
-    const cat=$('unit-cat').value, val=+$('unit-val').value, from=$('unit-from').value, to=$('unit-to').value;
-    let result;
-    if (cat==='temp') result = unitConvertTemp(val, from, to);
-    else { const def = UNIT_DEFS[cat]; result = val * def.toBase[from] / def.toBase[to]; }
-    const decimals = Math.abs(result) >= 100 ? 2 : (Math.abs(result) >= 1 ? 3 : 4);
-    setOut('unit-out','Result', fmt(result, decimals), `${val} ${from} = ${fmt(result, decimals)} ${to}`);
-  }
-
-  /* CONVERSIONS — Date Calculator */
-  function dateUpdateUI() {
-    const mode = $('date-mode').value;
-    $('date-row-between').style.display = mode==='between' ? '' : 'none';
-    $('date-row-addto').style.display   = mode==='addto'   ? '' : 'none';
-  }
-  function dateCalc() {
-    const mode = $('date-mode').value;
-    if (mode==='between') {
-      const f=$('date-from').value, t=$('date-to').value;
-      if (!f || !t) { setOut('date-out','Result','—','Pick both dates.'); return; }
-      const days = Math.round((new Date(t) - new Date(f)) / 86400000);
-      const years = Math.abs(days)/365.25;
-      setOut('date-out','Days', `${days>=0?'+':''}${fmt0(days)}`,
-        `${Math.abs(days)} day${Math.abs(days)===1?'':'s'} · ~${fmt(years,2)} year${years===1?'':'s'}`);
-    } else {
-      const d=Math.floor(+$('date-days').value)||0;
-      const result = new Date();
-      result.setDate(result.getDate() + d);
-      const iso = result.toISOString().slice(0,10);
-      const weekday = result.toLocaleDateString('en-US', {weekday:'long'});
-      setOut('date-out','Date', iso, `${weekday} · ${d>=0?'+':''}${d} day${Math.abs(d)===1?'':'s'} from today`);
-    }
-  }
-
-  /* CONVERSIONS — Time Zone */
-  function tzCalc() {
-    const time = $('tz-time').value, fromTZ = $('tz-from').value, toTZ = $('tz-to').value;
-    if (!time) { setOut('tz-out','Time in target zone','—','Pick a time.'); return; }
-    const today = new Date();
-    const [hh, mm] = time.split(':').map(Number);
-    // Build a UTC-anchored date that, when interpreted in fromTZ, has the given local time.
-    // Trick: try a UTC date with hh:mm, then read it in fromTZ and adjust.
-    const baseUTC = Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate(), hh, mm);
-    // Determine offset of fromTZ at baseUTC by formatting and parsing back
-    const fromLocal = new Date(baseUTC).toLocaleString('en-US', {timeZone: fromTZ, hour12:false, year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit'});
-    // Parse fromLocal back to ms-as-if-UTC, diff to baseUTC = offset
-    const m = fromLocal.match(/(\d+)\/(\d+)\/(\d+),?\s+(\d+):(\d+)/);
-    const fromAsUTC = Date.UTC(+m[3], +m[1]-1, +m[2], +m[4], +m[5]);
-    const offsetMs = fromAsUTC - baseUTC;
-    const realUTC = baseUTC - offsetMs;
-    // Format realUTC in toTZ
-    const targetStr = new Date(realUTC).toLocaleString('en-US', {timeZone: toTZ, hour12:false, weekday:'short', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'});
-    const targetTime = new Date(realUTC).toLocaleTimeString('en-US', {timeZone: toTZ, hour12:false, hour:'2-digit', minute:'2-digit'});
-    setOut('tz-out','Time in target zone', targetTime, `${time} ${fromTZ.split('/').pop().replace(/_/g,' ')} → ${targetStr} (${toTZ.split('/').pop().replace(/_/g,' ')})`);
-  }
-
-  /* INIT */
-  pctCalc(); vatCalc(); mtgCalc(); loanCalc(); ciCalc(); rentCalc(); tipCalc(); discCalc();
-  unitUpdateOptions();
-  // Set today's date as default for date-from
-  (function initDate(){
-    const today = new Date().toISOString().slice(0,10);
-    if ($('date-from')) $('date-from').value = today;
-    const t = new Date(); t.setDate(t.getDate()+30);
-    if ($('date-to')) $('date-to').value = t.toISOString().slice(0,10);
-    dateCalc();
-  })();
-  tzCalc();
-</script>
-
 </body>
 </html>
