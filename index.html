@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>TinyUseful — small tools for everyday questions</title>
-<meta name="description" content="Small money calculators. One page. No account. No saved input. No AI. For when you don't need AI — just the answer." />
+<meta name="description" content="Eleven small tools — money calculators, unit converter, date and time zone converters. One page. No account. No tracking. No AI." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -384,7 +384,7 @@
     <h1>Small tools for<br>everyday <span class="red">questions</span>.</h1>
     <p class="subtitle">Small tools<span class="dot">·</span>No accounts<span class="dot">·</span>No AI</p>
     <p class="lede">
-      Eight small money calculators on a single page.
+      Eleven small tools on a single page — money, units, dates, time zones.
       That's it.
       <strong>For when you don't need a chat &mdash; just the answer.</strong>
     </p>
@@ -401,6 +401,7 @@
   <nav class="index" aria-label="Index">
     <span class="label">Index</span>
     <a href="#money">01 · Money (8)</a>
+    <a href="#conversions">02 · Conversions (3)</a>
     <a href="#how">How it works</a>
     <a href="#why">Why no AI</a>
   </nav>
@@ -574,6 +575,110 @@
     <div class="placeholder">728 × 90 leaderboard placement</div>
   </div>
 
+  <!-- ─── 02 CONVERSIONS ─── -->
+  <section class="tools" id="conversions">
+    <div class="section-head">
+      <span class="section-num">§ 02</span>
+      <h2>Conversions</h2>
+      <span class="desc">Units, dates, time zones — everyday translations.</span>
+    </div>
+
+    <!-- 9. UNIT CONVERTER -->
+    <div class="tool" data-tool="unit">
+      <div class="tool-meta">
+        <span class="tool-num">No. 09</span>
+        <h3>Unit Converter</h3>
+        <p class="desc">Length, weight, and temperature — metric ↔ imperial.</p>
+      </div>
+      <div class="tool-form">
+        <div class="row">
+          <label>Category
+            <select id="unit-cat" onchange="unitUpdateOptions()">
+              <option value="length">Length</option>
+              <option value="weight">Weight</option>
+              <option value="temp">Temperature</option>
+            </select>
+          </label>
+          <label>Value<input type="number" id="unit-val" value="1" step="any"></label>
+        </div>
+        <div class="row">
+          <label>From<select id="unit-from"></select></label>
+          <label>To<select id="unit-to"></select></label>
+        </div>
+        <button onclick="unitCalc()">Convert</button>
+        <div class="out" id="unit-out"><span class="label">Result</span><span class="big">3.281</span><span class="breakdown">1 m = 3.281 ft</span></div>
+      </div>
+    </div>
+
+    <!-- 10. DATE CALCULATOR -->
+    <div class="tool" data-tool="date">
+      <div class="tool-meta">
+        <span class="tool-num">No. 10</span>
+        <h3>Date Calculator</h3>
+        <p class="desc">Days between two dates, or a date X days from today.</p>
+      </div>
+      <div class="tool-form">
+        <div class="row">
+          <label>Mode
+            <select id="date-mode" onchange="dateUpdateUI()">
+              <option value="between">Days between</option>
+              <option value="addto">Days from today</option>
+            </select>
+          </label>
+        </div>
+        <div class="row" id="date-row-between">
+          <label>From<input type="date" id="date-from"></label>
+          <label>To<input type="date" id="date-to"></label>
+        </div>
+        <div class="row" id="date-row-addto" style="display:none;">
+          <label>Days (+/−)<input type="number" id="date-days" value="100" step="1"></label>
+        </div>
+        <button onclick="dateCalc()">Calculate</button>
+        <div class="out" id="date-out"><span class="label">Result</span><span class="big">—</span><span class="breakdown">Pick dates and press Calculate.</span></div>
+      </div>
+    </div>
+
+    <!-- 11. TIME ZONE -->
+    <div class="tool" data-tool="timezone">
+      <div class="tool-meta">
+        <span class="tool-num">No. 11</span>
+        <h3>Time Zone Converter</h3>
+        <p class="desc">Convert a time between major world time zones.</p>
+      </div>
+      <div class="tool-form">
+        <div class="row">
+          <label>Time (HH:MM)<input type="time" id="tz-time" value="14:00"></label>
+          <label>From
+            <select id="tz-from">
+              <option value="UTC">UTC</option>
+              <option value="America/New_York">New York (ET)</option>
+              <option value="America/Los_Angeles">Los Angeles (PT)</option>
+              <option value="Europe/London">London (GMT/BST)</option>
+              <option value="Europe/Prague" selected>Prague (CET/CEST)</option>
+              <option value="Asia/Dubai">Dubai (GST)</option>
+              <option value="Asia/Tokyo">Tokyo (JST)</option>
+              <option value="Australia/Sydney">Sydney (AET)</option>
+            </select>
+          </label>
+          <label>To
+            <select id="tz-to">
+              <option value="UTC">UTC</option>
+              <option value="America/New_York" selected>New York (ET)</option>
+              <option value="America/Los_Angeles">Los Angeles (PT)</option>
+              <option value="Europe/London">London (GMT/BST)</option>
+              <option value="Europe/Prague">Prague (CET/CEST)</option>
+              <option value="Asia/Dubai">Dubai (GST)</option>
+              <option value="Asia/Tokyo">Tokyo (JST)</option>
+              <option value="Australia/Sydney">Sydney (AET)</option>
+            </select>
+          </label>
+        </div>
+        <button onclick="tzCalc()">Convert</button>
+        <div class="out" id="tz-out"><span class="label">Time in target zone</span><span class="big">—</span><span class="breakdown">Press Convert.</span></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ─── DISCLOSURE / MANIFEST TAIL ─── -->
   <section class="disclosure" id="how">
     <div>
@@ -668,8 +773,95 @@
       `You save $${fmt(save)} · ${pct}% off $${fmt(price)}`);
   }
 
+  /* CONVERSIONS — Unit Converter */
+  const UNIT_DEFS = {
+    length: { label:'Length', units:[['m','meter'],['cm','centimeter'],['mm','millimeter'],['km','kilometer'],['in','inch'],['ft','foot'],['yd','yard'],['mi','mile']],
+              toBase:{m:1, cm:0.01, mm:0.001, km:1000, in:0.0254, ft:0.3048, yd:0.9144, mi:1609.344} },
+    weight: { label:'Weight', units:[['kg','kilogram'],['g','gram'],['mg','milligram'],['lb','pound'],['oz','ounce'],['t','tonne (metric)']],
+              toBase:{kg:1, g:0.001, mg:0.000001, lb:0.45359237, oz:0.0283495231, t:1000} },
+    temp:   { label:'Temperature', units:[['C','Celsius'],['F','Fahrenheit'],['K','Kelvin']] }
+  };
+  function unitFillSelect(sel, units, defaultIdx) {
+    sel.innerHTML = units.map(([u,name],i)=>`<option value="${u}"${i===defaultIdx?' selected':''}>${u} (${name})</option>`).join('');
+  }
+  function unitUpdateOptions() {
+    const cat = $('unit-cat').value, def = UNIT_DEFS[cat];
+    unitFillSelect($('unit-from'), def.units, 0);
+    unitFillSelect($('unit-to'),   def.units, cat==='temp' ? 1 : (cat==='length' ? 5 : 3));
+    unitCalc();
+  }
+  function unitConvertTemp(val, from, to) {
+    let c; if (from==='C') c=val; else if (from==='F') c=(val-32)*5/9; else c=val-273.15;
+    if (to==='C') return c; if (to==='F') return c*9/5+32; return c+273.15;
+  }
+  function unitCalc() {
+    const cat=$('unit-cat').value, val=+$('unit-val').value, from=$('unit-from').value, to=$('unit-to').value;
+    let result;
+    if (cat==='temp') result = unitConvertTemp(val, from, to);
+    else { const def = UNIT_DEFS[cat]; result = val * def.toBase[from] / def.toBase[to]; }
+    const decimals = Math.abs(result) >= 100 ? 2 : (Math.abs(result) >= 1 ? 3 : 4);
+    setOut('unit-out','Result', fmt(result, decimals), `${val} ${from} = ${fmt(result, decimals)} ${to}`);
+  }
+
+  /* CONVERSIONS — Date Calculator */
+  function dateUpdateUI() {
+    const mode = $('date-mode').value;
+    $('date-row-between').style.display = mode==='between' ? '' : 'none';
+    $('date-row-addto').style.display   = mode==='addto'   ? '' : 'none';
+  }
+  function dateCalc() {
+    const mode = $('date-mode').value;
+    if (mode==='between') {
+      const f=$('date-from').value, t=$('date-to').value;
+      if (!f || !t) { setOut('date-out','Result','—','Pick both dates.'); return; }
+      const days = Math.round((new Date(t) - new Date(f)) / 86400000);
+      const years = Math.abs(days)/365.25;
+      setOut('date-out','Days', `${days>=0?'+':''}${fmt0(days)}`,
+        `${Math.abs(days)} day${Math.abs(days)===1?'':'s'} · ~${fmt(years,2)} year${years===1?'':'s'}`);
+    } else {
+      const d=Math.floor(+$('date-days').value)||0;
+      const result = new Date();
+      result.setDate(result.getDate() + d);
+      const iso = result.toISOString().slice(0,10);
+      const weekday = result.toLocaleDateString('en-US', {weekday:'long'});
+      setOut('date-out','Date', iso, `${weekday} · ${d>=0?'+':''}${d} day${Math.abs(d)===1?'':'s'} from today`);
+    }
+  }
+
+  /* CONVERSIONS — Time Zone */
+  function tzCalc() {
+    const time = $('tz-time').value, fromTZ = $('tz-from').value, toTZ = $('tz-to').value;
+    if (!time) { setOut('tz-out','Time in target zone','—','Pick a time.'); return; }
+    const today = new Date();
+    const [hh, mm] = time.split(':').map(Number);
+    // Build a UTC-anchored date that, when interpreted in fromTZ, has the given local time.
+    // Trick: try a UTC date with hh:mm, then read it in fromTZ and adjust.
+    const baseUTC = Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate(), hh, mm);
+    // Determine offset of fromTZ at baseUTC by formatting and parsing back
+    const fromLocal = new Date(baseUTC).toLocaleString('en-US', {timeZone: fromTZ, hour12:false, year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit'});
+    // Parse fromLocal back to ms-as-if-UTC, diff to baseUTC = offset
+    const m = fromLocal.match(/(\d+)\/(\d+)\/(\d+),?\s+(\d+):(\d+)/);
+    const fromAsUTC = Date.UTC(+m[3], +m[1]-1, +m[2], +m[4], +m[5]);
+    const offsetMs = fromAsUTC - baseUTC;
+    const realUTC = baseUTC - offsetMs;
+    // Format realUTC in toTZ
+    const targetStr = new Date(realUTC).toLocaleString('en-US', {timeZone: toTZ, hour12:false, weekday:'short', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'});
+    const targetTime = new Date(realUTC).toLocaleTimeString('en-US', {timeZone: toTZ, hour12:false, hour:'2-digit', minute:'2-digit'});
+    setOut('tz-out','Time in target zone', targetTime, `${time} ${fromTZ.split('/').pop().replace(/_/g,' ')} → ${targetStr} (${toTZ.split('/').pop().replace(/_/g,' ')})`);
+  }
+
   /* INIT */
   pctCalc(); vatCalc(); mtgCalc(); loanCalc(); ciCalc(); rentCalc(); tipCalc(); discCalc();
+  unitUpdateOptions();
+  // Set today's date as default for date-from
+  (function initDate(){
+    const today = new Date().toISOString().slice(0,10);
+    if ($('date-from')) $('date-from').value = today;
+    const t = new Date(); t.setDate(t.getDate()+30);
+    if ($('date-to')) $('date-to').value = t.toISOString().slice(0,10);
+    dateCalc();
+  })();
+  tzCalc();
 </script>
 
 </body>
