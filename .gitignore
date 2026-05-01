@@ -11,6 +11,10 @@ og-template.html
 # Review ZIP archivy a kontrolni slozky — nikdy do live webu
 tinyuseful-review-*.zip
 kontrola GPT a Geminy/
+kontrola pro GPT a gemny */
+
+# Font ZIP downloads — nikdy do live webu (jen .woff2 v podslozkach)
+fonts/*.zip
 
 # Tokens & secrets — never commit (should be outside repo anyway)
 tokeny.txt

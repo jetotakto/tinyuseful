@@ -28,6 +28,9 @@
   (page views, no personal identification, no cross-site
   follow). Read the full details in /privacy.html.
 
+  Fonts (Newsreader, JetBrains Mono) are self-hosted in
+  /fonts/. No Google Fonts CDN, no third-party requests.
+
   One advertisement, declared. That's the business.
 
   If you find a bug or have an idea: lukasaustralie@gmail.com.
