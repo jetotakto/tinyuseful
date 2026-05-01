@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Discount Calculator — Final Price and Savings | TinyUseful</title>
+<meta name="description" content="Calculate the final price after a percentage discount and see how much you save. Works for sale items, coupons, and promo codes. No account, no tracking." />
+<link rel="canonical" href="https://www.tinyuseful.app/discount-calculator/">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Discount Calculator — TinyUseful">
+<meta property="og:description" content="Final price after % off, plus what you save. Works for sale items and coupons.">
+<meta property="og:url" content="https://www.tinyuseful.app/discount-calculator/">
+<meta property="og:site_name" content="TinyUseful">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Discount Calculator","applicationCategory":"UtilityApplication","operatingSystem":"Any (browser-based)","description":"Calculate the final price after a percentage discount and the amount saved.","url":"https://www.tinyuseful.app/discount-calculator/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"TinyUseful","url":"https://www.tinyuseful.app/"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TinyUseful","item":"https://www.tinyuseful.app/"},{"@type":"ListItem","position":2,"name":"Discount Calculator","item":"https://www.tinyuseful.app/discount-calculator/"}]}
+</script>
+</head>
+
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <a class="wordmark" href="/"><span class="knife" aria-hidden="true"></span>TinyUseful</a>
+    <span class="issue">Discount Calculator</span>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">TinyUseful</a><span class="sep">›</span>Discount Calculator
+  </nav>
+
+  <section class="tools">
+    <div class="section-head">
+      <span class="section-num">No. 08</span>
+      <h2>Discount Calculator</h2>
+      <span class="desc">Take X% off a price — final price and what you save.</span>
+    </div>
+    <div class="tool" data-tool="discount">
+      <div class="tool-meta">
+        <h3>Inputs</h3>
+        <p class="desc">Original price and the discount percentage. Final price and savings appear below.</p>
+      </div>
+      <div class="tool-form">
+        <div class="row">
+          <label>Price ($)<input type="number" id="disc-price" value="80" step="any"></label>
+          <label>Discount %<input type="number" id="disc-pct" value="25" step="any"></label>
+        </div>
+        <button onclick="discCalc()">Calculate</button>
+        <div class="out" id="disc-out"><span class="label">Final price</span><span class="big">$60.00</span><span class="breakdown">You save $20.00 · 25% off $80.00</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ad-block">
+    <div class="placeholder">728 × 90 leaderboard placement</div>
+  </div>
+
+  <section class="explainer">
+    <h3>How it works</h3>
+    <p>
+      Savings = price × discount ÷ 100. Final = price − savings. Mathematically equivalent:
+      final = price × (1 − discount ÷ 100). For 25% off $80: $80 × 0.75 = $60. You save $20.
+    </p>
+    <p>
+      Two discounts in sequence don't add up. <strong>50% off then 20% off is not 70% off.</strong>
+      It's 60% off (because the 20% comes off the already-reduced price). For coupon stacking
+      and Black Friday markdowns, run each discount one at a time.
+    </p>
+  </section>
+
+  <section class="faq">
+    <h3>Frequently asked questions</h3>
+    <details>
+      <summary>If something is "50% off" and I have a 20% coupon, what's the final discount?</summary>
+      <div class="answer"><p>60%, not 70%. The 20% comes off the already-discounted price. $100 → 50% off → $50 → 20% off → $40. Final price is 40% of original = 60% discount total.</p></div>
+    </details>
+    <details>
+      <summary>How do I find the original price from a sale price?</summary>
+      <div class="answer"><p>Original = final ÷ (1 − discount/100). If you paid $60 with 25% off, original was $60 ÷ 0.75 = $80. Useful for verifying the discount actually matches what's claimed.</p></div>
+    </details>
+    <details>
+      <summary>Is "buy one get one free" the same as 50% off?</summary>
+      <div class="answer"><p>Yes, mathematically — assuming you wanted both items. If you only wanted one, BOGO is 0% off (you're paying full price for the one you wanted). 50% off is straightforwardly cheaper for any quantity.</p></div>
+    </details>
+    <details>
+      <summary>Do these calculations include sales tax?</summary>
+      <div class="answer"><p>No. Discount is applied to the pre-tax price; tax is then added to the discounted total. Use the <a href="/sales-tax-calculator/">Sales Tax Calculator</a> for the next step.</p></div>
+    </details>
+  </section>
+
+  <section class="related">
+    <h3>Related tools</h3>
+    <div class="related-grid">
+      <a href="/percentage-calculator/">Percentage Calculator</a>
+      <a href="/sales-tax-calculator/">Sales Tax Calculator</a>
+      <a href="/tip-calculator/">Tip Calculator</a>
+      <a href="/unit-converter/">Unit Converter</a>
+    </div>
+  </section>
+
+  <footer class="colophon">
+    <span>TinyUseful · Issue No. 1 · 2026</span>
+    <span><a href="/">Home</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a></span>
+  </footer>
+
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const fmt = (n, d=2) => n.toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
+  function setOut(id, label, big, breakdown='') {
+    $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
+  }
+  function discCalc() {
+    const price=+$('disc-price').value, pct=+$('disc-pct').value;
+    const save = price*pct/100, final = price-save;
+    setOut('disc-out','Final price','$'+fmt(final),
+      `You save $${fmt(save)} · ${pct}% off $${fmt(price)}`);
+  }
+  discCalc();
+</script>
+
+</body>
+</html>

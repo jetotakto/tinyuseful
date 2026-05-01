@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Tip Calculator — Restaurant Tip with Split | TinyUseful</title>
+<meta name="description" content="Calculate restaurant tip and split the bill between people. Standard 15/18/20% or any custom percentage. Per-person amount included. No account, no tracking." />
+<link rel="canonical" href="https://www.tinyuseful.app/tip-calculator/">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tip Calculator — TinyUseful">
+<meta property="og:description" content="Restaurant tip with optional split between people.">
+<meta property="og:url" content="https://www.tinyuseful.app/tip-calculator/">
+<meta property="og:site_name" content="TinyUseful">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Tip Calculator","applicationCategory":"UtilityApplication","operatingSystem":"Any (browser-based)","description":"Calculate restaurant tip and split between people.","url":"https://www.tinyuseful.app/tip-calculator/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"TinyUseful","url":"https://www.tinyuseful.app/"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TinyUseful","item":"https://www.tinyuseful.app/"},{"@type":"ListItem","position":2,"name":"Tip Calculator","item":"https://www.tinyuseful.app/tip-calculator/"}]}
+</script>
+</head>
+
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <a class="wordmark" href="/"><span class="knife" aria-hidden="true"></span>TinyUseful</a>
+    <span class="issue">Tip Calculator</span>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">TinyUseful</a><span class="sep">›</span>Tip Calculator
+  </nav>
+
+  <section class="tools">
+    <div class="section-head">
+      <span class="section-num">No. 07</span>
+      <h2>Tip Calculator</h2>
+      <span class="desc">Restaurant tip with optional split between people.</span>
+    </div>
+    <div class="tool" data-tool="tip">
+      <div class="tool-meta">
+        <h3>Inputs</h3>
+        <p class="desc">Bill amount, tip percent, and number of people. Per-person total appears below.</p>
+      </div>
+      <div class="tool-form">
+        <div class="row">
+          <label>Bill ($)<input type="number" id="tip-bill" value="50" step="any"></label>
+          <label>Tip %<input type="number" id="tip-pct" value="18" step="any"></label>
+          <label>Split<input type="number" id="tip-split" value="2" step="1" min="1"></label>
+        </div>
+        <button onclick="tipCalc()">Calculate</button>
+        <div class="out" id="tip-out"><span class="label">Total</span><span class="big">$59.00</span><span class="breakdown">Tip $9.00 · Per person $29.50</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ad-block">
+    <div class="placeholder">728 × 90 leaderboard placement</div>
+  </div>
+
+  <section class="explainer">
+    <h3>How it works</h3>
+    <p>
+      Tip = bill × percent ÷ 100. Total = bill + tip. Per person = total ÷ split. That's it.
+    </p>
+    <p>
+      In the US, standard restaurant tip is 18–20% on the pre-tax subtotal. 15% is acceptable for
+      adequate service, 20%+ for great service. In the UK and most of continental Europe, service
+      is often included; tipping 5–10% extra is appreciated but not expected. In Japan, tipping
+      is usually not done at all.
+    </p>
+  </section>
+
+  <section class="faq">
+    <h3>Frequently asked questions</h3>
+    <details>
+      <summary>How do I calculate a 15% or 18% tip in my head?</summary>
+      <div class="answer"><p>For 15%: take 10% (move the decimal one place left), then add half of that. Bill of $40 → 10% is $4 → half is $2 → 15% is $6. For 18%: same trick, then add a bit more. For 20%: take 10% and double it.</p></div>
+    </details>
+    <details>
+      <summary>Should I tip on the pre-tax or post-tax total?</summary>
+      <div class="answer"><p>Pre-tax is the traditional standard in the US — you're tipping for service, not for tax. But many people tip on the post-tax total because it's what's printed on the receipt and it's easier. Both are acceptable.</p></div>
+    </details>
+    <details>
+      <summary>Is 20% standard in 2026?</summary>
+      <div class="answer"><p>In US sit-down restaurants, yes. "Tip creep" has pushed the expected range from 15–18% (2010s) to 18–22% (2020s). Counter-service and takeout are more flexible — 10% or a few dollars is common, sometimes nothing.</p></div>
+    </details>
+    <details>
+      <summary>How do I split a bill unevenly?</summary>
+      <div class="answer"><p>This calculator does an even split. For uneven splits, ask the server to print separate checks (most US restaurants will), or calculate each person's share manually and add a flat tip percentage to each.</p></div>
+    </details>
+  </section>
+
+  <section class="related">
+    <h3>Related tools</h3>
+    <div class="related-grid">
+      <a href="/percentage-calculator/">Percentage Calculator</a>
+      <a href="/sales-tax-calculator/">Sales Tax Calculator</a>
+      <a href="/discount-calculator/">Discount Calculator</a>
+      <a href="/unit-converter/">Unit Converter</a>
+    </div>
+  </section>
+
+  <footer class="colophon">
+    <span>TinyUseful · Issue No. 1 · 2026</span>
+    <span><a href="/">Home</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a></span>
+  </footer>
+
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const fmt = (n, d=2) => n.toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
+  function setOut(id, label, big, breakdown='') {
+    $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
+  }
+  function tipCalc() {
+    const bill=+$('tip-bill').value, pct=+$('tip-pct').value, split=Math.max(1, Math.floor(+$('tip-split').value)||1);
+    const tip = bill*pct/100, total = bill+tip, perPerson = total/split;
+    setOut('tip-out','Total','$'+fmt(total),
+      `Tip $${fmt(tip)}${split>1?` · Per person $${fmt(perPerson)}`:''}`);
+  }
+  tipCalc();
+</script>
+
+</body>
+</html>
