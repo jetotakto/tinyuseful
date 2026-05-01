@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>TinyUseful — small tools for everyday questions, no AI</title>
-<meta name="description" content="Eleven small tools — money calculators, unit converter, date and time zone converters. One page per tool. No account. No tracking. No AI." />
+<meta name="description" content="Eleven small tools — money calculators, unit converter, date and time zone converters. One page per tool. No account. No saved input. No AI." />
 <link rel="canonical" href="https://www.tinyuseful.app/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta name="robots" content="index, follow">
@@ -12,10 +12,10 @@
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="TinyUseful — small tools for everyday questions, no AI">
-<meta property="og:description" content="Eleven small tools — money calculators, unit converter, date and time zone converters. No account. No tracking. No AI.">
+<meta property="og:description" content="Eleven small tools — money calculators, unit converter, date and time zone converters. No account. No saved input. No AI.">
 <meta property="og:url" content="https://www.tinyuseful.app/">
 <meta property="og:site_name" content="TinyUseful">
-<meta property="og:image" content="https://www.tinyuseful.app/og-image01.png">
+<meta property="og:image" content="https://www.tinyuseful.app/og-image03.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="TinyUseful — small tools for everyday questions">
@@ -23,8 +23,8 @@
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="TinyUseful — small tools for everyday questions, no AI">
-<meta name="twitter:description" content="Eleven small tools. No account. No tracking. No AI.">
-<meta name="twitter:image" content="https://www.tinyuseful.app/og-image01.png">
+<meta name="twitter:description" content="Eleven small tools. No account. No saved input. No AI.">
+<meta name="twitter:image" content="https://www.tinyuseful.app/og-image03.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,7 +39,7 @@
   "@type": "WebSite",
   "name": "TinyUseful",
   "url": "https://www.tinyuseful.app/",
-  "description": "Small browser-based tools — money calculators, unit converter, date and time zone converters. No account, no tracking, no AI."
+  "description": "Small browser-based tools — money calculators, unit converter, date and time zone converters. No account, no saved input, no AI."
 }
 </script>
 </head>
@@ -69,7 +69,7 @@
       <span>No account</span>
       <span>No saved input</span>
       <span>No AI</span>
-      <span>Works offline after first load</span>
+      <span>Browser-based</span>
     </div>
   </section>
 
@@ -160,8 +160,9 @@
     <div>
       <h4>How it works</h4>
       <p>
-        Every calculator uses the same formula your bank uses, computed entirely in your browser using JavaScript.
-        No external lookup, no API call. Open the page once, and it works offline forever.
+        Every tool uses simple deterministic formulas, computed entirely in your browser using JavaScript.
+        No external lookup, no API call. The math behind the money tools is the standard textbook
+        amortization and percentage formulas — the same ones your bank's calculator uses.
       </p>
     </div>
     <div id="why">
@@ -177,7 +178,8 @@
       <p>
         One advertisement, declared. No tracking pixels, no fingerprinting, no email gates, no popups.
         We sell attention to advertisers in one clearly labelled box. That is the entire business model.
-        Your inputs never leave your browser.
+        Your inputs never leave your browser. Cloudflare keeps cookieless server-side analytics —
+        full disclosure on the <a href="/privacy.html">Privacy page</a>.
       </p>
     </div>
   </section>
