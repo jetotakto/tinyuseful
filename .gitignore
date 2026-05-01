@@ -2,6 +2,15 @@
 _commit.ps1
 _run_commit.bat
 _run_*.bat
+_make_zip.ps1
+_make_zip.bat
+_make_review.ps1
+_make_review.bat
+og-template.html
+
+# Review ZIP archivy a kontrolni slozky — nikdy do live webu
+tinyuseful-review-*.zip
+kontrola GPT a Geminy/
 
 # Tokens & secrets — never commit (should be outside repo anyway)
 tokeny.txt

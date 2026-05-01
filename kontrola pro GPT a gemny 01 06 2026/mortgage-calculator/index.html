@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Mortgage Calculator — Monthly Payment, Interest Total | TinyUseful</title>
+<meta name="description" content="Calculate your monthly mortgage payment using the standard amortization formula. See total interest paid over the loan. No account, no tracking, no AI guessing." />
+<link rel="canonical" href="https://www.tinyuseful.app/mortgage-calculator/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mortgage Calculator — Monthly Payment & Interest">
+<meta property="og:description" content="Calculate monthly mortgage payment and total interest. Same formula your bank uses, computed in your browser.">
+<meta property="og:url" content="https://www.tinyuseful.app/mortgage-calculator/">
+<meta property="og:site_name" content="TinyUseful">
+<meta property="og:image" content="https://www.tinyuseful.app/og-image01.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TinyUseful — small tools for everyday questions">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mortgage Calculator — TinyUseful">
+<meta name="twitter:description" content="Calculate monthly mortgage payment and total interest paid.">
+<meta name="twitter:image" content="https://www.tinyuseful.app/og-image01.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Mortgage Calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any (browser-based)",
+  "description": "Calculate monthly mortgage payment and total interest using the standard amortization formula.",
+  "url": "https://www.tinyuseful.app/mortgage-calculator/",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "publisher": {"@type": "Organization", "name": "TinyUseful", "url": "https://www.tinyuseful.app/"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "TinyUseful", "item": "https://www.tinyuseful.app/"},
+    {"@type": "ListItem", "position": 2, "name": "Mortgage Calculator", "item": "https://www.tinyuseful.app/mortgage-calculator/"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "How is a mortgage payment calculated?",
+     "acceptedAnswer": {"@type": "Answer", "text": "The standard amortization formula is M = P × [r(1+r)^n] / [(1+r)^n − 1], where P is the loan amount, r is the monthly interest rate (annual rate divided by 12), and n is the total number of monthly payments (years × 12). The result M is the fixed monthly payment that fully repays the loan with interest."}},
+    {"@type": "Question", "name": "What is the difference between APR and interest rate?",
+     "acceptedAnswer": {"@type": "Answer", "text": "The interest rate is the cost of borrowing the principal. The APR (Annual Percentage Rate) includes the interest rate plus other lender fees expressed as a yearly cost. APR is always equal to or higher than the interest rate. This calculator uses the interest rate, not APR."}},
+    {"@type": "Question", "name": "Should I choose a 15-year or 30-year mortgage?",
+     "acceptedAnswer": {"@type": "Answer", "text": "A 15-year mortgage has higher monthly payments but you pay much less total interest and own the home sooner. A 30-year mortgage has lower monthly payments but you pay more interest overall. Run both numbers in the calculator and compare the total interest column."}},
+    {"@type": "Question", "name": "Why is my first payment mostly interest?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Mortgage interest is calculated on the remaining balance. At the start, the balance is highest, so most of your payment goes to interest. As the principal shrinks, more of each payment goes to principal. By the end, almost all of each payment is principal. This pattern is called amortization."}},
+    {"@type": "Question", "name": "Does this calculator include taxes and insurance?",
+     "acceptedAnswer": {"@type": "Answer", "text": "No. This is principal and interest only (P&I). Property taxes, homeowners insurance, PMI, and HOA fees vary by location and lender, and are not part of the loan formula. Your full monthly housing payment will be higher than the number shown here."}}
+  ]
+}
+</script>
+</head>
+
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <a class="wordmark" href="/">
+      <span class="knife" aria-hidden="true"></span>
+      TinyUseful
+    </a>
+    <span class="issue">Mortgage Calculator</span>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">TinyUseful</a><span class="sep">›</span>Mortgage Calculator
+  </nav>
+
+  <section class="tools">
+    <div class="section-head">
+      <span class="section-num">No. 03</span>
+      <h2>Mortgage Calculator</h2>
+      <span class="desc">Monthly principal &amp; interest using the standard amortization formula.</span>
+    </div>
+    <div class="tool" data-tool="mortgage">
+      <div class="tool-meta">
+        <h3>Inputs</h3>
+        <p class="desc">Enter your loan amount, interest rate, and term in years. The calculator runs the standard amortization formula in your browser. Nothing is saved or sent.</p>
+      </div>
+      <div class="tool-form">
+        <div class="row">
+          <label>Loan ($)<input type="number" id="mtg-loan" value="450000" step="any"></label>
+          <label>Rate %<input type="number" id="mtg-rate" value="6.75" step="any"></label>
+          <label>Years<input type="number" id="mtg-years" value="30" step="any"></label>
+        </div>
+        <button onclick="mtgCalc()">Calculate</button>
+        <div class="out" id="mtg-out"><span class="label">Monthly payment</span><span class="big">$2,919</span><span class="breakdown">Total interest $600,765 · Total paid $1,050,765</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ad-block">
+    <div class="placeholder">728 × 90 leaderboard placement</div>
+  </div>
+
+  <section class="explainer">
+    <h3>How it works</h3>
+    <p>
+      A fixed-rate mortgage is repaid in equal monthly installments over the term you choose.
+      Each payment covers some interest on the remaining balance plus some principal repayment.
+      In the early years, most of every payment is interest; in the later years, most of it is principal.
+      This pattern is called <em>amortization</em>.
+    </p>
+    <p>
+      The formula is: <strong>M = P × [r(1+r)<sup>n</sup>] / [(1+r)<sup>n</sup> − 1]</strong>,
+      where <strong>P</strong> is the loan amount, <strong>r</strong> is the monthly interest rate
+      (annual rate divided by 12), and <strong>n</strong> is the total number of monthly payments
+      (years × 12). It's the same formula your bank uses. There is one correct answer.
+    </p>
+    <h3>What this does not include</h3>
+    <p>
+      This calculator shows <strong>principal and interest only</strong>. Your real monthly housing
+      payment usually also includes property tax, homeowners insurance, sometimes PMI (private
+      mortgage insurance) when your down payment is below 20%, and HOA fees if applicable.
+      These vary by location and lender — check your loan estimate document for the full picture.
+    </p>
+  </section>
+
+  <section class="faq">
+    <h3>Frequently asked questions</h3>
+    <details>
+      <summary>How is a mortgage payment calculated?</summary>
+      <div class="answer">
+        <p>The standard amortization formula is <strong>M = P × [r(1+r)<sup>n</sup>] / [(1+r)<sup>n</sup> − 1]</strong>, where P is the loan amount, r is the monthly interest rate (annual rate ÷ 12), and n is the total number of monthly payments (years × 12). The result M is the fixed monthly payment that fully repays the loan with interest.</p>
+      </div>
+    </details>
+    <details>
+      <summary>What is the difference between APR and interest rate?</summary>
+      <div class="answer">
+        <p>The interest rate is the cost of borrowing the principal. The APR (Annual Percentage Rate) includes the interest rate plus other lender fees expressed as a yearly cost. APR is always equal to or higher than the interest rate. This calculator uses the interest rate, not APR.</p>
+      </div>
+    </details>
+    <details>
+      <summary>Should I choose a 15-year or 30-year mortgage?</summary>
+      <div class="answer">
+        <p>A 15-year mortgage has higher monthly payments but you pay much less total interest and own the home sooner. A 30-year mortgage has lower monthly payments but you pay more interest overall. Run both numbers in the calculator above and compare the total interest line.</p>
+      </div>
+    </details>
+    <details>
+      <summary>Why is my first payment mostly interest?</summary>
+      <div class="answer">
+        <p>Mortgage interest is calculated on the remaining balance. At the start, the balance is highest, so most of your payment goes to interest. As the principal shrinks, more of each payment goes to principal. By the end, almost all of each payment is principal. This pattern is called amortization.</p>
+      </div>
+    </details>
+    <details>
+      <summary>Does this calculator include taxes and insurance?</summary>
+      <div class="answer">
+        <p>No. This is principal and interest only (P&amp;I). Property taxes, homeowners insurance, PMI, and HOA fees vary by location and lender and are not part of the loan formula. Your full monthly housing payment will be higher than the number shown here.</p>
+      </div>
+    </details>
+  </section>
+
+  <section class="related">
+    <h3>Related tools</h3>
+    <div class="related-grid">
+      <a href="/loan-calculator/">Loan Calculator</a>
+      <a href="/compound-interest-calculator/">Compound Interest</a>
+      <a href="/rent-affordability-calculator/">Rent Affordability</a>
+      <a href="/percentage-calculator/">Percentage Calculator</a>
+    </div>
+  </section>
+
+  <footer class="colophon">
+    <span>TinyUseful · Issue No. 1 · 2026 · Made for the open web</span>
+    <span><a href="/">Home</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp; <a href="https://github.com/jetotakto/tinyuseful">Source</a></span>
+  </footer>
+
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const fmt0 = n => n.toLocaleString('en-US', {maximumFractionDigits: 0});
+  function setOut(id, label, big, breakdown='') {
+    $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
+  }
+  function mtgCalc() {
+    const P=+$('mtg-loan').value, r=+$('mtg-rate').value/100/12, n=+$('mtg-years').value*12;
+    const M = r===0 ? P/n : P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+    setOut('mtg-out','Monthly payment','$'+fmt0(M),`Total interest $${fmt0(M*n-P)} · Total paid $${fmt0(M*n)}`);
+  }
+  mtgCalc();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Rent Affordability Calculator — How Much Rent Can I Afford | TinyUseful</title>
+<meta name="description" content="Calculate the maximum rent you can afford using the 30%-rule, adjusted for your monthly debts. Conservative and stretch ranges shown. No account, no tracking." />
+<link rel="canonical" href="https://www.tinyuseful.app/rent-affordability-calculator/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rent Affordability Calculator — TinyUseful">
+<meta property="og:description" content="The 30%-rule, adjusted for your monthly debts. Conservative and stretch ranges shown.">
+<meta property="og:url" content="https://www.tinyuseful.app/rent-affordability-calculator/">
+<meta property="og:site_name" content="TinyUseful">
+<meta property="og:image" content="https://www.tinyuseful.app/og-image01.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TinyUseful — small tools for everyday questions">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.tinyuseful.app/og-image01.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Rent Affordability Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any (browser-based)","description":"Calculate maximum affordable rent based on income and monthly debts.","url":"https://www.tinyuseful.app/rent-affordability-calculator/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"TinyUseful","url":"https://www.tinyuseful.app/"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TinyUseful","item":"https://www.tinyuseful.app/"},{"@type":"ListItem","position":2,"name":"Rent Affordability Calculator","item":"https://www.tinyuseful.app/rent-affordability-calculator/"}]}
+</script>
+</head>
+
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <a class="wordmark" href="/"><span class="knife" aria-hidden="true"></span>TinyUseful</a>
+    <span class="issue">Rent Affordability</span>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">TinyUseful</a><span class="sep">›</span>Rent Affordability Calculator
+  </nav>
+
+  <section class="tools">
+    <div class="section-head">
+      <span class="section-num">No. 06</span>
+      <h2>Rent Affordability Calculator</h2>
+      <span class="desc">The 30%-rule, adjusted for monthly debt obligations.</span>
+    </div>
+    <div class="tool" data-tool="rent">
+      <div class="tool-meta">
+        <h3>Inputs</h3>
+        <p class="desc">Monthly net income, current monthly debt payments, and what % of income you're willing to spend on rent.</p>
+      </div>
+      <div class="tool-form">
+        <div class="row">
+          <label>Income/mo ($)<input type="number" id="rent-inc" value="6500" step="any"></label>
+          <label>Debts/mo ($)<input type="number" id="rent-debt" value="450" step="any"></label>
+          <label>Rule %<input type="number" id="rent-rule" value="30" step="any"></label>
+        </div>
+        <button onclick="rentCalc()">Calculate</button>
+        <div class="out" id="rent-out"><span class="label">Suggested max rent</span><span class="big">$1,500</span><span class="breakdown">Conservative $1,300 · Stretch $1,815 · Based on the 30% rule</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ad-block">
+    <div class="placeholder">728 × 90 leaderboard placement</div>
+  </div>
+
+  <section class="explainer">
+    <h3>How it works</h3>
+    <p>
+      The classic <strong>30% rule</strong> says housing should not exceed 30% of gross income.
+      This calculator adjusts that for monthly debt payments — credit cards, car loans, student
+      loans — by subtracting half of those from the result. The conservative figure (20%) is
+      safer; the stretch figure (35%) assumes minimal debt and a stable income.
+    </p>
+    <p>
+      The 30% rule comes from a 1969 US housing law, not financial science. In high-cost cities
+      (NYC, San Francisco, London), median renters often spend 40–50%+. Use the calculator to see
+      what's mathematically affordable, then add a buffer for utilities, internet, and rent
+      increases.
+    </p>
+  </section>
+
+  <section class="faq">
+    <h3>Frequently asked questions</h3>
+    <details>
+      <summary>Should I use gross or net income?</summary>
+      <div class="answer"><p>The 30% rule traditionally uses gross (pre-tax). This calculator works with whichever you enter — but using net income gives a more realistic ceiling because that's what actually hits your account.</p></div>
+    </details>
+    <details>
+      <summary>Why does this subtract half of my debts and not all?</summary>
+      <div class="answer"><p>Because debt payments aren't going up if you sign a lease — they're already in your budget. The half-adjustment is a heuristic to leave room for the part of debt servicing that competes with rent for the same monthly cash. Landlords often use a stricter "30% of (income − all debts)" calculation.</p></div>
+    </details>
+    <details>
+      <summary>What do most landlords actually require?</summary>
+      <div class="answer"><p>The common landlord rule is gross monthly income ≥ 3× rent (so rent ≤ 33% of income). Some require 2.5× or 4×. Your credit score and rental history matter more than which exact ratio you fit.</p></div>
+    </details>
+    <details>
+      <summary>Why does the 30% rule break in big cities?</summary>
+      <div class="answer"><p>Because rent is set by local supply and demand, not by national averages. In NYC, San Francisco, or central London, the median renter spends 40–50%. The rule is an old guideline, not a law of physics — the calculator gives you the math, you decide what fits your life.</p></div>
+    </details>
+  </section>
+
+  <section class="related">
+    <h3>Related tools</h3>
+    <div class="related-grid">
+      <a href="/mortgage-calculator/">Mortgage Calculator</a>
+      <a href="/loan-calculator/">Loan Calculator</a>
+      <a href="/percentage-calculator/">Percentage Calculator</a>
+      <a href="/compound-interest-calculator/">Compound Interest</a>
+    </div>
+  </section>
+
+  <footer class="colophon">
+    <span>TinyUseful · Issue No. 1 · 2026</span>
+    <span><a href="/">Home</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp; <a href="https://github.com/jetotakto/tinyuseful">Source</a></span>
+  </footer>
+
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const fmt0 = n => n.toLocaleString('en-US', {maximumFractionDigits: 0});
+  function setOut(id, label, big, breakdown='') {
+    $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
+  }
+  function rentCalc() {
+    const inc=+$('rent-inc').value, debt=+$('rent-debt').value, rule=+$('rent-rule').value;
+    const adjusted = inc*rule/100 - debt*0.5;
+    setOut('rent-out','Suggested max rent','$'+fmt0(Math.max(0,adjusted)),
+      `Conservative $${fmt0(inc*0.20)} · Stretch $${fmt0(inc*(rule+5)/100)} · Based on the ${rule}% rule`);
+  }
+  rentCalc();
+</script>
+
+</body>
+</html>

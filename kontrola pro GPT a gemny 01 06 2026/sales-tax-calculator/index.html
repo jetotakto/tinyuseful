@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Sales Tax Calculator — Add or Remove Tax | TinyUseful</title>
+<meta name="description" content="Add sales tax to a net price, or remove tax from a gross price. Works for any state rate or VAT percentage. No account, no tracking, no AI." />
+<link rel="canonical" href="https://www.tinyuseful.app/sales-tax-calculator/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sales Tax Calculator — TinyUseful">
+<meta property="og:description" content="Add or remove sales tax instantly. Works for any state or VAT rate.">
+<meta property="og:url" content="https://www.tinyuseful.app/sales-tax-calculator/">
+<meta property="og:site_name" content="TinyUseful">
+<meta property="og:image" content="https://www.tinyuseful.app/og-image01.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TinyUseful — small tools for everyday questions">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.tinyuseful.app/og-image01.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Sales Tax Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any (browser-based)","description":"Add or remove sales tax from a price.","url":"https://www.tinyuseful.app/sales-tax-calculator/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"TinyUseful","url":"https://www.tinyuseful.app/"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TinyUseful","item":"https://www.tinyuseful.app/"},{"@type":"ListItem","position":2,"name":"Sales Tax Calculator","item":"https://www.tinyuseful.app/sales-tax-calculator/"}]}
+</script>
+</head>
+
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <a class="wordmark" href="/"><span class="knife" aria-hidden="true"></span>TinyUseful</a>
+    <span class="issue">Sales Tax Calculator</span>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">TinyUseful</a><span class="sep">›</span>Sales Tax Calculator
+  </nav>
+
+  <section class="tools">
+    <div class="section-head">
+      <span class="section-num">No. 02</span>
+      <h2>Sales Tax / VAT Calculator</h2>
+      <span class="desc">Add tax to a net price, or remove tax to find the original.</span>
+    </div>
+    <div class="tool" data-tool="vat">
+      <div class="tool-meta">
+        <h3>Inputs</h3>
+        <p class="desc">Enter price, tax rate, and pick add or remove. The default rate (8.875%) is New York City. Replace with your local rate.</p>
+      </div>
+      <div class="tool-form">
+        <div class="row">
+          <label>Price<input type="number" id="vat-price" value="100" step="any"></label>
+          <label>Rate %<input type="number" id="vat-rate" value="8.875" step="any"></label>
+          <label>Mode
+            <select id="vat-mode">
+              <option value="add">Add tax</option>
+              <option value="remove">Remove tax</option>
+            </select>
+          </label>
+        </div>
+        <button onclick="vatCalc()">Calculate</button>
+        <div class="out" id="vat-out"><span class="label">After tax</span><span class="big">$108.88</span><span class="breakdown">Tax amount $8.88</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ad-block">
+    <div class="placeholder">728 × 90 leaderboard placement</div>
+  </div>
+
+  <section class="explainer">
+    <h3>How it works</h3>
+    <p>
+      To <strong>add tax</strong>: gross = net × (1 + rate/100). To <strong>remove tax</strong> from a price
+      that already includes it: net = gross ÷ (1 + rate/100). The tax amount is the difference.
+    </p>
+    <p>
+      US state sales tax varies widely: Oregon, Montana, New Hampshire, Alaska, and Delaware have no
+      statewide sales tax. California (7.25%) and Tennessee (≈9.55% combined) are at the high end.
+      In the EU and UK, VAT is typically 19–25% and is usually included in displayed prices, so the
+      <em>remove tax</em> mode is the common case.
+    </p>
+  </section>
+
+  <section class="faq">
+    <h3>Frequently asked questions</h3>
+    <details>
+      <summary>What's the sales tax rate in my state?</summary>
+      <div class="answer"><p>This calculator does not look up rates by location — you enter the rate yourself. Combined state + local rates in the US range from 0% (NH, OR, MT, AK, DE) to roughly 9.55% (TN). City and county add-ons vary; the receipt or your state's tax site has the exact number.</p></div>
+    </details>
+    <details>
+      <summary>Why do I get a slightly different number than the receipt?</summary>
+      <div class="answer"><p>Most often it's rounding. Stores round each line item, so the receipt total can differ by a cent or two from a calculation done on the subtotal. Some jurisdictions also tax certain categories (food, clothing) at different rates than general goods.</p></div>
+    </details>
+    <details>
+      <summary>How do I remove tax from a total that includes it?</summary>
+      <div class="answer"><p>Switch the calculator to "Remove tax" mode. If you paid $108 at an 8% rate, the original was $108 ÷ 1.08 = $100, and the tax was $8.</p></div>
+    </details>
+    <details>
+      <summary>Is sales tax the same as VAT?</summary>
+      <div class="answer"><p>Mathematically yes — both are a percentage added to a price. The legal and accounting differences (who collects, who can reclaim, when it's due) are different, but for figuring out a final price the formula is identical.</p></div>
+    </details>
+  </section>
+
+  <section class="related">
+    <h3>Related tools</h3>
+    <div class="related-grid">
+      <a href="/percentage-calculator/">Percentage Calculator</a>
+      <a href="/discount-calculator/">Discount Calculator</a>
+      <a href="/tip-calculator/">Tip Calculator</a>
+      <a href="/unit-converter/">Unit Converter</a>
+    </div>
+  </section>
+
+  <footer class="colophon">
+    <span>TinyUseful · Issue No. 1 · 2026</span>
+    <span><a href="/">Home</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp; <a href="https://github.com/jetotakto/tinyuseful">Source</a></span>
+  </footer>
+
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const fmt = (n, d=2) => n.toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
+  function setOut(id, label, big, breakdown='') {
+    $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
+  }
+  function vatCalc() {
+    const price=+$('vat-price').value, rate=+$('vat-rate').value, mode=$('vat-mode').value;
+    if (mode === 'add') { const tax=price*rate/100, gross=price+tax;
+      setOut('vat-out','After tax','$'+fmt(gross),`Tax amount $${fmt(tax)} · Net $${fmt(price)}`); }
+    else { const net=price/(1+rate/100), tax=price-net;
+      setOut('vat-out','Before tax','$'+fmt(net),`Tax amount $${fmt(tax)} · Total $${fmt(price)}`); }
+  }
+  vatCalc();
+</script>
+
+</body>
+</html>

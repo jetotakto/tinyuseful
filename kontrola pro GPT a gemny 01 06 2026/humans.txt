@@ -24,10 +24,6 @@
   No "intelligent assistant" that's actually a chatbot.
   No autoplay video ads. No newsletter prompts.
 
-  We use Cloudflare's cookieless server-side analytics
-  (page views, no personal identification, no cross-site
-  follow). Read the full details in /privacy.html.
-
   One advertisement, declared. That's the business.
 
   If you find a bug or have an idea: lukasaustralie@gmail.com.

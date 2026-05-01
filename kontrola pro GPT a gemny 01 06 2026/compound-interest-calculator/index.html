@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Compound Interest Calculator — Future Value with Monthly Contributions | TinyUseful</title>
+<meta name="description" content="Calculate the future value of savings with compound interest and monthly contributions. See total contributed and interest earned. No account, no tracking." />
+<link rel="canonical" href="https://www.tinyuseful.app/compound-interest-calculator/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Compound Interest Calculator — TinyUseful">
+<meta property="og:description" content="Future value with monthly contributions. See contributed vs. interest earned over years.">
+<meta property="og:url" content="https://www.tinyuseful.app/compound-interest-calculator/">
+<meta property="og:site_name" content="TinyUseful">
+<meta property="og:image" content="https://www.tinyuseful.app/og-image01.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TinyUseful — small tools for everyday questions">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.tinyuseful.app/og-image01.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Compound Interest Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any (browser-based)","description":"Calculate future value of an investment with compound interest and monthly contributions.","url":"https://www.tinyuseful.app/compound-interest-calculator/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"TinyUseful","url":"https://www.tinyuseful.app/"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TinyUseful","item":"https://www.tinyuseful.app/"},{"@type":"ListItem","position":2,"name":"Compound Interest Calculator","item":"https://www.tinyuseful.app/compound-interest-calculator/"}]}
+</script>
+</head>
+
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <a class="wordmark" href="/"><span class="knife" aria-hidden="true"></span>TinyUseful</a>
+    <span class="issue">Compound Interest</span>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">TinyUseful</a><span class="sep">›</span>Compound Interest Calculator
+  </nav>
+
+  <section class="tools">
+    <div class="section-head">
+      <span class="section-num">No. 05</span>
+      <h2>Compound Interest Calculator</h2>
+      <span class="desc">Future value of a starting balance plus monthly contributions.</span>
+    </div>
+    <div class="tool" data-tool="compound">
+      <div class="tool-meta">
+        <h3>Inputs</h3>
+        <p class="desc">Starting balance, monthly contribution, expected annual return, and number of years. Compounded monthly.</p>
+      </div>
+      <div class="tool-form">
+        <div class="row">
+          <label>Start ($)<input type="number" id="ci-start" value="10000" step="any"></label>
+          <label>Monthly<input type="number" id="ci-monthly" value="500" step="any"></label>
+          <label>APR %<input type="number" id="ci-apr" value="7" step="any"></label>
+          <label>Years<input type="number" id="ci-years" value="20" step="any"></label>
+        </div>
+        <button onclick="ciCalc()">Calculate</button>
+        <div class="out" id="ci-out"><span class="label">Future value</span><span class="big">$300,123</span><span class="breakdown">Contributed $130,000 · Interest earned $170,123</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ad-block">
+    <div class="placeholder">728 × 90 leaderboard placement</div>
+  </div>
+
+  <section class="explainer">
+    <h3>How it works</h3>
+    <p>
+      Each month, the balance earns interest at one twelfth of the annual rate, then your contribution
+      is added. Over time, interest is earned on previously earned interest — that's <em>compounding</em>.
+      The longer the time horizon, the bigger the role of interest versus contributions.
+    </p>
+    <p>
+      The default 7% annual return is a common assumption for diversified stock-market index investing
+      over multi-decade periods. Real returns vary year to year and are not guaranteed. This is a
+      planning tool, not investment advice.
+    </p>
+  </section>
+
+  <section class="faq">
+    <h3>Frequently asked questions</h3>
+    <details>
+      <summary>Does starting earlier really matter that much?</summary>
+      <div class="answer"><p>Yes — dramatically. $200/month from age 25 to 65 at 7% grows to about $525,000. The same $200/month from age 35 to 65 grows to about $245,000. You contributed $24,000 less in the first scenario but ended with more than twice as much. Time is the biggest variable.</p></div>
+    </details>
+    <details>
+      <summary>What return rate should I use?</summary>
+      <div class="answer"><p>For long-term diversified stock investing, 6–8% is a common planning assumption (after inflation, closer to 4–5%). For bonds, 3–4%. For a savings account, whatever your bank pays. Always run the calculator at multiple rates to see the range.</p></div>
+    </details>
+    <details>
+      <summary>Does this account for inflation?</summary>
+      <div class="answer"><p>No, it shows nominal future dollars. To estimate purchasing power, subtract roughly 2–3% from your APR before calculating. A 7% nominal return with 3% inflation is about 4% real.</p></div>
+    </details>
+    <details>
+      <summary>What if I contribute irregularly?</summary>
+      <div class="answer"><p>This tool assumes a constant monthly contribution. For lump sums or irregular schedules, the math is more complex — you'd need a spreadsheet or a financial planner. For consistent saving habits, this is accurate enough.</p></div>
+    </details>
+  </section>
+
+  <section class="related">
+    <h3>Related tools</h3>
+    <div class="related-grid">
+      <a href="/mortgage-calculator/">Mortgage Calculator</a>
+      <a href="/loan-calculator/">Loan Calculator</a>
+      <a href="/percentage-calculator/">Percentage Calculator</a>
+      <a href="/rent-affordability-calculator/">Rent Affordability</a>
+    </div>
+  </section>
+
+  <footer class="colophon">
+    <span>TinyUseful · Issue No. 1 · 2026</span>
+    <span><a href="/">Home</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp; <a href="https://github.com/jetotakto/tinyuseful">Source</a></span>
+  </footer>
+
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const fmt0 = n => n.toLocaleString('en-US', {maximumFractionDigits: 0});
+  function setOut(id, label, big, breakdown='') {
+    $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
+  }
+  function ciCalc() {
+    const P=+$('ci-start').value, m=+$('ci-monthly').value, r=+$('ci-apr').value/100/12, n=+$('ci-years').value*12;
+    let bal = P; for (let i=0;i<n;i++){ bal = bal*(1+r) + m; }
+    const contrib = P + m*n;
+    setOut('ci-out','Future value','$'+fmt0(bal),`Contributed $${fmt0(contrib)} · Interest earned $${fmt0(bal-contrib)}`);
+  }
+  ciCalc();
+</script>
+
+</body>
+</html>

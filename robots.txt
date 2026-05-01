@@ -1,7 +1,29 @@
+# TinyUseful — robots policy
+# Strategy: allow AI search bots that recommend us to users,
+# block AI training crawlers that feed models.
+
 User-agent: *
 Allow: /
 
-# Block AI training crawlers (also blocked at Cloudflare edge)
+# ─── AI search / browse bots — ALLOWED (they can show our site to users) ───
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# ─── AI training crawlers — BLOCKED (we do not want to feed models) ───
+
 User-agent: GPTBot
 Disallow: /
 
@@ -9,9 +31,6 @@ User-agent: ClaudeBot
 Disallow: /
 
 User-agent: anthropic-ai
-Disallow: /
-
-User-agent: PerplexityBot
 Disallow: /
 
 User-agent: Google-Extended
@@ -31,5 +50,8 @@ Disallow: /
 
 User-agent: cohere-ai
 Disallow: /
+
+# Note: Googlebot, Bingbot, Applebot (without "-Extended") are search crawlers
+# that fall under "User-agent: *" allow rule above. They are explicitly permitted.
 
 Sitemap: https://www.tinyuseful.app/sitemap.xml
