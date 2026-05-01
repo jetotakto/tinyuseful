@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>TinyUseful — small tools for everyday questions</title>
-<meta name="description" content="Ten small tools. One page. No account. No saved input. No AI. For when you don't need AI — just the answer." />
+<meta name="description" content="Small money calculators. One page. No account. No saved input. No AI. For when you don't need AI — just the answer." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -287,53 +287,6 @@
     color: var(--ink);
   }
 
-  /* ─── POS-specific ─── */
-  .pos-out .word-display {
-    font-family: 'Newsreader', serif;
-    font-weight: 500;
-    font-size: 36px;
-    line-height: 1;
-    letter-spacing: -0.02em;
-    margin-bottom: 8px;
-  }
-  .pos-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
-  .pos-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
-    background: var(--ink); color: var(--paper);
-    padding: 2px 7px;
-  }
-  .pos-tag.alt { background: transparent; color: var(--ink-2); border: 1px solid var(--rule-soft); }
-  .pos-examples { font-size: 14px; color: var(--ink-2); line-height: 1.55; font-style: italic; }
-  .pos-examples .ex { margin: 3px 0; }
-  .pos-examples .ex strong {
-    font-style: normal; font-weight: 500; color: var(--ink);
-    font-family: 'JetBrains Mono', monospace; font-size: 11px;
-    letter-spacing: 0.14em; text-transform: uppercase; margin-right: 6px;
-  }
-
-  /* syllable */
-  .syl-display {
-    font-family: 'Newsreader', serif;
-    font-size: 18px; line-height: 1.5;
-    word-break: break-word;
-    margin-bottom: 8px;
-  }
-  .syl-display .sep { color: var(--red); }
-  .syl-display .count {
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--ink-3); font-size: 12px;
-    margin-left: 8px;
-  }
-  .syl-stats { font-size: 13px; color: var(--ink-2); font-style: italic; }
-  .syl-stats strong {
-    font-style: normal;
-    color: var(--ink);
-    font-family: 'Newsreader', serif;
-    font-weight: 500;
-    font-size: 18px;
-  }
-
   /* ─── DISCLOSURE BLOCK (manifest tail) ─── */
   .disclosure {
     margin-top: 32px;
@@ -431,7 +384,7 @@
     <h1>Small tools for<br>everyday <span class="red">questions</span>.</h1>
     <p class="subtitle">Small tools<span class="dot">·</span>No accounts<span class="dot">·</span>No AI</p>
     <p class="lede">
-      Ten of them on a single page. They calculate numbers and explain words.
+      Six small money calculators on a single page.
       That's it.
       <strong>For when you don't need a chat &mdash; just the answer.</strong>
     </p>
@@ -447,18 +400,17 @@
   <!-- ─── INDEX ─── -->
   <nav class="index" aria-label="Index">
     <span class="label">Index</span>
-    <a href="#numbers">01 · Numbers (6)</a>
-    <a href="#words">02 · Words (4)</a>
+    <a href="#money">01 · Money (6)</a>
     <a href="#how">How it works</a>
     <a href="#why">Why no AI</a>
   </nav>
 
-  <!-- ─── 01 NUMBERS ─── -->
-  <section class="tools" id="numbers">
+  <!-- ─── 01 MONEY ─── -->
+  <section class="tools" id="money">
     <div class="section-head">
       <span class="section-num">§ 01</span>
-      <h2>Numbers</h2>
-      <span class="desc">Math you actually do — six tools, deterministic, computed in your browser.</span>
+      <h2>Money</h2>
+      <span class="desc">Math you actually do — deterministic, computed in your browser.</span>
     </div>
 
     <!-- 1. PERCENTAGE -->
@@ -587,110 +539,20 @@
     <div class="placeholder">728 × 90 leaderboard placement</div>
   </div>
 
-  <!-- ─── 02 WORDS ─── -->
-  <section class="tools" id="words">
-    <div class="section-head">
-      <span class="section-num">§ 02</span>
-      <h2>Words</h2>
-      <span class="desc">Understand the language you're using — four tools, no dictionary lookup needed.</span>
-    </div>
-
-    <!-- 7. TYPE OF WORD -->
-    <div class="tool" data-tool="typeofword">
-      <div class="tool-meta">
-        <span class="tool-num">No. 07</span>
-        <h3>Type of Word</h3>
-        <p class="desc">Identify the part of speech with example sentences.</p>
-      </div>
-      <div class="tool-form">
-        <div class="row">
-          <label>Word<input type="text" id="pos-in" placeholder="run" autocapitalize="off" autocorrect="off"></label>
-        </div>
-        <button onclick="posCalc()">Identify</button>
-        <div class="out pos-out" id="pos-out">
-          <span class="label">Part of speech</span>
-          <span class="word-display">run</span>
-          <div class="pos-tags">
-            <span class="pos-tag">verb</span>
-            <span class="pos-tag">noun</span>
-          </div>
-          <div class="pos-examples">
-            <p class="ex"><strong>verb</strong> She runs every morning before work.</p>
-            <p class="ex"><strong>noun</strong> They went for a long run in the park.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 8. SYLLABLE -->
-    <div class="tool" data-tool="syllable">
-      <div class="tool-meta">
-        <span class="tool-num">No. 08</span>
-        <h3>Syllable Counter</h3>
-        <p class="desc">Counts syllables per line — useful for haiku, songwriting, ESL practice.</p>
-      </div>
-      <div class="tool-form">
-        <label>Text<textarea id="syl-in" oninput="sylCalc()">An old silent pond
-A frog jumps into the pond
-splash again silence</textarea></label>
-        <div class="out" id="syl-out">
-          <span class="label">Result</span>
-          <div class="syl-display"></div>
-          <div class="syl-stats"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 9. WORD COUNTER -->
-    <div class="tool" data-tool="wordcount">
-      <div class="tool-meta">
-        <span class="tool-num">No. 09</span>
-        <h3>Word Counter</h3>
-        <p class="desc">Live word count with sentences and reading time.</p>
-      </div>
-      <div class="tool-form">
-        <label>Text<textarea id="wc-in" placeholder="Start typing..." oninput="wcCalc()"></textarea></label>
-        <div class="out" id="wc-out">
-          <span class="label">Stats</span>
-          <span class="big">0 <span style="font-size:18px; color: var(--ink-2);">words</span></span>
-          <span class="breakdown">0 sentences · 0 min read</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- 10. CHARACTER COUNTER -->
-    <div class="tool" data-tool="charcount">
-      <div class="tool-meta">
-        <span class="tool-num">No. 10</span>
-        <h3>Character Counter</h3>
-        <p class="desc">Live character count with platform limits — Twitter, LinkedIn, SMS.</p>
-      </div>
-      <div class="tool-form">
-        <label>Text<textarea id="cc-in" placeholder="Start typing..." oninput="ccCalc()"></textarea></label>
-        <div class="out" id="cc-out">
-          <span class="label">Characters</span>
-          <span class="big">0</span>
-          <span class="breakdown">0 with spaces · 0 without · Twitter 280 · SMS 160 · Meta description 160</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ─── DISCLOSURE / MANIFEST TAIL ─── -->
   <section class="disclosure" id="how">
     <div>
       <h4>How it works</h4>
       <p>
-        Every number tool uses the same formula your bank uses, computed entirely in your browser using JavaScript.
-        Word tools use a built-in dictionary and standard syllable rules — no external lookup, no API call.
-        Open the page once, and it works offline forever.
+        Every calculator uses the same formula your bank uses, computed entirely in your browser using JavaScript.
+        No external lookup, no API call. Open the page once, and it works offline forever.
       </p>
     </div>
     <div id="why">
       <h4>Why no AI</h4>
       <p>
-        AI is great at writing emails. It is a wasteful, unverifiable tool for arithmetic and grammar.
-        These ten tools have one correct answer each. No probability, no hallucination, no "let me try that again."
+        AI is great at writing emails. It is a wasteful, unverifiable tool for arithmetic.
+        These calculators have one correct answer each. No probability, no hallucination, no "let me try that again."
         For when you don't need a chat — just an answer.
       </p>
     </div>
@@ -759,184 +621,8 @@ splash again silence</textarea></label>
       `Conservative $${fmt0(inc*0.20)} · Stretch $${fmt0(inc*(rule+5)/100)} · Based on the ${rule}% rule`);
   }
 
-  /* WORDS — Type of Word */
-  const POS_DICT = {
-    "run":[{p:"verb",ex:"She runs every morning before work."},{p:"noun",ex:"They went for a long run in the park."}],
-    "light":[{p:"noun",ex:"Turn on the light, please."},{p:"verb",ex:"She lit a candle."},{p:"adjective",ex:"This bag is very light."}],
-    "back":[{p:"noun",ex:"My back hurts after the flight."},{p:"adverb",ex:"Step back from the edge."},{p:"verb",ex:"I'll back you in this argument."},{p:"adjective",ex:"Use the back door."}],
-    "right":[{p:"adjective",ex:"That's the right answer."},{p:"noun",ex:"You have the right to remain silent."},{p:"adverb",ex:"Turn right at the corner."}],
-    "well":[{p:"adverb",ex:"She speaks Italian well."},{p:"noun",ex:"They drew water from the well."},{p:"adjective",ex:"I don't feel well today."}],
-    "fast":[{p:"adjective",ex:"It's a fast car."},{p:"adverb",ex:"He runs fast."},{p:"verb",ex:"Muslims fast during Ramadan."},{p:"noun",ex:"He broke his fast at sunset."}],
-    "love":[{p:"noun",ex:"Love is patient."},{p:"verb",ex:"I love this song."}],
-    "water":[{p:"noun",ex:"Drink more water."},{p:"verb",ex:"Don't forget to water the plants."}],
-    "play":[{p:"verb",ex:"Children play in the yard."},{p:"noun",ex:"We saw a play at the theater."}],
-    "work":[{p:"verb",ex:"I work from home."},{p:"noun",ex:"The work is almost done."}],
-    "look":[{p:"verb",ex:"Look at the stars."},{p:"noun",ex:"She gave me a strange look."}],
-    "help":[{p:"verb",ex:"Can you help me?"},{p:"noun",ex:"I need your help."}],
-    "like":[{p:"verb",ex:"I like coffee."},{p:"preposition",ex:"He swims like a fish."}],
-    "make":[{p:"verb",ex:"Make a wish."},{p:"noun",ex:"What make is your car?"}],
-    "want":[{p:"verb",ex:"I want pizza tonight."},{p:"noun",ex:"They lived in want for years."}],
-    "need":[{p:"verb",ex:"I need a break."},{p:"noun",ex:"There's a need for clarity."}],
-    "time":[{p:"noun",ex:"Time flies."},{p:"verb",ex:"Time the cooking carefully."}],
-    "hand":[{p:"noun",ex:"Raise your hand."},{p:"verb",ex:"Hand me the salt."}],
-    "house":[{p:"noun",ex:"Their house is on the hill."},{p:"verb",ex:"The museum houses rare books."}],
-    "book":[{p:"noun",ex:"Read a good book."},{p:"verb",ex:"Book the flight today."}],
-    "park":[{p:"noun",ex:"Meet me at the park."},{p:"verb",ex:"Park the car here."}],
-    "fly":[{p:"verb",ex:"Birds fly south for winter."},{p:"noun",ex:"There's a fly in my soup."}],
-    "kind":[{p:"adjective",ex:"She is very kind."},{p:"noun",ex:"What kind of bread is this?"}],
-    "near":[{p:"preposition",ex:"The store is near the park."},{p:"adjective",ex:"In the near future."}],
-    "fair":[{p:"adjective",ex:"That's a fair price."},{p:"noun",ex:"We met at the county fair."}],
-    "mean":[{p:"verb",ex:"What does that mean?"},{p:"adjective",ex:"Don't be mean."},{p:"noun",ex:"The mean of the data is 7."}],
-    "down":[{p:"adverb",ex:"Sit down, please."},{p:"preposition",ex:"Run down the hill."},{p:"adjective",ex:"The system is down."}],
-    "up":[{p:"adverb",ex:"Look up at the sky."},{p:"preposition",ex:"Climb up the ladder."},{p:"adjective",ex:"Stocks are up today."}],
-    "set":[{p:"verb",ex:"Set the table."},{p:"noun",ex:"A set of tools."},{p:"adjective",ex:"He's set in his ways."}],
-    "bear":[{p:"verb",ex:"I cannot bear the noise."},{p:"noun",ex:"A bear roamed the woods."}],
-    "watch":[{p:"verb",ex:"Watch the road carefully."},{p:"noun",ex:"My watch is broken."}],
-    "stand":[{p:"verb",ex:"Please stand up."},{p:"noun",ex:"She took a stand on the issue."}],
-    "drink":[{p:"verb",ex:"Drink your milk."},{p:"noun",ex:"Order a drink."}],
-    "fish":[{p:"noun",ex:"Fish swim in schools."},{p:"verb",ex:"They fish at dawn."}],
-    "rest":[{p:"verb",ex:"Rest before the meeting."},{p:"noun",ex:"The rest is history."}],
-    "match":[{p:"noun",ex:"They watched the tennis match."},{p:"verb",ex:"Your shoes match your belt."}],
-    "save":[{p:"verb",ex:"Save your work often."},{p:"noun",ex:"The goalie made a great save."}],
-    "answer":[{p:"verb",ex:"Please answer the phone."},{p:"noun",ex:"Your answer was correct."}],
-    "change":[{p:"verb",ex:"People change over time."},{p:"noun",ex:"Bring some change for parking."}],
-    "open":[{p:"verb",ex:"Open the window."},{p:"adjective",ex:"The shop is open."}],
-    "close":[{p:"verb",ex:"Close the door behind you."},{p:"adjective",ex:"They are close friends."}],
-    "happy":[{p:"adjective",ex:"She looks happy today."}],
-    "quickly":[{p:"adverb",ex:"He answered quickly."}],
-    "beautiful":[{p:"adjective",ex:"That's a beautiful painting."}],
-    "table":[{p:"noun",ex:"Set the table for dinner."}],
-    "chair":[{p:"noun",ex:"Pull up a chair."}],
-    "always":[{p:"adverb",ex:"He always arrives on time."}],
-    "sometimes":[{p:"adverb",ex:"Sometimes I walk to work."}],
-    "however":[{p:"adverb",ex:"It's late; however, we should keep going."}],
-    "because":[{p:"conjunction",ex:"I left because it was raining."}],
-    "and":[{p:"conjunction",ex:"Bread and butter."}],
-    "but":[{p:"conjunction",ex:"Small but mighty."}],
-    "or":[{p:"conjunction",ex:"Tea or coffee?"}],
-    "the":[{p:"article",ex:"The book is on the table."}],
-    "a":[{p:"article",ex:"A cat sat on the mat."}],
-    "an":[{p:"article",ex:"An apple a day."}],
-    "in":[{p:"preposition",ex:"He's in the kitchen."}],
-    "on":[{p:"preposition",ex:"The cup is on the shelf."}],
-    "with":[{p:"preposition",ex:"Coffee with milk, please."}],
-    "she":[{p:"pronoun",ex:"She is my sister."}],
-    "he":[{p:"pronoun",ex:"He arrived early."}],
-    "they":[{p:"pronoun",ex:"They went home."}],
-    "we":[{p:"pronoun",ex:"We are ready."}],
-    "i":[{p:"pronoun",ex:"I agree with you."}],
-    "wow":[{p:"interjection",ex:"Wow, that's amazing!"}],
-    "ouch":[{p:"interjection",ex:"Ouch, that hurt!"}],
-    "hello":[{p:"interjection",ex:"Hello, how are you?"}]
-  };
-  function inferPos(w) {
-    const word = w.toLowerCase(), guesses = [];
-    if (/^[A-Z]/.test(w)) guesses.push({p:"proper noun",ex:`${w} is likely a proper noun.`});
-    if (/ly$/.test(word) && !/^(fly|ally|rely|reply|imply|apply)$/.test(word)) guesses.push({p:"adverb",ex:`Ends in "-ly" — typically an adverb.`});
-    if (/(tion|sion|ness|ity|ment|ship|hood|ance|ence)$/.test(word)) guesses.push({p:"noun",ex:`Ends in a noun-forming suffix.`});
-    if (/(ize|ise|ate|ify|en)$/.test(word) && word.length>4) guesses.push({p:"verb",ex:`Ends in a verb-forming suffix.`});
-    if (/(able|ible|ous|ive|ful|less|ish|ic)$/.test(word) && word.length>5) guesses.push({p:"adjective",ex:`Ends in an adjective-forming suffix.`});
-    if (/ing$/.test(word) && word.length>4) guesses.push({p:"verb (gerund)",ex:`Likely a gerund or present participle.`});
-    if (/ed$/.test(word) && word.length>3) guesses.push({p:"verb (past)",ex:`Likely a past-tense verb.`});
-    return guesses.length ? guesses : [{p:"unknown",ex:"Couldn't identify. Try a more common word."}];
-  }
-  function posCalc() {
-    const raw = $('pos-in').value.trim(); if (!raw) return;
-    const word = raw.toLowerCase();
-    const dict = POS_DICT[word];
-    const entries = dict || inferPos(raw);
-    const tags = entries.map((e,i) => `<span class="pos-tag${i>0?' alt':''}">${e.p}</span>`).join('');
-    const examples = entries.map(e => `<p class="ex"><strong>${e.p}</strong> ${e.ex}</p>`).join('');
-    const inferred = !dict ? '<p class="ex" style="opacity:.6; font-size:11px; margin-top:8px;">Inferred from word structure. For exact data, check a dictionary.</p>' : '';
-    $('pos-out').innerHTML = `
-      <span class="label">Part of speech</span>
-      <span class="word-display">${raw}</span>
-      <div class="pos-tags">${tags}</div>
-      <div class="pos-examples">${examples}${inferred}</div>`;
-  }
-  $('pos-in').addEventListener('keydown', e => { if (e.key === 'Enter') posCalc(); });
-
-  /* WORDS — Syllable */
-  function countSyllables(word) {
-    word = word.toLowerCase().replace(/[^a-z]/g, '');
-    if (!word) return 0;
-    if (word.length <= 3) return 1;
-    word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '');
-    word = word.replace(/^y/, '');
-    const matches = word.match(/[aeiouy]{1,2}/g);
-    return matches ? matches.length : 1;
-  }
-  function splitSyllables(word) {
-    word = word.toLowerCase();
-    const n = countSyllables(word);
-    if (n <= 1) return word;
-    let parts = [], chunk = '';
-    for (let i = 0; i < word.length; i++) {
-      chunk += word[i];
-      if (/[aeiouy]/.test(word[i]) && /[bcdfghjklmnpqrstvwxz]/.test(word[i+1] || '') && /[aeiouy]/.test(word[i+2] || '')) {
-        parts.push(chunk); chunk = '';
-      }
-    }
-    if (chunk) parts.push(chunk);
-    while (parts.length > n) parts[parts.length-2] += parts.pop();
-    return parts.join('·');
-  }
-  function sylCalc() {
-    const text = $('syl-in').value;
-    const display = $('syl-out').querySelector('.syl-display');
-    const stats   = $('syl-out').querySelector('.syl-stats');
-    if (!text.trim()) { display.innerHTML = '<span style="color:var(--ink-3);">Type something.</span>'; stats.innerHTML = '0 syllables · 0 words'; return; }
-    const lines = text.split(/\n/);
-    let totalSyl = 0, totalWords = 0, longest = {w:'',s:0};
-    const lineCounts = [];
-    const html = lines.map(line => {
-      const words = line.split(/\s+/).filter(Boolean);
-      let lineSyl = 0;
-      const wordHtml = words.map(w => {
-        const cleaned = w.replace(/[^A-Za-z']/g, '');
-        if (!cleaned) return w;
-        const s = countSyllables(cleaned);
-        lineSyl += s;
-        if (s > longest.s) longest = {w:cleaned, s};
-        const split = splitSyllables(cleaned).split('·').join('<span class="sep">·</span>');
-        const punct = w.match(/[^A-Za-z']+$/);
-        return split + (punct ? punct[0] : '');
-      }).join(' ');
-      totalSyl += lineSyl;
-      totalWords += words.length;
-      lineCounts.push(lineSyl);
-      return `<div>${wordHtml} <span class="count">${lineSyl}</span></div>`;
-    }).join('');
-    display.innerHTML = html;
-    const isHaiku = lineCounts.length === 3 && lineCounts[0] === 5 && lineCounts[1] === 7 && lineCounts[2] === 5;
-    const haikuNote = isHaiku ? ' &mdash; <strong style="color:var(--red);">valid haiku</strong>' : '';
-    stats.innerHTML = `<strong>${totalSyl} syllables</strong> · ${totalWords} word${totalWords===1?'':'s'}${haikuNote} · longest: <em>${longest.w || '—'}</em> (${longest.s})`;
-  }
-
-  /* WORDS — Word counter */
-  function wcCalc() {
-    const t = $('wc-in').value;
-    const words = t.trim() ? t.trim().split(/\s+/).length : 0;
-    const sentences = t.trim() ? (t.match(/[.!?]+/g) || []).length || 1 : 0;
-    const minutes = Math.max(1, Math.ceil(words/200));
-    $('wc-out').innerHTML = `<span class="label">Stats</span><span class="big">${fmt0(words)} <span style="font-size:18px;color:var(--ink-2);">words</span></span><span class="breakdown">${sentences} sentence${sentences===1?'':'s'} · ${minutes} min read</span>`;
-  }
-
-  /* WORDS — Character counter */
-  function ccCalc() {
-    const t = $('cc-in').value;
-    const withSp = t.length;
-    const noSp = t.replace(/\s/g, '').length;
-    const tw = 280 - withSp;
-    const sms = 160 - withSp;
-    const meta = 160 - withSp;
-    const fmtRem = n => n >= 0 ? `${n} left` : `${Math.abs(n)} over`;
-    $('cc-out').innerHTML = `<span class="label">Characters</span><span class="big">${fmt0(withSp)}</span><span class="breakdown">${fmt0(noSp)} without spaces · Twitter ${fmtRem(tw)} · SMS ${fmtRem(sms)} · Meta description ${fmtRem(meta)}</span>`;
-  }
-
   /* INIT */
   pctCalc(); vatCalc(); mtgCalc(); loanCalc(); ciCalc(); rentCalc();
-  posCalc(); sylCalc(); wcCalc(); ccCalc();
 </script>
 
 </body>
