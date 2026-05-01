@@ -1,0 +1,38 @@
+/* TEAM */
+
+  Builder: Lukas Bures
+  Site: https://room411.cz
+  Location: Prague, Czech Republic
+
+/* SITE */
+
+  Last update: 2026-05-02
+  Standards: HTML5, CSS3, ES2020 vanilla JavaScript
+  Components: none. No framework. No build step.
+  Software: a text editor and a browser.
+  Hosting: Cloudflare Pages
+  Source: https://github.com/jetotakto/tinyuseful
+
+/* MADE BY ONE PERSON */
+
+  TinyUseful was built by a human, in a text editor,
+  in 2026, the year everyone else was generating
+  content with AI. The calculators do their math
+  in your browser using formulas — not models.
+
+  No tracking pixels. No popups. No email gates.
+  No "intelligent assistant" that's actually a chatbot.
+  No autoplay video ads. No newsletter prompts.
+
+  One advertisement, declared. That's the business.
+
+  If you find a bug or have an idea: lukasaustralie@gmail.com.
+
+/* THANKS */
+
+  Christian Ghisler — Total Commander, the file manager
+    that survived everything else (1993–present).
+  Jan Tschichold — for proving that good typography
+    is timeless and ideology-free.
+  Anyone who still bookmarks small websites instead of
+    asking a chatbot. The web works because of you.

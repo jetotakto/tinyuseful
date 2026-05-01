@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>404 — Page not found | TinyUseful</title>
+<meta name="description" content="The page you're looking for doesn't exist on TinyUseful. Try one of our eleven small calculators instead." />
+<meta name="robots" content="noindex, follow">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+
+<style>
+  .notfound {
+    padding: 80px 0 60px;
+    text-align: center;
+    border-bottom: 1px solid var(--rule);
+  }
+  .notfound .code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 18px;
+  }
+  .notfound h1 {
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: clamp(40px, 5.4vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.018em;
+    margin-bottom: 22px;
+  }
+  .notfound .lede {
+    font-size: clamp(17px, 1.4vw, 19px);
+    line-height: 1.5;
+    color: var(--ink-2);
+    max-width: 50ch;
+    margin: 0 auto 32px;
+  }
+  .notfound .actions {
+    display: inline-flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .notfound .actions a {
+    display: inline-block;
+    padding: 10px 18px;
+    border: 1px solid var(--ink);
+    text-decoration: none;
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: background 0.15s, color 0.15s;
+  }
+  .notfound .actions a:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <a class="wordmark" href="/">
+      <span class="knife" aria-hidden="true"></span>
+      TinyUseful
+    </a>
+    <span class="issue">404</span>
+  </header>
+
+  <section class="notfound">
+    <p class="code">Error 404 — Page not found</p>
+    <h1>This article<br>was never <span class="red">printed</span>.</h1>
+    <p class="lede">
+      The URL you followed doesn't exist on TinyUseful.
+      Maybe a typo, maybe a link that aged badly.
+      Either way: we have eleven small calculators waiting on the index.
+    </p>
+    <div class="actions">
+      <a href="/">Back to index</a>
+      <a href="/mortgage-calculator/">Mortgage</a>
+      <a href="/percentage-calculator/">Percentage</a>
+      <a href="/unit-converter/">Unit Converter</a>
+    </div>
+  </section>
+
+  <footer class="colophon">
+    <span>TinyUseful · Issue No. 1 · 2026 · Made for the open web</span>
+    <span><a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp; <a href="https://github.com/jetotakto/tinyuseful">Source</a></span>
+  </footer>
+
+</div>
+</body>
+</html>
