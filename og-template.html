@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>OG Image Template — TinyUseful</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    margin: 0;
+    background: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  .og {
+    width: 1200px;
+    height: 630px;
+    background: #FAF8F2;
+    color: #111;
+    font-family: 'Newsreader', Georgia, serif;
+    padding: 64px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  /* Top: masthead */
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 18px;
+    border-bottom: 3px solid #111;
+  }
+  .wordmark {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 14px;
+    font-weight: 600;
+    font-size: 38px;
+    letter-spacing: -0.01em;
+  }
+  .knife {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background: #C8102E;
+    position: relative;
+    transform: translateY(2px);
+  }
+  .knife::before, .knife::after {
+    content: ""; position: absolute; background: #FAF8F2;
+  }
+  .knife::before { left: 14px; top: 6px; width: 4px; height: 20px; }
+  .knife::after  { left: 6px; top: 14px; width: 20px; height: 4px; }
+  .issue {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #555;
+  }
+
+  /* Middle: hero */
+  .middle {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 24px 0;
+  }
+  h1 {
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: 92px;
+    line-height: 1.0;
+    letter-spacing: -0.022em;
+    margin-bottom: 28px;
+  }
+  h1 .red { color: #C8102E; }
+  .subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 19px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 22px;
+  }
+  .subtitle .dot { color: #C8102E; margin: 0 10px; }
+  .lede {
+    font-family: 'Newsreader', serif;
+    font-size: 26px;
+    line-height: 1.4;
+    color: #111;
+    max-width: 800px;
+  }
+  .lede strong { font-weight: 500; }
+
+  /* Bottom: colophon */
+  .bottom {
+    padding-top: 16px;
+    border-top: 1px solid #111;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #555;
+  }
+  .bottom .url {
+    color: #111;
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+  <div class="og">
+    <div class="top">
+      <span class="wordmark">
+        <span class="knife"></span>
+        TinyUseful
+      </span>
+      <span class="issue">No. 1 — April 2026</span>
+    </div>
+    <div class="middle">
+      <h1>Small tools for<br>everyday <span class="red">questions</span>.</h1>
+      <p class="subtitle">Small tools<span class="dot">·</span>No accounts<span class="dot">·</span>No AI</p>
+      <p class="lede">
+        Eleven small calculators on a single page.<br>
+        <strong>No sign-up. No tracking. Just the answer.</strong>
+      </p>
+    </div>
+    <div class="bottom">
+      <span>Made for the open web</span>
+      <span class="url">tinyuseful.app</span>
+    </div>
+  </div>
+</body>
+</html>
