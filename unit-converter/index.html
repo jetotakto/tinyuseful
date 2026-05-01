@@ -40,13 +40,13 @@
   </header>
 
   <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">TinyUseful</a><span class="sep">›</span>Unit Converter
+    <a href="/">TinyUseful</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">Unit Converter</span>
   </nav>
 
   <section class="tools">
     <div class="section-head">
       <span class="section-num">No. 09</span>
-      <h2>Unit Converter</h2>
+      <h1>Unit Converter</h1>
       <span class="desc">Length, weight, and temperature — metric ↔ imperial.</span>
     </div>
     <div class="tool" data-tool="unit">
@@ -69,8 +69,8 @@
           <label>From<select id="unit-from"></select></label>
           <label>To<select id="unit-to"></select></label>
         </div>
-        <button onclick="unitCalc()">Convert</button>
-        <div class="out" id="unit-out"><span class="label">Result</span><span class="big">3.281</span><span class="breakdown">1 m = 3.281 ft</span></div>
+        <button type="button" onclick="unitCalc()">Convert</button>
+        <div class="out" id="unit-out" role="status" aria-live="polite"><span class="label">Result</span><span class="big">3.281</span><span class="breakdown">1 m = 3.281 ft</span></div>
       </div>
     </div>
   </section>

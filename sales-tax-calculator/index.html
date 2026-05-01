@@ -40,13 +40,13 @@
   </header>
 
   <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">TinyUseful</a><span class="sep">›</span>Sales Tax Calculator
+    <a href="/">TinyUseful</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">Sales Tax Calculator</span>
   </nav>
 
   <section class="tools">
     <div class="section-head">
       <span class="section-num">No. 02</span>
-      <h2>Sales Tax / VAT Calculator</h2>
+      <h1>Sales Tax / VAT Calculator</h1>
       <span class="desc">Add tax to a net price, or remove tax to find the original.</span>
     </div>
     <div class="tool" data-tool="vat">
@@ -65,8 +65,8 @@
             </select>
           </label>
         </div>
-        <button onclick="vatCalc()">Calculate</button>
-        <div class="out" id="vat-out"><span class="label">After tax</span><span class="big">$108.88</span><span class="breakdown">Tax amount $8.88</span></div>
+        <button type="button" onclick="vatCalc()">Calculate</button>
+        <div class="out" id="vat-out" role="status" aria-live="polite"><span class="label">After tax</span><span class="big">$108.88</span><span class="breakdown">Tax amount $8.88</span></div>
       </div>
     </div>
   </section>

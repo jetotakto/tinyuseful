@@ -40,13 +40,13 @@
   </header>
 
   <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">TinyUseful</a><span class="sep">›</span>Percentage Calculator
+    <a href="/">TinyUseful</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">Percentage Calculator</span>
   </nav>
 
   <section class="tools">
     <div class="section-head">
       <span class="section-num">No. 01</span>
-      <h2>Percentage Calculator</h2>
+      <h1>Percentage Calculator</h1>
       <span class="desc">Three percentage problems, one tool.</span>
     </div>
     <div class="tool" data-tool="percentage">
@@ -66,8 +66,8 @@
           </label>
           <label>Y<input type="number" id="pct-y" value="80" step="any"></label>
         </div>
-        <button onclick="pctCalc()">Calculate</button>
-        <div class="out" id="pct-out"><span class="label">Result</span><span class="big">12</span></div>
+        <button type="button" onclick="pctCalc()">Calculate</button>
+        <div class="out" id="pct-out" role="status" aria-live="polite"><span class="label">Result</span><span class="big">12</span></div>
       </div>
     </div>
   </section>

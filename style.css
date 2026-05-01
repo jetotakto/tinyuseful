@@ -208,12 +208,14 @@ section.tools:last-of-type { border-bottom: 2px solid var(--rule); }
   font-size: 12px; letter-spacing: 0.18em;
   color: var(--red);
 }
+.section-head h1,
 .section-head h2 {
   font-family: 'Newsreader', serif;
   font-weight: 500;
   font-size: clamp(28px, 3.4vw, 38px);
   letter-spacing: -0.01em;
   line-height: 1;
+  margin: 0;
 }
 .section-head .desc {
   font-style: italic;
@@ -304,6 +306,17 @@ section.tools:last-of-type { border-bottom: 2px solid var(--rule); }
   outline: 0;
   border-bottom-color: var(--red);
   border-color: var(--red);
+}
+
+/* ─── FOCUS RING (WCAG 2.1 keyboard navigation) ─── */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 3px;
 }
 .tool-form button {
   background: var(--ink); color: var(--paper);

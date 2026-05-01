@@ -83,13 +83,13 @@
   </header>
 
   <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">TinyUseful</a><span class="sep">›</span>Mortgage Calculator
+    <a href="/">TinyUseful</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">Mortgage Calculator</span>
   </nav>
 
   <section class="tools">
     <div class="section-head">
       <span class="section-num">No. 03</span>
-      <h2>Mortgage Calculator</h2>
+      <h1>Mortgage Calculator</h1>
       <span class="desc">Monthly principal &amp; interest using the standard amortization formula.</span>
     </div>
     <div class="tool" data-tool="mortgage">
@@ -103,8 +103,8 @@
           <label>Rate %<input type="number" id="mtg-rate" value="6.75" step="any"></label>
           <label>Years<input type="number" id="mtg-years" value="30" step="any"></label>
         </div>
-        <button onclick="mtgCalc()">Calculate</button>
-        <div class="out" id="mtg-out"><span class="label">Monthly payment</span><span class="big">$2,919</span><span class="breakdown">Total interest $600,765 · Total paid $1,050,765</span></div>
+        <button type="button" onclick="mtgCalc()">Calculate</button>
+        <div class="out" id="mtg-out" role="status" aria-live="polite"><span class="label">Monthly payment</span><span class="big">$2,919</span><span class="breakdown">Total interest $600,765 · Total paid $1,050,765</span></div>
       </div>
     </div>
   </section>

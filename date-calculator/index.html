@@ -40,13 +40,13 @@
   </header>
 
   <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">TinyUseful</a><span class="sep">›</span>Date Calculator
+    <a href="/">TinyUseful</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">Date Calculator</span>
   </nav>
 
   <section class="tools">
     <div class="section-head">
       <span class="section-num">No. 10</span>
-      <h2>Date Calculator</h2>
+      <h1>Date Calculator</h1>
       <span class="desc">Days between two dates, or a date X days from today.</span>
     </div>
     <div class="tool" data-tool="date">
@@ -70,8 +70,8 @@
         <div class="row" id="date-row-addto" style="display:none;">
           <label>Days (+/−)<input type="number" id="date-days" value="100" step="1"></label>
         </div>
-        <button onclick="dateCalc()">Calculate</button>
-        <div class="out" id="date-out"><span class="label">Result</span><span class="big">—</span><span class="breakdown">Pick dates and press Calculate.</span></div>
+        <button type="button" onclick="dateCalc()">Calculate</button>
+        <div class="out" id="date-out" role="status" aria-live="polite"><span class="label">Result</span><span class="big">—</span><span class="breakdown">Pick dates and press Calculate.</span></div>
       </div>
     </div>
   </section>

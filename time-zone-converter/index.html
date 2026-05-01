@@ -40,13 +40,13 @@
   </header>
 
   <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">TinyUseful</a><span class="sep">›</span>Time Zone Converter
+    <a href="/">TinyUseful</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">Time Zone Converter</span>
   </nav>
 
   <section class="tools">
     <div class="section-head">
       <span class="section-num">No. 11</span>
-      <h2>Time Zone Converter</h2>
+      <h1>Time Zone Converter</h1>
       <span class="desc">Convert a time between major world time zones.</span>
     </div>
     <div class="tool" data-tool="timezone">
@@ -82,8 +82,8 @@
             </select>
           </label>
         </div>
-        <button onclick="tzCalc()">Convert</button>
-        <div class="out" id="tz-out"><span class="label">Time in target zone</span><span class="big">—</span><span class="breakdown">Press Convert.</span></div>
+        <button type="button" onclick="tzCalc()">Convert</button>
+        <div class="out" id="tz-out" role="status" aria-live="polite"><span class="label">Time in target zone</span><span class="big">—</span><span class="breakdown">Press Convert.</span></div>
       </div>
     </div>
   </section>

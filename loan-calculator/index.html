@@ -40,13 +40,13 @@
   </header>
 
   <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">TinyUseful</a><span class="sep">›</span>Loan Calculator
+    <a href="/">TinyUseful</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">Loan Calculator</span>
   </nav>
 
   <section class="tools">
     <div class="section-head">
       <span class="section-num">No. 04</span>
-      <h2>Loan Calculator</h2>
+      <h1>Loan Calculator</h1>
       <span class="desc">Auto, student, or personal — fixed-rate, fully amortized.</span>
     </div>
     <div class="tool" data-tool="loan">
@@ -60,8 +60,8 @@
           <label>APR %<input type="number" id="loan-apr" value="7.5" step="any"></label>
           <label>Months<input type="number" id="loan-months" value="60" step="any"></label>
         </div>
-        <button onclick="loanCalc()">Calculate</button>
-        <div class="out" id="loan-out"><span class="label">Monthly</span><span class="big">$501</span><span class="breakdown">Total interest $5,059 · Total paid $30,059</span></div>
+        <button type="button" onclick="loanCalc()">Calculate</button>
+        <div class="out" id="loan-out" role="status" aria-live="polite"><span class="label">Monthly</span><span class="big">$501</span><span class="breakdown">Total interest $5,059 · Total paid $30,059</span></div>
       </div>
     </div>
   </section>

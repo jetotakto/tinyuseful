@@ -40,13 +40,13 @@
   </header>
 
   <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">TinyUseful</a><span class="sep">›</span>Discount Calculator
+    <a href="/">TinyUseful</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">Discount Calculator</span>
   </nav>
 
   <section class="tools">
     <div class="section-head">
       <span class="section-num">No. 08</span>
-      <h2>Discount Calculator</h2>
+      <h1>Discount Calculator</h1>
       <span class="desc">Take X% off a price — final price and what you save.</span>
     </div>
     <div class="tool" data-tool="discount">
@@ -59,8 +59,8 @@
           <label>Price ($)<input type="number" id="disc-price" value="80" step="any"></label>
           <label>Discount %<input type="number" id="disc-pct" value="25" step="any"></label>
         </div>
-        <button onclick="discCalc()">Calculate</button>
-        <div class="out" id="disc-out"><span class="label">Final price</span><span class="big">$60.00</span><span class="breakdown">You save $20.00 · 25% off $80.00</span></div>
+        <button type="button" onclick="discCalc()">Calculate</button>
+        <div class="out" id="disc-out" role="status" aria-live="polite"><span class="label">Final price</span><span class="big">$60.00</span><span class="breakdown">You save $20.00 · 25% off $80.00</span></div>
       </div>
     </div>
   </section>

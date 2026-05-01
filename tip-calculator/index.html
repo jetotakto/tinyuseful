@@ -40,13 +40,13 @@
   </header>
 
   <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">TinyUseful</a><span class="sep">›</span>Tip Calculator
+    <a href="/">TinyUseful</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">Tip Calculator</span>
   </nav>
 
   <section class="tools">
     <div class="section-head">
       <span class="section-num">No. 07</span>
-      <h2>Tip Calculator</h2>
+      <h1>Tip Calculator</h1>
       <span class="desc">Restaurant tip with optional split between people.</span>
     </div>
     <div class="tool" data-tool="tip">
@@ -60,8 +60,8 @@
           <label>Tip %<input type="number" id="tip-pct" value="18" step="any"></label>
           <label>Split<input type="number" id="tip-split" value="2" step="1" min="1"></label>
         </div>
-        <button onclick="tipCalc()">Calculate</button>
-        <div class="out" id="tip-out"><span class="label">Total</span><span class="big">$59.00</span><span class="breakdown">Tip $9.00 · Per person $29.50</span></div>
+        <button type="button" onclick="tipCalc()">Calculate</button>
+        <div class="out" id="tip-out" role="status" aria-live="polite"><span class="label">Total</span><span class="big">$59.00</span><span class="breakdown">Tip $9.00 · Per person $29.50</span></div>
       </div>
     </div>
   </section>
