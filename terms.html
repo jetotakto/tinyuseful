@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Terms of Service — TinyUseful</title>
+<meta name="description" content="Terms of service for TinyUseful — a free single-page utility website. Plain English, no surprises." />
+<link rel="canonical" href="https://www.tinyuseful.app/terms.html">
+<meta name="robots" content="index, follow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper:    #FAF8F2;
+    --ink:      #111111;
+    --ink-2:    #555;
+    --ink-3:    #999;
+    --rule:     #111;
+    --rule-soft:#D8D4C8;
+    --red:      #C8102E;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Newsreader', 'Iowan Old Style', Georgia, serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .page { max-width: 720px; margin: 0 auto; padding: 28px 28px 64px; }
+
+  .masthead {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--rule);
+  }
+  .wordmark {
+    display: inline-flex; align-items: baseline; gap: 10px;
+    font-family: 'Newsreader', serif;
+    font-weight: 600; font-size: 22px; letter-spacing: -0.01em;
+    text-decoration: none; color: var(--ink);
+  }
+  .knife {
+    display: inline-block;
+    width: 22px; height: 22px;
+    background: var(--red);
+    position: relative;
+    transform: translateY(2px);
+  }
+  .knife::before, .knife::after {
+    content: ""; position: absolute; background: var(--paper);
+  }
+  .knife::before { left: 10px; top: 4px; width: 2px; height: 14px; }
+  .knife::after  { left: 4px; top: 10px; width: 14px; height: 2px; }
+  .issue {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-2);
+  }
+
+  article { padding: 38px 0 28px; }
+  h1 {
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: clamp(34px, 4.4vw, 48px);
+    line-height: 1.05;
+    letter-spacing: -0.018em;
+    margin-bottom: 8px;
+  }
+  .lastmod {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-2);
+    margin-bottom: 28px;
+  }
+  h2 {
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: 24px;
+    margin-top: 32px;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  p { margin-bottom: 14px; }
+  p strong { font-weight: 500; }
+  ul { margin: 0 0 14px 22px; }
+  ul li { margin-bottom: 6px; }
+  a { color: var(--ink); border-bottom: 1px dotted var(--ink-3); text-decoration: none; padding-bottom: 1px; }
+  a:hover { color: var(--red); border-color: var(--red); }
+
+  .colophon {
+    margin-top: 48px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+    display: flex; justify-content: space-between; align-items: baseline; gap: 14px;
+    flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .colophon a { color: inherit; border-bottom: 1px dotted var(--ink-3); padding-bottom: 1px; }
+  .colophon a:hover { color: var(--red); border-color: var(--red); }
+
+  @media (max-width: 720px) {
+    .page { padding: 20px 18px 48px; }
+    .masthead { flex-direction: column; align-items: flex-start; gap: 6px; }
+  }
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <a class="wordmark" href="/">
+      <span class="knife" aria-hidden="true"></span>
+      TinyUseful
+    </a>
+    <span class="issue">Terms of Service</span>
+  </header>
+
+  <article>
+    <h1>Terms of Service</h1>
+    <p class="lastmod">Last updated: 1 May 2026</p>
+
+    <p>
+      These terms govern your use of <strong>TinyUseful</strong> (the website at
+      <a href="https://www.tinyuseful.app">www.tinyuseful.app</a>). By using the site,
+      you agree to them. If you do not agree, please don't use the site. The terms are
+      written in plain English on purpose.
+    </p>
+
+    <h2>1. What the site is</h2>
+    <p>
+      TinyUseful is a free, browser-based collection of small calculators and word tools.
+      Everything runs locally in your browser. We do not require an account, and we do
+      not store the values you enter into the tools.
+    </p>
+
+    <h2>2. No warranty</h2>
+    <p>
+      The tools are provided <strong>as-is, without warranty of any kind</strong>. We try
+      to make the math and the word logic correct, but we do not guarantee accuracy,
+      completeness, or fitness for a particular purpose. The Mortgage and Loan calculators
+      are not financial advice. The Type-of-Word and Syllable Counter tools are not a
+      substitute for a dictionary or a qualified language expert.
+    </p>
+    <p>
+      Always verify any number that matters — for example before signing a loan, paying
+      tax, or making an investment decision — with a qualified professional or the
+      relevant institution.
+    </p>
+
+    <h2>3. Acceptable use</h2>
+    <p>You may use the site for any lawful purpose. You may not:</p>
+    <ul>
+      <li>Attempt to overload, attack, or otherwise disrupt the site.</li>
+      <li>Scrape the site at industrial scale (basic respectful use is fine; if in doubt, see <a href="/robots.txt">robots.txt</a>).</li>
+      <li>Reproduce the site's design or code wholesale and pass it off as your own. The source is open on GitHub for personal study and inspiration, but the brand and copy are not licensed for resale.</li>
+    </ul>
+
+    <h2>4. Advertising</h2>
+    <p>
+      The site shows one advertising slot, clearly labelled. When ads are served by
+      Google AdSense, the advertiser, not us, is responsible for the content of the ad.
+      We do not endorse advertised products and have no commercial relationship with the
+      advertiser beyond receiving display revenue.
+    </p>
+
+    <h2>5. Third-party links and services</h2>
+    <p>
+      Pages may link to third-party websites (for example Cloudflare's privacy policy or
+      Google's ad policy). We are not responsible for the content or practices of those
+      third parties.
+    </p>
+
+    <h2>6. Limitation of liability</h2>
+    <p>
+      To the maximum extent permitted by law, TinyUseful and its operator are not liable
+      for any indirect, incidental, consequential, or punitive damages arising from your
+      use of the site or from any decision you made based on a calculation or word lookup
+      performed on the site.
+    </p>
+
+    <h2>7. Changes</h2>
+    <p>
+      We may update these terms from time to time. The current version is always at this
+      URL with the <em>Last updated</em> date above.
+    </p>
+
+    <h2>8. Governing law</h2>
+    <p>
+      These terms are governed by the law of the Czech Republic. Any dispute that cannot
+      be resolved informally will be brought before the courts of Prague, Czech Republic.
+    </p>
+
+    <h2>9. Contact</h2>
+    <p>
+      Operator: Lukas Bures, Prague, Czech Republic.<br>
+      Email: <a href="mailto:lukasaustralie@gmail.com">lukasaustralie@gmail.com</a>
+    </p>
+  </article>
+
+  <footer class="colophon">
+    <span>TinyUseful · Issue No. 1 · 2026</span>
+    <span><a href="/">Home</a> &nbsp; <a href="/privacy.html">Privacy</a></span>
+  </footer>
+
+</div>
+</body>
+</html>

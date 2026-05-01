@@ -1,0 +1,18 @@
+# Local helper scripts (Cowork commit flow) — never commit
+_commit.ps1
+_run_commit.bat
+_run_*.bat
+
+# Tokens & secrets — never commit (should be outside repo anyway)
+tokeny.txt
+.env
+.env.local
+*.key
+*.pem
+
+# OS / editor noise
+Thumbs.db
+.DS_Store
+*.swp
+*.swo
+*~

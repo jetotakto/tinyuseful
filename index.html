@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>TinyUseful — a pocket knife for your browser</title>
+<title>TinyUseful — small tools for everyday questions</title>
 <meta name="description" content="Ten small tools. One page. No account. No saved input. No AI. For when you don't need AI — just the answer." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -84,6 +84,14 @@
     margin-bottom: 18px;
   }
   .manifesto h1 .red { color: var(--red); }
+  .manifesto .subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin-bottom: 18px;
+  }
+  .manifesto .subtitle .dot { color: var(--red); margin: 0 6px; }
   .manifesto .lede {
     font-size: clamp(17px, 1.4vw, 19px);
     color: var(--ink);
@@ -420,11 +428,12 @@
 
   <!-- ─── MANIFESTO ─── -->
   <section class="manifesto">
-    <h1>A pocket knife<br>for your <span class="red">browser</span>.</h1>
+    <h1>Small tools for<br>everyday <span class="red">questions</span>.</h1>
+    <p class="subtitle">Small tools<span class="dot">·</span>No accounts<span class="dot">·</span>No AI</p>
     <p class="lede">
-      Ten small tools on a single page. They calculate numbers and explain words.
-      That's it. No account, no saved input, no AI guessing.
-      <strong>For when you don't need AI &mdash; just the answer.</strong>
+      Ten of them on a single page. They calculate numbers and explain words.
+      That's it.
+      <strong>For when you don't need a chat &mdash; just the answer.</strong>
     </p>
     <div class="promises">
       <span>No account</span>
@@ -698,7 +707,7 @@ splash again silence</textarea></label>
   <!-- ─── COLOPHON ─── -->
   <footer class="colophon">
     <span>TinyUseful · Issue No. 1 · April 2026 · Made for the open web</span>
-    <span><a href="#">Privacy</a> &nbsp; <a href="#">Contact</a> &nbsp; v0.3</span>
+    <span><a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp; <a href="mailto:lukasaustralie@gmail.com">Contact</a> &nbsp; v0.3</span>
   </footer>
 
 </div>
