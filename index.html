@@ -384,7 +384,7 @@
     <h1>Small tools for<br>everyday <span class="red">questions</span>.</h1>
     <p class="subtitle">Small tools<span class="dot">·</span>No accounts<span class="dot">·</span>No AI</p>
     <p class="lede">
-      Six small money calculators on a single page.
+      Eight small money calculators on a single page.
       That's it.
       <strong>For when you don't need a chat &mdash; just the answer.</strong>
     </p>
@@ -400,7 +400,7 @@
   <!-- ─── INDEX ─── -->
   <nav class="index" aria-label="Index">
     <span class="label">Index</span>
-    <a href="#money">01 · Money (6)</a>
+    <a href="#money">01 · Money (8)</a>
     <a href="#how">How it works</a>
     <a href="#why">Why no AI</a>
   </nav>
@@ -532,6 +532,41 @@
         <div class="out" id="rent-out"><span class="label">Suggested max rent</span><span class="big">$1,500</span><span class="breakdown">Conservative $1,300 · Stretch $1,815 · Based on the 30% rule</span></div>
       </div>
     </div>
+
+    <!-- 7. TIP -->
+    <div class="tool" data-tool="tip">
+      <div class="tool-meta">
+        <span class="tool-num">No. 07</span>
+        <h3>Tip Calculator</h3>
+        <p class="desc">Restaurant tip with optional split between people.</p>
+      </div>
+      <div class="tool-form">
+        <div class="row">
+          <label>Bill ($)<input type="number" id="tip-bill" value="50" step="any"></label>
+          <label>Tip %<input type="number" id="tip-pct" value="18" step="any"></label>
+          <label>Split<input type="number" id="tip-split" value="2" step="1" min="1"></label>
+        </div>
+        <button onclick="tipCalc()">Calculate</button>
+        <div class="out" id="tip-out"><span class="label">Total</span><span class="big">$59.00</span><span class="breakdown">Tip $9.00 · Per person $29.50</span></div>
+      </div>
+    </div>
+
+    <!-- 8. DISCOUNT -->
+    <div class="tool" data-tool="discount">
+      <div class="tool-meta">
+        <span class="tool-num">No. 08</span>
+        <h3>Discount</h3>
+        <p class="desc">Take X% off a price — final price and what you save.</p>
+      </div>
+      <div class="tool-form">
+        <div class="row">
+          <label>Price ($)<input type="number" id="disc-price" value="80" step="any"></label>
+          <label>Discount %<input type="number" id="disc-pct" value="25" step="any"></label>
+        </div>
+        <button onclick="discCalc()">Calculate</button>
+        <div class="out" id="disc-out"><span class="label">Final price</span><span class="big">$60.00</span><span class="breakdown">You save $20.00 · 25% off $80.00</span></div>
+      </div>
+    </div>
   </section>
 
   <!-- ─── AD BLOCK ─── -->
@@ -620,9 +655,21 @@
     setOut('rent-out','Suggested max rent','$'+fmt0(Math.max(0,adjusted)),
       `Conservative $${fmt0(inc*0.20)} · Stretch $${fmt0(inc*(rule+5)/100)} · Based on the ${rule}% rule`);
   }
+  function tipCalc() {
+    const bill=+$('tip-bill').value, pct=+$('tip-pct').value, split=Math.max(1, Math.floor(+$('tip-split').value)||1);
+    const tip = bill*pct/100, total = bill+tip, perPerson = total/split;
+    setOut('tip-out','Total','$'+fmt(total),
+      `Tip $${fmt(tip)}${split>1?` · Per person $${fmt(perPerson)}`:''}`);
+  }
+  function discCalc() {
+    const price=+$('disc-price').value, pct=+$('disc-pct').value;
+    const save = price*pct/100, final = price-save;
+    setOut('disc-out','Final price','$'+fmt(final),
+      `You save $${fmt(save)} · ${pct}% off $${fmt(price)}`);
+  }
 
   /* INIT */
-  pctCalc(); vatCalc(); mtgCalc(); loanCalc(); ciCalc(); rentCalc();
+  pctCalc(); vatCalc(); mtgCalc(); loanCalc(); ciCalc(); rentCalc(); tipCalc(); discCalc();
 </script>
 
 </body>
