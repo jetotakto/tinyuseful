@@ -20,6 +20,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://www.tinyuseful.app/og-image03.png">
 <link rel="stylesheet" href="/style.css">
+<script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Date Calculator","applicationCategory":"UtilityApplication","operatingSystem":"Any (browser-based)","description":"Calculate the number of days between two dates, or find a date X days from today.","url":"https://www.tinyuseful.app/date-calculator/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"TinyUseful","url":"https://www.tinyuseful.app/"}}
 </script>
@@ -123,8 +124,12 @@
 
   <footer class="colophon">
     <span>TinyUseful · Issue No. 1 · 2026</span>
-    <span><a href="/">Home</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp; <a href="https://github.com/jetotakto/tinyuseful">Source</a></span>
+    <span>
+      <a href="/">Home</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp; <a href="https://github.com/jetotakto/tinyuseful">Source</a> &nbsp;
+      <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode"><span class="icon-light" aria-hidden="true">☀</span><span class="icon-dark" aria-hidden="true">☾</span> Theme</button>
+    </span>
   </footer>
+  <script src="/theme.js" defer></script>
 
 </div>
 

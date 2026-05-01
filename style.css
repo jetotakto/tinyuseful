@@ -59,14 +59,79 @@
   src: url('/fonts/jetbrains-mono-v24-latin/jetbrains-mono-v24-latin-500.woff2') format('woff2');
 }
 
+/* Inter — UI sans-serif for body, tool names, FAQ, forms. SIL OFL licensed.
+   Files in /fonts/inter-v20-latin/ (downloaded from gwfh.mranftl.com) */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/inter-v20-latin/inter-v20-latin-regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/inter-v20-latin/inter-v20-latin-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/inter-v20-latin/inter-v20-latin-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/inter-v20-latin/inter-v20-latin-700.woff2') format('woff2');
+}
+
+/* ─── COLOR + FONT SYSTEM ─── */
+/* Light mode (default) */
 :root {
   --paper:    #FAF8F2;
   --ink:      #111111;
   --ink-2:    #555;
   --ink-3:    #6F6F6F;
+  --muted:    #5F5F5F;
   --rule:     #111;
   --rule-soft:#D8D4C8;
   --red:      #C8102E;     /* swiss red */
+
+  /* Typography roles (Phase 13 hybrid: serif brand, sans UI, mono technical) */
+  --font-brand: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-ui:    'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:  'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* Dark mode — automatic via system preference (Inverted Newspaper / Night Edition) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper:    #121212;
+    --ink:      #FAF8F2;
+    --ink-2:    #B8B4A8;
+    --ink-3:    #99958C;
+    --muted:    #99958C;
+    --rule:     #FAF8F2;
+    --rule-soft:#2A2A2A;
+    --red:      #E31B23;   /* slightly brighter for dark backgrounds */
+  }
+}
+
+/* Manual theme override (set by JS toggle, persisted in localStorage) */
+:root[data-theme="dark"] {
+  --paper:    #121212;
+  --ink:      #FAF8F2;
+  --ink-2:    #B8B4A8;
+  --ink-3:    #99958C;
+  --muted:    #99958C;
+  --rule:     #FAF8F2;
+  --rule-soft:#2A2A2A;
+  --red:      #E31B23;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -79,7 +144,7 @@
   background: var(--ink);
   color: var(--paper);
   padding: 8px 12px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -94,16 +159,17 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--paper);
   color: var(--ink);
-  font-family: 'Newsreader', 'Iowan Old Style', Georgia, serif;
+  font-family: var(--font-ui);
   font-optical-sizing: auto;
   font-weight: 400;
   font-size: 17px;
-  line-height: 1.45;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background 0.2s, color 0.2s;
 }
 
-.mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.mono { font-family: var(--font-mono); }
 
 /* ─── PAGE FRAME ─── */
 .page { max-width: 920px; margin: 0 auto; padding: 28px 28px 64px; }
@@ -116,7 +182,7 @@ body {
 }
 .wordmark {
   display: inline-flex; align-items: baseline; gap: 10px;
-  font-family: 'Newsreader', serif;
+  font-family: var(--font-brand);
   font-weight: 600; font-size: 22px; letter-spacing: -0.01em;
   text-decoration: none; color: var(--ink);
 }
@@ -128,12 +194,12 @@ body {
   transform: translateY(2px);
 }
 .knife::before, .knife::after {
-  content: ""; position: absolute; background: var(--paper);
+  content: ""; position: absolute; background: #FAF8F2;  /* white plus, fixed (red square is always red) */
 }
 .knife::before { left: 10px; top: 4px; width: 2px; height: 14px; }
 .knife::after  { left: 4px; top: 10px; width: 14px; height: 2px; }
 .issue {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 11px; letter-spacing: 0.14em;
   text-transform: uppercase; color: var(--ink-2);
 }
@@ -144,7 +210,7 @@ body {
   border-bottom: 1px solid var(--rule);
 }
 .manifesto h1 {
-  font-family: 'Newsreader', serif;
+  font-family: var(--font-brand);
   font-weight: 500;
   font-size: clamp(40px, 5.4vw, 64px);
   line-height: 1.05;
@@ -153,7 +219,7 @@ body {
 }
 .manifesto h1 .red { color: var(--red); }
 .manifesto .subtitle {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 13px; letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--ink-2);
@@ -169,18 +235,18 @@ body {
 .manifesto .promises {
   margin-top: 22px;
   display: flex; flex-wrap: wrap; gap: 6px 22px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--ink-2);
 }
 .manifesto .promises span::before {
   content: "✓"; color: var(--red); margin-right: 6px;
-  font-family: 'Newsreader', serif; font-weight: 700;
+  font-family: var(--font-brand); font-weight: 700;
 }
 
 /* ─── BREADCRUMBS (tool pages) ─── */
 .breadcrumb {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--ink-2);
   padding: 14px 0;
@@ -205,16 +271,16 @@ body {
   margin-bottom: 24px;
 }
 .catalog-head .num {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 12px; letter-spacing: 0.18em;
   color: var(--red);
 }
 .catalog-head h2 {
-  font-family: 'Newsreader', serif;
-  font-weight: 500;
-  font-size: clamp(28px, 3.4vw, 38px);
-  letter-spacing: -0.01em;
-  line-height: 1;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: clamp(26px, 3vw, 34px);
+  letter-spacing: -0.015em;
+  line-height: 1.05;
 }
 .catalog-head .desc {
   font-style: italic;
@@ -247,18 +313,18 @@ body {
 .catalog-card:hover .card-num,
 .catalog-card:hover .card-desc { color: var(--paper); opacity: 0.85; }
 .catalog-card .card-num {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 11px; letter-spacing: 0.18em;
   color: var(--red);
   display: block;
   margin-bottom: 6px;
 }
 .catalog-card h3 {
-  font-family: 'Newsreader', serif;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 1.15;
-  letter-spacing: -0.005em;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 19px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
   margin-bottom: 6px;
 }
 .catalog-card .card-desc {
@@ -279,17 +345,17 @@ section.tools:last-of-type { border-bottom: 2px solid var(--rule); }
   margin-bottom: 24px;
 }
 .section-num {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 12px; letter-spacing: 0.18em;
   color: var(--red);
 }
 .section-head h1,
 .section-head h2 {
-  font-family: 'Newsreader', serif;
-  font-weight: 500;
+  font-family: var(--font-ui);
+  font-weight: 600;
   font-size: clamp(28px, 3.4vw, 38px);
-  letter-spacing: -0.01em;
-  line-height: 1;
+  letter-spacing: -0.015em;
+  line-height: 1.05;
   margin: 0;
 }
 .section-head .desc {
@@ -313,15 +379,15 @@ section.tools:last-of-type { border-bottom: 2px solid var(--rule); }
 .tool:first-of-type { border-top: 0; padding-top: 4px; }
 
 .tool-meta h3 {
-  font-family: 'Newsreader', serif;
-  font-weight: 500;
-  font-size: 22px;
-  line-height: 1.15;
-  letter-spacing: -0.005em;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
   margin-bottom: 4px;
 }
 .tool-meta .tool-num {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 11px; letter-spacing: 0.18em;
   color: var(--red);
   display: block;
@@ -340,7 +406,7 @@ section.tools:last-of-type { border-bottom: 2px solid var(--rule); }
 .tool-form label {
   flex: 1; min-width: 0;
   display: flex; flex-direction: column; gap: 4px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--ink-2);
 }
@@ -350,13 +416,14 @@ section.tools:last-of-type { border-bottom: 2px solid var(--rule); }
   border: 0; border-bottom: 1.5px solid var(--ink);
   background: transparent;
   padding: 7px 0;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-ui);
   font-weight: 500;
   font-size: 16px;
   color: var(--ink);
   width: 100%;
   border-radius: 0;
   -webkit-appearance: none; appearance: none;
+  font-variant-numeric: tabular-nums;
 }
 .tool-form select {
   background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%);
@@ -368,7 +435,7 @@ section.tools:last-of-type { border-bottom: 2px solid var(--rule); }
 .tool-form textarea {
   border: 1px solid var(--rule-soft);
   padding: 10px;
-  font-family: 'Newsreader', serif;
+  font-family: var(--font-ui);
   font-weight: 400;
   font-size: 15px;
   line-height: 1.5;
@@ -398,34 +465,36 @@ textarea:focus-visible {
   border: 0;
   padding: 8px 16px;
   margin-top: 10px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-weight: 500;
   font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
   cursor: pointer;
 }
 .tool-form button:hover { background: var(--red); }
 
-/* ─── OUTPUT ─── */
+/* ─── OUTPUT (newspaper headline style) ─── */
 .out {
-  margin-top: 14px;
-  padding-top: 12px;
-  border-top: 1px dashed var(--rule-soft);
+  margin-top: 18px;
+  padding: 18px 0 14px;
+  border-top: 3px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
 }
 .out .label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--ink-2);
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted);
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 .out .big {
   display: block;
-  font-family: 'Newsreader', serif;
+  font-family: var(--font-brand);
   font-weight: 500;
-  font-size: 30px;
-  line-height: 1.05;
-  letter-spacing: -0.015em;
+  font-size: clamp(34px, 5.5vw, 56px);
+  line-height: 1;
+  letter-spacing: -0.025em;
   color: var(--ink);
+  font-variant-numeric: tabular-nums;
 }
 .out .breakdown {
   display: block;
@@ -449,7 +518,7 @@ textarea:focus-visible {
   max-width: 64ch;
 }
 .explainer h3 {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--red);
   margin-bottom: 12px;
@@ -475,7 +544,7 @@ textarea:focus-visible {
   max-width: 64ch;
 }
 .faq h3 {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--red);
   margin-bottom: 18px;
@@ -486,7 +555,7 @@ textarea:focus-visible {
 }
 .faq details:last-of-type { border-bottom: 0; }
 .faq summary {
-  font-family: 'Newsreader', serif;
+  font-family: var(--font-brand);
   font-weight: 500;
   font-size: 18px;
   line-height: 1.3;
@@ -500,7 +569,7 @@ textarea:focus-visible {
   content: "+";
   position: absolute;
   right: 0; top: 0;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   color: var(--red);
   font-weight: 500;
   font-size: 20px;
@@ -522,7 +591,7 @@ textarea:focus-visible {
   border-bottom: 1px solid var(--rule);
 }
 .related h3 {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--red);
   margin-bottom: 18px;
@@ -538,7 +607,7 @@ textarea:focus-visible {
   border: 1px solid var(--rule-soft);
   text-decoration: none;
   color: var(--ink);
-  font-family: 'Newsreader', serif;
+  font-family: var(--font-ui);
   font-weight: 500;
   font-size: 15px;
   transition: background 0.15s, color 0.15s;
@@ -559,7 +628,7 @@ textarea:focus-visible {
   border-bottom: 1px solid var(--rule);
 }
 .disclosure h4 {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--red);
   margin-bottom: 8px;
@@ -576,12 +645,48 @@ textarea:focus-visible {
   padding-top: 14px;
   display: flex; justify-content: space-between; align-items: baseline; gap: 14px;
   flex-wrap: wrap;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--ink-2);
 }
 .colophon a { color: inherit; border-bottom: 1px dotted var(--ink-3); text-decoration: none; padding-bottom: 1px; }
 .colophon a:hover { color: var(--red); border-color: var(--red); }
+
+/* ─── THEME TOGGLE (sun/moon, light/dark) ─── */
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--rule-soft);
+  color: var(--ink);
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin: 0;
+  line-height: 1.4;
+}
+.theme-toggle:hover {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+.theme-toggle .icon-light,
+.theme-toggle .icon-dark {
+  display: inline-block;
+  margin-right: 4px;
+}
+:root[data-theme="dark"] .theme-toggle .icon-light,
+:root:not([data-theme="light"]) .theme-toggle .icon-light { display: none; }
+:root[data-theme="light"] .theme-toggle .icon-dark { display: none; }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .theme-toggle .icon-light { display: inline-block; }
+  :root:not([data-theme="dark"]) .theme-toggle .icon-dark  { display: none; }
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .icon-light { display: none; }
+  :root:not([data-theme="light"]) .theme-toggle .icon-dark  { display: inline-block; }
+}
 
 /* ─── ADVERTISEMENT (declared, not hidden) ─── */
 .ad-block {
@@ -594,7 +699,7 @@ textarea:focus-visible {
 .ad-block::before {
   content: "Advertisement";
   display: block;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
   color: var(--ink-3);
   margin-bottom: 14px;
@@ -604,7 +709,7 @@ textarea:focus-visible {
   padding: 32px 60px;
   border: 1px dashed var(--rule-soft);
   color: var(--ink-3);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
 }
 
