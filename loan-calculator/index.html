@@ -60,6 +60,13 @@
         </div>
         <button type="button" onclick="loanCalc()">Calculate</button>
         <div class="out" id="loan-out" role="status" aria-live="polite"><span class="label">Monthly</span><span class="big">$501</span><span class="breakdown">Total interest $5,059 · Total paid $30,059</span></div>
+        <div class="next-task" id="loan-next" hidden>
+          <p class="hint">↓ You might also need</p>
+          <div class="next-tools">
+            <a href="/mortgage-calculator/" class="next-link" data-symbol="⌂">Mortgage</a>
+            <a href="/compound-interest-calculator/" class="next-link" data-symbol="Σ">Compound Interest</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -133,6 +140,7 @@
     const P=+$('loan-amt').value, r=+$('loan-apr').value/100/12, n=+$('loan-months').value;
     const M = r===0 ? P/n : P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
     setOut('loan-out','Monthly','$'+fmt0(M),`Total interest $${fmt0(M*n-P)} · Total paid $${fmt0(M*n)}`);
+    document.getElementById('loan-next').hidden = false;
   }
   loanCalc();
 </script>

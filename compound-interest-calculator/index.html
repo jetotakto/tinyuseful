@@ -61,6 +61,13 @@
         </div>
         <button type="button" onclick="ciCalc()">Calculate</button>
         <div class="out" id="ci-out" role="status" aria-live="polite"><span class="label">Future value</span><span class="big">$300,123</span><span class="breakdown">Contributed $130,000 · Interest earned $170,123</span></div>
+        <div class="next-task" id="ci-next" hidden>
+          <p class="hint">↓ You might also need</p>
+          <div class="next-tools">
+            <a href="/rent-affordability-calculator/" class="next-link" data-symbol="⅓">Rent Affordability</a>
+            <a href="/loan-calculator/" class="next-link" data-symbol="$">Loan Calculator</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -135,6 +142,7 @@
     let bal = P; for (let i=0;i<n;i++){ bal = bal*(1+r) + m; }
     const contrib = P + m*n;
     setOut('ci-out','Future value','$'+fmt0(bal),`Contributed $${fmt0(contrib)} · Interest earned $${fmt0(bal-contrib)}`);
+    document.getElementById('ci-next').hidden = false;
   }
   ciCalc();
 </script>

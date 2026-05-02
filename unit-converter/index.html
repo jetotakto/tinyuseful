@@ -69,6 +69,13 @@
         </div>
         <button type="button" onclick="unitCalc()">Convert</button>
         <div class="out" id="unit-out" role="status" aria-live="polite"><span class="label">Result</span><span class="big">3.281</span><span class="breakdown">1 m = 3.281 ft</span></div>
+        <div class="next-task" id="unit-next" hidden>
+          <p class="hint">↓ You might also need</p>
+          <div class="next-tools">
+            <a href="/date-calculator/" class="next-link" data-symbol="▦">Date Calculator</a>
+            <a href="/time-zone-converter/" class="next-link" data-symbol="⊙">Time Zone</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -164,6 +171,7 @@
     else { const def = UNIT_DEFS[cat]; result = val * def.toBase[from] / def.toBase[to]; }
     const decimals = Math.abs(result) >= 100 ? 2 : (Math.abs(result) >= 1 ? 3 : 4);
     setOut('unit-out','Result', fmt(result, decimals), `${val} ${from} = ${fmt(result, decimals)} ${to}`);
+    document.getElementById('unit-next').hidden = false;
   }
   unitUpdateOptions();
 </script>

@@ -59,6 +59,13 @@
         </div>
         <button type="button" onclick="discCalc()">Calculate</button>
         <div class="out" id="disc-out" role="status" aria-live="polite"><span class="label">Final price</span><span class="big">$60.00</span><span class="breakdown">You save $20.00 · 25% off $80.00</span></div>
+        <div class="next-task" id="disc-next" hidden>
+          <p class="hint">↓ You might also need</p>
+          <div class="next-tools">
+            <a href="/sales-tax-calculator/" class="next-link" data-symbol="+">Sales Tax</a>
+            <a href="/percentage-calculator/" class="next-link" data-symbol="%">Percentage</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -132,6 +139,7 @@
     const save = price*pct/100, final = price-save;
     setOut('disc-out','Final price','$'+fmt(final),
       `You save $${fmt(save)} · ${pct}% off $${fmt(price)}`);
+    document.getElementById('disc-next').hidden = false;
   }
   discCalc();
 </script>

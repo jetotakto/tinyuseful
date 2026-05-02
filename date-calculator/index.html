@@ -70,6 +70,13 @@
         </div>
         <button type="button" onclick="dateCalc()">Calculate</button>
         <div class="out" id="date-out" role="status" aria-live="polite"><span class="label">Result</span><span class="big">—</span><span class="breakdown">Pick dates and press Calculate.</span></div>
+        <div class="next-task" id="date-next" hidden>
+          <p class="hint">↓ You might also need</p>
+          <div class="next-tools">
+            <a href="/time-zone-converter/" class="next-link" data-symbol="⊙">Time Zone</a>
+            <a href="/unit-converter/" class="next-link" data-symbol="↔">Unit Converter</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -162,6 +169,7 @@
       const weekday = result.toLocaleDateString('en-US', {weekday:'long'});
       setOut('date-out','Date', iso, `${weekday} · ${d>=0?'+':''}${d} day${Math.abs(d)===1?'':'s'} from today`);
     }
+    document.getElementById('date-next').hidden = false;
   }
   (function initDate(){
     const today = new Date().toISOString().slice(0,10);

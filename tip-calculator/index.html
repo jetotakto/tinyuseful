@@ -60,6 +60,13 @@
         </div>
         <button type="button" onclick="tipCalc()">Calculate</button>
         <div class="out" id="tip-out" role="status" aria-live="polite"><span class="label">Total</span><span class="big">$59.00</span><span class="breakdown">Tip $9.00 · Per person $29.50</span></div>
+        <div class="next-task" id="tip-next" hidden>
+          <p class="hint">↓ You might also need</p>
+          <div class="next-tools">
+            <a href="/discount-calculator/" class="next-link" data-symbol="−">Discount</a>
+            <a href="/sales-tax-calculator/" class="next-link" data-symbol="+">Sales Tax</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -133,6 +140,7 @@
     const tip = bill*pct/100, total = bill+tip, perPerson = total/split;
     setOut('tip-out','Total','$'+fmt(total),
       `Tip $${fmt(tip)}${split>1?` · Per person $${fmt(perPerson)}`:''}`);
+    document.getElementById('tip-next').hidden = false;
   }
   tipCalc();
 </script>

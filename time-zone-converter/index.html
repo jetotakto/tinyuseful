@@ -82,6 +82,13 @@
         </div>
         <button type="button" onclick="tzCalc()">Convert</button>
         <div class="out" id="tz-out" role="status" aria-live="polite"><span class="label">Time in target zone</span><span class="big">—</span><span class="breakdown">Press Convert.</span></div>
+        <div class="next-task" id="tz-next" hidden>
+          <p class="hint">↓ You might also need</p>
+          <div class="next-tools">
+            <a href="/date-calculator/" class="next-link" data-symbol="▦">Date Calculator</a>
+            <a href="/unit-converter/" class="next-link" data-symbol="↔">Unit Converter</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -164,6 +171,7 @@
     const targetStr = new Date(realUTC).toLocaleString('en-US', {timeZone: toTZ, hour12:false, weekday:'short', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'});
     const targetTime = new Date(realUTC).toLocaleTimeString('en-US', {timeZone: toTZ, hour12:false, hour:'2-digit', minute:'2-digit'});
     setOut('tz-out','Time in target zone', targetTime, `${time} ${fromTZ.split('/').pop().replace(/_/g,' ')} → ${targetStr} (${toTZ.split('/').pop().replace(/_/g,' ')})`);
+    document.getElementById('tz-next').hidden = false;
   }
   tzCalc();
 </script>
