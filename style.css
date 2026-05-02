@@ -309,10 +309,9 @@ body {
   transition: background 0.15s, color 0.15s;
 }
 .catalog-card .card-symbol {
-  flex: 0 0 56px;
-  width: 56px;
-  height: 56px;
-  aspect-ratio: 1 / 1;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 110px;
   align-self: flex-start;
   background: transparent;
   border: 1px solid var(--rule-soft);
