@@ -8,6 +8,9 @@ _make_review.ps1
 _make_review.bat
 og-template.html
 
+# Claude instructions — local-only, never push to public repo
+CLAUDE.md
+
 # Review ZIP archivy a kontrolni slozky — nikdy do live webu
 tinyuseful-review-*.zip
 kontrola GPT a Geminy/
