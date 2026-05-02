@@ -494,6 +494,12 @@ section.tools {
   background-repeat: no-repeat;
   padding-right: 18px;
 }
+/* Fix dark mode dropdown — OS native <option> ignoruje var(--ink/--paper) inheritance,
+   bez explicitního override je v dark mode bila na bile (Win/macOS Chrome/Edge/FF). */
+.tool-form select option {
+  background: var(--paper);
+  color: var(--ink);
+}
 .tool-form textarea {
   border: 1px solid var(--rule-soft);
   padding: 10px;
