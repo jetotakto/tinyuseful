@@ -336,9 +336,6 @@ body {
 .catalog-card:nth-child(-n+1),
 .catalog-card.first-row { border-top: 0; }
 .catalog-card:first-child { border-left: 0; }
-.catalog-card:hover { background: var(--ink); color: var(--paper); }
-.catalog-card:hover .card-desc { color: var(--paper); opacity: 0.7; }
-.catalog-card:hover .card-num { color: var(--red); opacity: 1; }
 .catalog-card h3 {
   font-family: var(--font-ui);
   font-weight: 600;
