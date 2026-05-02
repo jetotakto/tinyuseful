@@ -4,43 +4,9 @@
    ───────────────────────────────────────────────────────── */
 
 /* ─── SELF-HOSTED FONTS (no Google CDN) ─── */
-/* Newsreader — serif headlines + body. SIL OFL licensed.
-   Files in /fonts/newsreader-v26-latin/ (downloaded from gwfh.mranftl.com) */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url('/fonts/newsreader-v26-latin/newsreader-v26-latin-300.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/newsreader-v26-latin/newsreader-v26-latin-regular.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('/fonts/newsreader-v26-latin/newsreader-v26-latin-500.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url('/fonts/newsreader-v26-latin/newsreader-v26-latin-600.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/fonts/newsreader-v26-latin/newsreader-v26-latin-700.woff2') format('woff2');
-}
+/* Phase 30: Newsreader serif retired — replaced with Montserrat geometric sans.
+   Phase 41 cleanup: @font-face definitions removed. Files in /fonts/newsreader-v26-latin/
+   can be deleted manually from the repo (no CSS reference left). */
 
 /* Montserrat — geometric sans, used as brand display font (h1, h2, FAQ summary,
    masthead wordmark, .out .big). SIL OFL licensed.
