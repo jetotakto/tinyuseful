@@ -78,6 +78,14 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- About -->
+  <url>
+    <loc>https://www.tinyuseful.app/about.html</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
   <!-- Legal -->
   <url>
     <loc>https://www.tinyuseful.app/privacy.html</loc>
