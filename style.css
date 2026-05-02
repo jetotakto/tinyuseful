@@ -312,7 +312,7 @@ body {
   flex: 0 0 56px;
   width: 56px;
   height: 56px;
-  border: 1px solid var(--rule-soft);
+  background: var(--rule-soft);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -320,9 +320,28 @@ body {
   font-weight: 600;
   font-size: 30px;
   line-height: 1;
+  color: var(--paper);
+  transition: background 0.15s, color 0.15s;
+}
+.catalog-card:hover .card-symbol {
+  background: var(--red);
+  color: var(--paper);
+}
+/* Dark mode: světlejší box, ink-color znak (paper se ztratí na tmavém pozadí) */
+@media (prefers-color-scheme: dark) {
+  .catalog-card .card-symbol {
+    background: var(--rule-soft);
+    color: var(--ink);
+  }
+}
+[data-theme="dark"] .catalog-card .card-symbol {
+  background: var(--rule-soft);
   color: var(--ink);
 }
-.catalog-card:hover .card-symbol { border-color: var(--paper); color: var(--paper); }
+[data-theme="light"] .catalog-card .card-symbol {
+  background: var(--rule-soft);
+  color: var(--paper);
+}
 .catalog-card .card-body {
   flex: 1 1 auto;
   min-width: 0;
@@ -332,20 +351,7 @@ body {
 .catalog-card:first-child { border-left: 0; }
 .catalog-card:hover { background: var(--ink); color: var(--paper); }
 .catalog-card:hover .card-num,
-.catalog-card:hover .card-desc { color: var(--paper); opacity: 0.85; }
-.catalog-card .card-num {
-  font-family: var(--font-mono);
-  font-weight: 400;
-  font-size: 11px;
-  line-height: 1;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--red);
-  display: block;
-  margin-bottom: 6px;
-}
-/* legacy .ic kept for backwards compat — hidden in new layout */
-.catalog-card .card-num .ic { display: none; }
+.catalog-card:hover .card-desc { color: var(--paper); opacity: 0.7; }
 .catalog-card h3 {
   font-family: var(--font-ui);
   font-weight: 600;
@@ -359,6 +365,19 @@ body {
   color: var(--muted);
   line-height: 1.45;
 }
+.catalog-card .card-num {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-top: 10px;
+}
+/* legacy .ic kept for backwards compat — hidden in new layout */
+.catalog-card .card-num .ic { display: none; }
 
 /* ─── SECTIONS (tool pages) ─── */
 section.tools {
