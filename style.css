@@ -530,6 +530,35 @@ textarea:focus-visible {
   color: var(--ink);
 }
 
+/* ─── NEXT-TASK NAVIGATION (appears after Calculate) ─── */
+.next-task {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--rule-soft);
+  font-family: var(--font-ui);
+}
+.next-task .hint {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 10px 0;
+}
+.next-task .next-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 24px;
+}
+.next-task .next-link {
+  font-size: 14px;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 1px;
+}
+.next-task .next-link:hover { color: var(--red); border-bottom-color: var(--red); }
+
 /* ─── EXPLAINER (tool page SEO copy) ─── */
 .explainer {
   padding: 32px 0 12px;

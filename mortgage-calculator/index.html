@@ -103,6 +103,13 @@
         </div>
         <button type="button" onclick="mtgCalc()">Calculate</button>
         <div class="out" id="mtg-out" role="status" aria-live="polite"><span class="label">Monthly payment</span><span class="big">$2,919</span><span class="breakdown">Total interest $600,765 · Total paid $1,050,765</span></div>
+        <div class="next-task" id="mtg-next" hidden>
+          <p class="hint">↓ You might also need</p>
+          <div class="next-tools">
+            <a href="/loan-calculator/" class="next-link">Loan Calculator →</a>
+            <a href="/compound-interest-calculator/" class="next-link">Compound Interest →</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -199,6 +206,7 @@
     const P=+$('mtg-loan').value, r=+$('mtg-rate').value/100/12, n=+$('mtg-years').value*12;
     const M = r===0 ? P/n : P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
     setOut('mtg-out','Monthly payment','$'+fmt0(M),`Total interest $${fmt0(M*n-P)} · Total paid $${fmt0(M*n)}`);
+    document.getElementById('mtg-next').hidden = false;
   }
   mtgCalc();
 </script>

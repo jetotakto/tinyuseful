@@ -66,6 +66,13 @@
         </div>
         <button type="button" onclick="pctCalc()">Calculate</button>
         <div class="out" id="pct-out" role="status" aria-live="polite"><span class="label">Result</span><span class="big">12</span></div>
+        <div class="next-task" id="pct-next" hidden>
+          <p class="hint">↓ You might also need</p>
+          <div class="next-tools">
+            <a href="/sales-tax-calculator/" class="next-link">Sales Tax →</a>
+            <a href="/discount-calculator/" class="next-link">Discount →</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -142,6 +149,7 @@
     else if (mode==='isof') { const r = y===0?0:(x/y)*100; label = `${x} is what % of ${y}`; big = fmt(r,2)+' %'; }
     else                    { const r = y===0?0:((x-y)/y)*100; label = `${y} → ${x}`; big = (r>=0?'+':'')+fmt(r,2)+' %'; br = `Absolute change: ${fmt(x-y)}`; }
     setOut('pct-out', label, big, br);
+    document.getElementById('pct-next').hidden = false;
   }
   pctCalc();
 </script>

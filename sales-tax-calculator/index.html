@@ -65,6 +65,13 @@
         </div>
         <button type="button" onclick="vatCalc()">Calculate</button>
         <div class="out" id="vat-out" role="status" aria-live="polite"><span class="label">After tax</span><span class="big">$108.88</span><span class="breakdown">Tax amount $8.88</span></div>
+        <div class="next-task" id="vat-next" hidden>
+          <p class="hint">↓ You might also need</p>
+          <div class="next-tools">
+            <a href="/tip-calculator/" class="next-link">Tip Calculator →</a>
+            <a href="/percentage-calculator/" class="next-link">Percentage →</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -140,6 +147,7 @@
       setOut('vat-out','After tax','$'+fmt(gross),`Tax amount $${fmt(tax)} · Net $${fmt(price)}`); }
     else { const net=price/(1+rate/100), tax=price-net;
       setOut('vat-out','Before tax','$'+fmt(net),`Tax amount $${fmt(tax)} · Total $${fmt(price)}`); }
+    document.getElementById('vat-next').hidden = false;
   }
   vatCalc();
 </script>
