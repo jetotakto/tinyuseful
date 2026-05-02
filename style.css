@@ -42,6 +42,38 @@
   src: url('/fonts/newsreader-v26-latin/newsreader-v26-latin-700.woff2') format('woff2');
 }
 
+/* Montserrat — geometric sans, used as brand display font (h1, h2, FAQ summary,
+   masthead wordmark, .out .big). SIL OFL licensed.
+   Files in /fonts/montserrat-v31-latin/ (downloaded from gwfh.mranftl.com) */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/montserrat-v31-latin/montserrat-v31-latin-regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/montserrat-v31-latin/montserrat-v31-latin-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/montserrat-v31-latin/montserrat-v31-latin-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/montserrat-v31-latin/montserrat-v31-latin-700.woff2') format('woff2');
+}
+
 /* JetBrains Mono — labels, breadcrumbs, mono UI. SIL OFL licensed.
    Files in /fonts/jetbrains-mono-v24-latin/ (downloaded from gwfh.mranftl.com) */
 @font-face {
@@ -93,7 +125,7 @@
 /* ─── COLOR + FONT SYSTEM ─── */
 /* Light mode (default) */
 :root {
-  --paper:    #FAF8F2;
+  --paper:    #FCFAF6;
   --ink:      #111111;
   --ink-2:    #555;
   --ink-3:    #6F6F6F;
@@ -102,8 +134,8 @@
   --rule-soft:#D8D4C8;
   --red:      #C8102E;     /* swiss red */
 
-  /* Typography roles (Phase 13 hybrid: serif brand, sans UI, mono technical) */
-  --font-brand: 'Newsreader', Georgia, 'Times New Roman', serif;
+  /* Typography roles (Phase 30: Montserrat brand display, Inter UI, JetBrains mono technical) */
+  --font-brand: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
   --font-ui:    'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono:  'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
@@ -112,11 +144,11 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --paper:    #121212;
-    --ink:      #FAF8F2;
+    --ink:      #FCFAF6;
     --ink-2:    #B8B4A8;
     --ink-3:    #99958C;
     --muted:    #99958C;
-    --rule:     #FAF8F2;
+    --rule:     #FCFAF6;
     --rule-soft:#2A2A2A;
     --red:      #E31B23;   /* slightly brighter for dark backgrounds */
   }
@@ -125,11 +157,11 @@
 /* Manual theme override (set by JS toggle, persisted in localStorage) */
 :root[data-theme="dark"] {
   --paper:    #121212;
-  --ink:      #FAF8F2;
+  --ink:      #FCFAF6;
   --ink-2:    #B8B4A8;
   --ink-3:    #99958C;
   --muted:    #99958C;
-  --rule:     #FAF8F2;
+  --rule:     #FCFAF6;
   --rule-soft:#2A2A2A;
   --red:      #E31B23;
 }
@@ -326,8 +358,9 @@ body {
   transition: border-color 0.15s, color 0.15s;
 }
 .catalog-card:hover .card-symbol {
+  background: var(--red);
   border-color: var(--red);
-  color: var(--red);
+  color: var(--paper);
 }
 .catalog-card .card-body {
   flex: 1 1 auto;
