@@ -547,11 +547,11 @@ textarea:focus-visible {
 .out .breakdown {
   display: block;
   font-family: var(--font-ui);
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 400;
   color: var(--ink);
   margin-top: 14px;
-  line-height: 1.5;
+  line-height: 1.45;
   font-variant-numeric: tabular-nums;
 }
 .out .breakdown strong { font-weight: 600; }
@@ -564,32 +564,69 @@ textarea:focus-visible {
 
 /* ─── NEXT-TASK NAVIGATION (appears after Calculate) ─── */
 .next-task {
-  margin-top: 14px;
+  margin-top: 32px;
   padding-top: 14px;
   border-top: 1px dashed var(--rule-soft);
   font-family: var(--font-ui);
 }
 .next-task .hint {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-style: italic;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--muted);
-  margin: 0 0 10px 0;
+  margin: 0 0 12px 0;
 }
 .next-task .next-tools {
   display: flex;
+  gap: 12px;
   flex-wrap: wrap;
-  gap: 18px 24px;
 }
 .next-task .next-link {
-  font-size: 14px;
-  color: var(--ink);
+  flex: 1 1 0;
+  min-width: 160px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--paper);
+  border: 1px solid var(--rule-soft);
   text-decoration: none;
-  border-bottom: 1px solid var(--ink);
-  padding-bottom: 1px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--ink);
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
-.next-task .next-link:hover { color: var(--red); border-bottom-color: var(--red); }
+.next-task .next-link::before {
+  content: attr(data-symbol);
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  background: var(--rule-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--paper);
+  transition: background 0.15s, color 0.15s;
+}
+.next-task .next-link:hover {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.next-task .next-link:hover::before {
+  background: var(--red);
+  color: var(--paper);
+}
+/* Dark mode: paper-color symbol by se ztratil — invert */
+@media (prefers-color-scheme: dark) {
+  .next-task .next-link::before { color: var(--ink); }
+}
+[data-theme="dark"] .next-task .next-link::before { color: var(--ink); }
+[data-theme="light"] .next-task .next-link::before { color: var(--paper); }
 
 /* ─── EXPLAINER (tool page SEO copy) ─── */
 .explainer {
