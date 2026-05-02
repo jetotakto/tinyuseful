@@ -86,17 +86,41 @@
   </div>
 
   <section class="explainer">
-    <h3>How it works</h3>
+    <h3>How to calculate days between two dates manually</h3>
+    <ol>
+      <li>Count whole years between the dates and multiply by 365.</li>
+      <li>Add 1 day for each leap year (years divisible by 4, except centuries not divisible by 400).</li>
+      <li>Add or subtract the leftover months and days.</li>
+    </ol>
+    <p><strong>Example:</strong> From 1 Jan 2024 to 1 Jan 2026 = 2 years × 365 + 1 leap day (2024) = <strong>731 days</strong>.</p>
+
+    <h3>Quick examples</h3>
+    <ul class="examples">
+      <li>Days from today to next Christmas — varies by current date</li>
+      <li>30 days from today — typical invoice due date</li>
+      <li>60 days from today — extended payment terms</li>
+      <li>90 days from today — contract notice period</li>
+      <li>Days between your birthday this year and next = <strong>365 or 366</strong></li>
+    </ul>
+
+    <h3>Formulas used</h3>
+    <p class="formula"><code>days between = (end − start) ÷ 86,400,000 ms</code></p>
+    <p class="formula"><code>date from today = today + N days</code></p>
+    <p class="formula"><code>~years = days ÷ 365.25</code></p>
     <p>
-      Days between two dates is just (end − start) in milliseconds, divided by 86,400,000
-      (the number of milliseconds in a day). The browser handles leap years and month lengths.
-      Negative results mean the end date is before the start date.
+      The browser handles leap years and month lengths automatically. Negative results in
+      "between" mode mean the end date is earlier than the start. Negative numbers in
+      "from today" mode go backward in time.
     </p>
-    <p>
-      "Days from today" adds the number to today's date and shows the resulting weekday and ISO date.
-      Negative numbers go backward. Useful for deadlines, anniversaries, contract expiry dates,
-      and "how many days until X."
-    </p>
+
+    <h3>Common uses</h3>
+    <ul>
+      <li>Project deadlines, contract expiry, and notice periods</li>
+      <li>Counting down to a holiday, birthday, or vacation</li>
+      <li>Working out a baby's due date or a return-by date</li>
+      <li>Calculating age in days, months, or approximate years</li>
+      <li>Verifying a 30/60/90-day payment term on an invoice</li>
+    </ul>
   </section>
 
   <section class="faq">

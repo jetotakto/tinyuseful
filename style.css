@@ -631,12 +631,36 @@ textarea:focus-visible {
   line-height: 1.55;
   margin-bottom: 14px;
 }
-.explainer ul {
+.explainer ul,
+.explainer ol {
   margin: 0 0 14px 22px;
   font-size: 16px;
   line-height: 1.55;
 }
-.explainer ul li { margin-bottom: 6px; }
+.explainer ul li,
+.explainer ol li { margin-bottom: 6px; }
+.explainer .examples {
+  list-style: none;
+  margin-left: 0;
+  font-variant-numeric: tabular-nums;
+}
+.explainer .examples li {
+  padding: 6px 0;
+  border-bottom: 1px dotted var(--rule-soft);
+  margin-bottom: 0;
+}
+.explainer .examples li:last-child { border-bottom: 0; }
+.explainer .formula {
+  margin-bottom: 8px;
+}
+.explainer .formula code {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  background: transparent;
+  padding: 0;
+}
 
 /* ─── FAQ ─── */
 .faq {
