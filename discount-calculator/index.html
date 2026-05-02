@@ -75,16 +75,41 @@
   </div>
 
   <section class="explainer">
-    <h3>How it works</h3>
+    <h3>How to calculate a discount manually</h3>
+    <ol>
+      <li>Convert the discount percentage to a decimal (25% → 0.25).</li>
+      <li>Multiply the price by the decimal to get the savings amount.</li>
+      <li>Subtract savings from price for the final price.</li>
+    </ol>
+    <p><strong>Example:</strong> 25% off $80 → 80 × 0.25 = $20 savings → final price <strong>$60</strong>.</p>
+
+    <h3>Quick examples</h3>
+    <ul class="examples">
+      <li>20% off $50 = <strong>$40</strong> (saves $10)</li>
+      <li>30% off $120 = <strong>$84</strong> (saves $36)</li>
+      <li>50% off $200 = <strong>$100</strong> (saves $100)</li>
+      <li>"50% off then 20% off" $100 = <strong>$40</strong> (60% total, NOT 70%)</li>
+      <li>Buy one get one 50% off (2 × $40) = <strong>$60</strong> (25% effective discount)</li>
+    </ul>
+
+    <h3>Formulas used</h3>
+    <p class="formula"><code>savings = price × (discount ÷ 100)</code></p>
+    <p class="formula"><code>final price = price − savings</code></p>
+    <p class="formula"><code>final price = price × (1 − discount ÷ 100)</code> (equivalent)</p>
     <p>
-      Savings = price × discount ÷ 100. Final = price − savings. Mathematically equivalent:
-      final = price × (1 − discount ÷ 100). For 25% off $80: $80 × 0.75 = $60. You save $20.
-    </p>
-    <p>
-      Two discounts in sequence don't add up. <strong>50% off then 20% off is not 70% off.</strong>
-      It's 60% off (because the 20% comes off the already-reduced price). For coupon stacking
+      <strong>Two discounts in sequence don't add up.</strong> 50% off then 20% off is not 70% off —
+      it's 60% off (because the 20% comes off the already-reduced price). For coupon stacking
       and Black Friday markdowns, run each discount one at a time.
     </p>
+
+    <h3>Common uses</h3>
+    <ul>
+      <li>Black Friday and seasonal sale comparisons</li>
+      <li>Stacking a coupon on top of a sale price</li>
+      <li>Computing membership/loyalty discount on a final cart</li>
+      <li>Verifying a "X% off" sticker against the receipt</li>
+      <li>Negotiating discounts with a supplier or contractor</li>
+    </ul>
   </section>
 
   <section class="faq">

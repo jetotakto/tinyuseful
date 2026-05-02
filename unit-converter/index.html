@@ -85,16 +85,42 @@
   </div>
 
   <section class="explainer">
-    <h3>How it works</h3>
+    <h3>How to convert units manually</h3>
+    <ol>
+      <li>For length and weight: multiply by the conversion factor (1 inch = 0.0254 m).</li>
+      <li>For Celsius to Fahrenheit: multiply by 9/5, then add 32.</li>
+      <li>For Celsius to Kelvin: just add 273.15 (no scale change).</li>
+    </ol>
+    <p><strong>Example:</strong> 1 m to feet → 1 ÷ 0.3048 = <strong>3.281 ft</strong>. 20 °C to °F → 20 × 9/5 + 32 = <strong>68 °F</strong>.</p>
+
+    <h3>Quick examples</h3>
+    <ul class="examples">
+      <li>1 m = <strong>3.281 ft</strong></li>
+      <li>1 mile = <strong>1.609 km</strong></li>
+      <li>1 kg = <strong>2.205 lb</strong></li>
+      <li>20 °C = <strong>68 °F</strong></li>
+      <li>100 °F = <strong>37.8 °C</strong> (body temperature)</li>
+      <li>0 °C = <strong>32 °F = 273.15 K</strong> (freezing)</li>
+    </ul>
+
+    <h3>Formulas used</h3>
+    <p class="formula"><code>length: value × factor (1 in = 0.0254 m)</code></p>
+    <p class="formula"><code>weight: value × factor (1 lb = 0.45359237 kg)</code></p>
+    <p class="formula"><code>°F = °C × 9/5 + 32</code></p>
+    <p class="formula"><code>K = °C + 273.15</code></p>
     <p>
-      Length and weight conversions use exact factors: 1 inch = 0.0254 m, 1 pound = 0.45359237 kg.
-      Temperature is different — it's a shift plus a scale: °F = °C × 9/5 + 32, K = °C + 273.15.
-      That's why a 1-degree change in Celsius is a 1.8-degree change in Fahrenheit.
+      All conversions run client-side using these constants. No API call, no rounding from
+      the server, no precision loss in transit.
     </p>
-    <p>
-      All conversions run client-side using these constants. No API call, no rounding from the
-      server, no precision loss in transit.
-    </p>
+
+    <h3>Common uses</h3>
+    <ul>
+      <li>Converting metric ↔ imperial for cooking, travel, and shopping</li>
+      <li>Reading European product specs in US units (or vice versa)</li>
+      <li>Weather: Celsius to Fahrenheit when traveling</li>
+      <li>Fitness tracking: pounds ↔ kilograms, miles ↔ kilometers</li>
+      <li>School and physics homework (especially temperature)</li>
+    </ul>
   </section>
 
   <section class="faq">

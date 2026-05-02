@@ -24,6 +24,36 @@
 <link rel="stylesheet" href="/style.css">
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 
+<!-- Structured data: AboutPage + Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About TinyUseful",
+  "url": "https://www.tinyuseful.app/about.html",
+  "description": "TinyUseful is an independent static utility site made by a small studio in Prague. Tiny calculators for everyday decisions.",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "TinyUseful",
+    "url": "https://www.tinyuseful.app/",
+    "logo": "https://www.tinyuseful.app/favicon.svg",
+    "foundingDate": "2026",
+    "foundingLocation": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Prague",
+        "addressCountry": "CZ"
+      }
+    },
+    "email": "contact@tinyuseful.app",
+    "sameAs": [
+      "https://github.com/jetotakto/tinyuseful"
+    ]
+  }
+}
+</script>
+
 <style>
   :root {
     --paper:    #FCFAF6;

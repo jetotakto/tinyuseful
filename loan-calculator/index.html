@@ -76,17 +76,39 @@
   </div>
 
   <section class="explainer">
-    <h3>How it works</h3>
+    <h3>How to calculate a loan payment manually</h3>
+    <ol>
+      <li>Convert APR to monthly rate: divide by 12 and by 100 (7.5% APR → 0.00625).</li>
+      <li>Compute (1 + monthly rate) raised to the power of total months.</li>
+      <li>Apply the amortization formula: <code>M = P × [r(1+r)^n] / [(1+r)^n − 1]</code>.</li>
+    </ol>
+    <p><strong>Example:</strong> $25,000 loan, 7.5% APR, 60 months → monthly payment ≈ <strong>$501</strong>.</p>
+
+    <h3>Quick examples</h3>
+    <ul class="examples">
+      <li>$25,000 auto loan, 7.5% APR, 60 mo = <strong>$501/mo</strong></li>
+      <li>$15,000 personal loan, 9% APR, 36 mo = <strong>$477/mo</strong></li>
+      <li>$50,000 student loan, 5% APR, 120 mo = <strong>$530/mo</strong></li>
+      <li>Same $25,000 over 36 mo instead of 60 mo = <strong>$777/mo</strong> (saves ~$2.5k interest)</li>
+    </ul>
+
+    <h3>Formulas used</h3>
+    <p class="formula"><code>monthly rate = APR ÷ 12 ÷ 100</code></p>
+    <p class="formula"><code>M = P × [r(1+r)^n] / [(1+r)^n − 1]</code></p>
+    <p class="formula"><code>total interest = (M × n) − P</code></p>
     <p>
-      A fixed-rate amortized loan uses the same formula as a mortgage:
-      <strong>M = P × [r(1+r)<sup>n</sup>] / [(1+r)<sup>n</sup> − 1]</strong>, where P is the loan amount,
-      r is the monthly interest rate (APR ÷ 12 ÷ 100), and n is the number of monthly payments.
-      The result is your fixed monthly payment.
+      Auto loans typically run 3–7 years, student loans 10–20 years, personal loans 2–7 years.
+      Shorter term = higher monthly payment but less total interest. Run both and compare.
     </p>
-    <p>
-      Auto loans typically run 3–7 years, student loans 10–20 years, and personal loans 2–7 years.
-      A shorter term means higher monthly payment but less total interest. Run both and compare.
-    </p>
+
+    <h3>Common uses</h3>
+    <ul>
+      <li>Comparing auto loan offers from different dealers or banks</li>
+      <li>Choosing between 36 and 60 month terms (interest vs. cash flow trade-off)</li>
+      <li>Estimating monthly payment before applying for a personal loan</li>
+      <li>Planning student loan repayment after graduation</li>
+      <li>Refinancing decision: new APR vs. current monthly payment</li>
+    </ul>
   </section>
 
   <section class="faq">
