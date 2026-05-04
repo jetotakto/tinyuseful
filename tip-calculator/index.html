@@ -176,6 +176,10 @@
   const fmt = (n, d=2) => n.toLocaleString(undefined, {minimumFractionDigits: d, maximumFractionDigits: d});
   function tipCalc() {
     const bill=parseLocaleNumber($('tip-bill').value), pct=parseLocaleNumber($('tip-pct').value), split=Math.max(1, Math.floor(parseLocaleNumber($('tip-split').value))||1);
+    if (!Number.isFinite(bill) || !Number.isFinite(pct)) {
+      setOut('tip-out','Total','—','Complete all fields.');
+      return;
+    }
     const tip = bill*pct/100, total = bill+tip, perPerson = total/split;
     setOut('tip-out','Total','$'+fmt(total),
       `Tip $${fmt(tip)}${split>1?` · Per person $${fmt(perPerson)}`:''}`);

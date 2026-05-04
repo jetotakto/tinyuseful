@@ -205,6 +205,10 @@
   }
   function unitCalc() {
     const cat=$('unit-cat').value, val=parseLocaleNumber($('unit-val').value), from=$('unit-from').value, to=$('unit-to').value;
+    if (!Number.isFinite(val)) {
+      setOut('unit-out','Result','—','Complete all fields.');
+      return;
+    }
     let result;
     if (cat==='temp') result = unitConvertTemp(val, from, to);
     else { const def = UNIT_DEFS[cat]; result = val * def.toBase[from] / def.toBase[to]; }

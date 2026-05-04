@@ -175,6 +175,10 @@
   const fmt = (n, d=2) => n.toLocaleString(undefined, {minimumFractionDigits: d, maximumFractionDigits: d});
   function discCalc() {
     const price=parseLocaleNumber($('disc-price').value), pct=parseLocaleNumber($('disc-pct').value);
+    if (!Number.isFinite(price) || !Number.isFinite(pct)) {
+      setOut('disc-out','Final price','—','Complete all fields.');
+      return;
+    }
     const save = price*pct/100, final = price-save;
     setOut('disc-out','Final price','$'+fmt(final),
       `You save $${fmt(save)} · ${pct}% off $${fmt(price)}`);

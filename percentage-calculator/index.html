@@ -192,6 +192,10 @@
   const fmt = (n, d=2) => n.toLocaleString(undefined, {minimumFractionDigits: d, maximumFractionDigits: d});
   function pctCalc() {
     const x = parseLocaleNumber($('pct-x').value), y = parseLocaleNumber($('pct-y').value), mode = $('pct-mode').value;
+    if (!Number.isFinite(x) || !Number.isFinite(y)) {
+      setOut('pct-out', 'Result', '—', 'Complete all fields.');
+      return;
+    }
     let label, big, br='';
     if (mode === 'of')      { const r = x/100*y; label = `${x}% of ${y}`; big = fmt(r); }
     else if (mode==='isof') { const r = y===0?0:(x/y)*100; label = `${x} is what % of ${y}`; big = fmt(r,2)+' %'; }

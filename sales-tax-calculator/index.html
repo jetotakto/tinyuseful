@@ -185,6 +185,10 @@
   const fmt = (n, d=2) => n.toLocaleString(undefined, {minimumFractionDigits: d, maximumFractionDigits: d});
   function vatCalc() {
     const price=parseLocaleNumber($('vat-price').value), rate=parseLocaleNumber($('vat-rate').value), mode=$('vat-mode').value;
+    if (!Number.isFinite(price) || !Number.isFinite(rate)) {
+      setOut('vat-out','Result','—','Complete all fields.');
+      return;
+    }
     if (mode === 'add') { const tax=price*rate/100, gross=price+tax;
       setOut('vat-out','After tax','$'+fmt(gross),`Tax amount $${fmt(tax)} · Net $${fmt(price)}`); }
     else { const net=price/(1+rate/100), tax=price-net;

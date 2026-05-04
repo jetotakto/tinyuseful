@@ -32,7 +32,11 @@ window.setOut = function setOut(id, label, big, breakdown) {
   }
   const bigEl = document.createElement('span');
   bigEl.className = 'big';
-  bigEl.textContent = (big === null || big === undefined || big === '') ? '—' : String(big);
+  // Phase 51b: defensive guard. Per-calculator validity checks should catch invalid state first
+  // and call setOut with '—'. This is the safety net for any case that slips through.
+  let bigStr = (big === null || big === undefined || big === '') ? '—' : String(big);
+  if (/\bNaN\b|^Invalid|undefined/i.test(bigStr)) bigStr = '—';
+  bigEl.textContent = bigStr;
   out.appendChild(bigEl);
   if (breakdown) {
     const breakdownEl = document.createElement('span');
@@ -51,7 +55,7 @@ window.setOut = function setOut(id, label, big, breakdown) {
   btn.type = 'button';
   btn.dataset.copyResult = '';
   btn.setAttribute('aria-label', 'Copy result to clipboard');
-  btn.textContent = 'Copy result ↗';
+  btn.textContent = 'Copy result';
   out.appendChild(btn);
 };
 
@@ -74,7 +78,7 @@ window.copyResultFromButton = function copyResultFromButton(btn) {
     return;
   }
   navigator.clipboard.writeText(text).then(() => {
-    btn.textContent = 'Copied ✓';
+    btn.textContent = 'Copied';
     setTimeout(revert, 1500);
   }).catch(() => {
     btn.textContent = 'Copy failed';

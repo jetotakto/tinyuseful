@@ -6,6 +6,8 @@ _make_zip.ps1
 _make_zip.bat
 _make_review.ps1
 _make_review.bat
+_make_audit*.ps1
+_make_audit*.bat
 og-template.html
 
 # Claude instructions — local-only, never push to public repo
