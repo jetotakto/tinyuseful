@@ -88,3 +88,23 @@ document.addEventListener('click', function (e) {
   const btn = e.target.closest('[data-copy-result]');
   if (btn) window.copyResultFromButton(btn);
 });
+
+/* Phase 51: live calculation. Wire input/change events on a tool form to a calc function.
+   Debounced (default 80ms) so rapid typing produces one calculation per pause.
+   Calculate button stays as a fallback for users who expect explicit confirmation,
+   for users on assistive tech, or for users with motion preferences.
+   No flash, no count-up — result simply updates in place. */
+window.attachLiveCalc = function attachLiveCalc(containerSelector, calcFn, wait) {
+  const container = document.querySelector(containerSelector);
+  if (!container || typeof calcFn !== 'function') return;
+  const delay = typeof wait === 'number' ? wait : 80;
+  let t;
+  const handler = function () {
+    clearTimeout(t);
+    t = setTimeout(calcFn, delay);
+  };
+  container.querySelectorAll('input, select').forEach(function (el) {
+    el.addEventListener('input', handler);
+    el.addEventListener('change', handler);
+  });
+};

@@ -215,6 +215,7 @@
     if ($('date-to')) $('date-to').value = t.toISOString().slice(0,10);
     dateCalc();
   })();
+  attachLiveCalc('.tool-form', dateCalc);
 </script>
 
 </body>
