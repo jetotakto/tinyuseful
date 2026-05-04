@@ -30,6 +30,14 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TinyUseful","item":"https://www.tinyuseful.app/"},{"@type":"ListItem","position":2,"name":"Compound Interest Calculator","item":"https://www.tinyuseful.app/compound-interest-calculator/"}]}
 </script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Does starting earlier really matter that much?","acceptedAnswer":{"@type":"Answer","text":"Yes — dramatically. $200/month from age 25 to 65 at 7% grows to about $525,000. The same $200/month from age 35 to 65 grows to about $245,000. You contributed $24,000 less in the first scenario but ended with more than twice as much. Time is the biggest variable."}},
+{"@type":"Question","name":"What return rate should I use?","acceptedAnswer":{"@type":"Answer","text":"For long-horizon stock-market investing, 7% is a common assumption (after inflation, total US stock market historical average). For bonds, 3-4%. For cash savings accounts, 0-2%. For retirement projections, conservative is better — use 5-6% to leave a margin."}},
+{"@type":"Question","name":"Is this calculator pre-tax or after-tax?","acceptedAnswer":{"@type":"Answer","text":"Pre-tax. For tax-advantaged accounts (401k, IRA, Roth), use the input as-is. For taxable accounts, multiply the result by roughly 0.85 to estimate after-tax value (varies by your bracket)."}},
+{"@type":"Question","name":"Why is the result so different from my bank's compound interest tool?","acceptedAnswer":{"@type":"Answer","text":"Most likely a difference in compounding frequency. Banks often compound daily; this tool compounds monthly. The difference for a 7% annual rate is small (~0.1% per year), but adds up over decades."}}
+]}
+</script>
 </head>
 
 <body>
@@ -159,7 +167,7 @@
 
 <script>
   const $ = id => document.getElementById(id);
-  const fmt0 = n => n.toLocaleString('en-US', {maximumFractionDigits: 0});
+  const fmt0 = n => n.toLocaleString(undefined, {maximumFractionDigits: 0});
   function setOut(id, label, big, breakdown='') {
     $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
   }

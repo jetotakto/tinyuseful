@@ -30,6 +30,14 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TinyUseful","item":"https://www.tinyuseful.app/"},{"@type":"ListItem","position":2,"name":"Percentage Calculator","item":"https://www.tinyuseful.app/percentage-calculator/"}]}
 </script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I calculate 15% of a number in my head?","acceptedAnswer":{"@type":"Answer","text":"Take 10% (move the decimal one place left), then add half of that. For 15% of 80: 10% is 8, half of 8 is 4, so 15% is 8 + 4 = 12."}},
+{"@type":"Question","name":"What's the difference between percentage and percentage points?","acceptedAnswer":{"@type":"Answer","text":"If a rate goes from 5% to 7%, that's a change of 2 percentage points, but a 40% increase (because 2 ÷ 5 = 0.4). News headlines often confuse these."}},
+{"@type":"Question","name":"Why does X is what percent of Y sometimes give over 100%?","acceptedAnswer":{"@type":"Answer","text":"Because X is bigger than Y. If you scored 110 on a test out of 100, you got 110%. Percentages can exceed 100% whenever the part is larger than the whole."}},
+{"@type":"Question","name":"How do I reverse a percentage to find the original?","acceptedAnswer":{"@type":"Answer","text":"If a final price after 25% off is $60, the original is $60 ÷ (1 − 0.25) = $80. For tax, $108 after 8% tax means original $108 ÷ 1.08 = $100."}}
+]}
+</script>
 </head>
 
 <body>
@@ -85,6 +93,15 @@
   </div>
 
   <section class="explainer">
+    <h3>What this tool answers</h3>
+    <p>
+      This calculator handles the three classic percentage questions:
+      <strong>what is X percent of Y</strong>, <strong>X is what percent of Y</strong>
+      (also phrased as &ldquo;what percentage of Y is X&rdquo;), and
+      <strong>percentage change from one number to another</strong>. Pick the matching mode
+      above and the answer appears in your browser — no account, no tracking.
+    </p>
+
     <h3>How to calculate a percentage manually</h3>
     <ol>
       <li>Convert the percentage to a decimal &mdash; move the decimal point two places left (15% → 0.15).</li>
@@ -113,6 +130,9 @@
 
     <h3>Common uses</h3>
     <ul>
+      <li>What is X percent of Y? (e.g. what is 15% of 80?)</li>
+      <li>X is what percent of Y? (e.g. 30 is what percent of 120?)</li>
+      <li>What percentage of X is Y? (the reverse phrasing of the above)</li>
       <li>Calculating a tip, discount, or sales tax on a receipt</li>
       <li>Tracking weight, fitness, or savings change over time</li>
       <li>Understanding interest rates, APR, and investment returns</li>
@@ -164,7 +184,7 @@
 
 <script>
   const $ = id => document.getElementById(id);
-  const fmt = (n, d=2) => n.toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
+  const fmt = (n, d=2) => n.toLocaleString(undefined, {minimumFractionDigits: d, maximumFractionDigits: d});
   function setOut(id, label, big, breakdown='') {
     $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
   }

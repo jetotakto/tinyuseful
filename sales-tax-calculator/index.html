@@ -30,6 +30,14 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TinyUseful","item":"https://www.tinyuseful.app/"},{"@type":"ListItem","position":2,"name":"Sales Tax Calculator","item":"https://www.tinyuseful.app/sales-tax-calculator/"}]}
 </script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What's the sales tax rate in my state?","acceptedAnswer":{"@type":"Answer","text":"This calculator does not look up rates by location — you enter the rate yourself. Combined state and local rates in the US range from 0% (NH, OR, MT, AK, DE) to roughly 9.55% (TN). City and county add-ons vary; the receipt or your state tax site has the exact number."}},
+{"@type":"Question","name":"Why do I get a slightly different number than the receipt?","acceptedAnswer":{"@type":"Answer","text":"Most often it's rounding. Stores round each line item, so the receipt total can differ by a cent or two from a calculation done on the subtotal. Some jurisdictions also tax certain categories (food, clothing) at different rates."}},
+{"@type":"Question","name":"How do I remove tax from a total that includes it?","acceptedAnswer":{"@type":"Answer","text":"Switch the calculator to Remove tax mode. If you paid $108 at an 8% rate, the original was $108 ÷ 1.08 = $100, and the tax was $8."}},
+{"@type":"Question","name":"Is sales tax the same as VAT?","acceptedAnswer":{"@type":"Answer","text":"Mathematically yes — both are a percentage added to a price. The legal and accounting differences (who collects, who can reclaim, when it's due) are different, but for figuring out a final price the formula is identical."}}
+]}
+</script>
 </head>
 
 <body>
@@ -169,7 +177,7 @@
 
 <script>
   const $ = id => document.getElementById(id);
-  const fmt = (n, d=2) => n.toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
+  const fmt = (n, d=2) => n.toLocaleString(undefined, {minimumFractionDigits: d, maximumFractionDigits: d});
   function setOut(id, label, big, breakdown='') {
     $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
   }

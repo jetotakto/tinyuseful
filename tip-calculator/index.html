@@ -30,6 +30,14 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TinyUseful","item":"https://www.tinyuseful.app/"},{"@type":"ListItem","position":2,"name":"Tip Calculator","item":"https://www.tinyuseful.app/tip-calculator/"}]}
 </script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I calculate a 15% or 18% tip in my head?","acceptedAnswer":{"@type":"Answer","text":"For 15%: take 10% (move the decimal one place left), then add half of that. Bill of $40 → 10% is $4 → half is $2 → 15% is $6. For 18%: same trick, then add a bit more. For 20%: take 10% and double it."}},
+{"@type":"Question","name":"Should I tip on the pre-tax or post-tax total?","acceptedAnswer":{"@type":"Answer","text":"Pre-tax is the traditional standard in the US — you're tipping for service, not for tax. But many people tip on the post-tax total because it's what's printed on the receipt and it's easier. Both are acceptable."}},
+{"@type":"Question","name":"Is 20% standard in 2026?","acceptedAnswer":{"@type":"Answer","text":"In US sit-down restaurants, yes. Tip creep has pushed the expected range from 15-18% (2010s) to 18-22% (2020s). Counter-service and takeout are more flexible — 10% or a few dollars is common, sometimes nothing."}},
+{"@type":"Question","name":"How do I split a bill unevenly?","acceptedAnswer":{"@type":"Answer","text":"This calculator does an even split. For uneven splits, ask the server to print separate checks (most US restaurants will), or calculate each person's share manually and add a flat tip percentage to each."}}
+]}
+</script>
 </head>
 
 <body>
@@ -160,7 +168,7 @@
 
 <script>
   const $ = id => document.getElementById(id);
-  const fmt = (n, d=2) => n.toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
+  const fmt = (n, d=2) => n.toLocaleString(undefined, {minimumFractionDigits: d, maximumFractionDigits: d});
   function setOut(id, label, big, breakdown='') {
     $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
   }

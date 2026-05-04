@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Discount Calculator — Final Price and Savings | TinyUseful</title>
-<meta name="description" content="Calculate the final price after a percentage discount and see how much you save. Works for sale items, coupons, and promo codes. No account, no saved input." />
+<meta name="description" content="Price off calculator — calculate the final price after a percentage discount and see how much you save. Works for sale items, coupons, and promo codes. No account, no saved input." />
 <link rel="canonical" href="https://www.tinyuseful.app/discount-calculator/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta name="robots" content="index, follow">
@@ -29,6 +29,14 @@
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TinyUseful","item":"https://www.tinyuseful.app/"},{"@type":"ListItem","position":2,"name":"Discount Calculator","item":"https://www.tinyuseful.app/discount-calculator/"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"If something is 50% off and I have a 20% coupon, what's the final discount?","acceptedAnswer":{"@type":"Answer","text":"60%, not 70%. The 20% comes off the already-discounted price. $100 → 50% off → $50 → 20% off → $40. Final price is 40% of original = 60% discount total."}},
+{"@type":"Question","name":"How do I find the original price from a sale price?","acceptedAnswer":{"@type":"Answer","text":"Divide the sale price by (1 − discount/100). $60 sale price after 25% off: $60 ÷ 0.75 = $80 original. The reverse-discount math is the same as removing sales tax."}},
+{"@type":"Question","name":"Is 30% off really better than buy-one-get-one?","acceptedAnswer":{"@type":"Answer","text":"Depends on what you'd buy anyway. BOGO is effectively 50% off if you wanted both items. If you only wanted one, the discount is 0%. 30% off applies to one item, no quantity catch."}},
+{"@type":"Question","name":"How do I compare two stores' discounts?","acceptedAnswer":{"@type":"Answer","text":"Run each price through the calculator and compare final prices, not percentages. A store with a higher original price and bigger discount can still be more expensive than a competitor with a smaller discount on a lower price."}}
+]}
 </script>
 </head>
 
@@ -107,6 +115,7 @@
 
     <h3>Common uses</h3>
     <ul>
+      <li>X percent off calculator — quick price-off check before checkout</li>
       <li>Black Friday and seasonal sale comparisons</li>
       <li>Stacking a coupon on top of a sale price</li>
       <li>Computing membership/loyalty discount on a final cart</li>
@@ -158,7 +167,7 @@
 
 <script>
   const $ = id => document.getElementById(id);
-  const fmt = (n, d=2) => n.toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
+  const fmt = (n, d=2) => n.toLocaleString(undefined, {minimumFractionDigits: d, maximumFractionDigits: d});
   function setOut(id, label, big, breakdown='') {
     $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
   }

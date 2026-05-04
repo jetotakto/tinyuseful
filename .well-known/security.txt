@@ -1,0 +1,20 @@
+# TinyUseful — Security Policy
+# RFC 9116 (https://www.rfc-editor.org/rfc/rfc9116)
+
+Contact: mailto:contact@tinyuseful.app
+Expires: 2027-05-04T00:00:00.000Z
+Preferred-Languages: en, cs
+Canonical: https://www.tinyuseful.app/.well-known/security.txt
+
+# Notes
+# TinyUseful is a static utility website with no backend, no user accounts,
+# and no stored personal data. Calculator inputs are processed locally in
+# the browser and never sent to TinyUseful. The site is hosted on
+# Cloudflare Pages and served only over HTTPS.
+#
+# If you find a security issue (e.g. XSS, broken auth on a third-party
+# script, dependency vulnerability), please email the contact address
+# above with a clear description and reproduction steps. We aim to
+# respond within 7 days.
+#
+# Source code is public at https://github.com/jetotakto/tinyuseful

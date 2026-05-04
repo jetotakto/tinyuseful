@@ -30,6 +30,14 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TinyUseful","item":"https://www.tinyuseful.app/"},{"@type":"ListItem","position":2,"name":"Loan Calculator","item":"https://www.tinyuseful.app/loan-calculator/"}]}
 </script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What's the difference between APR and interest rate on a loan?","acceptedAnswer":{"@type":"Answer","text":"Interest rate is the cost of borrowing the principal. APR also includes lender fees expressed as a yearly cost, so APR is always equal to or higher than the interest rate. Always compare loans on APR, not just rate."}},
+{"@type":"Question","name":"Should I take a longer loan to lower the monthly payment?","acceptedAnswer":{"@type":"Answer","text":"The monthly payment drops, but total interest paid usually rises a lot. A 60-month vs 36-month auto loan can mean thousands more in interest. Use the calculator to see the trade-off explicitly."}},
+{"@type":"Question","name":"Does this calculator account for extra payments?","acceptedAnswer":{"@type":"Answer","text":"No, this is a basic amortization calculator with one fixed payment. Extra principal payments shorten the term and reduce total interest, but the math is iterative — try different P or n values to see the effect."}},
+{"@type":"Question","name":"What about variable-rate loans?","acceptedAnswer":{"@type":"Answer","text":"This tool assumes a fixed rate for the full term. For variable-rate loans (some private student loans, some personal loans), the rate can change, so the monthly payment shown is only correct for the period the rate stays fixed."}}
+]}
+</script>
 </head>
 
 <body>
@@ -157,7 +165,7 @@
 
 <script>
   const $ = id => document.getElementById(id);
-  const fmt0 = n => n.toLocaleString('en-US', {maximumFractionDigits: 0});
+  const fmt0 = n => n.toLocaleString(undefined, {maximumFractionDigits: 0});
   function setOut(id, label, big, breakdown='') {
     $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
   }

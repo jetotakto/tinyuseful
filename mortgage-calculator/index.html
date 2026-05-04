@@ -201,7 +201,7 @@
 
 <script>
   const $ = id => document.getElementById(id);
-  const fmt0 = n => n.toLocaleString('en-US', {maximumFractionDigits: 0});
+  const fmt0 = n => n.toLocaleString(undefined, {maximumFractionDigits: 0});
   function setOut(id, label, big, breakdown='') {
     $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
   }

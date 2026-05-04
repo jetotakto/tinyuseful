@@ -30,6 +30,14 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TinyUseful","item":"https://www.tinyuseful.app/"},{"@type":"ListItem","position":2,"name":"Rent Affordability Calculator","item":"https://www.tinyuseful.app/rent-affordability-calculator/"}]}
 </script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Should I use gross or net income?","acceptedAnswer":{"@type":"Answer","text":"The 30% rule traditionally uses gross (pre-tax). This calculator works with whichever you enter — but using net income gives a more realistic ceiling because that's what actually hits your account."}},
+{"@type":"Question","name":"What about utilities, internet, and renters insurance?","acceptedAnswer":{"@type":"Answer","text":"Not included. Add roughly $150-300 per month for utilities + internet in most US cities, plus $15-25 for renters insurance. Subtract that from your max rent figure."}},
+{"@type":"Question","name":"My city is too expensive for the 30% rule. Now what?","acceptedAnswer":{"@type":"Answer","text":"In NYC, SF, LA, London, etc. median renters often spend 40-50% of gross income. The math doesn't change — only your tolerance for trade-offs (less savings, more roommates, smaller place, longer commute). The calculator gives you a number; the decision is yours."}},
+{"@type":"Question","name":"Why does the calculator subtract half of debt, not all of it?","acceptedAnswer":{"@type":"Answer","text":"Because debt payments and rent overlap on cash flow but not perfectly. Subtracting half is a rough approximation lenders use. For a more accurate view, track your full monthly budget separately."}}
+]}
+</script>
 </head>
 
 <body>
@@ -159,7 +167,7 @@
 
 <script>
   const $ = id => document.getElementById(id);
-  const fmt0 = n => n.toLocaleString('en-US', {maximumFractionDigits: 0});
+  const fmt0 = n => n.toLocaleString(undefined, {maximumFractionDigits: 0});
   function setOut(id, label, big, breakdown='') {
     $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
   }

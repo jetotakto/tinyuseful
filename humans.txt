@@ -1,12 +1,12 @@
 /* TEAM */
 
-  Builder: Lukas Bures
-  Site: https://room411.cz
+  Builder: Lukáš, an architect from Prague
   Location: Prague, Czech Republic
+  Contact: contact@tinyuseful.app
 
 /* SITE */
 
-  Last update: 2026-05-02
+  Last update: 2026-05-04
   Standards: HTML5, CSS3, ES2020 vanilla JavaScript
   Components: none. No framework. No build step.
   Software: a text editor and a browser.
@@ -28,8 +28,9 @@
   (page views, no personal identification, no cross-site
   follow). Read the full details in /privacy.html.
 
-  Fonts (Newsreader, JetBrains Mono) are self-hosted in
-  /fonts/. No Google Fonts CDN, no third-party requests.
+  Fonts (Montserrat, Inter, JetBrains Mono) are
+  self-hosted in /fonts/. No Google Fonts CDN, no
+  third-party requests.
 
   One advertisement, declared. That's the business.
 

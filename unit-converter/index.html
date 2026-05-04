@@ -30,6 +30,14 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TinyUseful","item":"https://www.tinyuseful.app/"},{"@type":"ListItem","position":2,"name":"Unit Converter","item":"https://www.tinyuseful.app/unit-converter/"}]}
 </script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I convert kg to pounds in my head?","acceptedAnswer":{"@type":"Answer","text":"Multiply by 2.2 (close enough for casual use). 70 kg ≈ 154 lb. For exact, use 2.2046. Going the other way, divide pounds by 2.2 to get kg."}},
+{"@type":"Question","name":"How do I convert Celsius to Fahrenheit quickly?","acceptedAnswer":{"@type":"Answer","text":"Double it and add 30 (rough). 20 °C → 40 + 30 = 70 °F (actual: 68 °F). For exact, use °F = °C × 9/5 + 32. The shortcut is wrong by 1-2 degrees but good enough for weather and cooking."}},
+{"@type":"Question","name":"Why isn't volume (liters, gallons) included?","acceptedAnswer":{"@type":"Answer","text":"Volume conversion is more complicated because there are two gallon definitions (US 3.785 L vs UK Imperial 4.546 L). To keep this tool simple and not give wrong results, volume isn't included. Use a dedicated volume converter for that."}},
+{"@type":"Question","name":"Are these conversions exact or rounded?","acceptedAnswer":{"@type":"Answer","text":"Length and weight use exact factors (1 inch = 0.0254 m, 1 lb = 0.45359237 kg). Temperature uses exact formulas. The display rounds to 2-4 decimal places depending on the result magnitude."}}
+]}
+</script>
 </head>
 
 <body>
@@ -169,7 +177,7 @@
 
 <script>
   const $ = id => document.getElementById(id);
-  const fmt = (n, d=2) => n.toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
+  const fmt = (n, d=2) => n.toLocaleString(undefined, {minimumFractionDigits: d, maximumFractionDigits: d});
   function setOut(id, label, big, breakdown='') {
     $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
   }

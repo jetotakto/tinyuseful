@@ -30,6 +30,14 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TinyUseful","item":"https://www.tinyuseful.app/"},{"@type":"ListItem","position":2,"name":"Date Calculator","item":"https://www.tinyuseful.app/date-calculator/"}]}
 </script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Does this count weekends and holidays?","acceptedAnswer":{"@type":"Answer","text":"Yes — it counts all calendar days. For business days only (Mon-Fri, excluding holidays), this tool is not the right one. The math is more complex and depends on country."}},
+{"@type":"Question","name":"Is the start day included or excluded?","acceptedAnswer":{"@type":"Answer","text":"Excluded. From Monday to Tuesday is 1 day. If you need inclusive counting (sometimes used for project days), add 1 to the result."}},
+{"@type":"Question","name":"Why is approximately X years only an estimate?","acceptedAnswer":{"@type":"Answer","text":"Because a year is not exactly 365 days — it averages 365.25 (leap years). The years line uses this average. For exact age in years, months, and days, use a dedicated date-of-birth calculator."}},
+{"@type":"Question","name":"What time zone does today use?","acceptedAnswer":{"@type":"Answer","text":"Your browser's local time zone. If you're traveling and your device is set to local time, today follows along. The calculation itself doesn't care about time zones — only the calendar date."}}
+]}
+</script>
 </head>
 
 <body>
@@ -169,8 +177,8 @@
 
 <script>
   const $ = id => document.getElementById(id);
-  const fmt = (n, d=2) => n.toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
-  const fmt0 = n => n.toLocaleString('en-US', {maximumFractionDigits: 0});
+  const fmt = (n, d=2) => n.toLocaleString(undefined, {minimumFractionDigits: d, maximumFractionDigits: d});
+  const fmt0 = n => n.toLocaleString(undefined, {maximumFractionDigits: 0});
   function setOut(id, label, big, breakdown='') {
     $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
   }

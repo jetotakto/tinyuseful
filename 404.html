@@ -65,6 +65,15 @@
     background: var(--ink);
     color: var(--paper);
   }
+  .notfound .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-top: 32px;
+    margin-bottom: 14px;
+    text-align: center;
+  }
 </style>
 </head>
 
@@ -85,13 +94,27 @@
     <p class="lede">
       The URL you followed doesn't exist on TinyUseful.
       Maybe a typo, maybe a link that aged badly.
-      Either way: we have eleven small calculators waiting on the index.
+      Either way: pick one of the eleven small calculators below.
     </p>
     <div class="actions">
       <a href="/">Back to index</a>
-      <a href="/mortgage-calculator/">Mortgage</a>
+    </div>
+    <p class="section-label">Money</p>
+    <div class="actions">
       <a href="/percentage-calculator/">Percentage</a>
+      <a href="/sales-tax-calculator/">Sales Tax</a>
+      <a href="/mortgage-calculator/">Mortgage</a>
+      <a href="/loan-calculator/">Loan</a>
+      <a href="/compound-interest-calculator/">Compound Interest</a>
+      <a href="/rent-affordability-calculator/">Rent Affordability</a>
+      <a href="/tip-calculator/">Tip</a>
+      <a href="/discount-calculator/">Discount</a>
+    </div>
+    <p class="section-label">Conversions</p>
+    <div class="actions">
       <a href="/unit-converter/">Unit Converter</a>
+      <a href="/date-calculator/">Date Calculator</a>
+      <a href="/time-zone-converter/">Time Zone</a>
     </div>
   </section>
 
