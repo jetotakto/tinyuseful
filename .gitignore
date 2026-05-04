@@ -15,6 +15,9 @@ CLAUDE.md
 _handoff_*.md
 TINYUSEFUL_REVIEW_BRIEFING.md
 
+# Preview/mockup files — local-only experiments, never deploy to production
+_preview-*.html
+
 # Review ZIP archivy a kontrolni slozky — nikdy do live webu
 tinyuseful-review-*.zip
 kontrola GPT a Geminy/
