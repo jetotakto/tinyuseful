@@ -27,6 +27,8 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="/style.css">
+<script src="/js/helpers.js" defer></script>
+<script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 
 <script type="application/ld+json">
@@ -206,7 +208,7 @@
     $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
   }
   function mtgCalc() {
-    const P=+$('mtg-loan').value, r=+$('mtg-rate').value/100/12, n=+$('mtg-years').value*12;
+    const P=parseLocaleNumber($('mtg-loan').value), r=parseLocaleNumber($('mtg-rate').value)/100/12, n=parseLocaleNumber($('mtg-years').value)*12;
     const M = r===0 ? P/n : P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
     setOut('mtg-out','Monthly payment','$'+fmt0(M),`Total interest $${fmt0(M*n-P)} · Total paid $${fmt0(M*n)}`);
     document.getElementById('mtg-next').hidden = false;

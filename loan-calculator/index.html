@@ -23,6 +23,8 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="/style.css">
+<script src="/js/helpers.js" defer></script>
+<script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Loan Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any (browser-based)","description":"Calculate monthly payment, total interest, and total paid for a fixed-rate loan.","url":"https://www.tinyuseful.app/loan-calculator/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"TinyUseful","url":"https://www.tinyuseful.app/"}}
@@ -170,7 +172,7 @@
     $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
   }
   function loanCalc() {
-    const P=+$('loan-amt').value, r=+$('loan-apr').value/100/12, n=+$('loan-months').value;
+    const P=parseLocaleNumber($('loan-amt').value), r=parseLocaleNumber($('loan-apr').value)/100/12, n=parseLocaleNumber($('loan-months').value);
     const M = r===0 ? P/n : P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
     setOut('loan-out','Monthly','$'+fmt0(M),`Total interest $${fmt0(M*n-P)} · Total paid $${fmt0(M*n)}`);
     document.getElementById('loan-next').hidden = false;

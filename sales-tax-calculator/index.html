@@ -23,6 +23,8 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="/style.css">
+<script src="/js/helpers.js" defer></script>
+<script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Sales Tax Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any (browser-based)","description":"Add or remove sales tax from a price.","url":"https://www.tinyuseful.app/sales-tax-calculator/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"TinyUseful","url":"https://www.tinyuseful.app/"}}
@@ -182,7 +184,7 @@
     $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
   }
   function vatCalc() {
-    const price=+$('vat-price').value, rate=+$('vat-rate').value, mode=$('vat-mode').value;
+    const price=parseLocaleNumber($('vat-price').value), rate=parseLocaleNumber($('vat-rate').value), mode=$('vat-mode').value;
     if (mode === 'add') { const tax=price*rate/100, gross=price+tax;
       setOut('vat-out','After tax','$'+fmt(gross),`Tax amount $${fmt(tax)} · Net $${fmt(price)}`); }
     else { const net=price/(1+rate/100), tax=price-net;

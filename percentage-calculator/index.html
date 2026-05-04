@@ -23,6 +23,8 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="/style.css">
+<script src="/js/helpers.js" defer></script>
+<script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Percentage Calculator","applicationCategory":"UtilityApplication","operatingSystem":"Any (browser-based)","description":"Calculate percent of a number, percent change, and X is what percent of Y.","url":"https://www.tinyuseful.app/percentage-calculator/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"TinyUseful","url":"https://www.tinyuseful.app/"}}
@@ -189,7 +191,7 @@
     $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
   }
   function pctCalc() {
-    const x = +$('pct-x').value, y = +$('pct-y').value, mode = $('pct-mode').value;
+    const x = parseLocaleNumber($('pct-x').value), y = parseLocaleNumber($('pct-y').value), mode = $('pct-mode').value;
     let label, big, br='';
     if (mode === 'of')      { const r = x/100*y; label = `${x}% of ${y}`; big = fmt(r); }
     else if (mode==='isof') { const r = y===0?0:(x/y)*100; label = `${x} is what % of ${y}`; big = fmt(r,2)+' %'; }

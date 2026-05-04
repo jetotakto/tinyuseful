@@ -11,6 +11,10 @@ og-template.html
 # Claude instructions — local-only, never push to public repo
 CLAUDE.md
 
+# Internal handoff documents between Cowork sessions — never push
+_handoff_*.md
+TINYUSEFUL_REVIEW_BRIEFING.md
+
 # Review ZIP archivy a kontrolni slozky — nikdy do live webu
 tinyuseful-review-*.zip
 kontrola GPT a Geminy/

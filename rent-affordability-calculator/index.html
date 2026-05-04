@@ -23,6 +23,8 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="/style.css">
+<script src="/js/helpers.js" defer></script>
+<script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Rent Affordability Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any (browser-based)","description":"Calculate maximum affordable rent based on income and monthly debts.","url":"https://www.tinyuseful.app/rent-affordability-calculator/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"TinyUseful","url":"https://www.tinyuseful.app/"}}
@@ -172,7 +174,7 @@
     $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
   }
   function rentCalc() {
-    const inc=+$('rent-inc').value, debt=+$('rent-debt').value, rule=+$('rent-rule').value;
+    const inc=parseLocaleNumber($('rent-inc').value), debt=parseLocaleNumber($('rent-debt').value), rule=parseLocaleNumber($('rent-rule').value);
     const adjusted = inc*rule/100 - debt*0.5;
     setOut('rent-out','Suggested max rent','$'+fmt0(Math.max(0,adjusted)),
       `Conservative $${fmt0(inc*0.20)} · Stretch $${fmt0(inc*(rule+5)/100)} · Based on the ${rule}% rule`);

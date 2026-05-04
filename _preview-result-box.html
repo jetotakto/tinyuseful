@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<!--
+  ════════════════════════════════════════════════════════════════════════
+  PREVIEW — Result Box variations (Phase 51 mockup)
+  ════════════════════════════════════════════════════════════════════════
+
+  3 varianty result boxu side-by-side. Klikni Calculate v každé sekci
+  abys viděl reakci. Light/Dark mode toggle vpravo nahoře.
+
+  Žádný production deploy — tento soubor je gitignored přes _preview-*.html
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>PREVIEW — Result Box variants · TinyUseful</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+
+<style>
+  /* PREVIEW BANNER */
+  .preview-banner {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--red); color: var(--paper);
+    padding: 6px 14px;
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    text-align: center; z-index: 9999;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .preview-banner button {
+    background: transparent; color: var(--paper);
+    border: 1px solid var(--paper);
+    padding: 3px 10px;
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  body { padding-top: 36px !important; }
+
+  /* GRID — 3 sloupce side-by-side na desktop, 1 sloupec na mobile */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 18px;
+    margin-bottom: 60px;
+  }
+  @media (max-width: 900px) {
+    .compare-grid { grid-template-columns: 1fr; }
+  }
+
+  /* VARIANT WRAPPER */
+  .variant {
+    border: 1px dashed var(--rule-soft);
+    padding: 24px 18px;
+  }
+  .variant-label {
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+  }
+  .variant-title {
+    font-family: var(--font-brand);
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 4px;
+    color: var(--ink);
+  }
+  .variant-note {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+    margin-bottom: 18px;
+  }
+
+  /* SDÍLENÝ MINI-FORM */
+  .mini-form {
+    display: flex; flex-direction: column; gap: 10px;
+    margin-bottom: 14px;
+  }
+  .mini-form label {
+    display: flex; flex-direction: column; gap: 3px;
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .mini-form input {
+    border: 0; border-bottom: 1.5px solid var(--ink);
+    background: transparent;
+    padding: 6px 0;
+    font-family: var(--font-ui);
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--ink);
+    width: 100%;
+    border-radius: 0;
+    -webkit-appearance: none; appearance: none;
+    font-variant-numeric: tabular-nums;
+  }
+  .mini-form button {
+    background: var(--ink); color: var(--paper);
+    border: 0;
+    padding: 12px 18px;
+    margin-top: 6px;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .mini-form button:hover { background: var(--red); }
+
+  /* ─────────────────────────────────────────────────────────────────
+     VARIANTA A — Můj hairline frame (border around, no fill)
+     ───────────────────────────────────────────────────────────────── */
+  .out-variant-a {
+    margin-top: 14px;
+    padding: 22px 20px 24px;
+    border: 1px solid var(--rule-soft);
+    border-top: 3px solid var(--ink);
+    position: relative;
+  }
+  .out-variant-a .label {
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .out-variant-a .big {
+    display: block;
+    font-family: var(--font-brand);
+    font-weight: 500;
+    font-size: clamp(40px, 7vw, 64px);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .out-variant-a .breakdown {
+    display: block;
+    font-family: var(--font-ui);
+    font-size: 16px;
+    color: var(--ink);
+    margin-top: 12px;
+    line-height: 1.5;
+    font-variant-numeric: tabular-nums;
+  }
+  .out-variant-a .copy-btn {
+    position: absolute;
+    bottom: 14px;
+    right: 18px;
+    background: transparent;
+    border: 1px solid var(--rule-soft);
+    color: var(--ink-2);
+    padding: 4px 10px;
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .out-variant-a .copy-btn:hover { border-color: var(--ink); color: var(--ink); }
+
+  /* ─────────────────────────────────────────────────────────────────
+     VARIANTA B — Gemini fill (light grey background + red left border)
+     ───────────────────────────────────────────────────────────────── */
+  .out-variant-b {
+    margin-top: 14px;
+    padding: 22px 20px 24px;
+    background: var(--rule-soft);
+    border-left: 3px solid var(--red);
+    position: relative;
+  }
+  [data-theme="dark"] .out-variant-b {
+    background: rgba(232, 232, 232, 0.06); /* tmavé téma — jemné highlight */
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .out-variant-b {
+      background: rgba(232, 232, 232, 0.06);
+    }
+  }
+  .out-variant-b .label {
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .out-variant-b .big {
+    display: block;
+    font-family: var(--font-brand);
+    font-weight: 500;
+    font-size: clamp(40px, 7vw, 64px);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .out-variant-b .breakdown {
+    display: block;
+    font-family: var(--font-ui);
+    font-size: 16px;
+    color: var(--ink);
+    margin-top: 12px;
+    line-height: 1.5;
+    font-variant-numeric: tabular-nums;
+  }
+  .out-variant-b .copy-btn {
+    position: absolute;
+    bottom: 14px;
+    right: 18px;
+    background: var(--paper);
+    border: 1px solid var(--rule-soft);
+    color: var(--ink-2);
+    padding: 4px 10px;
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .out-variant-b .copy-btn:hover { border-color: var(--ink); color: var(--ink); }
+
+  /* ─────────────────────────────────────────────────────────────────
+     VARIANTA C — Animation only (keep current, add red flash + bigger)
+     ───────────────────────────────────────────────────────────────── */
+  .out-variant-c {
+    margin-top: 14px;
+    padding: 24px 0 28px;
+    border-top: 3px solid var(--ink);
+    transition: border-top-color 0.4s;
+    position: relative;
+  }
+  .out-variant-c.flash { border-top-color: var(--red); }
+  .out-variant-c .label {
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .out-variant-c .big {
+    display: block;
+    font-family: var(--font-brand);
+    font-weight: 500;
+    font-size: clamp(40px, 7vw, 72px);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .out-variant-c .breakdown {
+    display: block;
+    font-family: var(--font-ui);
+    font-size: 16px;
+    color: var(--ink);
+    margin-top: 14px;
+    line-height: 1.5;
+    font-variant-numeric: tabular-nums;
+  }
+  .out-variant-c .copy-btn {
+    margin-top: 16px;
+    background: transparent;
+    border: 0;
+    color: var(--muted);
+    padding: 0;
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    cursor: pointer;
+    border-bottom: 1px dotted var(--muted);
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .out-variant-c .copy-btn:hover {
+    color: var(--red);
+    border-bottom-color: var(--red);
+  }
+
+  /* SECTION HEADER */
+  h1.preview-h1 {
+    font-family: var(--font-brand);
+    font-size: clamp(28px, 3.5vw, 38px);
+    font-weight: 500;
+    margin-top: 30px;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .preview-lede {
+    font-size: 16px;
+    color: var(--ink-2);
+    line-height: 1.5;
+    max-width: 60ch;
+    margin-bottom: 30px;
+  }
+  .pros-cons {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--rule-soft);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .pros-cons .pros { color: var(--ink); }
+  .pros-cons .cons { color: var(--muted); margin-top: 4px; }
+  .pros-cons strong { font-weight: 600; }
+</style>
+</head>
+
+<body>
+<div class="preview-banner">
+  <span>PREVIEW — Result Box variants · NEEXPORTUJE SE NA PRODUKCI</span>
+  <button onclick="toggleTheme()">Toggle Theme</button>
+</div>
+
+<div class="page">
+
+  <header class="masthead">
+    <a class="wordmark" href="/">
+      <span class="knife" aria-hidden="true"></span>
+      TinyUseful
+    </a>
+    <span class="issue">Preview · Result Box</span>
+  </header>
+
+  <h1 class="preview-h1">Result box variants</h1>
+  <p class="preview-lede">
+    Same Sales Tax calculation in 3 different result box treatments. Click
+    <strong>Calculate</strong> in each variant and observe the difference. Toggle
+    light/dark mode top-right to see how each behaves.
+  </p>
+
+  <div class="compare-grid">
+
+    <!-- ════════════════════════════════════════════════════
+         VARIANTA A — Hairline frame
+         ════════════════════════════════════════════════════ -->
+    <div class="variant">
+      <div class="variant-label">Variant A</div>
+      <div class="variant-title">Hairline frame</div>
+      <div class="variant-note">
+        Border 1px around + 3px red top. No background fill. Larger result number.
+        Copy button absolute bottom-right.
+      </div>
+
+      <div class="mini-form">
+        <label>Price ($)<input type="number" id="price-a" value="100" step="any"></label>
+        <label>Rate %<input type="number" id="rate-a" value="8.875" step="any"></label>
+        <button type="button" onclick="calcA()">Calculate</button>
+      </div>
+
+      <div class="out-variant-a" id="out-a">
+        <span class="label">After tax</span>
+        <span class="big">$108.88</span>
+        <span class="breakdown">Tax amount $8.88 · Net $100.00</span>
+        <button class="copy-btn" onclick="copyResult('out-a', this)">Copy ↗</button>
+      </div>
+
+      <div class="pros-cons">
+        <div class="pros"><strong>Pro:</strong> Jasná zóna, zachová newspaper feel, místo pro Copy</div>
+        <div class="cons"><strong>Proti:</strong> Border-heavy (4 hrany), mírně víc vizuálu</div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════
+         VARIANTA B — Gemini fill
+         ════════════════════════════════════════════════════ -->
+    <div class="variant">
+      <div class="variant-label">Variant B</div>
+      <div class="variant-title">Filled box (Gemini)</div>
+      <div class="variant-note">
+        Světle šedé pozadí (--rule-soft) + 3px red left border. Background fill
+        způsobuje SaaS feel. Copy button absolute bottom-right.
+      </div>
+
+      <div class="mini-form">
+        <label>Price ($)<input type="number" id="price-b" value="100" step="any"></label>
+        <label>Rate %<input type="number" id="rate-b" value="8.875" step="any"></label>
+        <button type="button" onclick="calcB()">Calculate</button>
+      </div>
+
+      <div class="out-variant-b" id="out-b">
+        <span class="label">After tax</span>
+        <span class="big">$108.88</span>
+        <span class="breakdown">Tax amount $8.88 · Net $100.00</span>
+        <button class="copy-btn" onclick="copyResult('out-b', this)">Copy ↗</button>
+      </div>
+
+      <div class="pros-cons">
+        <div class="pros"><strong>Pro:</strong> Nepřehlédnutelné, "tady je odpověď" zóna</div>
+        <div class="cons"><strong>Proti:</strong> Konflikt s newspaper estetikou (filled blocks = SaaS), složitější dark mode</div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════
+         VARIANTA C — Animation + larger number
+         ════════════════════════════════════════════════════ -->
+    <div class="variant">
+      <div class="variant-label">Variant C</div>
+      <div class="variant-title">Existing + animation</div>
+      <div class="variant-note">
+        Současná struktura zachována. Větší číslo (72px max). Red flash animace
+        top borderu po Calculate. Copy button text-only pod result.
+      </div>
+
+      <div class="mini-form">
+        <label>Price ($)<input type="number" id="price-c" value="100" step="any"></label>
+        <label>Rate %<input type="number" id="rate-c" value="8.875" step="any"></label>
+        <button type="button" onclick="calcC()">Calculate</button>
+      </div>
+
+      <div class="out-variant-c" id="out-c">
+        <span class="label">After tax</span>
+        <span class="big">$108.88</span>
+        <span class="breakdown">Tax amount $8.88 · Net $100.00</span>
+        <button class="copy-btn" onclick="copyResult('out-c', this)">Copy result ↗</button>
+      </div>
+
+      <div class="pros-cons">
+        <div class="pros"><strong>Pro:</strong> Min změna kódu, plně newspaper, Copy elegantně integrován</div>
+        <div class="cons"><strong>Proti:</strong> Pasivnější vizuální feedback (flash je krátký)</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bonus — porovnání s aktuální verzí -->
+  <h1 class="preview-h1">Aktuální verze (pro srovnání)</h1>
+  <p class="preview-lede">
+    To co je teď live na produkci. Žádný frame, žádný fill, jen 3px ink top border.
+  </p>
+
+  <div class="variant" style="max-width: 600px;">
+    <div class="variant-label">Current</div>
+    <div class="variant-title">Live production</div>
+    <div class="variant-note">3px ink top border, no frame, no fill, no copy button. Result number clamp(34-56px).</div>
+
+    <div class="mini-form">
+      <label>Price ($)<input type="number" id="price-cur" value="100" step="any"></label>
+      <label>Rate %<input type="number" id="rate-cur" value="8.875" step="any"></label>
+      <button type="button" onclick="calcCur()">Calculate</button>
+    </div>
+
+    <div class="out" id="out-cur" role="status" aria-live="polite">
+      <span class="label">After tax</span>
+      <span class="big">$108.88</span>
+      <span class="breakdown">Tax amount $8.88 · Net $100.00</span>
+    </div>
+  </div>
+
+  <footer class="colophon" style="margin-top: 80px;">
+    <span>Preview only · Not in production</span>
+    <span><a href="/">Back to live site</a></span>
+  </footer>
+
+</div>
+
+<script>
+const fmt = (n, d=2) => n.toLocaleString(undefined, {minimumFractionDigits: d, maximumFractionDigits: d});
+
+function readNumber(id) {
+  const v = document.getElementById(id).value;
+  if (v == null || v === '') return 0;
+  return parseFloat(String(v).trim().replace(',', '.')) || 0;
+}
+
+function calc(priceId, rateId, outId, options = {}) {
+  const price = readNumber(priceId);
+  const rate = readNumber(rateId);
+  const tax = price * rate / 100;
+  const gross = price + tax;
+  const out = document.getElementById(outId);
+  out.querySelector('.big').textContent = '$' + fmt(gross);
+  out.querySelector('.breakdown').textContent = 'Tax amount $' + fmt(tax) + ' · Net $' + fmt(price);
+  if (options.flash) {
+    out.classList.add('flash');
+    setTimeout(() => out.classList.remove('flash'), 600);
+  }
+}
+
+function calcA() { calc('price-a', 'rate-a', 'out-a'); }
+function calcB() { calc('price-b', 'rate-b', 'out-b'); }
+function calcC() { calc('price-c', 'rate-c', 'out-c', { flash: true }); }
+function calcCur() { calc('price-cur', 'rate-cur', 'out-cur'); }
+
+function copyResult(outId, btn) {
+  const out = document.getElementById(outId);
+  const big = out.querySelector('.big').textContent;
+  const breakdown = out.querySelector('.breakdown').textContent;
+  const text = big + '\n' + breakdown;
+  navigator.clipboard.writeText(text).then(() => {
+    const original = btn.textContent;
+    btn.textContent = 'Copied ✓';
+    setTimeout(() => btn.textContent = original, 1500);
+  }).catch(() => {
+    btn.textContent = 'Failed';
+    setTimeout(() => btn.textContent = 'Copy ↗', 1500);
+  });
+}
+
+function toggleTheme() {
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('tinyuseful-theme', next); } catch(e) {}
+}
+</script>
+
+</body>
+</html>

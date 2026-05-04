@@ -23,6 +23,8 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="/style.css">
+<script src="/js/helpers.js" defer></script>
+<script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Compound Interest Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any (browser-based)","description":"Calculate future value of an investment with compound interest and monthly contributions.","url":"https://www.tinyuseful.app/compound-interest-calculator/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"TinyUseful","url":"https://www.tinyuseful.app/"}}
@@ -172,7 +174,7 @@
     $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
   }
   function ciCalc() {
-    const P=+$('ci-start').value, m=+$('ci-monthly').value, r=+$('ci-apr').value/100/12, n=+$('ci-years').value*12;
+    const P=parseLocaleNumber($('ci-start').value), m=parseLocaleNumber($('ci-monthly').value), r=parseLocaleNumber($('ci-apr').value)/100/12, n=parseLocaleNumber($('ci-years').value)*12;
     let bal = P; for (let i=0;i<n;i++){ bal = bal*(1+r) + m; }
     const contrib = P + m*n;
     setOut('ci-out','Future value','$'+fmt0(bal),`Contributed $${fmt0(contrib)} · Interest earned $${fmt0(bal-contrib)}`);

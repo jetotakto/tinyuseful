@@ -23,6 +23,8 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="/style.css">
+<script src="/js/helpers.js" defer></script>
+<script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Unit Converter","applicationCategory":"UtilityApplication","operatingSystem":"Any (browser-based)","description":"Convert length, weight, and temperature between metric and imperial units.","url":"https://www.tinyuseful.app/unit-converter/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"TinyUseful","url":"https://www.tinyuseful.app/"}}
@@ -202,7 +204,7 @@
     if (to==='C') return c; if (to==='F') return c*9/5+32; return c+273.15;
   }
   function unitCalc() {
-    const cat=$('unit-cat').value, val=+$('unit-val').value, from=$('unit-from').value, to=$('unit-to').value;
+    const cat=$('unit-cat').value, val=parseLocaleNumber($('unit-val').value), from=$('unit-from').value, to=$('unit-to').value;
     let result;
     if (cat==='temp') result = unitConvertTemp(val, from, to);
     else { const def = UNIT_DEFS[cat]; result = val * def.toBase[from] / def.toBase[to]; }

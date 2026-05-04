@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8" />
+<title>Preview — Result typography FINAL (3 close variants)</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/style.css">
+<style>
+  body {
+    background: #e5e5e0;
+    margin: 0;
+    padding: 28px;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ink);
+  }
+  h1.preview-title{
+    font-family:'Montserrat',sans-serif;font-weight:600;font-size:22px;
+    margin:0 0 4px;letter-spacing:-0.01em;
+  }
+  p.preview-sub{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;
+    text-transform:uppercase;color:#6b6b6b;margin:0 0 28px;
+  }
+
+  /* MAIN GRID — 3 columns side by side */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    max-width: 1500px;
+  }
+  @media (max-width: 1100px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+
+  .col {
+    background: var(--paper);
+    border: 1px solid #bdbdbd;
+  }
+  .col-head {
+    padding: 16px 20px 14px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .col-head .v-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin: 0 0 6px;
+  }
+  .col-head .v-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  .col-head .v-spec {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #6b6b6b;
+    line-height: 1.55;
+    margin: 0;
+    text-transform: none;
+    letter-spacing: 0;
+    white-space: pre-line;
+  }
+  .col-head .v-verdict {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dotted #ccc;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+  .col-head .v-verdict strong { color: var(--ink); }
+
+  .examples {
+    padding: 4px 20px 22px;
+  }
+  .ex {
+    padding: 16px 0 16px;
+    border-top: 1px solid #D8D4C8;
+  }
+  .ex:first-child { border-top: 0; }
+  .ex-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #999;
+    margin: 0 0 6px;
+  }
+
+  /* Production-matching .out spec */
+  .ex .out {
+    margin: 0;
+    padding: 12px 0 8px;
+    border-top: 2px solid var(--ink);
+  }
+  .ex .out .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .ex .out .big {
+    display: block;
+    font-size: clamp(34px, 4.8vw, 50px);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    margin: 0 0 10px;
+  }
+  .ex .out .breakdown {
+    display: block;
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+  .ex .out .breakdown strong { font-weight: 600; }
+
+  /* ─────────── VARIANT A — CURRENT (baseline) ─────────── */
+  .v-A .out .big {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+  }
+  .v-A .out .breakdown {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+  }
+
+  /* ─────────── VARIANT A+ — A WITH TABULAR-NUMS ─────────── */
+  /* Just one CSS line difference vs A — the live calc enabler */
+  .v-Aplus .out .big {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums lining-nums;
+    font-feature-settings: "tnum" 1, "lnum" 1;
+  }
+  .v-Aplus .out .breakdown {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  /* ─────────── VARIANT D-REFINED — recommended ─────────── */
+  /* Montserrat 500 big + tabular-nums; Inter breakdown 15px (NOT mono) */
+  /* Brand 100% preserved, only stability added */
+  .v-Drefined .out .big {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums lining-nums;
+    font-feature-settings: "tnum" 1, "lnum" 1;
+  }
+  .v-Drefined .out .breakdown {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  /* === LIVE TEST SECTION === */
+  .live-test {
+    margin-top: 32px;
+    padding: 24px;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    max-width: 1500px;
+  }
+  .live-test h2 {
+    margin: 0 0 4px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+  }
+  .live-test .test-sub {
+    margin: 0 0 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .live-test input {
+    width: 100%;
+    padding: 12px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    border: 1px solid var(--ink);
+    border-radius: 0;
+    background: white;
+    box-sizing: border-box;
+  }
+  .live-test .preset-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0 18px;
+  }
+  .live-test .preset-row button {
+    background: white;
+    border: 1px solid var(--ink);
+    padding: 6px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    cursor: pointer;
+    color: var(--ink);
+  }
+  .live-test .preset-row button:hover {
+    background: var(--red);
+    color: white;
+    border-color: var(--red);
+  }
+  .live-test .test-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 1100px) {
+    .live-test .test-cols { grid-template-columns: 1fr; }
+  }
+  .live-test .test-out {
+    padding: 12px 16px 14px;
+    border-top: 2px solid var(--ink);
+    background: white;
+  }
+  .live-test .test-out .test-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .live-test .test-out .test-value {
+    font-size: clamp(32px, 4vw, 44px);
+    line-height: 1;
+    letter-spacing: -0.025em;
+  }
+  .test-out.t-A .test-value {
+    font-family: 'Montserrat', sans-serif; font-weight: 500;
+  }
+  .test-out.t-Aplus .test-value {
+    font-family: 'Montserrat', sans-serif; font-weight: 500;
+    font-variant-numeric: tabular-nums lining-nums;
+    font-feature-settings: "tnum" 1, "lnum" 1;
+  }
+  .test-out.t-Drefined .test-value {
+    font-family: 'Montserrat', sans-serif; font-weight: 500;
+    font-variant-numeric: tabular-nums lining-nums;
+    font-feature-settings: "tnum" 1, "lnum" 1;
+  }
+
+  .legend {
+    margin-top: 28px;
+    max-width: 1500px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-2);
+  }
+  .legend h2 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    margin: 24px 0 8px;
+    color: var(--ink);
+  }
+  .legend strong { color: var(--ink); }
+  .legend p { margin: 0 0 12px; }
+  .legend code {
+    background: white;
+    border: 1px solid #ccc;
+    padding: 1px 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+  .legend .css-diff {
+    background: white;
+    border: 1px solid var(--ink);
+    padding: 14px 18px;
+    margin: 8px 0 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.55;
+    white-space: pre;
+    overflow-x: auto;
+  }
+  .legend .css-diff .add { background: #e8f5e8; color: #1a5f1a; display: block; }
+  .legend .css-diff .rem { background: #fbe5e5; color: #8a2222; display: block; text-decoration: line-through; }
+</style>
+</head>
+<body>
+
+<h1 class="preview-title">Phase 49b FINAL preview — 3 těsné varianty</h1>
+<p class="preview-sub">A current · A+tnum · D refined · cíl: vybrat 1 a commit</p>
+
+<div class="grid">
+
+  <!-- VARIANT A — CURRENT -->
+  <div class="col v-A">
+    <div class="col-head">
+      <p class="v-label">Variant A</p>
+      <p class="v-name">Current (live, baseline)</p>
+      <p class="v-spec">.big = Montserrat 500
+.breakdown = Inter 400, 15px
+NO tabular-nums</p>
+      <p class="v-verdict"><strong>Pro:</strong> elegantní, brand-first, big číslice mají charakter. <strong>Proti:</strong> v live calc cifry skáčou (1 je užší než 8), neaktivuje Phase 51 stabilitu.</p>
+    </div>
+    <div class="examples">
+      <div class="ex"><p class="ex-name">Percentage</p>
+        <div class="out"><span class="label">Result</span><span class="big">12.00</span><span class="breakdown">15% of <strong>80</strong></span></div></div>
+      <div class="ex"><p class="ex-name">Sales Tax</p>
+        <div class="out"><span class="label">Total with tax</span><span class="big">$108.88</span><span class="breakdown">$100.00 + 8.875% tax</span></div></div>
+      <div class="ex"><p class="ex-name">Mortgage</p>
+        <div class="out"><span class="label">Monthly payment</span><span class="big">$2,919</span><span class="breakdown">$500,000 · 6.5% · 30 years</span></div></div>
+      <div class="ex"><p class="ex-name">Loan</p>
+        <div class="out"><span class="label">Monthly payment</span><span class="big">$438.71</span><span class="breakdown">$20,000 · 4.5% · 5 years</span></div></div>
+      <div class="ex"><p class="ex-name">Date</p>
+        <div class="out"><span class="label">Difference</span><span class="big">127 days</span><span class="breakdown">Apr 1 — Aug 6, 2026</span></div></div>
+      <div class="ex"><p class="ex-name">Time Zone</p>
+        <div class="out"><span class="label">Local time</span><span class="big">09:30</span><span class="breakdown">17:30 UTC → New York</span></div></div>
+    </div>
+  </div>
+
+  <!-- VARIANT A+ — TABULAR NUMS ONLY -->
+  <div class="col v-Aplus">
+    <div class="col-head">
+      <p class="v-label">Variant A+</p>
+      <p class="v-name">A + tabular-nums (minimal change)</p>
+      <p class="v-spec">.big = Montserrat 500 + tnum/lnum
+.breakdown = Inter 400 + tnum
+1 CSS property added</p>
+      <p class="v-verdict"><strong>Pro:</strong> 100% identické s A pro statický stav, ale cifry zarovnány = stabilní v live calc. Ultra-minimal. <strong>Proti:</strong> Montserrat tabular-nums dělá cifry mírně širší = větší prázdné místo kolem "1".</p>
+    </div>
+    <div class="examples">
+      <div class="ex"><p class="ex-name">Percentage</p>
+        <div class="out"><span class="label">Result</span><span class="big">12.00</span><span class="breakdown">15% of <strong>80</strong></span></div></div>
+      <div class="ex"><p class="ex-name">Sales Tax</p>
+        <div class="out"><span class="label">Total with tax</span><span class="big">$108.88</span><span class="breakdown">$100.00 + 8.875% tax</span></div></div>
+      <div class="ex"><p class="ex-name">Mortgage</p>
+        <div class="out"><span class="label">Monthly payment</span><span class="big">$2,919</span><span class="breakdown">$500,000 · 6.5% · 30 years</span></div></div>
+      <div class="ex"><p class="ex-name">Loan</p>
+        <div class="out"><span class="label">Monthly payment</span><span class="big">$438.71</span><span class="breakdown">$20,000 · 4.5% · 5 years</span></div></div>
+      <div class="ex"><p class="ex-name">Date</p>
+        <div class="out"><span class="label">Difference</span><span class="big">127 days</span><span class="breakdown">Apr 1 — Aug 6, 2026</span></div></div>
+      <div class="ex"><p class="ex-name">Time Zone</p>
+        <div class="out"><span class="label">Local time</span><span class="big">09:30</span><span class="breakdown">17:30 UTC → New York</span></div></div>
+    </div>
+  </div>
+
+  <!-- VARIANT D-REFINED — RECOMMENDED -->
+  <div class="col v-Drefined">
+    <div class="col-head">
+      <p class="v-label">Variant D refined ★ recommended</p>
+      <p class="v-name">A + tnum (= same as A+)</p>
+      <p class="v-spec">.big = Montserrat 500 + tnum/lnum
+.breakdown = Inter 400 + tnum
+identical to A+</p>
+      <p class="v-verdict"><strong>Pro:</strong> Tvoje preference: Montserrat big (čitelný pro starší), Inter breakdown (větší = lépe čitelné). + tnum stabilizuje pro live calc. <strong>Note:</strong> A+ a D refined jsou ve výsledku identické — vznikly ze stejného principu (A enhanced by tabular-nums). Ponechávám obě jako kontrolu.</p>
+    </div>
+    <div class="examples">
+      <div class="ex"><p class="ex-name">Percentage</p>
+        <div class="out"><span class="label">Result</span><span class="big">12.00</span><span class="breakdown">15% of <strong>80</strong></span></div></div>
+      <div class="ex"><p class="ex-name">Sales Tax</p>
+        <div class="out"><span class="label">Total with tax</span><span class="big">$108.88</span><span class="breakdown">$100.00 + 8.875% tax</span></div></div>
+      <div class="ex"><p class="ex-name">Mortgage</p>
+        <div class="out"><span class="label">Monthly payment</span><span class="big">$2,919</span><span class="breakdown">$500,000 · 6.5% · 30 years</span></div></div>
+      <div class="ex"><p class="ex-name">Loan</p>
+        <div class="out"><span class="label">Monthly payment</span><span class="big">$438.71</span><span class="breakdown">$20,000 · 4.5% · 5 years</span></div></div>
+      <div class="ex"><p class="ex-name">Date</p>
+        <div class="out"><span class="label">Difference</span><span class="big">127 days</span><span class="breakdown">Apr 1 — Aug 6, 2026</span></div></div>
+      <div class="ex"><p class="ex-name">Time Zone</p>
+        <div class="out"><span class="label">Local time</span><span class="big">09:30</span><span class="breakdown">17:30 UTC → New York</span></div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- LIVE TEST -->
+<div class="live-test">
+  <h2>Live test stability — toto je důvod proč chceme tabular-nums</h2>
+  <p class="test-sub">Klikej na presety nebo typuj. Sleduj jak se cifry pohnou. Cílem je vidět rozdíl mezi A (cifry skáčou) a A+/D (cifry drží mřížku).</p>
+
+  <input id="liveTest" type="text" inputmode="decimal" placeholder="Typuj číslo" value="100000" />
+
+  <div class="preset-row">
+    <button onclick="setVal('1')">1</button>
+    <button onclick="setVal('11')">11</button>
+    <button onclick="setVal('111')">111</button>
+    <button onclick="setVal('1111')">1111</button>
+    <button onclick="setVal('11111')">11111</button>
+    <button onclick="setVal('888')">888</button>
+    <button onclick="setVal('8888')">8888</button>
+    <button onclick="setVal('108.88')">108.88</button>
+    <button onclick="setVal('123456.78')">123456.78</button>
+    <button onclick="setVal('999999')">999999</button>
+  </div>
+
+  <div class="test-cols">
+    <div class="test-out t-A">
+      <div class="test-label">A — current (no tnum)</div>
+      <div class="test-value" id="ta">100,000</div>
+    </div>
+    <div class="test-out t-Aplus">
+      <div class="test-label">A+ — tnum</div>
+      <div class="test-value" id="taplus">100,000</div>
+    </div>
+    <div class="test-out t-Drefined">
+      <div class="test-label">D refined ★</div>
+      <div class="test-value" id="tdrefined">100,000</div>
+    </div>
+  </div>
+</div>
+
+<div class="legend">
+  <h2>Co se vlastně mění</h2>
+  <p>Po tvém pozorování ("A breakdown čitelnější, D big čitelnější") jsem zúžil debate na 3 varianty které leží blízko sebe a všechny zachovávají Montserrat pro big číslo. <strong>Žádný JetBrains Mono na výsledcích</strong> — brand 100% zachován.</p>
+
+  <h2>CSS diff (Phase 49b skutečný produkční zásah)</h2>
+  <div class="css-diff">.out .big {
+  display: block;
+  font-family: var(--font-brand);
+  font-weight: 500;
+  font-size: clamp(34px, 5.5vw, 56px);
+  line-height: 1;
+<span class="add">+ font-variant-numeric: tabular-nums lining-nums;
++ font-feature-settings: "tnum" 1, "lnum" 1;</span>
+  margin-bottom: 12px;
+}
+
+.out .breakdown {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 19px;
+  font-weight: 400;
+  color: var(--ink);
+<span class="add">+ font-variant-numeric: tabular-nums lining-nums;</span>
+}</div>
+  <p><strong>Celkem 3 řádky CSS.</strong> Žádný HTML zásah, žádný JS. Aplikuje se automaticky na všech 11 tool pages.</p>
+
+  <h2>Co to fakticky řeší</h2>
+  <p><strong>1. Stabilita pro Phase 51 (live calc):</strong> až budeme přidávat live calculation, cifry se nebudou pohybovat při každém úhozu. To je psychologicky důležité — uživatel vidí výsledek měnit hodnotu, ne layout.</p>
+  <p><strong>2. Vyrovnání v breakdown řádcích:</strong> až budou breakdowny obsahovat víc čísel pod sebou (např. Loan: 60 měsíčních splátek), budou pravidelně zarovnané jako tabulka. Profesionálnější dojem.</p>
+  <p><strong>3. Žádné jiné změny:</strong> velikost, váha, rodina písma, padding, border — vše zůstává. Změna je <em>matematická, ne estetická</em>.</p>
+
+  <h2>Co to NEřeší (a proč to OK)</h2>
+  <p><strong>Big číslo na 56px nebude radikálně jiné než dnes.</strong> Tabular-nums u Montserrat dělá cifry trochu širší (kolem "1" je víc bílého místa, "8" se nemění), ale efekt je jemný. Pokud chceš dramatičtější posun (Mono pro big), to je varianta C/B z minulého preview a Tvoje vlastní oči řekly že je to horší pro starší uživatele.</p>
+
+  <h2>Pravděpodobnost úspěchu (můj odhad)</h2>
+  <p><strong>A current:</strong> nikdo se nerozzlobí, ale Phase 51 (live calc) bude trpět nestabilitou cifer.</p>
+  <p><strong>A+ / D refined:</strong> nikdo si nevšimne v statickém stavu, ale Phase 51 bude působit jako přístroj. <strong>Doporučuji.</strong></p>
+</div>
+
+<script>
+  const input = document.getElementById('liveTest');
+  const targets = ['ta', 'taplus', 'tdrefined'].map(id => document.getElementById(id));
+  function update() {
+    const raw = input.value.trim().replace(/\s+/g, '').replace(',', '.');
+    const n = Number(raw);
+    const formatted = Number.isFinite(n) && raw !== ''
+      ? n.toLocaleString('en-US', { maximumFractionDigits: 2 })
+      : '—';
+    targets.forEach(t => t.textContent = formatted);
+  }
+  function setVal(v) { input.value = v; update(); }
+  input.addEventListener('input', update);
+  update();
+</script>
+
+</body>
+</html>
