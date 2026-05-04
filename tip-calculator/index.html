@@ -23,7 +23,7 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="/style.css">
-<script src="/js/helpers.js" defer></script>
+<script src="/js/helpers.js"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <script type="application/ld+json">
@@ -171,9 +171,6 @@
 <script>
   const $ = id => document.getElementById(id);
   const fmt = (n, d=2) => n.toLocaleString(undefined, {minimumFractionDigits: d, maximumFractionDigits: d});
-  function setOut(id, label, big, breakdown='') {
-    $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
-  }
   function tipCalc() {
     const bill=parseLocaleNumber($('tip-bill').value), pct=parseLocaleNumber($('tip-pct').value), split=Math.max(1, Math.floor(parseLocaleNumber($('tip-split').value))||1);
     const tip = bill*pct/100, total = bill+tip, perPerson = total/split;

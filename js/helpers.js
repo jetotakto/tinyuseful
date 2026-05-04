@@ -1,14 +1,90 @@
 /* TinyUseful — shared client-side helpers
-   Loaded by all tool pages via <script src="/js/helpers.js" defer>.
-   Phase 50: locale-aware number parsing (accept decimal comma + thousand spaces). */
+   Loaded by all tool pages via <script src="/js/helpers.js"> (synchronous, before inline calculator scripts).
+   Phase 50: parseLocaleNumber() — locale-aware number parsing.
+   Phase 52: setOut() + copyResultFromButton() — shared result rendering with copy button. */
 
-// Parse locale-aware number string. Accepts both decimal dot and decimal comma.
-// Strips ASCII spaces and non-breaking spaces (CZ/EU thousand separator).
-// Returns NaN for empty/invalid input — matches native Number() behavior so existing
-// calculator math (Math.max, Math.floor, *0, /n) keeps working unchanged.
-function parseLocaleNumber(raw) {
+/* Parse locale-aware number string. Accepts both decimal dot and decimal comma.
+   Strips ASCII spaces and non-breaking spaces (CZ/EU thousand separator).
+   Returns NaN for empty/invalid input — matches native Number() behavior so existing
+   calculator math (Math.max, Math.floor, *0, /n) keeps working unchanged. */
+window.parseLocaleNumber = function parseLocaleNumber(raw) {
   if (raw === null || raw === undefined) return NaN;
-  const cleaned = String(raw).trim().replace(/[\s ]+/g, '').replace(',', '.');
+  const cleaned = String(raw).trim().replace(/[\s ]+/g, '').replace(',', '.');
   if (!cleaned) return NaN;
   return Number(cleaned);
-}
+};
+
+/* Render a result block. Replaces local per-page setOut() definitions across 11 tools.
+   Always appends a "Copy result" button so it survives every recalculation.
+   Uses textContent (not innerHTML) to avoid any HTML injection risk.
+   Falls back to innerHTML only when breakdown contains <strong> (percentage calc).
+   Default state: if big is null/undefined/'', renders "—" placeholder. */
+window.setOut = function setOut(id, label, big, breakdown) {
+  const out = document.getElementById(id);
+  if (!out) return;
+  // Clear and rebuild
+  out.textContent = '';
+  if (label) {
+    const labelEl = document.createElement('span');
+    labelEl.className = 'label';
+    labelEl.textContent = label;
+    out.appendChild(labelEl);
+  }
+  const bigEl = document.createElement('span');
+  bigEl.className = 'big';
+  bigEl.textContent = (big === null || big === undefined || big === '') ? '—' : String(big);
+  out.appendChild(bigEl);
+  if (breakdown) {
+    const breakdownEl = document.createElement('span');
+    breakdownEl.className = 'breakdown';
+    // Allow <strong> markup in breakdown (developer-controlled strings only — never user input)
+    if (typeof breakdown === 'string' && breakdown.includes('<strong>')) {
+      breakdownEl.innerHTML = breakdown;
+    } else {
+      breakdownEl.textContent = breakdown;
+    }
+    out.appendChild(breakdownEl);
+  }
+  // Always append the copy button — event delegation handles clicks regardless of when button was created
+  const btn = document.createElement('button');
+  btn.className = 'copy-btn';
+  btn.type = 'button';
+  btn.dataset.copyResult = '';
+  btn.setAttribute('aria-label', 'Copy result to clipboard');
+  btn.textContent = 'Copy result ↗';
+  out.appendChild(btn);
+};
+
+/* Copy the current result of a given .out element to clipboard.
+   Triggered via event delegation on [data-copy-result] buttons (no inline onclick).
+   Guards against copying empty/placeholder state ("—"). */
+window.copyResultFromButton = function copyResultFromButton(btn) {
+  const out = btn.closest('.out');
+  if (!out) return;
+  const label = (out.querySelector('.label')?.textContent || '').trim();
+  const big = (out.querySelector('.big')?.textContent || '').trim();
+  const breakdown = (out.querySelector('.breakdown')?.textContent || '').trim();
+  const text = (label ? label + ': ' : '') + big + (breakdown ? ' — ' + breakdown : '');
+  if (!text.trim() || big === '—') return;
+  const original = btn.textContent;
+  const revert = () => { btn.textContent = original; };
+  if (!navigator.clipboard) {
+    btn.textContent = 'Copy unavailable';
+    setTimeout(revert, 1500);
+    return;
+  }
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied ✓';
+    setTimeout(revert, 1500);
+  }).catch(() => {
+    btn.textContent = 'Copy failed';
+    setTimeout(revert, 1500);
+  });
+};
+
+/* Event delegation — single listener catches clicks on any [data-copy-result] button,
+   even if the button was just rendered by setOut() into a freshly rebuilt .out element. */
+document.addEventListener('click', function (e) {
+  const btn = e.target.closest('[data-copy-result]');
+  if (btn) window.copyResultFromButton(btn);
+});

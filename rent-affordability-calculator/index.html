@@ -23,7 +23,7 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="/style.css">
-<script src="/js/helpers.js" defer></script>
+<script src="/js/helpers.js"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <script type="application/ld+json">
@@ -170,9 +170,6 @@
 <script>
   const $ = id => document.getElementById(id);
   const fmt0 = n => n.toLocaleString(undefined, {maximumFractionDigits: 0});
-  function setOut(id, label, big, breakdown='') {
-    $(id).innerHTML = `<span class="label">${label}</span><span class="big">${big}</span>${breakdown?`<span class="breakdown">${breakdown}</span>`:''}`;
-  }
   function rentCalc() {
     const inc=parseLocaleNumber($('rent-inc').value), debt=parseLocaleNumber($('rent-debt').value), rule=parseLocaleNumber($('rent-rule').value);
     const adjusted = inc*rule/100 - debt*0.5;
