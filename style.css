@@ -868,8 +868,12 @@ textarea:focus-visible {
 }
 
 /* ─── RESPONSIVE ─── */
+/* Phase 54+55 (2026-05-04): mobile compression + homepage 2-col density on bigger phones.
+   Strategy: shared mobile rules in 720px query, then 400-720 adds 2-col grid,
+   <400px keeps single column with compact card style. */
 @media (max-width: 720px) {
-  .page { padding: 20px 18px 48px; }
+  /* Page chrome */
+  .page { padding: 16px 18px 40px; }
   .masthead {
     flex-direction: row;
     justify-content: space-between;
@@ -882,16 +886,97 @@ textarea:focus-visible {
   .knife { width: 18px; height: 18px; }
   .knife::before { left: 8px; top: 3px; width: 2px; height: 12px; }
   .knife::after  { left: 3px; top: 8px; width: 12px; height: 2px; }
-  .manifesto { padding: 24px 0 20px; }
-  .section-head, .catalog-head { flex-direction: column; gap: 8px; }
+
+  /* Manifesto: tighter padding (Phase 54), promises bar kept */
+  .manifesto { padding: 16px 0 14px; }
+
+  /* Section/catalog heads */
+  .section-head, .catalog-head { flex-direction: column; gap: 6px; margin-bottom: 16px; }
   .section-head .desc, .catalog-head .desc { margin-left: 0; text-align: left; max-width: 100%; }
-  .tool { grid-template-columns: 1fr; gap: 14px; }
-  .tool-form .row { flex-direction: column; gap: 12px; }
+
+  /* Tool page form (Phase 54) */
+  .tool { grid-template-columns: 1fr; gap: 12px; }
+  .tool-form .row { flex-direction: column; gap: 10px; }
+
+  /* Catalog grid: default 1 column, 400+ overrides below */
   .catalog-grid { grid-template-columns: 1fr; }
   .catalog-card { border-left: 0; }
   .catalog-card:first-child { border-top: 0; }
+
+  /* Colophon */
   .colophon { flex-direction: column; gap: 8px; }
   .colophon span { width: 100%; }
+
+  /* Phase 54b: ad placeholder mobile compact + replace dev label with user-friendly.
+     Strategy: hide original "728 x 90 leaderboard placement" via font-size:0 + color:transparent
+     (belt+suspenders), inject "Advertisement" via ::after pseudo-element. */
+  .ad-block { margin: 24px 0; padding: 16px 0; }
+  .ad-block .placeholder {
+    padding: 18px 32px;
+    min-height: 60px;
+    font-size: 0;
+    color: transparent;
+    line-height: 0;
+    position: relative;
+  }
+  .ad-block .placeholder::after {
+    content: "Advertisement";
+    display: inline-block;
+    font-size: 10px;
+    line-height: 1.2;
+    letter-spacing: 0.16em;
+    color: var(--ink-3);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+  }
+}
+
+/* Phase 55: 2-column grid on bigger phones (iPhone 13+ / Pro Max / Galaxy S, etc.)
+   Cards switch to vertical stack: small square symbol on top, then num + title + desc. */
+@media (min-width: 400px) and (max-width: 720px) {
+  .catalog-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .catalog-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px 12px 14px;
+    border-left: 1px solid var(--rule-soft);
+  }
+  /* First two cards in each section have no top border (they're the new "first row") */
+  .catalog-card:nth-child(1),
+  .catalog-card:nth-child(2) { border-top: 0; }
+  /* Odd cards lose left border (they're the new "first column") */
+  .catalog-card:nth-child(odd) { border-left: 0; }
+  /* Symbol becomes small square on top */
+  .catalog-card .card-symbol {
+    flex: none;
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
+  /* Body width adjusts for narrower column */
+  .catalog-card .card-body { width: 100%; }
+  .catalog-card h3 { font-size: 15px; margin-bottom: 4px; }
+  .catalog-card .card-num { font-size: 9px; margin-bottom: 4px; }
+  .catalog-card .card-desc { font-size: 12px; line-height: 1.4; }
+}
+
+/* Phase 55 fallback: <400px (iPhone SE, older Androids) — single column but compact */
+@media (max-width: 399px) {
+  .catalog-card {
+    padding: 12px 14px 14px;
+    gap: 14px;
+  }
+  .catalog-card .card-symbol {
+    flex: 0 0 40px;
+    width: 40px;
+    height: 72px;
+    font-size: 24px;
+  }
+  .catalog-card h3 { font-size: 17px; }
+  .catalog-card .card-desc { font-size: 13px; }
 }
 
 /* print: makes the philosophical point — it works on paper too */
