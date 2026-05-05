@@ -25,8 +25,8 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260504d">
-<script src="/js/helpers.js?v=20260504d"></script>
+<link rel="stylesheet" href="/style.css?v=20260504e">
+<script src="/js/helpers.js?v=20260504e"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <script type="application/ld+json">
@@ -175,12 +175,16 @@
   const fmt0 = n => n.toLocaleString(undefined, {maximumFractionDigits: 0});
   function rentCalc() {
     const inc=parseLocaleNumber($('rent-inc').value), debt=parseLocaleNumber($('rent-debt').value), rule=parseLocaleNumber($('rent-rule').value);
+    // Phase 53b: validity guard — keep last valid result if any input is incomplete/invalid.
+    // debt can be 0 (no debts), but inc and rule must be positive.
+    if (!Number.isFinite(inc) || !Number.isFinite(debt) || !Number.isFinite(rule) || inc<=0 || rule<=0) return;
     const adjusted = inc*rule/100 - debt*0.5;
     setOut('rent-out','Suggested max rent','$'+fmt0(Math.max(0,adjusted)),
       `Conservative $${fmt0(inc*0.20)} · Stretch $${fmt0(inc*(rule+5)/100)} · Based on the ${rule}% rule`);
     document.getElementById('rent-next').hidden = false;
   }
   rentCalc();
+  attachLiveCalc('.tool-form', rentCalc);
 </script>
 
 </body>
