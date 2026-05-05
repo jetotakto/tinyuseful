@@ -1008,13 +1008,14 @@ textarea:focus-visible {
     margin-bottom: 4px;
   }
   body.is-input-mode .tool-form button {
-    margin-top: 8px;
-    padding: 12px 24px;     /* still 44px+ touch target */
+    /* hide Calculate button in input mode — live calc handles updates,
+       button reappears when user blurs the input */
+    display: none;
   }
   body.is-input-mode .out {
     margin-top: 10px;
     padding: 12px 0 14px;
-    scroll-margin-top: 80px; /* room when scrolled into view */
+    scroll-margin-top: 24px; /* tight room above big number when scrolled to top */
   }
   body.is-input-mode .explainer,
   body.is-input-mode .faq,

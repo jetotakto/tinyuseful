@@ -135,7 +135,9 @@ window.attachLiveCalc = function attachLiveCalc(containerSelector, calcFn, wait)
       if (!document.body.classList.contains('is-input-mode')) return;
       const out = document.querySelector('.out');
       if (out && typeof out.scrollIntoView === 'function') {
-        out.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // block: 'start' — bring top of result (label + big number) to visible area.
+        // scroll-margin-top in CSS adds breathing room above.
+        out.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }, 300);
   });
