@@ -130,16 +130,11 @@ window.attachLiveCalc = function attachLiveCalc(containerSelector, calcFn, wait)
     if (!isInToolForm(e.target)) return;
     clearTimeout(blurTimer);
     document.body.classList.add('is-input-mode');
-    // After keyboard opens (300ms typical), scroll result into view if it exists
-    setTimeout(function () {
-      if (!document.body.classList.contains('is-input-mode')) return;
-      const out = document.querySelector('.out');
-      if (out && typeof out.scrollIntoView === 'function') {
-        // block: 'start' — bring top of result (label + big number) to visible area.
-        // scroll-margin-top in CSS adds breathing room above.
-        out.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 300);
+    // No explicit scrollIntoView — native iOS Safari and Android Chrome auto-scroll the
+    // focused input into view. Combined with compact mode (hidden tool-meta, intro,
+    // Calculate button), the form + result are short enough to fit above the keyboard.
+    // If real-device testing shows result is still hidden, revisit with scroll on
+    // .tool-form (not .out) so inputs stay anchored at the top.
   });
 
   document.addEventListener('focusout', function () {
