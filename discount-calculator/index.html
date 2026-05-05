@@ -70,8 +70,8 @@
       </div>
       <div class="tool-form">
         <div class="row">
-          <label>Price ($)<input type="number" id="disc-price" value="80" step="any"></label>
-          <label>Discount %<input type="number" id="disc-pct" value="25" step="any"></label>
+          <label>Price ($)<input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="disc-price" value="80"></label>
+          <label>Discount %<input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="done" id="disc-pct" value="25"></label>
         </div>
         <button type="button" onclick="discCalc()">Calculate</button>
         <div class="out" id="disc-out" role="status" aria-live="polite"><span class="label">Final price</span><span class="big">$60.00</span><span class="breakdown">You save $20.00 · 25% off $80.00</span></div>

@@ -82,7 +82,7 @@
           <label>To<input type="date" id="date-to"></label>
         </div>
         <div class="row" id="date-row-addto" style="display:none;">
-          <label>Days (+/−)<input type="number" id="date-days" value="100" step="1"></label>
+          <label>Days (+/−)<input type="text" inputmode="numeric" autocomplete="off" enterkeyhint="done" id="date-days" value="100"></label>
         </div>
         <button type="button" onclick="dateCalc()">Calculate</button>
         <div class="out" id="date-out" role="status" aria-live="polite"><span class="label">Result</span><span class="big">—</span><span class="breakdown">Pick dates and press Calculate.</span></div>

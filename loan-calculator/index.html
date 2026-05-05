@@ -70,9 +70,9 @@
       </div>
       <div class="tool-form">
         <div class="row">
-          <label>Amount ($)<input type="number" id="loan-amt" value="25000" step="any"></label>
-          <label>APR %<input type="number" id="loan-apr" value="7.5" step="any"></label>
-          <label>Months<input type="number" id="loan-months" value="60" step="any"></label>
+          <label>Amount ($)<input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="loan-amt" value="25000"></label>
+          <label>APR %<input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="loan-apr" value="7.5"></label>
+          <label>Months<input type="text" inputmode="numeric" autocomplete="off" enterkeyhint="done" id="loan-months" value="60"></label>
         </div>
         <button type="button" onclick="loanCalc()">Calculate</button>
         <div class="out" id="loan-out" role="status" aria-live="polite"><span class="label">Monthly</span><span class="big">$501</span><span class="breakdown">Total interest $5,059 · Total paid $30,059</span></div>

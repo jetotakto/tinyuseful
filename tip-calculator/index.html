@@ -70,9 +70,9 @@
       </div>
       <div class="tool-form">
         <div class="row">
-          <label>Bill ($)<input type="number" id="tip-bill" value="50" step="any"></label>
-          <label>Tip %<input type="number" id="tip-pct" value="18" step="any"></label>
-          <label>Split<input type="number" id="tip-split" value="2" step="1" min="1"></label>
+          <label>Bill ($)<input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="tip-bill" value="50"></label>
+          <label>Tip %<input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="tip-pct" value="18"></label>
+          <label>Split<input type="text" inputmode="numeric" autocomplete="off" enterkeyhint="done" id="tip-split" value="2"></label>
         </div>
         <button type="button" onclick="tipCalc()">Calculate</button>
         <div class="out" id="tip-out" role="status" aria-live="polite"><span class="label">Total</span><span class="big">$59.00</span><span class="breakdown">Tip $9.00 · Per person $29.50</span></div>

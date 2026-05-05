@@ -979,6 +979,52 @@ textarea:focus-visible {
   .catalog-card .card-desc { font-size: 13px; }
 }
 
+/* Phase 54b: keyboard-aware compact mode.
+   Triggered when focus is inside .tool-form (body gets .is-input-mode class via helpers.js).
+   Goal: result stays visible above the on-screen keyboard.
+   Strategy: hide non-essential context, tighten spacing, keep H1 visible.
+   Mobile-only — desktop keyboards don't cover the viewport. */
+@media (max-width: 720px) {
+  body.is-input-mode .breadcrumb {
+    padding: 6px 0;
+    margin-bottom: 0;
+  }
+  body.is-input-mode .section-head {
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    gap: 4px;
+  }
+  body.is-input-mode .section-head .desc {
+    display: none;          /* desc duplicates context user already has */
+  }
+  body.is-input-mode .tool-meta {
+    display: none;          /* tool-meta is a duplicate label of H1 area on mobile */
+  }
+  body.is-input-mode .tool {
+    padding: 8px 0;
+    gap: 8px;
+  }
+  body.is-input-mode .tool-form .row {
+    margin-bottom: 4px;
+  }
+  body.is-input-mode .tool-form button {
+    margin-top: 8px;
+    padding: 12px 24px;     /* still 44px+ touch target */
+  }
+  body.is-input-mode .out {
+    margin-top: 10px;
+    padding: 12px 0 14px;
+    scroll-margin-top: 80px; /* room when scrolled into view */
+  }
+  body.is-input-mode .explainer,
+  body.is-input-mode .faq,
+  body.is-input-mode .related,
+  body.is-input-mode .next-task,
+  body.is-input-mode .ad-block {
+    /* keep these visible if user scrolls down — just don't let them push result far */
+  }
+}
+
 /* print: makes the philosophical point — it works on paper too */
 @media print {
   body { background: white; }

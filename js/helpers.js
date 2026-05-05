@@ -112,3 +112,40 @@ window.attachLiveCalc = function attachLiveCalc(containerSelector, calcFn, wait)
     el.addEventListener('change', handler);
   });
 };
+
+/* Phase 54b: keyboard-aware mobile compact mode.
+   When focus enters an input/select inside .tool-form, add body.is-input-mode class.
+   Mobile CSS uses this class to compact non-essential vertical space so the result
+   stays visible above the on-screen keyboard.
+   Also scrolls the result panel into center view 300ms after focus (after keyboard opens).
+   Removed if focus leaves .tool-form (with small delay to allow Tab/Next between fields). */
+(function () {
+  let blurTimer;
+
+  function isInToolForm(el) {
+    return !!(el && el.closest && el.closest('.tool-form'));
+  }
+
+  document.addEventListener('focusin', function (e) {
+    if (!isInToolForm(e.target)) return;
+    clearTimeout(blurTimer);
+    document.body.classList.add('is-input-mode');
+    // After keyboard opens (300ms typical), scroll result into view if it exists
+    setTimeout(function () {
+      if (!document.body.classList.contains('is-input-mode')) return;
+      const out = document.querySelector('.out');
+      if (out && typeof out.scrollIntoView === 'function') {
+        out.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 300);
+  });
+
+  document.addEventListener('focusout', function () {
+    clearTimeout(blurTimer);
+    blurTimer = setTimeout(function () {
+      if (!isInToolForm(document.activeElement)) {
+        document.body.classList.remove('is-input-mode');
+      }
+    }, 150);
+  });
+})();
