@@ -86,10 +86,18 @@
     <priority>0.5</priority>
   </url>
 
+  <!-- Changelog -->
+  <url>
+    <loc>https://www.tinyuseful.app/changelog.html</loc>
+    <lastmod>2026-05-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
   <!-- Legal -->
   <url>
     <loc>https://www.tinyuseful.app/privacy.html</loc>
-    <lastmod>2026-05-01</lastmod>
+    <lastmod>2026-05-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

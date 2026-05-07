@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Changelog — What Changed | TinyUseful</title>
+<meta name="description" content="Public changelog for TinyUseful. What changed and when, in plain English." />
+<link rel="canonical" href="https://www.tinyuseful.app/changelog.html">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Changelog — TinyUseful">
+<meta property="og:description" content="What changed and when, in plain English.">
+<meta property="og:url" content="https://www.tinyuseful.app/changelog.html">
+<meta property="og:site_name" content="TinyUseful">
+<meta property="og:image" content="https://www.tinyuseful.app/og-image04.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TinyUseful — small tools for everyday questions">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.tinyuseful.app/og-image04.png">
+
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="/style.css?v=20260507a">
+<script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+
+<style>
+  :root {
+    --paper:    #FCFAF6;
+    --ink:      #111111;
+    --ink-2:    #555;
+    --ink-3:    #999;
+    --rule:     #111;
+    --rule-soft:#D8D4C8;
+    --red:      #C8102E;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .skip-link {
+    position: absolute; left: -999px; top: 12px;
+    background: var(--ink); color: var(--paper);
+    padding: 8px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    text-decoration: none; z-index: 1000;
+  }
+  .skip-link:focus { left: 12px; }
+  .page { max-width: 720px; margin: 0 auto; padding: 28px 28px 64px; }
+
+  .masthead {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--rule);
+  }
+  .wordmark {
+    display: inline-flex; align-items: baseline; gap: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600; font-size: 22px; letter-spacing: -0.01em;
+    text-decoration: none; color: var(--ink);
+  }
+  .knife {
+    display: inline-block;
+    width: 22px; height: 22px;
+    background: var(--red);
+    position: relative;
+    transform: translateY(2px);
+  }
+  .knife::before, .knife::after {
+    content: ""; position: absolute; background: var(--paper);
+  }
+  .knife::before { left: 10px; top: 4px; width: 2px; height: 14px; }
+  .knife::after  { left: 4px; top: 10px; width: 14px; height: 2px; }
+  .issue {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-2);
+  }
+
+  article { padding: 38px 0 28px; }
+  h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: clamp(34px, 4.4vw, 48px);
+    line-height: 1.05;
+    letter-spacing: -0.018em;
+    margin-bottom: 8px;
+  }
+  .lede {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--ink);
+    margin-bottom: 28px;
+    max-width: 60ch;
+  }
+
+  .entry {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .entry:last-child { border-bottom: 0; }
+  .entry .date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 6px;
+  }
+  .entry p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  a { color: var(--ink); border-bottom: 1px dotted var(--ink-3); text-decoration: none; padding-bottom: 1px; }
+  a:hover { color: var(--red); border-color: var(--red); }
+  .mono { font-family: 'JetBrains Mono', monospace; font-size: 14px; }
+
+  .colophon {
+    margin-top: 48px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+    display: flex; justify-content: space-between; align-items: baseline; gap: 14px;
+    flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .colophon a { color: inherit; border-bottom: 1px dotted var(--ink-3); padding-bottom: 1px; }
+  .colophon a:hover { color: var(--red); border-color: var(--red); }
+
+  @media (max-width: 720px) {
+    .page { padding: 20px 18px 48px; }
+    .masthead { flex-direction: column; align-items: flex-start; gap: 6px; }
+  }
+</style>
+</head>
+
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<main id="main" class="page">
+
+  <header class="masthead">
+    <a class="wordmark" href="/">
+      <span class="knife" aria-hidden="true"></span>
+      TinyUseful
+    </a>
+    <span class="issue">Changelog</span>
+  </header>
+
+  <article>
+    <h1>Changelog</h1>
+    <p class="lede">
+      What changed and when, in plain English.
+    </p>
+
+    <div class="entry">
+      <p class="date">May 2026</p>
+      <p>Improved calculator transparency with methodology notes, including assumptions, rounding, and browser-only calculation notes.</p>
+    </div>
+
+    <div class="entry">
+      <p class="date">May 2026</p>
+      <p>Improved accessibility structure on calculator pages with clearer headings, main landmarks, and skip-link support.</p>
+    </div>
+
+    <div class="entry">
+      <p class="date">May 2026</p>
+      <p>Improved mobile calculator input handling, including decimal comma support and numeric keyboards.</p>
+    </div>
+
+    <div class="entry">
+      <p class="date">May 2026</p>
+      <p>Added live calculation behavior so supported calculators update results as values change.</p>
+    </div>
+
+    <div class="entry">
+      <p class="date">May 2026</p>
+      <p>Added copy-result support for calculator outputs.</p>
+    </div>
+
+    <div class="entry">
+      <p class="date">April 2026</p>
+      <p>Launched TinyUseful with browser-based calculators for everyday money, date, time, and conversion tasks.</p>
+    </div>
+
+    <p class="mono" style="margin-top: 28px; color: var(--ink-2);">
+      For source-level history, see <a href="https://github.com/jetotakto/tinyuseful">github.com/jetotakto/tinyuseful</a>.
+    </p>
+  </article>
+
+  <footer class="colophon">
+    <span>TinyUseful · Issue No. 1 · 2026</span>
+    <span>
+      <a href="/">Home</a> &nbsp; <a href="/about.html">About</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp;
+      <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode"><span class="icon-light" aria-hidden="true">☀</span><span class="icon-dark" aria-hidden="true">☾</span> Theme</button>
+    </span>
+  </footer>
+  <script src="/theme.js" defer></script>
+
+</main>
+</body>
+</html>

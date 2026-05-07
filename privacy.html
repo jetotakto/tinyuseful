@@ -27,7 +27,7 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260504d">
+<link rel="stylesheet" href="/style.css?v=20260507a">
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 
 <style>
@@ -42,6 +42,15 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
+  .skip-link {
+    position: absolute; left: -999px; top: 12px;
+    background: var(--ink); color: var(--paper);
+    padding: 8px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    text-decoration: none; z-index: 1000;
+  }
+  .skip-link:focus { left: 12px; }
   body {
     background: var(--paper);
     color: var(--ink);
@@ -136,7 +145,8 @@
 </head>
 
 <body>
-<div class="page">
+<a class="skip-link" href="#main">Skip to main content</a>
+<main id="main" class="page">
 
   <header class="masthead">
     <a class="wordmark" href="/">
@@ -246,12 +256,12 @@
   <footer class="colophon">
     <span>TinyUseful · Issue No. 1 · 2026</span>
     <span>
-      <a href="/">Home</a> &nbsp; <a href="/about.html">About</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp;
+      <a href="/">Home</a> &nbsp; <a href="/about.html">About</a> &nbsp; <a href="/changelog.html">Changelog</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp;
       <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode"><span class="icon-light" aria-hidden="true">☀</span><span class="icon-dark" aria-hidden="true">☾</span> Theme</button>
     </span>
   </footer>
   <script src="/theme.js" defer></script>
 
-</div>
+</main>
 </body>
 </html>
