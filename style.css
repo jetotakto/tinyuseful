@@ -405,6 +405,7 @@ section.tools {
 }
 .tool:first-of-type { border-top: 0; padding-top: 4px; }
 
+.tool-meta h2,
 .tool-meta h3 {
   font-family: var(--font-mono);
   font-weight: 500;
@@ -648,13 +649,16 @@ textarea:focus-visible {
   border-bottom: 1px solid var(--rule);
   max-width: 64ch;
 }
+.explainer h2,
 .explainer h3 {
   font-family: var(--font-mono);
   font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--red);
   margin-bottom: 12px;
   margin-top: 24px;
+  font-weight: 500;
 }
+.explainer h2:first-child,
 .explainer h3:first-child { margin-top: 0; }
 .explainer p {
   font-size: 16px;
@@ -698,11 +702,13 @@ textarea:focus-visible {
   border-bottom: 1px solid var(--rule);
   max-width: 64ch;
 }
+.faq h2,
 .faq h3 {
   font-family: var(--font-mono);
   font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--red);
   margin-bottom: 18px;
+  font-weight: 500;
 }
 .faq details {
   border-bottom: 1px solid var(--rule-soft);
@@ -746,11 +752,13 @@ textarea:focus-visible {
   border-bottom: 1px solid var(--rule);
   max-width: 64ch;
 }
+.methodology h2,
 .methodology h3 {
   font-family: var(--font-mono);
   font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--red);
   margin-bottom: 18px;
+  font-weight: 500;
 }
 .methodology details {
   border-top: 1px solid var(--rule-soft);
@@ -785,6 +793,7 @@ textarea:focus-visible {
   line-height: 1.55;
   color: var(--ink);
 }
+.methodology .answer h3,
 .methodology .answer h4 {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -792,7 +801,9 @@ textarea:focus-visible {
   text-transform: uppercase;
   color: var(--ink);
   margin: 14px 0 6px;
+  font-weight: 500;
 }
+.methodology .answer h3:first-child,
 .methodology .answer h4:first-child { margin-top: 0; }
 .methodology .answer ul {
   margin: 0 0 10px 22px;
@@ -810,11 +821,13 @@ textarea:focus-visible {
   padding: 32px 0 12px;
   border-bottom: 1px solid var(--rule);
 }
+.related h2,
 .related h3 {
   font-family: var(--font-mono);
   font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--red);
   margin-bottom: 18px;
+  font-weight: 500;
 }
 .related-grid {
   display: grid;
