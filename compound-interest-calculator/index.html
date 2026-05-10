@@ -25,7 +25,7 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260504e">
+<link rel="stylesheet" href="/style.css?v=20260509a">
 <script src="/js/helpers.js?v=20260504e"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
@@ -46,7 +46,8 @@
 </head>
 
 <body>
-<div class="page">
+<a class="skip-link" href="#main">Skip to main content</a>
+<main id="main" class="page">
 
   <header class="masthead">
     <a class="wordmark" href="/"><span class="knife" aria-hidden="true"></span>TinyUseful</a>
@@ -65,7 +66,7 @@
     </div>
     <div class="tool" data-tool="compound">
       <div class="tool-meta">
-        <h3>Inputs</h3>
+        <h2>Inputs</h2>
         <p class="desc">Starting balance, monthly contribution, expected annual return, and number of years. Compounded monthly.</p>
       </div>
       <div class="tool-form">
@@ -93,7 +94,7 @@
   </div>
 
   <section class="explainer">
-    <h3>How to calculate compound interest manually</h3>
+    <h2>How to calculate compound interest manually</h2>
     <ol>
       <li>Each month, multiply the current balance by (1 + monthly rate).</li>
       <li>Add the monthly contribution.</li>
@@ -101,7 +102,7 @@
     </ol>
     <p><strong>Example:</strong> $10k start + $500/month at 7% over 20 years → ≈ <strong>$300,000</strong> (you contributed $130k, earned $170k in interest).</p>
 
-    <h3>Quick examples</h3>
+    <h2>Quick examples</h2>
     <ul class="examples">
       <li>$200/mo from age 25 to 65 at 7% = <strong>~$525,000</strong></li>
       <li>$200/mo from age 35 to 65 at 7% = <strong>~$245,000</strong> (only 10 years later)</li>
@@ -109,7 +110,7 @@
       <li>$500/mo for 30 years at 7% = <strong>~$612,000</strong></li>
     </ul>
 
-    <h3>Formulas used</h3>
+    <h2>Formulas used</h2>
     <p class="formula"><code>monthly rate = annual rate ÷ 12 ÷ 100</code></p>
     <p class="formula"><code>balance = balance × (1 + monthly rate) + contribution</code></p>
     <p class="formula"><code>repeat for total months</code></p>
@@ -119,7 +120,7 @@
       planning tool, not investment advice.
     </p>
 
-    <h3>Common uses</h3>
+    <h2>Common uses</h2>
     <ul>
       <li>Retirement planning: how much to save monthly to reach a target</li>
       <li>Comparing the cost of starting now vs. starting in 5 years</li>
@@ -129,8 +130,48 @@
     </ul>
   </section>
 
+  <section class="methodology" aria-labelledby="methodology-title">
+    <h2 id="methodology-title">Methodology &amp; trust</h2>
+    <details>
+      <summary>Formula, assumptions, rounding, and limitations</summary>
+      <div class="answer">
+        <h3>Formula</h3>
+        <ul>
+          <li><code>monthly rate = annual rate ÷ 12 ÷ 100</code></li>
+          <li>For each month: <code>balance = balance × (1 + monthly rate) + contribution</code></li>
+          <li><code>total contributed = starting balance + (monthly contribution × months)</code></li>
+          <li><code>interest earned = future value − total contributed</code></li>
+        </ul>
+
+        <h3>Assumptions</h3>
+        <ul>
+          <li>The annual rate you enter is fixed for the whole period.</li>
+          <li>Monthly contribution is constant and applied at the end of each month.</li>
+          <li>Compounding is monthly — neither daily, quarterly, nor annual.</li>
+          <li>Both decimal comma (7,0) and decimal point (7.0) are accepted.</li>
+        </ul>
+
+        <h3>Rounding</h3>
+        <ul>
+          <li>Future value, total contributed, and interest earned are rounded to the nearest dollar for display.</li>
+        </ul>
+
+        <h3>Limitations</h3>
+        <ul>
+          <li>Returns are not guaranteed. Real-world rates vary year to year and can be negative.</li>
+          <li>Figures are nominal — inflation is not modelled. Actual purchasing power will be lower.</li>
+          <li>Taxes (capital gains, dividends, withdrawal taxes), account fees, fund expense ratios, and trading costs are not modelled.</li>
+          <li>Lump-sum and irregular contributions are not modelled.</li>
+          <li>This is a planning estimate, not investment advice or a guarantee of future results.</li>
+        </ul>
+
+        <p class="byline"><em>Built and maintained by Lukáš, an architect in Prague. Last updated May 2026.</em></p>
+      </div>
+    </details>
+  </section>
+
   <section class="faq">
-    <h3>Frequently asked questions</h3>
+    <h2>Frequently asked questions</h2>
     <details>
       <summary>Does starting earlier really matter that much?</summary>
       <div class="answer"><p>Yes — dramatically. $200/month from age 25 to 65 at 7% grows to about $525,000. The same $200/month from age 35 to 65 grows to about $245,000. You contributed $24,000 less in the first scenario but ended with more than twice as much. Time is the biggest variable.</p></div>
@@ -150,7 +191,7 @@
   </section>
 
   <section class="related">
-    <h3>Related tools</h3>
+    <h2>Related tools</h2>
     <div class="related-grid">
       <a href="/mortgage-calculator/">Mortgage Calculator</a>
       <a href="/loan-calculator/">Loan Calculator</a>
@@ -162,13 +203,13 @@
   <footer class="colophon">
     <span>TinyUseful · Issue No. 1 · 2026</span>
     <span>
-      <a href="/">Home</a> &nbsp; <a href="/about.html">About</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp;
+      <a href="/">Home</a> &nbsp; <a href="/about.html">About</a> &nbsp; <a href="/changelog.html">Changelog</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp;
       <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode"><span class="icon-light" aria-hidden="true">☀</span><span class="icon-dark" aria-hidden="true">☾</span> Theme</button>
     </span>
   </footer>
   <script src="/theme.js" defer></script>
 
-</div>
+</main>
 
 <script>
   const $ = id => document.getElementById(id);

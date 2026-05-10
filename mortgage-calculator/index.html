@@ -29,7 +29,7 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260504e">
+<link rel="stylesheet" href="/style.css?v=20260509a">
 <script src="/js/helpers.js?v=20260504e"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
@@ -78,7 +78,8 @@
 </head>
 
 <body>
-<div class="page">
+<a class="skip-link" href="#main">Skip to main content</a>
+<main id="main" class="page">
 
   <header class="masthead">
     <a class="wordmark" href="/">
@@ -100,7 +101,7 @@
     </div>
     <div class="tool" data-tool="mortgage">
       <div class="tool-meta">
-        <h3>Inputs</h3>
+        <h2>Inputs</h2>
         <p class="desc">Enter your loan amount, interest rate, and term in years. The calculator runs the standard amortization formula in your browser. Nothing is saved or sent.</p>
       </div>
       <div class="tool-form">
@@ -127,7 +128,7 @@
   </div>
 
   <section class="explainer">
-    <h3>How it works</h3>
+    <h2>How it works</h2>
     <p>
       A fixed-rate mortgage is repaid in equal monthly installments over the term you choose.
       Each payment covers some interest on the remaining balance plus some principal repayment.
@@ -140,7 +141,7 @@
       (annual rate divided by 12), and <strong>n</strong> is the total number of monthly payments
       (years × 12). It is a standard amortization formula used for fixed-rate loan estimates. There is one correct answer.
     </p>
-    <h3>What this does not include</h3>
+    <h2>What this does not include</h2>
     <p>
       This calculator shows <strong>principal and interest only</strong>. Your real monthly housing
       payment usually also includes property tax, homeowners insurance, sometimes PMI (private
@@ -149,8 +150,45 @@
     </p>
   </section>
 
+  <section class="methodology" aria-labelledby="methodology-title">
+    <h2 id="methodology-title">Methodology &amp; trust</h2>
+    <details>
+      <summary>Formula, assumptions, rounding, and limitations</summary>
+      <div class="answer">
+        <h3>Formula</h3>
+        <ul>
+          <li><code>M = P × [r(1+r)^n] / [(1+r)^n − 1]</code></li>
+          <li><code>total interest = (M × n) − P</code></li>
+          <li><code>total paid = M × n</code></li>
+        </ul>
+
+        <h3>Assumptions</h3>
+        <ul>
+          <li>Annual interest rate is divided by 12 for monthly compounding.</li>
+          <li>Term is fixed; the monthly payment is constant for the full term.</li>
+          <li>Both decimal comma (6,75) and decimal point (6.75) are accepted.</li>
+        </ul>
+
+        <h3>Rounding</h3>
+        <ul>
+          <li>Monthly payment, total interest, and total paid are rounded to the nearest dollar for display.</li>
+        </ul>
+
+        <h3>Limitations</h3>
+        <ul>
+          <li>Principal and interest only — does not include all costs unless entered. Property tax, homeowners insurance, PMI, HOA, escrow, points, lender fees, and closing costs are not modelled.</li>
+          <li>Uses the interest rate you enter, not APR. Real lender quotes use APR, which includes fees.</li>
+          <li>Adjustable-rate mortgages (ARMs), rate resets, recasting, refinancing, prepayment, and extra principal payments are not modelled.</li>
+          <li>Estimate only. Actual lender quotes, regional taxes, insurance, and qualifying rules will differ.</li>
+        </ul>
+
+        <p class="byline"><em>Built and maintained by Lukáš, an architect in Prague. Last updated May 2026.</em></p>
+      </div>
+    </details>
+  </section>
+
   <section class="faq">
-    <h3>Frequently asked questions</h3>
+    <h2>Frequently asked questions</h2>
     <details>
       <summary>How is a mortgage payment calculated?</summary>
       <div class="answer">
@@ -184,7 +222,7 @@
   </section>
 
   <section class="related">
-    <h3>Related tools</h3>
+    <h2>Related tools</h2>
     <div class="related-grid">
       <a href="/loan-calculator/">Loan Calculator</a>
       <a href="/compound-interest-calculator/">Compound Interest</a>
@@ -196,13 +234,13 @@
   <footer class="colophon">
     <span>TinyUseful · Issue No. 1 · 2026 · Made for the open web</span>
     <span>
-      <a href="/">Home</a> &nbsp; <a href="/about.html">About</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp;
+      <a href="/">Home</a> &nbsp; <a href="/about.html">About</a> &nbsp; <a href="/changelog.html">Changelog</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp;
       <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode"><span class="icon-light" aria-hidden="true">☀</span><span class="icon-dark" aria-hidden="true">☾</span> Theme</button>
     </span>
   </footer>
   <script src="/theme.js" defer></script>
 
-</div>
+</main>
 
 <script>
   const $ = id => document.getElementById(id);

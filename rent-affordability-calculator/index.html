@@ -25,7 +25,7 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260504e">
+<link rel="stylesheet" href="/style.css?v=20260509a">
 <script src="/js/helpers.js?v=20260504e"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
@@ -46,7 +46,8 @@
 </head>
 
 <body>
-<div class="page">
+<a class="skip-link" href="#main">Skip to main content</a>
+<main id="main" class="page">
 
   <header class="masthead">
     <a class="wordmark" href="/"><span class="knife" aria-hidden="true"></span>TinyUseful</a>
@@ -65,7 +66,7 @@
     </div>
     <div class="tool" data-tool="rent">
       <div class="tool-meta">
-        <h3>Inputs</h3>
+        <h2>Inputs</h2>
         <p class="desc">Monthly net income, current monthly debt payments, and what % of income you're willing to spend on rent.</p>
       </div>
       <div class="tool-form">
@@ -92,7 +93,7 @@
   </div>
 
   <section class="explainer">
-    <h3>How to calculate rent affordability manually</h3>
+    <h2>How to calculate rent affordability manually</h2>
     <ol>
       <li>Multiply your monthly income by 0.30 (the classic 30% rule).</li>
       <li>Subtract half of your monthly debt payments (credit cards, car, student loans).</li>
@@ -100,7 +101,7 @@
     </ol>
     <p><strong>Example:</strong> $5,000/mo income, $400 in debts → 5000 × 0.30 − 200 = <strong>$1,300/mo rent</strong>.</p>
 
-    <h3>Quick examples</h3>
+    <h2>Quick examples</h2>
     <ul class="examples">
       <li>$3,000/mo income, no debt = <strong>$900/mo</strong> (30% rule)</li>
       <li>$5,000/mo income, $400 debt = <strong>$1,300/mo</strong></li>
@@ -108,7 +109,7 @@
       <li>$10,000/mo income, $2,000 debt = <strong>$2,000/mo</strong></li>
     </ul>
 
-    <h3>Formulas used</h3>
+    <h2>Formulas used</h2>
     <p class="formula"><code>max rent = income × (rule ÷ 100) − (debts × 0.5)</code></p>
     <p class="formula"><code>conservative = income × 0.20</code></p>
     <p class="formula"><code>stretch = income × ((rule + 5) ÷ 100)</code></p>
@@ -119,7 +120,7 @@
       increases.
     </p>
 
-    <h3>Common uses</h3>
+    <h2>Common uses</h2>
     <ul>
       <li>Setting a maximum rent before apartment hunting</li>
       <li>Negotiating roommate splits or co-tenant contributions</li>
@@ -129,8 +130,47 @@
     </ul>
   </section>
 
+  <section class="methodology" aria-labelledby="methodology-title">
+    <h2 id="methodology-title">Methodology &amp; trust</h2>
+    <details>
+      <summary>Formula, assumptions, rounding, and limitations</summary>
+      <div class="answer">
+        <h3>Formula</h3>
+        <ul>
+          <li><code>max rent = income × (rule ÷ 100) − (debts × 0.5)</code></li>
+          <li><code>conservative = income × 0.20</code></li>
+          <li><code>stretch = income × ((rule + 5) ÷ 100)</code></li>
+        </ul>
+
+        <h3>Assumptions</h3>
+        <ul>
+          <li>Income and debts are monthly figures in the same currency.</li>
+          <li>The rule defaults to 30%; you can change the percentage in the input.</li>
+          <li>Debts are weighted at half. This is a simplified cash-flow adjustment used by this calculator, not a landlord rule.</li>
+          <li>Both decimal comma (1 500,50) and decimal point (1500.50) are accepted.</li>
+        </ul>
+
+        <h3>Rounding</h3>
+        <ul>
+          <li>Suggested max rent, conservative, and stretch values are rounded to the nearest dollar for display.</li>
+          <li>If the formula yields a negative number (debts exceed income at the chosen rule), the result floors at zero.</li>
+        </ul>
+
+        <h3>Limitations</h3>
+        <ul>
+          <li>Utilities, internet, renters insurance, parking, transit, groceries, and other monthly expenses are not subtracted.</li>
+          <li>Landlord criteria (commonly income ≥ 2.5–4× rent), credit score, employment history, and rental history are not evaluated.</li>
+          <li>Local rent control, security deposit caps, broker fees, pet rent, and utilities-included leases are not modelled.</li>
+          <li>Estimate to inform your search. Landlord approval and what you can comfortably afford will differ.</li>
+        </ul>
+
+        <p class="byline"><em>Built and maintained by Lukáš, an architect in Prague. Last updated May 2026.</em></p>
+      </div>
+    </details>
+  </section>
+
   <section class="faq">
-    <h3>Frequently asked questions</h3>
+    <h2>Frequently asked questions</h2>
     <details>
       <summary>Should I use gross or net income?</summary>
       <div class="answer"><p>The 30% rule traditionally uses gross (pre-tax). This calculator works with whichever you enter — but using net income gives a more realistic ceiling because that's what actually hits your account.</p></div>
@@ -150,7 +190,7 @@
   </section>
 
   <section class="related">
-    <h3>Related tools</h3>
+    <h2>Related tools</h2>
     <div class="related-grid">
       <a href="/mortgage-calculator/">Mortgage Calculator</a>
       <a href="/loan-calculator/">Loan Calculator</a>
@@ -162,13 +202,13 @@
   <footer class="colophon">
     <span>TinyUseful · Issue No. 1 · 2026</span>
     <span>
-      <a href="/">Home</a> &nbsp; <a href="/about.html">About</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp;
+      <a href="/">Home</a> &nbsp; <a href="/about.html">About</a> &nbsp; <a href="/changelog.html">Changelog</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp;
       <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode"><span class="icon-light" aria-hidden="true">☀</span><span class="icon-dark" aria-hidden="true">☾</span> Theme</button>
     </span>
   </footer>
   <script src="/theme.js" defer></script>
 
-</div>
+</main>
 
 <script>
   const $ = id => document.getElementById(id);
