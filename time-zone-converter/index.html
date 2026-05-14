@@ -38,9 +38,9 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"Does it handle daylight saving time?","acceptedAnswer":{"@type":"Answer","text":"Yes. The browser's Intl API knows when each zone switches between standard and summer time, so the conversion is correct on any date in the current year. The calculation always uses today's date."}},
-{"@type":"Question","name":"Why only 8 zones?","acceptedAnswer":{"@type":"Answer","text":"These cover the bulk of business meetings and travel: US Eastern + Pacific (covers US/Canada), London + Central Europe (covers UK + most of EU), Dubai (Gulf), Tokyo (Japan/Korea), Sydney (AU/NZ), and UTC as the reference. For other zones, calculate the offset relative to one of these."}},
-{"@type":"Question","name":"What's UTC and why is it always there?","acceptedAnswer":{"@type":"Answer","text":"UTC = Coordinated Universal Time, the global reference clock. It doesn't change for daylight saving. Every other time zone is an offset from UTC (e.g., New York summer = UTC−4, winter = UTC−5)."}},
-{"@type":"Question","name":"Can I convert a future date, not just today?","acceptedAnswer":{"@type":"Answer","text":"Not in this version — it always uses today's date for the DST lookup. For meetings far in the future (across DST switches), check both zones manually for that specific date."}}
+{"@type":"Question","name":"Why isn't my city in the list?","acceptedAnswer":{"@type":"Answer","text":"We kept the list to eight major zones to stay simple. Most cities share a zone with a listed one (e.g., Berlin = Prague, Paris = Prague, Hong Kong ≈ Tokyo + 1h, Mumbai = Dubai + 1.5h). For full city coverage you can use a dedicated tool like timeanddate.com."}},
+{"@type":"Question","name":"How do I figure out a meeting time across three zones?","acceptedAnswer":{"@type":"Answer","text":"Pick the source (your zone) and run the conversion to each target separately. There's no three-way view here — that's a different kind of tool, often called a \"world clock\" or \"team scheduler.\""}},
+{"@type":"Question","name":"Why does the same time give a different result tomorrow?","acceptedAnswer":{"@type":"Answer","text":"Because the conversion uses today's date. If a daylight saving change happens between today and the target date, the offset changes by one hour. For dates far in the future, double-check around DST switch days (March and November in most places)."}}
 ]}
 </script>
 </head>
