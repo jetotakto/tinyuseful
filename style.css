@@ -1384,6 +1384,31 @@ body.ui-hifi .hf-input select:focus {
   outline: none;
 }
 
+/* Patch CC: Native <input type="date"> inside .hf-input wrapper.
+   Scoped so other hf inputs are unaffected. Keeps native picker accessible. */
+body.ui-hifi .hf-input input[type="date"] {
+  flex: 1;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.1;
+  color: var(--ink);
+  background: transparent;
+  border: 0; outline: none;
+  padding: 0; margin: 0;
+  min-width: 0; width: 100%;
+  /* Keep native calendar icon visible; don't strip appearance entirely. */
+}
+body.ui-hifi .hf-input input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.6;
+  filter: invert(0);
+}
+body.ui-hifi .hf-input input[type="date"]:focus {
+  outline: none;
+}
+
 body.ui-hifi .hf-error {
   margin-top: 8px;
   font-size: 12px;
