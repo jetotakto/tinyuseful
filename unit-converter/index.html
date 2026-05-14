@@ -25,7 +25,7 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260504d">
+<link rel="stylesheet" href="/style.css?v=20260514-hotfix2">
 <script src="/js/helpers.js?v=20260504d"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
@@ -45,179 +45,530 @@
 </script>
 </head>
 
-<body>
-<div class="page">
+<body class="ui-hifi">
+<a class="skip-link" href="#main">Skip to main content</a>
+<main id="main" class="hf">
 
-  <header class="masthead">
-    <a class="wordmark" href="/"><span class="knife" aria-hidden="true"></span>TinyUseful</a>
-    <span class="issue">No. 1 — April 2026</span>
+  <header class="hf-header">
+    <a class="hf-wordmark" href="/" aria-label="TinyUseful home">
+      <span class="stack"><span>TINY</span><span>USEFUL</span></span>
+    </a>
+    <span class="hf-menu-btn" aria-hidden="true">
+      <span></span><span></span>
+    </span>
   </header>
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">TinyUseful</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">Unit Converter</span>
+  <nav class="hf-crumb" aria-label="Breadcrumb">
+    / unit converter <span class="crumb-marker" aria-hidden="true"><span class="crumb-star">&#9733;</span> No.&nbsp;09</span>
   </nav>
 
-  <section class="tools">
-    <div class="section-head">
-      <span class="section-num">No. 09</span>
-      <h1>Unit Converter</h1>
-      <span class="desc">Length, weight, and temperature — metric ↔ imperial.</span>
-    </div>
-    <div class="tool" data-tool="unit">
-      <div class="tool-meta">
-        <h3>Inputs</h3>
-        <p class="desc">Pick category, enter a value, choose source and target units. Conversion runs instantly in your browser.</p>
-      </div>
-      <div class="tool-form">
-        <div class="row">
-          <label>Category
-            <select id="unit-cat" onchange="unitUpdateOptions()">
-              <option value="length">Length</option>
-              <option value="weight">Weight</option>
-              <option value="temp">Temperature</option>
-            </select>
-          </label>
-          <label>Value<input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="done" id="unit-val" value="1"></label>
-        </div>
-        <div class="row">
-          <label>From<select id="unit-from"></select></label>
-          <label>To<select id="unit-to"></select></label>
-        </div>
-        <button type="button" onclick="unitCalc()">Convert</button>
-        <div class="out" id="unit-out" role="status" aria-live="polite"><span class="label">Result</span><span class="big">3.281</span><span class="breakdown">1 m = 3.281 ft</span></div>
-        <div class="next-task" id="unit-next" hidden>
-          <p class="hint">↓ You might also need</p>
-          <div class="next-tools">
-            <a href="/date-calculator/" class="next-link" data-symbol="▦">Date Calculator</a>
-            <a href="/time-zone-converter/" class="next-link" data-symbol="⊙">Time Zone</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="ad-block">
-    <div class="placeholder">728 × 90 leaderboard placement</div>
+  <h1 class="hf-display">UNIT CONVERTER</h1>
+  <div class="hf-sub">
+    <span>Length, weight, and temperature &mdash; metric &harr; imperial.</span>
   </div>
 
-  <section class="explainer">
-    <h3>How to convert units manually</h3>
-    <ol>
-      <li>For length and weight: multiply by the conversion factor (1 inch = 0.0254 m).</li>
-      <li>For Celsius to Fahrenheit: multiply by 9/5, then add 32.</li>
-      <li>For Celsius to Kelvin: just add 273.15 (no scale change).</li>
-    </ol>
-    <p><strong>Example:</strong> 1 m to feet → 1 ÷ 0.3048 = <strong>3.281 ft</strong>. 20 °C to °F → 20 × 9/5 + 32 = <strong>68 °F</strong>.</p>
+  <div class="hf-fields tool-form" data-tool="unit">
 
-    <h3>Quick examples</h3>
-    <ul class="examples">
-      <li>1 m = <strong>3.281 ft</strong></li>
-      <li>1 mile = <strong>1.609 km</strong></li>
-      <li>1 kg = <strong>2.205 lb</strong></li>
-      <li>20 °C = <strong>68 °F</strong></li>
-      <li>100 °F = <strong>37.8 °C</strong> (body temperature)</li>
-      <li>0 °C = <strong>32 °F = 273.15 K</strong> (freezing)</li>
-    </ul>
+    <div class="hf-field">
+      <div class="lbl">
+        <span>Category</span>
+      </div>
+      <div class="hf-input hf-input-select">
+        <select id="unit-cat" aria-label="Unit category">
+          <option value="length">Length</option>
+          <option value="weight">Weight</option>
+          <option value="temp">Temperature</option>
+        </select>
+      </div>
+    </div>
 
-    <h3>Formulas used</h3>
-    <p class="formula"><code>length: value × factor (1 in = 0.0254 m)</code></p>
-    <p class="formula"><code>weight: value × factor (1 lb = 0.45359237 kg)</code></p>
-    <p class="formula"><code>°F = °C × 9/5 + 32</code></p>
-    <p class="formula"><code>K = °C + 273.15</code></p>
-    <p>
-      All conversions run client-side using these constants. No API call, no rounding from
-      the server, no precision loss in transit.
-    </p>
+    <div class="hf-field">
+      <div class="lbl">
+        <span>Value</span>
+        <span class="req" id="unit-val-req">required</span>
+      </div>
+      <div class="hf-input focus" id="unit-val-wrap">
+        <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="unit-val" value="1" aria-label="Value to convert">
+      </div>
+    </div>
 
-    <h3>Common uses</h3>
-    <ul>
-      <li>Converting metric ↔ imperial for cooking, travel, and shopping</li>
-      <li>Reading European product specs in US units (or vice versa)</li>
-      <li>Weather: Celsius to Fahrenheit when traveling</li>
-      <li>Fitness tracking: pounds ↔ kilograms, miles ↔ kilometers</li>
-      <li>School and physics homework (especially temperature)</li>
-    </ul>
-  </section>
+    <div class="hf-field">
+      <div class="lbl">
+        <span>From</span>
+      </div>
+      <div class="hf-input hf-input-select">
+        <select id="unit-from" aria-label="Convert from unit"></select>
+      </div>
+    </div>
 
-  <section class="faq">
-    <h3>Frequently asked questions</h3>
-    <details>
-      <summary>How do I convert kg to pounds in my head?</summary>
-      <div class="answer"><p>Multiply by 2.2 (close enough for casual use). 70 kg ≈ 154 lb. For exact, use 2.2046. Going the other way, divide pounds by 2.2 to get kg.</p></div>
-    </details>
-    <details>
-      <summary>How do I convert Celsius to Fahrenheit quickly?</summary>
-      <div class="answer"><p>Double it and add 30 (rough). 20 °C → 40 + 30 = 70 °F (actual: 68 °F). For exact, use °F = °C × 9/5 + 32. The shortcut is wrong by 1–2 degrees but good enough for weather and cooking.</p></div>
-    </details>
-    <details>
-      <summary>Why is 0 K not 0 °C?</summary>
-      <div class="answer"><p>Kelvin is an absolute scale starting at the coldest possible temperature (no molecular motion). 0 K = −273.15 °C. Celsius starts at the freezing point of water for convenience, not for physics.</p></div>
-    </details>
-    <details>
-      <summary>What about volume, area, or speed?</summary>
-      <div class="answer"><p>Not in this tool. We kept the converter small on purpose — length, weight, and temperature cover the most common everyday cases. Volume (gallons, liters) and speed (mph, km/h) may be added later.</p></div>
-    </details>
-  </section>
+    <div class="hf-field">
+      <div class="lbl">
+        <span>To</span>
+      </div>
+      <div class="hf-input hf-input-select">
+        <select id="unit-to" aria-label="Convert to unit"></select>
+      </div>
+    </div>
 
-  <section class="related">
-    <h3>Related tools</h3>
-    <div class="related-grid">
-      <a href="/date-calculator/">Date Calculator</a>
-      <a href="/time-zone-converter/">Time Zone Converter</a>
-      <a href="/percentage-calculator/">Percentage Calculator</a>
-      <a href="/sales-tax-calculator/">Sales Tax Calculator</a>
+  </div>
+
+  <section class="hf-result" id="unit-out" role="status" aria-live="polite" aria-atomic="true">
+    <div class="r-lbl">
+      <span class="r-lbl-text" id="unit-lbl">Result</span>
+      <span class="hf-tiny hf-muted" aria-hidden="true">aria-live</span>
+    </div>
+    <div class="r-num">
+      <span class="val" id="unit-val-out">3.281</span><span class="per" id="unit-per">&nbsp;ft</span>
+    </div>
+    <div class="r-break" id="unit-break">
+      <span>Category</span><span class="v">Length</span>
+      <span>From</span><span class="v">1 m</span>
+      <span>To</span><span class="v">ft</span>
+      <span>Result</span><span class="v">3.281 ft</span>
+    </div>
+    <div class="r-actions">
+      <button type="button" class="hf-btn accent" id="unit-copy" aria-label="Copy result to clipboard">Copy result</button>
+      <button type="button" class="hf-btn ghost" id="unit-reset" aria-label="Reset to defaults">Reset</button>
+    </div>
+    <div class="why-line" id="unit-why">
+      1 &times; (1 &divide; 0.3048) = <b>3.281 ft</b>
     </div>
   </section>
 
-  <footer class="colophon">
-    <span>TinyUseful · Issue No. 1 · 2026</span>
-    <span>
-      <a href="/">Home</a> &nbsp; <a href="/about.html">About</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp;
-      <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode"><span class="icon-light" aria-hidden="true">☀</span><span class="icon-dark" aria-hidden="true">☾</span> Theme</button>
+  <div class="hf-chips-wrap" id="unit-next" aria-label="You might also need">
+    <div class="hf-cap">You might also need</div>
+    <div class="hf-chips" role="list">
+      <a class="hf-chip" href="/date-calculator/" role="listitem">Date Calculator</a>
+      <a class="hf-chip" href="/time-zone-converter/" role="listitem">Time Zone</a>
+      <a class="hf-chip" href="/percentage-calculator/" role="listitem">Percentage</a>
+    </div>
+  </div>
+
+  <div class="hf-chips-wrap">
+    <div class="hf-cap">Quick examples</div>
+    <div class="hf-chips" role="list">
+      <button type="button" class="hf-chip" data-cat="length" data-val="1"  data-from="m"  data-to="ft" role="listitem">1 m &rarr; ft</button>
+      <button type="button" class="hf-chip" data-cat="weight" data-val="1"  data-from="kg" data-to="lb" role="listitem">1 kg &rarr; lb</button>
+      <button type="button" class="hf-chip" data-cat="temp"   data-val="20" data-from="C"  data-to="F"  role="listitem">20 &deg;C &rarr; &deg;F</button>
+    </div>
+  </div>
+
+  <div class="hf-method-wrap">
+    <div class="hf-cap">How this is calculated</div>
+    <div class="hf-method-block">
+      <div class="formula">length: value &times; factor (1 in = 0.0254 m)</div>
+      <div class="formula">weight: value &times; factor (1 lb = 0.45359237 kg)</div>
+      <div class="formula">&deg;F = &deg;C &times; 9/5 + 32</div>
+      <div class="formula">K = &deg;C + 273.15</div>
+      <p>All conversions run client-side using these constants. No API call, no rounding from the server, no precision loss in transit.</p>
+      <p class="hf-muted hf-tiny">Updated May 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
+
+      <details class="method-details">
+        <summary>Formula, assumptions, rounding &amp; limitations</summary>
+
+        <h3>Formula</h3>
+        <ul>
+          <li>Length: <code>value &times; factor (1 in = 0.0254 m)</code></li>
+          <li>Weight: <code>value &times; factor (1 lb = 0.45359237 kg)</code></li>
+          <li>Temperature C&rarr;F: <code>&deg;F = &deg;C &times; 9/5 + 32</code></li>
+          <li>Temperature F&rarr;C: <code>&deg;C = (&deg;F &minus; 32) &times; 5/9</code></li>
+          <li>Temperature C&harr;K: <code>K = &deg;C + 273.15</code></li>
+        </ul>
+
+        <h3>Assumptions</h3>
+        <ul>
+          <li>Length and weight use exact international conversion factors.</li>
+          <li>Temperature scales (Celsius, Fahrenheit, Kelvin) pivot through Celsius internally.</li>
+          <li>Both decimal comma (1,5) and decimal point (1.5) are accepted.</li>
+        </ul>
+
+        <h3>Rounding</h3>
+        <ul>
+          <li>Results are displayed with adaptive decimal precision: 2 places for values &ge; 100, 3 places for 1&ndash;99, 4 places for &lt; 1.</li>
+        </ul>
+
+        <h3>Limitations</h3>
+        <ul>
+          <li>Volume (liters, gallons), area (m&sup2;, ft&sup2;), and speed (mph, km/h) are not included in this tool.</li>
+          <li>US and UK Imperial gallons differ (3.785 L vs 4.546 L); volume conversion needs a dedicated tool.</li>
+          <li>Surveying-specific units (US survey foot, nautical mile) and historic units are not included.</li>
+        </ul>
+      </details>
+    </div>
+  </div>
+
+  <div class="hf-ad" aria-label="Advertisement">
+    <div class="ad-label">Advertisement</div>
+    <div class="ad-slot" id="unit-ad-slot"></div>
+  </div>
+
+  <div class="hf-stack">
+
+    <section class="hf-step s1" data-step="faq">
+      <header class="step-head">
+        <div>
+          <div class="step-title">FAQ</div>
+          <div class="step-meta">kg to lb in head &middot; quick C to F &middot; absolute zero &middot; volume/area/speed</div>
+        </div>
+        <span class="step-chev" aria-hidden="true">&#8599;</span>
+      </header>
+      <div class="step-body">
+        <details class="step-q">
+          <summary>How do I convert kg to pounds in my head?</summary>
+          <div class="answer"><p>Multiply by 2.2 (close enough for casual use). 70 kg &asymp; 154 lb. For exact, use 2.2046. Going the other way, divide pounds by 2.2 to get kg.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>How do I convert Celsius to Fahrenheit quickly?</summary>
+          <div class="answer"><p>Double it and add 30 (rough). 20 &deg;C &rarr; 40 + 30 = 70 &deg;F (actual: 68 &deg;F). For exact, use &deg;F = &deg;C &times; 9/5 + 32. The shortcut is wrong by 1&ndash;2 degrees but good enough for weather and cooking.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>Why is 0 K not 0 &deg;C?</summary>
+          <div class="answer"><p>Kelvin is an absolute scale starting at the coldest possible temperature (no molecular motion). 0 K = &minus;273.15 &deg;C. Celsius starts at the freezing point of water for convenience, not for physics.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>What about volume, area, or speed?</summary>
+          <div class="answer"><p>Not in this tool. We kept the converter small on purpose &mdash; length, weight, and temperature cover the most common everyday cases. Volume (gallons, liters) and speed (mph, km/h) may be added later.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <section class="hf-step s2" data-step="related">
+      <header class="step-head">
+        <div>
+          <div class="step-title">RELATED</div>
+          <div class="step-meta">Date &middot; Time Zone &middot; Percentage &middot; Sales Tax</div>
+        </div>
+        <span class="step-chev" aria-hidden="true">&#8599;</span>
+      </header>
+      <nav class="step-related" aria-label="Related calculators">
+        <a href="/date-calculator/">Date Calculator</a>
+        <a href="/time-zone-converter/">Time Zone Converter</a>
+        <a href="/percentage-calculator/">Percentage Calculator</a>
+        <a href="/sales-tax-calculator/">Sales Tax Calculator</a>
+      </nav>
+    </section>
+
+  </div>
+
+  <div class="hf-trust">No accounts &middot; runs in your browser &middot; ads &amp; analytics may use cookies</div>
+
+  <footer class="hf-foot">
+    <span class="foot-links">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/changelog.html">Changelog</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
     </span>
+    <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode">&#9728; / &#9790;</button>
   </footer>
+
   <script src="/theme.js" defer></script>
 
-</div>
+</main>
 
 <script>
   const $ = id => document.getElementById(id);
-  const fmt = (n, d=2) => n.toLocaleString(undefined, {minimumFractionDigits: d, maximumFractionDigits: d});
+  const fmt = (n, d=2) => n.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+
+  // UNIT_DEFS preserved verbatim from legacy
   const UNIT_DEFS = {
-    length: { units:[['m','meter'],['cm','centimeter'],['mm','millimeter'],['km','kilometer'],['in','inch'],['ft','foot'],['yd','yard'],['mi','mile']],
-              toBase:{m:1, cm:0.01, mm:0.001, km:1000, in:0.0254, ft:0.3048, yd:0.9144, mi:1609.344} },
-    weight: { units:[['kg','kilogram'],['g','gram'],['mg','milligram'],['lb','pound'],['oz','ounce'],['t','tonne (metric)']],
-              toBase:{kg:1, g:0.001, mg:0.000001, lb:0.45359237, oz:0.0283495231, t:1000} },
-    temp:   { units:[['C','Celsius'],['F','Fahrenheit'],['K','Kelvin']] }
+    length: {
+      units: [['m','meter'],['cm','centimeter'],['mm','millimeter'],['km','kilometer'],
+              ['in','inch'],['ft','foot'],['yd','yard'],['mi','mile']],
+      toBase: { m:1, cm:0.01, mm:0.001, km:1000, in:0.0254, ft:0.3048, yd:0.9144, mi:1609.344 }
+    },
+    weight: {
+      units: [['kg','kilogram'],['g','gram'],['mg','milligram'],['lb','pound'],
+              ['oz','ounce'],['t','tonne (metric)']],
+      toBase: { kg:1, g:0.001, mg:0.000001, lb:0.45359237, oz:0.0283495231, t:1000 }
+    },
+    temp: {
+      units: [['C','Celsius'],['F','Fahrenheit'],['K','Kelvin']]
+      // No toBase — uses formula-based conversion via unitConvertTemp
+    }
   };
-  function unitFillSelect(sel, units, defaultIdx) {
-    sel.innerHTML = units.map(([u,name],i)=>`<option value="${u}"${i===defaultIdx?' selected':''}>${u} (${name})</option>`).join('');
+
+  const DEFAULTS = { cat: 'length', val: '1', from: 'm', to: 'ft' };
+
+  // Convert unit code to display label: C → °C, F → °F, K → K (no degree symbol on Kelvin)
+  function tempSym(code) {
+    if (code === 'C') return '°C';
+    if (code === 'F') return '°F';
+    return 'K';
   }
+  // Unit label for display (length/weight unchanged, temp gets ° prefix where applicable)
+  function unitLabel(cat, code) {
+    if (cat === 'temp') return tempSym(code);
+    return code;
+  }
+
+  function unitFillSelect(sel, units, defaultIdx) {
+    sel.innerHTML = units.map(function (entry, i) {
+      const u = entry[0], name = entry[1];
+      return '<option value="' + u + '"' + (i === defaultIdx ? ' selected' : '') + '>' + u + ' (' + name + ')</option>';
+    }).join('');
+  }
+
+  // Preserve legacy public name unitUpdateOptions
   function unitUpdateOptions() {
-    const cat = $('unit-cat').value, def = UNIT_DEFS[cat];
+    const cat = $('unit-cat').value;
+    const def = UNIT_DEFS[cat];
     unitFillSelect($('unit-from'), def.units, 0);
-    unitFillSelect($('unit-to'),   def.units, cat==='temp' ? 1 : (cat==='length' ? 5 : 3));
+    unitFillSelect($('unit-to'), def.units, cat === 'temp' ? 1 : (cat === 'length' ? 5 : 3));
     unitCalc();
   }
+
+  // Preserve legacy unitConvertTemp formula verbatim (Celsius pivot)
   function unitConvertTemp(val, from, to) {
-    let c; if (from==='C') c=val; else if (from==='F') c=(val-32)*5/9; else c=val-273.15;
-    if (to==='C') return c; if (to==='F') return c*9/5+32; return c+273.15;
+    let c;
+    if (from === 'C') c = val;
+    else if (from === 'F') c = (val - 32) * 5 / 9;
+    else c = val - 273.15;
+    if (to === 'C') return c;
+    if (to === 'F') return c * 9 / 5 + 32;
+    return c + 273.15;
   }
-  function unitCalc() {
-    const cat=$('unit-cat').value, val=parseLocaleNumber($('unit-val').value), from=$('unit-from').value, to=$('unit-to').value;
-    if (!Number.isFinite(val)) {
-      setOut('unit-out','Result','—','Complete all fields.');
+
+  function unitRender(state) {
+    const valEl = $('unit-val-out');
+    const perEl = $('unit-per');
+    const lblEl = $('unit-lbl');
+    const brkEl = $('unit-break');
+    const whyEl = $('unit-why');
+
+    if (!state.valid) {
+      lblEl.textContent = 'Result';
+      valEl.textContent = '—';
+      perEl.textContent = '';
+      brkEl.innerHTML = '<span>' + (state.message || 'Complete all fields') + '</span><span class="v">—</span>';
+      whyEl.textContent = 'Enter a value to convert above.';
       return;
     }
-    let result;
-    if (cat==='temp') result = unitConvertTemp(val, from, to);
-    else { const def = UNIT_DEFS[cat]; result = val * def.toBase[from] / def.toBase[to]; }
-    const decimals = Math.abs(result) >= 100 ? 2 : (Math.abs(result) >= 1 ? 3 : 4);
-    setOut('unit-out','Result', fmt(result, decimals), `${val} ${from} = ${fmt(result, decimals)} ${to}`);
-    document.getElementById('unit-next').hidden = false;
+
+    const { cat, val, from, to, result, decimals } = state;
+    const fromLbl = unitLabel(cat, from);
+    const toLbl = unitLabel(cat, to);
+    const valStr = fmt(val, decimals);
+    const resultStr = fmt(result, decimals);
+    const catLabel = cat === 'length' ? 'Length' : (cat === 'weight' ? 'Weight' : 'Temperature');
+
+    lblEl.textContent = 'Result';
+    valEl.textContent = resultStr;
+    perEl.textContent = ' ' + toLbl;
+    brkEl.innerHTML =
+      '<span>Category</span><span class="v">' + catLabel + '</span>' +
+      '<span>From</span><span class="v">' + valStr + ' ' + fromLbl + '</span>' +
+      '<span>To</span><span class="v">' + toLbl + '</span>' +
+      '<span>Result</span><span class="v">' + resultStr + ' ' + toLbl + '</span>';
+
+    // Why-line: factor-based for length/weight, formula-based for temperature (with parentheses where needed)
+    let whyHTML;
+    if (cat === 'temp') {
+      whyHTML = buildTempWhy(val, from, to, result, decimals);
+    } else {
+      const def = UNIT_DEFS[cat];
+      const fromFactor = def.toBase[from];
+      const toFactor = def.toBase[to];
+      if (from === to) {
+        whyHTML = valStr + ' ' + fromLbl + ' = <b>' + resultStr + ' ' + toLbl + '</b>';
+      } else if (toFactor === 1) {
+        // converting TO base unit
+        whyHTML = valStr + ' × ' + fromFactor + ' = <b>' + resultStr + ' ' + toLbl + '</b>';
+      } else if (fromFactor === 1) {
+        // converting FROM base unit
+        whyHTML = valStr + ' × (1 ÷ ' + toFactor + ') = <b>' + resultStr + ' ' + toLbl + '</b>';
+      } else {
+        // generic: via base
+        whyHTML = valStr + ' × (' + fromFactor + ' ÷ ' + toFactor + ') = <b>' + resultStr + ' ' + toLbl + '</b>';
+      }
+    }
+    whyEl.innerHTML = whyHTML;
   }
+
+  // Temperature why-line: formula-based with parentheses where required
+  function buildTempWhy(val, from, to, result, decimals) {
+    const fromLbl = tempSym(from);
+    const toLbl = tempSym(to);
+    const valStr = fmt(val, decimals);
+    const resStr = fmt(result, decimals);
+    const same = from === to;
+    if (same) {
+      return valStr + ' ' + fromLbl + ' = <b>' + resStr + ' ' + toLbl + '</b>';
+    }
+    if (from === 'C' && to === 'F') {
+      return valStr + ' °C × 9/5 + 32 = <b>' + resStr + ' °F</b>';
+    }
+    if (from === 'F' && to === 'C') {
+      return '(' + valStr + ' °F − 32) × 5/9 = <b>' + resStr + ' °C</b>';
+    }
+    if (from === 'C' && to === 'K') {
+      return valStr + ' °C + 273.15 = <b>' + resStr + ' K</b>';
+    }
+    if (from === 'K' && to === 'C') {
+      return valStr + ' K − 273.15 = <b>' + resStr + ' °C</b>';
+    }
+    if (from === 'F' && to === 'K') {
+      return '(' + valStr + ' °F − 32) × 5/9 + 273.15 = <b>' + resStr + ' K</b>';
+    }
+    if (from === 'K' && to === 'F') {
+      return '(' + valStr + ' K − 273.15) × 9/5 + 32 = <b>' + resStr + ' °F</b>';
+    }
+    // fallback
+    return valStr + ' ' + fromLbl + ' = <b>' + resStr + ' ' + toLbl + '</b>';
+  }
+
+  // Public name unitCalc preserved per freeze list
+  function unitCalc() {
+    const cat = $('unit-cat').value;
+    const val = parseLocaleNumber($('unit-val').value);
+    const from = $('unit-from').value;
+    const to = $('unit-to').value;
+
+    if (!Number.isFinite(val)) {
+      unitRender({ valid: false, message: 'Complete all fields' });
+      return;
+    }
+    if (!from || !to) {
+      // selects not yet populated
+      return;
+    }
+
+    let result;
+    if (cat === 'temp') {
+      result = unitConvertTemp(val, from, to);
+    } else {
+      const def = UNIT_DEFS[cat];
+      result = val * def.toBase[from] / def.toBase[to];
+    }
+
+    if (!Number.isFinite(result)) {
+      unitRender({ valid: false, message: 'Result out of range' });
+      return;
+    }
+
+    // Adaptive decimal precision preserved from legacy
+    const decimals = Math.abs(result) >= 100 ? 2 : (Math.abs(result) >= 1 ? 3 : 4);
+    unitRender({ valid: true, cat, val, from, to, result, decimals });
+  }
+
+  // Copy + copied state
+  (function () {
+    const copyBtn = $('unit-copy');
+    const out = $('unit-out');
+    const lblEl = $('unit-lbl');
+    const valEl = $('unit-val-out');
+    const perEl = $('unit-per');
+    let origLblText = lblEl ? lblEl.textContent : 'Result';
+    let revertTimer = null;
+
+    function setCopied(on) {
+      if (!out) return;
+      out.classList.toggle('copied', on);
+      if (lblEl && on) {
+        origLblText = lblEl.textContent;
+        lblEl.textContent = 'Copied to clipboard';
+      }
+      if (lblEl && !on && origLblText) {
+        lblEl.textContent = origLblText;
+      }
+      if (copyBtn) copyBtn.textContent = on ? '✓ Copied' : 'Copy result';
+    }
+
+    if (copyBtn) copyBtn.addEventListener('click', function () {
+      if (!valEl || valEl.textContent === '—') return;
+      const perStr = (perEl ? perEl.textContent : '').replace(/^\s+/, ' ');
+      const text = 'Result: ' + valEl.textContent + perStr;
+      const finalize = function () {
+        setCopied(true);
+        if (revertTimer) clearTimeout(revertTimer);
+        revertTimer = setTimeout(function () { setCopied(false); }, 1600);
+      };
+      if (!navigator.clipboard) {
+        copyBtn.textContent = 'Copy unavailable';
+        setTimeout(function () { setCopied(false); }, 1500);
+        return;
+      }
+      navigator.clipboard.writeText(text).then(finalize).catch(function () {
+        copyBtn.textContent = 'Copy failed';
+        setTimeout(function () { setCopied(false); }, 1500);
+      });
+    });
+  })();
+
+  // Reset
+  (function () {
+    const resetBtn = $('unit-reset');
+    if (!resetBtn) return;
+    resetBtn.addEventListener('click', function () {
+      $('unit-cat').value = DEFAULTS.cat;
+      $('unit-val').value = DEFAULTS.val;
+      unitUpdateOptions();
+      // unitUpdateOptions selected defaults length idx 0 (m) and idx 5 (ft) automatically
+      unitCalc();
+    });
+  })();
+
+  // Category change handler
+  (function () {
+    const catSel = $('unit-cat');
+    if (!catSel) return;
+    catSel.addEventListener('change', function () {
+      unitUpdateOptions();
+    });
+  })();
+
+  // Required + focus on Value input
+  (function () {
+    const valInput = $('unit-val');
+    const valReq = $('unit-val-req');
+    const valWrap = $('unit-val-wrap');
+
+    function syncRequired() {
+      if (!valReq || !valInput) return;
+      const v = String(valInput.value || '').trim();
+      const empty = v === '' || !Number.isFinite(parseLocaleNumber(v));
+      if (valWrap) valWrap.classList.toggle('error', empty);
+    }
+
+    if (valInput) {
+      valInput.addEventListener('input', syncRequired);
+      valInput.addEventListener('focus', function () { if (valWrap) valWrap.classList.add('focus'); });
+      valInput.addEventListener('blur',  function () { if (valWrap) valWrap.classList.remove('focus'); });
+    }
+    syncRequired();
+  })();
+
+  // Quick example chips
+  document.querySelectorAll('.hf-chip[data-cat]').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      const c = chip.getAttribute('data-cat');
+      const v = chip.getAttribute('data-val');
+      const f = chip.getAttribute('data-from');
+      const t = chip.getAttribute('data-to');
+      if (c !== null) $('unit-cat').value = c;
+      if (v !== null) $('unit-val').value = v;
+      unitUpdateOptions();
+      if (f !== null) $('unit-from').value = f;
+      if (t !== null) $('unit-to').value = t;
+      unitCalc();
+    });
+  });
+
+  // Initial populate + render
   unitUpdateOptions();
-  attachLiveCalc('.tool-form', unitCalc);
+
+  // Live recalc
+  if (typeof attachLiveCalc === 'function') {
+    attachLiveCalc('.tool-form', unitCalc);
+  } else {
+    let t;
+    const handler = function () { clearTimeout(t); t = setTimeout(unitCalc, 80); };
+    document.querySelectorAll('.tool-form input, .tool-form select').forEach(function (el) {
+      el.addEventListener('input', handler);
+      el.addEventListener('change', handler);
+    });
+  }
 </script>
 
 </body>
