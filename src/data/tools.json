@@ -1,0 +1,121 @@
+{
+  "$schema": "./tools.schema.json",
+  "$comment": "Tool manifest skeleton — per-tool metadata for v2 build pipeline. Populate during Master Plan implementation. URLs MUST stay flat root-level (/<slug>/), NEVER /tools/<slug>/ or /calculators/<cluster>/<slug>/.",
+  "version": "0.0.1-draft",
+  "generatedBy": "manual",
+  "lastUpdated": "2026-05-08",
+  "clusters": [
+    {
+      "id": "math-basics",
+      "name": "Math Basics",
+      "description": "Everyday arithmetic — percentage, fractions, ratios.",
+      "navigationOnly": true,
+      "_comment": "Cluster pages exist as navigation hubs only; tools stay at root URLs."
+    },
+    {
+      "id": "shopping-restaurant",
+      "name": "Shopping & Restaurant",
+      "description": "Tip, sales tax, discount, bill split.",
+      "navigationOnly": true
+    },
+    {
+      "id": "money-rent-work",
+      "name": "Money, Rent & Work",
+      "description": "Mortgage, loan, rent affordability — informational only.",
+      "navigationOnly": true
+    },
+    {
+      "id": "date-time",
+      "name": "Date & Time",
+      "description": "Days between, age, time zones.",
+      "navigationOnly": true
+    },
+    {
+      "id": "unit-cooking",
+      "name": "Unit & Cooking",
+      "description": "Length, weight, temperature, recipe scaling.",
+      "navigationOnly": true
+    },
+    {
+      "id": "home-projects",
+      "name": "Home Projects",
+      "description": "Paint, tile, square footage, drywall — backed by architectural expertise.",
+      "navigationOnly": true,
+      "_comment": "Lukasovo CKA 04891 expertise vertikála — E-E-A-T fit, post-AdSense priority"
+    }
+  ],
+  "tools": [
+    {
+      "$comment": "Schema reference for each tool entry. Populate during Master Plan implementation.",
+      "id": "percentage-calculator",
+      "slug": "percentage-calculator",
+      "url": "/percentage-calculator/",
+      "name": "Percentage Calculator",
+      "title": "Percentage Calculator | TinyUseful",
+      "description": "Calculate percentages three ways: percent of, X is what % of Y, and percent change.",
+      "cluster": "math-basics",
+      "tier": "simple",
+      "methodologyWordCount": 400,
+      "schema": ["BreadcrumbList", "SoftwareApplication", "FAQPage"],
+      "status": "live-on-main",
+      "v2Status": "not-started",
+      "v2Phase": "reference-target-2",
+      "_legacyHTML": "/percentage-calculator/index.html"
+    }
+  ],
+  "_pendingTools": [
+    {
+      "$comment": "Existing tools to port to v2 template, in order of priority. Reference page = Tip.",
+      "tools": [
+        {"slug": "tip-calculator", "tier": "simple", "v2Phase": "reference-target-1"},
+        {"slug": "percentage-calculator", "tier": "simple", "v2Phase": "reference-target-2"},
+        {"slug": "discount-calculator", "tier": "simple", "v2Phase": "rollout"},
+        {"slug": "sales-tax-calculator", "tier": "simple", "v2Phase": "rollout"},
+        {"slug": "rent-affordability-calculator", "tier": "simple", "v2Phase": "rollout"},
+        {"slug": "date-calculator", "tier": "simple", "v2Phase": "rollout"},
+        {"slug": "time-zone-converter", "tier": "simple", "v2Phase": "rollout"},
+        {"slug": "unit-converter", "tier": "simple", "v2Phase": "rollout"},
+        {"slug": "mortgage-calculator", "tier": "complex", "v2Phase": "rollout-finance"},
+        {"slug": "loan-calculator", "tier": "complex", "v2Phase": "rollout-finance"},
+        {"slug": "compound-interest-calculator", "tier": "complex", "v2Phase": "rollout-finance"}
+      ]
+    }
+  ],
+  "_postAdSenseTools": [
+    {
+      "$comment": "Phase 63+ Home Projects vertikála per 3-AI consensus. Lukasovo architectural CKA 04891 expertise.",
+      "tools": [
+        {"slug": "square-footage", "tier": "complex", "cluster": "home-projects"},
+        {"slug": "paint-calculator", "tier": "complex", "cluster": "home-projects"},
+        {"slug": "tile-calculator", "tier": "complex", "cluster": "home-projects"},
+        {"slug": "drywall-calculator", "tier": "complex", "cluster": "home-projects"},
+        {"slug": "concrete-calculator", "tier": "complex", "cluster": "home-projects"},
+        {"slug": "mulch-calculator", "tier": "complex", "cluster": "home-projects"}
+      ]
+    }
+  ],
+  "_yMylExclusions": {
+    "$comment": "NEVER ship these — Google quality rater binding, real-world liability risk.",
+    "medical": ["BMI", "BMR", "calorie", "pregnancy", "dosage", "blood-alcohol", "fertility", "mental-health-screener"],
+    "legal": ["tax-filing-1040", "child-support", "alimony", "government-benefits-eligibility"],
+    "investment": ["crypto-prediction", "stock-target", "millionaire-prediction"],
+    "safety-critical": ["structural-load", "electrical-wiring", "drug-dosage"]
+  },
+  "_principles": {
+    "$comment": "Locked from 3-AI consensus. See docs/TINYUSEFUL_HANDOFF_2026-05-07.md and memory/tinyuseful_v2_non_negotiables.md.",
+    "urlStrategy": "flat-root-no-migration",
+    "stack": "vanilla-html-css-js",
+    "framework": "none",
+    "build": "build-light-esbuild-only",
+    "accounts": false,
+    "ai": false,
+    "ymylTools": false,
+    "autoAds": false,
+    "stickyMobileAds": false,
+    "customSelects": false,
+    "placeholderOnlyLabels": false,
+    "typeNumberForCurrency": false,
+    "pSeoCityStatePages": false,
+    "previewIndexable": false
+  }
+}

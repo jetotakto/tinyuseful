@@ -25,7 +25,7 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260504d">
+<link rel="stylesheet" href="/style.css?v=20260509a">
 <script src="/js/helpers.js?v=20260504d"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
@@ -46,7 +46,8 @@
 </head>
 
 <body>
-<div class="page">
+<a class="skip-link" href="#main">Skip to main content</a>
+<main id="main" class="page">
 
   <header class="masthead">
     <a class="wordmark" href="/"><span class="knife" aria-hidden="true"></span>TinyUseful</a>
@@ -65,7 +66,7 @@
     </div>
     <div class="tool" data-tool="vat">
       <div class="tool-meta">
-        <h3>Inputs</h3>
+        <h2>Inputs</h2>
         <p class="desc">Enter price, tax rate, and pick add or remove. The default rate (8.875%) is New York City. Replace with your local rate.</p>
       </div>
       <div class="tool-form">
@@ -97,7 +98,7 @@
   </div>
 
   <section class="explainer">
-    <h3>How to calculate sales tax manually</h3>
+    <h2>How to calculate sales tax manually</h2>
     <ol>
       <li>Convert the tax rate to a decimal (8.875% → 0.08875).</li>
       <li>Multiply the price by the decimal to get the tax amount.</li>
@@ -105,7 +106,7 @@
     </ol>
     <p><strong>Example:</strong> $100 with 8% tax → 100 × 0.08 = $8.00 tax → <strong>$108.00 gross</strong>.</p>
 
-    <h3>Quick examples</h3>
+    <h2>Quick examples</h2>
     <ul class="examples">
       <li>$100 with 8% sales tax = <strong>$108.00</strong></li>
       <li>$54.99 with 7.25% tax = <strong>$58.98</strong></li>
@@ -114,7 +115,7 @@
       <li>Remove 20% VAT from £120 = <strong>£100.00</strong></li>
     </ul>
 
-    <h3>Formulas used</h3>
+    <h2>Formulas used</h2>
     <p class="formula"><code>add tax: gross = net × (1 + rate ÷ 100)</code></p>
     <p class="formula"><code>remove tax: net = gross ÷ (1 + rate ÷ 100)</code></p>
     <p class="formula"><code>tax amount = gross − net</code></p>
@@ -129,7 +130,7 @@
       and product type. This calculator does not look up rates by location.
     </p>
 
-    <h3>Common uses</h3>
+    <h2>Common uses</h2>
     <ul>
       <li>Estimating the final price of a US online purchase before checkout</li>
       <li>Removing VAT from an EU/UK price to see the net amount</li>
@@ -139,8 +140,45 @@
     </ul>
   </section>
 
+  <section class="methodology" aria-labelledby="methodology-title">
+    <h2 id="methodology-title">Methodology &amp; trust</h2>
+    <details>
+      <summary>Formula, assumptions, rounding, and limitations</summary>
+      <div class="answer">
+        <h3>Formula</h3>
+        <ul>
+          <li>Add tax: <code>gross = net × (1 + rate ÷ 100)</code></li>
+          <li>Remove tax: <code>net = gross ÷ (1 + rate ÷ 100)</code></li>
+          <li><code>tax amount = gross − net</code></li>
+        </ul>
+
+        <h3>Assumptions</h3>
+        <ul>
+          <li>The rate you enter is the combined rate (state + county + city + any special district), expressed as a percentage.</li>
+          <li>The same rate applies to the entire price — no per-line mix.</li>
+          <li>Both decimal comma (8,875) and decimal point (8.875) are accepted.</li>
+        </ul>
+
+        <h3>Rounding</h3>
+        <ul>
+          <li>Net, gross, and tax amounts are rounded to 2 decimal places for display.</li>
+          <li>Receipts may differ by a cent or two because stores round each line item before summing.</li>
+        </ul>
+
+        <h3>Limitations</h3>
+        <ul>
+          <li>This calculator does not look up rates by location. Look up your local rate before relying on the result.</li>
+          <li>Category-specific rates (food, clothing, prescriptions in some US states; reduced VAT bands in the EU) are not modelled.</li>
+          <li>Sales-tax holidays and exemptions are not detected.</li>
+        </ul>
+
+        <p class="byline"><em>Built and maintained by Lukáš, an architect in Prague. Last updated May 2026.</em></p>
+      </div>
+    </details>
+  </section>
+
   <section class="faq">
-    <h3>Frequently asked questions</h3>
+    <h2>Frequently asked questions</h2>
     <details>
       <summary>What's the sales tax rate in my state?</summary>
       <div class="answer"><p>This calculator does not look up rates by location — you enter the rate yourself. Combined state + local rates in the US range from 0% (NH, OR, MT, AK, DE) to roughly 9.55% (TN). City and county add-ons vary; the receipt or your state's tax site has the exact number.</p></div>
@@ -160,7 +198,7 @@
   </section>
 
   <section class="related">
-    <h3>Related tools</h3>
+    <h2>Related tools</h2>
     <div class="related-grid">
       <a href="/percentage-calculator/">Percentage Calculator</a>
       <a href="/discount-calculator/">Discount Calculator</a>
@@ -172,13 +210,13 @@
   <footer class="colophon">
     <span>TinyUseful · Issue No. 1 · 2026</span>
     <span>
-      <a href="/">Home</a> &nbsp; <a href="/about.html">About</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp;
+      <a href="/">Home</a> &nbsp; <a href="/about.html">About</a> &nbsp; <a href="/changelog.html">Changelog</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp;
       <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode"><span class="icon-light" aria-hidden="true">☀</span><span class="icon-dark" aria-hidden="true">☾</span> Theme</button>
     </span>
   </footer>
   <script src="/theme.js" defer></script>
 
-</div>
+</main>
 
 <script>
   const $ = id => document.getElementById(id);

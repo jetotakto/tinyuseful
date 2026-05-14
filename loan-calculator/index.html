@@ -25,7 +25,7 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260504e">
+<link rel="stylesheet" href="/style.css?v=20260509a">
 <script src="/js/helpers.js?v=20260504e"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
@@ -46,7 +46,8 @@
 </head>
 
 <body>
-<div class="page">
+<a class="skip-link" href="#main">Skip to main content</a>
+<main id="main" class="page">
 
   <header class="masthead">
     <a class="wordmark" href="/"><span class="knife" aria-hidden="true"></span>TinyUseful</a>
@@ -65,7 +66,7 @@
     </div>
     <div class="tool" data-tool="loan">
       <div class="tool-meta">
-        <h3>Inputs</h3>
+        <h2>Inputs</h2>
         <p class="desc">Enter loan amount, APR, and term in months. Same amortization formula as a mortgage, just shorter.</p>
       </div>
       <div class="tool-form">
@@ -92,7 +93,7 @@
   </div>
 
   <section class="explainer">
-    <h3>How to calculate a loan payment manually</h3>
+    <h2>How to calculate a loan payment manually</h2>
     <ol>
       <li>Convert APR to monthly rate: divide by 12 and by 100 (7.5% APR → 0.00625).</li>
       <li>Compute (1 + monthly rate) raised to the power of total months.</li>
@@ -100,7 +101,7 @@
     </ol>
     <p><strong>Example:</strong> $25,000 loan, 7.5% APR, 60 months → monthly payment ≈ <strong>$501</strong>.</p>
 
-    <h3>Quick examples</h3>
+    <h2>Quick examples</h2>
     <ul class="examples">
       <li>$25,000 auto loan, 7.5% APR, 60 mo = <strong>$501/mo</strong></li>
       <li>$15,000 personal loan, 9% APR, 36 mo = <strong>$477/mo</strong></li>
@@ -108,7 +109,7 @@
       <li>Same $25,000 over 36 mo instead of 60 mo = <strong>$777/mo</strong> (saves ~$2.5k interest)</li>
     </ul>
 
-    <h3>Formulas used</h3>
+    <h2>Formulas used</h2>
     <p class="formula"><code>monthly rate = APR ÷ 12 ÷ 100</code></p>
     <p class="formula"><code>M = P × [r(1+r)^n] / [(1+r)^n − 1]</code></p>
     <p class="formula"><code>total interest = (M × n) − P</code></p>
@@ -117,7 +118,7 @@
       Shorter term = higher monthly payment but less total interest. Run both and compare.
     </p>
 
-    <h3>Common uses</h3>
+    <h2>Common uses</h2>
     <ul>
       <li>Comparing auto loan offers from different dealers or banks</li>
       <li>Choosing between 36 and 60 month terms (interest vs. cash flow trade-off)</li>
@@ -127,8 +128,47 @@
     </ul>
   </section>
 
+  <section class="methodology" aria-labelledby="methodology-title">
+    <h2 id="methodology-title">Methodology &amp; trust</h2>
+    <details>
+      <summary>Formula, assumptions, rounding, and limitations</summary>
+      <div class="answer">
+        <h3>Formula</h3>
+        <ul>
+          <li><code>monthly rate = APR ÷ 12 ÷ 100</code></li>
+          <li><code>M = P × [r(1+r)^n] / [(1+r)^n − 1]</code></li>
+          <li><code>total interest = (M × n) − P</code></li>
+          <li><code>total paid = M × n</code></li>
+        </ul>
+
+        <h3>Assumptions</h3>
+        <ul>
+          <li>APR you enter is fixed for the full term and is divided by 12 for monthly compounding.</li>
+          <li>Monthly payment is constant; term is in whole months.</li>
+          <li>Both decimal comma (7,5) and decimal point (7.5) are accepted.</li>
+        </ul>
+
+        <h3>Rounding</h3>
+        <ul>
+          <li>Monthly payment, total interest, and total paid are rounded to the nearest dollar for display.</li>
+        </ul>
+
+        <h3>Limitations</h3>
+        <ul>
+          <li>Origination fees, points, prepayment penalties, late fees, and other lender charges are not modelled.</li>
+          <li>Variable-rate loans, deferment, forbearance, income-driven repayment, and grace periods are not handled.</li>
+          <li>Extra principal payments and bi-weekly schedules are not modelled.</li>
+          <li>The APR shown is what you enter — comparing real loan offers requires each lender's official APR disclosure.</li>
+          <li>Estimate only. Lender underwriting, qualification, and final terms will differ.</li>
+        </ul>
+
+        <p class="byline"><em>Built and maintained by Lukáš, an architect in Prague. Last updated May 2026.</em></p>
+      </div>
+    </details>
+  </section>
+
   <section class="faq">
-    <h3>Frequently asked questions</h3>
+    <h2>Frequently asked questions</h2>
     <details>
       <summary>What's the difference between APR and interest rate on a loan?</summary>
       <div class="answer"><p>Interest rate is the cost of borrowing the principal. APR also includes lender fees expressed as a yearly cost, so APR is always equal to or higher than the interest rate. Always compare loans on APR, not just rate.</p></div>
@@ -148,7 +188,7 @@
   </section>
 
   <section class="related">
-    <h3>Related tools</h3>
+    <h2>Related tools</h2>
     <div class="related-grid">
       <a href="/mortgage-calculator/">Mortgage Calculator</a>
       <a href="/compound-interest-calculator/">Compound Interest</a>
@@ -160,13 +200,13 @@
   <footer class="colophon">
     <span>TinyUseful · Issue No. 1 · 2026</span>
     <span>
-      <a href="/">Home</a> &nbsp; <a href="/about.html">About</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp;
+      <a href="/">Home</a> &nbsp; <a href="/about.html">About</a> &nbsp; <a href="/changelog.html">Changelog</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp;
       <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode"><span class="icon-light" aria-hidden="true">☀</span><span class="icon-dark" aria-hidden="true">☾</span> Theme</button>
     </span>
   </footer>
   <script src="/theme.js" defer></script>
 
-</div>
+</main>
 
 <script>
   const $ = id => document.getElementById(id);

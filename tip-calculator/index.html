@@ -13,7 +13,7 @@
 <meta name="robots" content="index, follow">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Tip Calculator — TinyUseful">
-<meta property="og:description" content="Restaurant tip with optional split between people.">
+<meta property="og:description" content="Restaurant tip + split bill, instant per-person amount.">
 <meta property="og:url" content="https://www.tinyuseful.app/tip-calculator/">
 <meta property="og:site_name" content="TinyUseful">
 <meta property="og:image" content="https://www.tinyuseful.app/og-image04.png">
@@ -25,12 +25,12 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260504d">
+<link rel="stylesheet" href="/style.css?v=20260513-parity">
 <script src="/js/helpers.js?v=20260504d"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Tip Calculator","applicationCategory":"UtilityApplication","operatingSystem":"Any (browser-based)","description":"Calculate restaurant tip and split between people.","url":"https://www.tinyuseful.app/tip-calculator/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"TinyUseful","url":"https://www.tinyuseful.app/"}}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Tip Calculator","applicationCategory":"UtilityApplication","operatingSystem":"Any (browser-based)","description":"Calculate restaurant tip and split the bill per person.","url":"https://www.tinyuseful.app/tip-calculator/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"TinyUseful","url":"https://www.tinyuseful.app/"}}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TinyUseful","item":"https://www.tinyuseful.app/"},{"@type":"ListItem","position":2,"name":"Tip Calculator","item":"https://www.tinyuseful.app/tip-calculator/"}]}
@@ -39,154 +39,380 @@
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"How do I calculate a 15% or 18% tip in my head?","acceptedAnswer":{"@type":"Answer","text":"For 15%: take 10% (move the decimal one place left), then add half of that. Bill of $40 → 10% is $4 → half is $2 → 15% is $6. For 18%: same trick, then add a bit more. For 20%: take 10% and double it."}},
 {"@type":"Question","name":"Should I tip on the pre-tax or post-tax total?","acceptedAnswer":{"@type":"Answer","text":"Pre-tax is the traditional standard in the US — you're tipping for service, not for tax. But many people tip on the post-tax total because it's what's printed on the receipt and it's easier. Both are acceptable."}},
-{"@type":"Question","name":"Is 20% standard in 2026?","acceptedAnswer":{"@type":"Answer","text":"In US sit-down restaurants, yes. Tip creep has pushed the expected range from 15-18% (2010s) to 18-22% (2020s). Counter-service and takeout are more flexible — 10% or a few dollars is common, sometimes nothing."}},
+{"@type":"Question","name":"Is 20% standard in 2026?","acceptedAnswer":{"@type":"Answer","text":"In US sit-down restaurants, yes. 'Tip creep' has pushed the expected range from 15–18% (2010s) to 18–22% (2020s). Counter-service and takeout are more flexible — 10% or a few dollars is common, sometimes 0% if it's true counter-service."}},
 {"@type":"Question","name":"How do I split a bill unevenly?","acceptedAnswer":{"@type":"Answer","text":"This calculator does an even split. For uneven splits, ask the server to print separate checks (most US restaurants will), or calculate each person's share manually and add a flat tip percentage to each."}}
 ]}
 </script>
 </head>
 
-<body>
-<div class="page">
+<body class="ui-hifi">
+<a class="skip-link" href="#main">Skip to main content</a>
+<main id="main" class="hf">
 
-  <header class="masthead">
-    <a class="wordmark" href="/"><span class="knife" aria-hidden="true"></span>TinyUseful</a>
-    <span class="issue">No. 1 — April 2026</span>
+  <header class="hf-header">
+    <a class="hf-wordmark" href="/" aria-label="TinyUseful home">
+      <span class="stack"><span>TINY</span><span>USEFUL</span></span>
+    </a>
+    <span class="hf-menu-btn" aria-hidden="true">
+      <span></span><span></span>
+    </span>
   </header>
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">TinyUseful</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">Tip Calculator</span>
+  <nav class="hf-crumb" aria-label="Breadcrumb">
+    / tip calculator <span class="crumb-marker" aria-hidden="true"><span class="crumb-star">&#9733;</span> balanced</span>
   </nav>
 
-  <section class="tools">
-    <div class="section-head">
-      <span class="section-num">No. 07</span>
-      <h1>Tip Calculator</h1>
-      <span class="desc">Restaurant tip with optional split between people.</span>
-    </div>
-    <div class="tool" data-tool="tip">
-      <div class="tool-meta">
-        <h3>Inputs</h3>
-        <p class="desc">Bill amount, tip percent, and number of people. Per-person total appears below.</p>
-      </div>
-      <div class="tool-form">
-        <div class="row">
-          <label>Bill ($)<input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="tip-bill" value="50"></label>
-          <label>Tip %<input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="tip-pct" value="18"></label>
-          <label>Split<input type="text" inputmode="numeric" autocomplete="off" enterkeyhint="done" id="tip-split" value="2"></label>
-        </div>
-        <button type="button" onclick="tipCalc()">Calculate</button>
-        <div class="out" id="tip-out" role="status" aria-live="polite"><span class="label">Total</span><span class="big">$59.00</span><span class="breakdown">Tip $9.00 · Per person $29.50</span></div>
-        <div class="next-task" id="tip-next" hidden>
-          <p class="hint">↓ You might also need</p>
-          <div class="next-tools">
-            <a href="/discount-calculator/" class="next-link" data-symbol="−">Discount</a>
-            <a href="/sales-tax-calculator/" class="next-link" data-symbol="+">Sales Tax</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="ad-block">
-    <div class="placeholder">728 × 90 leaderboard placement</div>
+  <h1 class="hf-display">TIP&nbsp;CALCULATOR</h1>
+  <div class="hf-sub">
+    <span>Calculates tip on the pre-tax subtotal.</span>
   </div>
 
-  <section class="explainer">
-    <h3>How to calculate a tip manually</h3>
-    <ol>
-      <li>For 10%: move the decimal point one place left ($45.00 → $4.50).</li>
-      <li>For 20%: take 10% and double it ($4.50 × 2 = $9.00).</li>
-      <li>For 15% or 18%: take 10%, then add half (15%) or close to half plus a bit (18%).</li>
-    </ol>
-    <p><strong>Example:</strong> 18% tip on a $45 bill = $4.50 + $4.50 + $0.90 ≈ <strong>$8.10</strong>.</p>
+  <div class="hf-fields" data-tool="tip">
 
-    <h3>Quick examples</h3>
-    <ul class="examples">
-      <li>15% tip on $45 = <strong>$6.75</strong></li>
-      <li>18% tip on $50 = <strong>$9.00</strong></li>
-      <li>20% tip on $60 = <strong>$12.00</strong></li>
-      <li>22% tip on $80 = <strong>$17.60</strong></li>
-      <li>$90 bill + 20% split between 3 = <strong>$36.00 each</strong></li>
-    </ul>
+    <div class="hf-field">
+      <div class="lbl">
+        <span>Bill amount</span>
+        <span class="req" id="tip-bill-req">required</span>
+      </div>
+      <div class="hf-input focus" id="tip-bill-wrap">
+        <span class="pre" aria-hidden="true">$</span>
+        <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="tip-bill" value="48.00" aria-label="Bill amount in dollars">
+      </div>
+    </div>
 
-    <h3>Formulas used</h3>
-    <p class="formula"><code>tip = bill × (percent ÷ 100)</code></p>
-    <p class="formula"><code>total = bill + tip</code></p>
-    <p class="formula"><code>per person = total ÷ split</code></p>
-    <p>
-      In the US, standard restaurant tip is 18–20% on the pre-tax subtotal. 15% is acceptable for
-      adequate service, 20%+ for great service. In the UK and most of continental Europe, service
-      is often included; 5–10% extra is appreciated but not expected. In Japan, tipping is usually
-      not done at all.
-    </p>
+    <div class="hf-field">
+      <div class="lbl">
+        <span>Tip</span>
+        <span aria-hidden="true">%</span>
+      </div>
+      <div class="hf-input">
+        <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="tip-pct" value="10" aria-label="Tip percentage">
+        <span class="suf" aria-hidden="true">%</span>
+      </div>
+      <div class="hf-quickrow" role="group" aria-label="Quick tip percentages">
+        <button type="button" class="hf-pill" data-pct="15">15%</button>
+        <button type="button" class="hf-pill active" data-pct="18">18%</button>
+        <button type="button" class="hf-pill" data-pct="20">20%</button>
+      </div>
+    </div>
 
-    <h3>Common uses</h3>
-    <ul>
-      <li>Restaurant and café service in the US (sit-down, 18–22%)</li>
-      <li>Splitting a shared dinner bill between people</li>
-      <li>Bartenders and baristas (typically $1–$2 or 15–20%)</li>
-      <li>Hotel housekeeping and bellhop service</li>
-      <li>Hairdresser, taxi, and food delivery (10–20%)</li>
-    </ul>
-  </section>
+    <div class="hf-field">
+      <div class="lbl">
+        <span>People</span>
+      </div>
+      <div class="hf-input">
+        <input type="text" inputmode="numeric" autocomplete="off" enterkeyhint="done" id="tip-split" value="4" aria-label="Number of people splitting the bill">
+        <span class="suf" aria-hidden="true">people</span>
+      </div>
+    </div>
 
-  <section class="faq">
-    <h3>Frequently asked questions</h3>
-    <details>
-      <summary>How do I calculate a 15% or 18% tip in my head?</summary>
-      <div class="answer"><p>For 15%: take 10% (move the decimal one place left), then add half of that. Bill of $40 → 10% is $4 → half is $2 → 15% is $6. For 18%: same trick, then add a bit more. For 20%: take 10% and double it.</p></div>
-    </details>
-    <details>
-      <summary>Should I tip on the pre-tax or post-tax total?</summary>
-      <div class="answer"><p>Pre-tax is the traditional standard in the US — you're tipping for service, not for tax. But many people tip on the post-tax total because it's what's printed on the receipt and it's easier. Both are acceptable.</p></div>
-    </details>
-    <details>
-      <summary>Is 20% standard in 2026?</summary>
-      <div class="answer"><p>In US sit-down restaurants, yes. "Tip creep" has pushed the expected range from 15–18% (2010s) to 18–22% (2020s). Counter-service and takeout are more flexible — 10% or a few dollars is common, sometimes nothing.</p></div>
-    </details>
-    <details>
-      <summary>How do I split a bill unevenly?</summary>
-      <div class="answer"><p>This calculator does an even split. For uneven splits, ask the server to print separate checks (most US restaurants will), or calculate each person's share manually and add a flat tip percentage to each.</p></div>
-    </details>
-  </section>
 
-  <section class="related">
-    <h3>Related tools</h3>
-    <div class="related-grid">
-      <a href="/percentage-calculator/">Percentage Calculator</a>
-      <a href="/sales-tax-calculator/">Sales Tax Calculator</a>
-      <a href="/discount-calculator/">Discount Calculator</a>
-      <a href="/unit-converter/">Unit Converter</a>
+  </div>
+
+  <section class="hf-result" id="tip-out" role="status" aria-live="polite" aria-atomic="true">
+    <div class="r-lbl">
+      <span class="r-lbl-text">Per person</span>
+      <span class="hf-tiny hf-muted" aria-hidden="true">aria-live</span>
+    </div>
+    <div class="r-num">
+      <span class="cur" aria-hidden="true">$</span><span class="val" id="tip-val">13.20</span><span class="per" id="tip-per">/ person</span>
+    </div>
+    <div class="r-break" id="tip-break">
+      <span>Bill</span><span class="v">$48.00</span>
+      <span>Tip (10%)</span><span class="v">$4.80</span>
+      <span>Total</span><span class="v">$52.80</span>
+      <span>Per person (4)</span><span class="v">$13.20</span>
+    </div>
+    <div class="r-actions">
+      <button type="button" class="hf-btn accent" id="tip-copy" aria-label="Copy result to clipboard">Copy result</button>
+      <button type="button" class="hf-btn ghost" id="tip-reset" aria-label="Reset to defaults">Reset</button>
+    </div>
+    <div class="why-line" id="tip-why">
+      $48 × 10% = $4.80 → $52.80 ÷ 4 = <b>$13.20</b>
     </div>
   </section>
 
-  <footer class="colophon">
-    <span>TinyUseful · Issue No. 1 · 2026</span>
-    <span>
-      <a href="/">Home</a> &nbsp; <a href="/about.html">About</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp;
-      <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode"><span class="icon-light" aria-hidden="true">☀</span><span class="icon-dark" aria-hidden="true">☾</span> Theme</button>
+  <div class="hf-chips-wrap">
+    <div class="hf-cap">Quick examples</div>
+    <div class="hf-chips" role="list">
+      <button type="button" class="hf-chip" data-bill="40" data-pct="20" data-split="1" role="listitem">$40 &middot; 20%</button>
+      <button type="button" class="hf-chip" data-bill="120" data-pct="18" data-split="4" role="listitem">$120 split 4</button>
+      <span class="hf-chip hf-chip-static" role="listitem" aria-label="Example: round up to whole dollars">Round up</span>
+    </div>
+  </div>
+
+  <div class="hf-method-wrap">
+    <div class="hf-cap">How this is calculated</div>
+    <div class="hf-method-block">
+      <div class="formula">tip = bill &times; (percent &divide; 100)</div>
+      <p>$48.00 &times; 10% = $4.80 tip. Total $52.80 split 4 ways = $13.20 each.
+        Two-decimal rounding. Tip is calculated from the bill amount you enter — if your receipt already includes tax, enter the amount you want to base the tip on.</p>
+      <p class="hf-muted hf-tiny">Updated May 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
+
+      <details class="method-details">
+        <summary>Assumptions, rounding &amp; limitations</summary>
+
+        <h3>Assumptions</h3>
+        <ul>
+          <li>Tip is calculated on the bill amount you enter. If you tip on the post-tax total, enter the post-tax bill.</li>
+          <li>Per-person split is even; each person pays the same share of total.</li>
+          <li>Both decimal comma (18,5) and decimal point (18.5) are accepted.</li>
+        </ul>
+
+        <h3>Rounding</h3>
+        <p>Tip, total, and per-person amounts are rounded to 2 decimal places for display.</p>
+
+        <h3>Limitations</h3>
+        <ul>
+          <li>Local tipping conventions are not looked up &mdash; defaults reflect US sit-down norms.</li>
+          <li>Automatic service charges (common for large parties or in some countries) are not detected; check the receipt before adding a tip on top.</li>
+          <li>Uneven splits are not modelled.</li>
+        </ul>
+      </details>
+    </div>
+  </div>
+
+  <div class="hf-ad" aria-label="Advertisement">
+    <div class="ad-label">Advertisement</div>
+    <div class="ad-slot" id="tip-ad-slot"></div>
+  </div>
+
+  <div class="hf-stack">
+
+    <section class="hf-step s1" data-step="faq">
+      <header class="step-head">
+        <div>
+          <div class="step-title">FAQ</div>
+          <div class="step-meta">tip in head &middot; pre-tax vs post-tax &middot; 20% standard &middot; split bill</div>
+        </div>
+        <span class="step-chev" aria-hidden="true">&#8599;</span>
+      </header>
+      <div class="step-body">
+        <details class="step-q">
+          <summary>How do I calculate a 15% or 18% tip in my head?</summary>
+          <div class="answer"><p>For 15%: take 10% (move the decimal one place left), then add half of that. Bill of $40 &rarr; 10% is $4 &rarr; half is $2 &rarr; 15% is $6. For 18%: same trick, then add a bit more. For 20%: take 10% and double it.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>Should I tip on the pre-tax or post-tax total?</summary>
+          <div class="answer"><p>Pre-tax is the traditional standard in the US &mdash; you&rsquo;re tipping for service, not for tax. But many people tip on the post-tax total because it&rsquo;s what&rsquo;s printed on the receipt and it&rsquo;s easier. Both are acceptable.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>Is 20% standard in 2026?</summary>
+          <div class="answer"><p>In US sit-down restaurants, yes. &ldquo;Tip creep&rdquo; has pushed the expected range from 15&ndash;18% (2010s) to 18&ndash;22% (2020s). Counter-service and takeout are more flexible &mdash; 10% or a few dollars is common, sometimes 0% if it&rsquo;s true counter-service.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>How do I split a bill unevenly?</summary>
+          <div class="answer"><p>This calculator does an even split. For uneven splits, ask the server to print separate checks (most US restaurants will), or calculate each person&rsquo;s share manually and add a flat tip percentage to each.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <section class="hf-step s2" data-step="related">
+      <header class="step-head">
+        <div>
+          <div class="step-title">RELATED</div>
+          <div class="step-meta">Sales tax &middot; Discount &middot; Percentage</div>
+        </div>
+        <span class="step-chev" aria-hidden="true">&#8599;</span>
+      </header>
+      <nav class="step-related" aria-label="Related calculators">
+        <a href="/percentage-calculator/">Percentage</a>
+        <a href="/sales-tax-calculator/">Sales Tax</a>
+        <a href="/discount-calculator/">Discount</a>
+        <a href="/unit-converter/">Unit Converter</a>
+      </nav>
+    </section>
+
+  </div>
+
+  <div class="hf-trust">No accounts &middot; runs in your browser &middot; ads &amp; analytics may use cookies</div>
+
+  <footer class="hf-foot">
+    <span class="foot-links">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/changelog.html">Changelog</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
     </span>
+    <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode">&#9728; / &#9790;</button>
   </footer>
+
   <script src="/theme.js" defer></script>
 
-</div>
+</main>
 
 <script>
   const $ = id => document.getElementById(id);
-  const fmt = (n, d=2) => n.toLocaleString(undefined, {minimumFractionDigits: d, maximumFractionDigits: d});
-  function tipCalc() {
-    const bill=parseLocaleNumber($('tip-bill').value), pct=parseLocaleNumber($('tip-pct').value), split=Math.max(1, Math.floor(parseLocaleNumber($('tip-split').value))||1);
-    if (!Number.isFinite(bill) || !Number.isFinite(pct)) {
-      setOut('tip-out','Total','—','Complete all fields.');
+  const fmt = (n, d=2) => n.toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
+
+  // Defaults match HiFiToolC canvas state
+  const DEFAULTS = { bill: '48.00', pct: '10', split: '4' };
+
+  function tipRender(state) {
+    const valEl = $('tip-val');
+    const perEl = $('tip-per');
+    const brkEl = $('tip-break');
+    const whyEl = $('tip-why');
+
+    if (!state.valid) {
+      valEl.textContent = '\u2014';
+      perEl.textContent = '';
+      brkEl.innerHTML = '<span>Complete all fields</span><span class="v">\u2014</span>';
+      whyEl.textContent = 'Enter a bill amount and tip percentage above.';
       return;
     }
-    const tip = bill*pct/100, total = bill+tip, perPerson = total/split;
-    setOut('tip-out','Total','$'+fmt(total),
-      `Tip $${fmt(tip)}${split>1?` · Per person $${fmt(perPerson)}`:''}`);
-    document.getElementById('tip-next').hidden = false;
+
+    const { bill, pct, split, tip, total, perPerson } = state;
+    // Per person always shown (canvas-faithful)
+    valEl.textContent = fmt(perPerson);
+    perEl.textContent = '/ person';
+
+    brkEl.innerHTML =
+      '<span>Bill</span><span class="v">$' + fmt(bill) + '</span>' +
+      '<span>Tip (' + pct + '%)</span><span class="v">$' + fmt(tip) + '</span>' +
+      '<span>Total</span><span class="v">$' + fmt(total) + '</span>' +
+      '<span>Per person (' + split + ')</span><span class="v">$' + fmt(perPerson) + '</span>';
+
+    whyEl.innerHTML =
+      '$' + fmt(bill, 0) + ' \u00D7 ' + pct + '% = $' + fmt(tip) +
+      ' \u2192 $' + fmt(total) + ' \u00F7 ' + split + ' = <b>$' + fmt(perPerson) + '</b>';
   }
+
+  function tipCalc() {
+    const bill  = parseLocaleNumber($('tip-bill').value);
+    const pct   = parseLocaleNumber($('tip-pct').value);
+    const split = Math.max(1, Math.floor(parseLocaleNumber($('tip-split').value)) || 1);
+
+    if (!Number.isFinite(bill) || !Number.isFinite(pct)) {
+      tipRender({ valid: false });
+      return;
+    }
+    const tip = bill * pct / 100;
+    const total = bill + tip;
+    const perPerson = total / split;
+    tipRender({ valid: true, bill, pct, split, tip, total, perPerson });
+  }
+
+  // Copy + copied state (canvas HiFiResultCopied)
+  (function () {
+    const copyBtn = $('tip-copy');
+    const out = $('tip-out');
+    const lblText = out ? out.querySelector('.r-lbl-text') : null;
+    const origLblText = lblText ? lblText.textContent : 'Per person';
+    let revertTimer = null;
+
+    function setCopied(on) {
+      if (!out) return;
+      out.classList.toggle('copied', on);
+      if (lblText) lblText.textContent = on ? 'Copied to clipboard' : origLblText;
+      if (copyBtn) copyBtn.textContent = on ? '\u2713 Copied' : 'Copy result';
+    }
+
+    if (copyBtn) copyBtn.addEventListener('click', function () {
+      const valEl = $('tip-val');
+      const perEl = $('tip-per');
+      if (!valEl || valEl.textContent === '\u2014') return;
+      const text = 'Per person: $' + valEl.textContent + ' ' + (perEl ? perEl.textContent : '');
+      const finalize = function () {
+        setCopied(true);
+        if (revertTimer) clearTimeout(revertTimer);
+        revertTimer = setTimeout(function () { setCopied(false); }, 1600);
+      };
+      if (!navigator.clipboard) {
+        copyBtn.textContent = 'Copy unavailable';
+        setTimeout(function () { setCopied(false); }, 1500);
+        return;
+      }
+      navigator.clipboard.writeText(text).then(finalize).catch(function () {
+        copyBtn.textContent = 'Copy failed';
+        setTimeout(function () { setCopied(false); }, 1500);
+      });
+    });
+  })();
+
+  // Reset
+  (function () {
+    const resetBtn = $('tip-reset');
+    if (!resetBtn) return;
+    resetBtn.addEventListener('click', function () {
+      $('tip-bill').value = DEFAULTS.bill;
+      $('tip-pct').value = DEFAULTS.pct;
+      $('tip-split').value = DEFAULTS.split;
+      $('tip-bill').dispatchEvent(new Event('input', { bubbles: true }));
+      $('tip-pct').dispatchEvent(new Event('input', { bubbles: true }));
+      $('tip-split').dispatchEvent(new Event('input', { bubbles: true }));
+    });
+  })();
+
+  // Pills + REQUIRED visible always + quick example chips
+  (function () {
+    const pillRow = document.querySelector('.hf-quickrow');
+    const pctInput = $('tip-pct');
+    const billInput = $('tip-bill');
+    const billReq = $('tip-bill-req');
+    const billWrap = $('tip-bill-wrap');
+
+    function syncPills() {
+      // Visual parity: when input matches 15/18/20, activate that pill.
+      // When input is NOT a preset (e.g. 10), preserve markup-set active state (18 from canvas).
+      if (!pillRow || !pctInput) return;
+      const cur = parseLocaleNumber(pctInput.value);
+      const presets = [15, 18, 20];
+      const idx = presets.indexOf(cur);
+      if (idx < 0) return;  // not a preset; leave canvas state alone
+      pillRow.querySelectorAll('.hf-pill').forEach(function (p) {
+        p.classList.toggle('active', Number(p.dataset.pct) === cur);
+      });
+    }
+
+    function syncRequired() {
+      // REQUIRED stays visible always (canvas-faithful). Only toggle .error on wrap.
+      if (!billReq || !billInput) return;
+      const v = String(billInput.value || '').trim();
+      const empty = v === '' || !Number.isFinite(parseLocaleNumber(v));
+      if (billWrap) billWrap.classList.toggle('error', empty);
+    }
+
+    if (pillRow) pillRow.addEventListener('click', function (e) {
+      const btn = e.target.closest('.hf-pill');
+      if (!btn || !pctInput) return;
+      pctInput.value = btn.dataset.pct;
+      pctInput.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+
+    if (pctInput) pctInput.addEventListener('input', syncPills);
+    if (billInput) {
+      billInput.addEventListener('input', syncRequired);
+      billInput.addEventListener('focus', function () { if (billWrap) billWrap.classList.add('focus'); });
+      billInput.addEventListener('blur',  function () { if (billWrap) billWrap.classList.remove('focus'); });
+    }
+
+    document.querySelectorAll('.hf-chip[data-bill]').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        const b = chip.getAttribute('data-bill');
+        const p = chip.getAttribute('data-pct');
+        const s = chip.getAttribute('data-split');
+        if (b) $('tip-bill').value = b;
+        if (p) $('tip-pct').value = p;
+        if (s) $('tip-split').value = s;
+        $('tip-bill').dispatchEvent(new Event('input', { bubbles: true }));
+      });
+    });
+
+    syncPills();
+    syncRequired();
+  })();
+
   tipCalc();
-  attachLiveCalc('.tool-form', tipCalc);
+  (function() {
+    let t;
+    const handler = function () { clearTimeout(t); t = setTimeout(tipCalc, 80); };
+    document.querySelectorAll('.hf-fields input').forEach(function (el) {
+      el.addEventListener('input', handler);
+      el.addEventListener('change', handler);
+    });
+  })();
 </script>
 
 </body>
