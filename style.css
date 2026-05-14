@@ -1897,6 +1897,30 @@ body.ui-hifi main.hf.hf-home {
   }
 }
 
+/* ─────────────────────────────────────────────────────────────
+   HOTFIX (Patch H-fix): generic hf tool pages desktop layout.
+   Base rule body.ui-hifi main.hf { max-width: 420px } was Patch H
+   "mobile artboard feel on desktop". On real desktop viewports this
+   renders tool pages as a narrow phone-sized column. Homepage has its
+   own .hf-home override; tool pages had none.
+
+   This block widens tool pages on tablet (≥768px) and desktop (≥1024px)
+   without touching .hf-home or mobile (≤767px stays untouched).
+   Pure CSS, no HTML changes.
+   ───────────────────────────────────────────────────────────── */
+@media (min-width: 768px) {
+  body.ui-hifi main.hf:not(.hf-home) {
+    max-width: 720px;
+    padding: 24px 32px 48px !important;
+  }
+}
+@media (min-width: 1024px) {
+  body.ui-hifi main.hf:not(.hf-home) {
+    max-width: 820px;
+    padding: 40px 48px 56px !important;
+  }
+}
+
 /* Desktop nav (hf-topnav) — hidden on mobile, shown ≥768 */
 body.ui-hifi .hf-topnav {
   display: none;
