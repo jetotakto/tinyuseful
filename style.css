@@ -1279,6 +1279,16 @@ body.ui-hifi .hf-display {
   color: var(--ink);
   padding: 10px 24px 2px;
   margin: 0;
+  /* HOTFIX-2 (A): safety net for long titles on narrow viewports */
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+/* HOTFIX-2 (A): mobile typography scale-down for long h1 titles */
+@media (max-width: 480px) {
+  body.ui-hifi .hf-display { font-size: 30px; }
+}
+@media (max-width: 360px) {
+  body.ui-hifi .hf-display { font-size: 26px; }
 }
 body.ui-hifi .hf-display.sm { font-size: 32px; padding: 8px 24px 2px; }
 body.ui-hifi .hf-display.md { font-size: 48px; }
@@ -1579,6 +1589,20 @@ body.ui-hifi .hf-chip.hf-chip-static {
   border-color: var(--rule-2);
 }
 
+/* HOTFIX-2 (C): next-task chips — filled black, white text, no underline.
+   Scoped to .hf-chips-wrap[aria-label="You might also need"] so the
+   "Quick examples" chips remain outlined (unchanged). */
+body.ui-hifi .hf-chips-wrap[aria-label="You might also need"] .hf-chip {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+  text-decoration: none;
+}
+body.ui-hifi .hf-chips-wrap[aria-label="You might also need"] .hf-chip:hover {
+  background: var(--ink-2);
+  color: var(--paper);
+}
+
 /* ───── methodology (hifi-theme.css L342-364) ───── */
 body.ui-hifi .hf-method-wrap { padding: 14px 0 6px; }
 body.ui-hifi .hf-method-block {
@@ -1833,7 +1857,7 @@ body.ui-hifi .hf-foot button.theme-toggle {
   body.ui-hifi .hf-step { padding-left: 20px; padding-right: 20px; }
   body.ui-hifi .hf-method-block,
   body.ui-hifi .hf-ad { margin-left: 20px; margin-right: 20px; }
-  body.ui-hifi .hf-display { font-size: 36px; }
+  /* .hf-display font-size handled by HOTFIX-2 (A) @max-480px and @max-360px rules above. */
   body.ui-hifi .hf-result .r-num { font-size: 68px; }
   body.ui-hifi .hf-step .step-title { font-size: 30px; }
 }
@@ -2305,18 +2329,14 @@ body.ui-hifi .hf-launcher-row.l4 .row-desc,
 body.ui-hifi .hf-launcher-row.l4 .row-url { color: rgba(255,255,255,0.7); }
 
 /* Patch U — arrow hover color (CSS-only)
-   Hover na šipce ↗ uvnitř launcher row → orange.
-   Hover na šipce v yellow tile CTA → white.
-   Per Lukáš: hover scope = jen na šipce, ne na celé řádce. */
-body.ui-hifi .hf-launcher-row .row-arrow:hover {
+   HOTFIX-2 (B): hover scope expanded from arrow-only to whole launcher row.
+   Hovering anywhere on a row recolors the arrow. Featured tile CTA already
+   uses .featured-cta:hover .arrow (defined earlier), no change there. */
+body.ui-hifi .hf-launcher-row:hover .row-arrow {
   color: var(--accent);
   transition: color 120ms ease;
 }
-body.ui-hifi .hf-launcher-row.l4 .row-arrow:hover {
-  color: #fff;
-  transition: color 120ms ease;
-}
-body.ui-hifi .hf-featured-tile .featured-cta .arrow:hover {
+body.ui-hifi .hf-launcher-row.l4:hover .row-arrow {
   color: #fff;
   transition: color 120ms ease;
 }
