@@ -25,7 +25,7 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260509a">
+<link rel="stylesheet" href="/style.css?v=20260514-hotfix2">
 <script src="/js/helpers.js?v=20260504e"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
@@ -45,101 +45,122 @@
 </script>
 </head>
 
-<body>
+<body class="ui-hifi">
 <a class="skip-link" href="#main">Skip to main content</a>
-<main id="main" class="page">
+<main id="main" class="hf">
 
-  <header class="masthead">
-    <a class="wordmark" href="/"><span class="knife" aria-hidden="true"></span>TinyUseful</a>
-    <span class="issue">No. 1 — April 2026</span>
+  <header class="hf-header">
+    <a class="hf-wordmark" href="/" aria-label="TinyUseful home">
+      <span class="stack"><span>TINY</span><span>USEFUL</span></span>
+    </a>
+    <span class="hf-menu-btn" aria-hidden="true">
+      <span></span><span></span>
+    </span>
   </header>
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">TinyUseful</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">Rent Affordability Calculator</span>
+  <nav class="hf-crumb" aria-label="Breadcrumb">
+    / rent affordability calculator <span class="crumb-marker" aria-hidden="true"><span class="crumb-star">&#9733;</span> No.&nbsp;06</span>
   </nav>
 
-  <section class="tools">
-    <div class="section-head">
-      <span class="section-num">No. 06</span>
-      <h1>Rent Affordability Calculator</h1>
-      <span class="desc">The 30%-rule, adjusted for monthly debt obligations.</span>
-    </div>
-    <div class="tool" data-tool="rent">
-      <div class="tool-meta">
-        <h2>Inputs</h2>
-        <p class="desc">Monthly net income, current monthly debt payments, and what % of income you're willing to spend on rent.</p>
-      </div>
-      <div class="tool-form">
-        <div class="row">
-          <label>Income/mo ($)<input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="rent-inc" value="6500"></label>
-          <label>Debts/mo ($)<input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="rent-debt" value="450"></label>
-          <label>Rule %<input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="done" id="rent-rule" value="30"></label>
-        </div>
-        <button type="button" onclick="rentCalc()">Calculate</button>
-        <div class="out" id="rent-out" role="status" aria-live="polite"><span class="label">Suggested max rent</span><span class="big">$1,500</span><span class="breakdown">Conservative $1,300 · Stretch $1,815 · Based on the 30% rule</span></div>
-        <div class="next-task" id="rent-next" hidden>
-          <p class="hint">↓ You might also need</p>
-          <div class="next-tools">
-            <a href="/mortgage-calculator/" class="next-link" data-symbol="⌂">Mortgage</a>
-            <a href="/compound-interest-calculator/" class="next-link" data-symbol="Σ">Compound Interest</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="ad-block">
-    <div class="placeholder">728 × 90 leaderboard placement</div>
+  <h1 class="hf-display">RENT AFFORDABILITY CALCULATOR</h1>
+  <div class="hf-sub">
+    <span>The 30%-rule, adjusted for monthly debt obligations.</span>
   </div>
 
-  <section class="explainer">
-    <h2>How to calculate rent affordability manually</h2>
-    <ol>
-      <li>Multiply your monthly income by 0.30 (the classic 30% rule).</li>
-      <li>Subtract half of your monthly debt payments (credit cards, car, student loans).</li>
-      <li>The result is a realistic ceiling for rent — leave room for utilities and rent hikes.</li>
-    </ol>
-    <p><strong>Example:</strong> $5,000/mo income, $400 in debts → 5000 × 0.30 − 200 = <strong>$1,300/mo rent</strong>.</p>
+  <div class="hf-fields tool-form" data-tool="rent">
 
-    <h2>Quick examples</h2>
-    <ul class="examples">
-      <li>$3,000/mo income, no debt = <strong>$900/mo</strong> (30% rule)</li>
-      <li>$5,000/mo income, $400 debt = <strong>$1,300/mo</strong></li>
-      <li>$8,000/mo income, $1,000 debt = <strong>$1,900/mo</strong></li>
-      <li>$10,000/mo income, $2,000 debt = <strong>$2,000/mo</strong></li>
-    </ul>
+    <div class="hf-field">
+      <div class="lbl">
+        <span>Income / month</span>
+        <span class="req" id="rent-inc-req">required</span>
+      </div>
+      <div class="hf-input focus" id="rent-inc-wrap">
+        <span class="pre" aria-hidden="true">$</span>
+        <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="rent-inc" value="6500" aria-label="Monthly income in dollars">
+      </div>
+    </div>
 
-    <h2>Formulas used</h2>
-    <p class="formula"><code>max rent = income × (rule ÷ 100) − (debts × 0.5)</code></p>
-    <p class="formula"><code>conservative = income × 0.20</code></p>
-    <p class="formula"><code>stretch = income × ((rule + 5) ÷ 100)</code></p>
-    <p>
-      The 30% rule comes from a 1969 US housing law, not financial science. In high-cost cities
-      (NYC, San Francisco, London), median renters often spend 40–50%+. Use the calculator to see
-      what's mathematically affordable, then add a buffer for utilities, internet, and rent
-      increases.
-    </p>
+    <div class="hf-field">
+      <div class="lbl">
+        <span>Debts / month</span>
+      </div>
+      <div class="hf-input">
+        <span class="pre" aria-hidden="true">$</span>
+        <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="rent-debt" value="450" aria-label="Monthly debt payments in dollars">
+      </div>
+    </div>
 
-    <h2>Common uses</h2>
-    <ul>
-      <li>Setting a maximum rent before apartment hunting</li>
-      <li>Negotiating roommate splits or co-tenant contributions</li>
-      <li>Sanity-checking a landlord's "you qualify" approval letter</li>
-      <li>Comparing job offers with different cost-of-living cities</li>
-      <li>Planning a move from owning to renting (or vice versa)</li>
-    </ul>
+    <div class="hf-field">
+      <div class="lbl">
+        <span>Rule</span>
+        <span aria-hidden="true">%</span>
+      </div>
+      <div class="hf-input">
+        <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="done" id="rent-rule" value="30" aria-label="Percent of income rule">
+        <span class="suf" aria-hidden="true">%</span>
+      </div>
+    </div>
+
+  </div>
+
+  <section class="hf-result" id="rent-out" role="status" aria-live="polite" aria-atomic="true">
+    <div class="r-lbl">
+      <span class="r-lbl-text" id="rent-lbl">Suggested max rent</span>
+      <span class="hf-tiny hf-muted" aria-hidden="true">aria-live</span>
+    </div>
+    <div class="r-num">
+      <span class="cur" aria-hidden="true">$</span><span class="val" id="rent-val">1,725</span>
+    </div>
+    <div class="r-break" id="rent-break">
+      <span>Income</span><span class="v">$6,500</span>
+      <span>Conservative (20%)</span><span class="v">$1,300</span>
+      <span>Stretch (35%)</span><span class="v">$2,275</span>
+      <span>Suggested max</span><span class="v">$1,725</span>
+    </div>
+    <div class="r-actions">
+      <button type="button" class="hf-btn accent" id="rent-copy" aria-label="Copy result to clipboard">Copy result</button>
+      <button type="button" class="hf-btn ghost" id="rent-reset" aria-label="Reset to defaults">Reset</button>
+    </div>
+    <div class="why-line" id="rent-why">
+      $6,500 &times; 30% &minus; $450 &times; 0.5 = <b>$1,725/mo max rent</b>
+    </div>
   </section>
 
-  <section class="methodology" aria-labelledby="methodology-title">
-    <h2 id="methodology-title">Methodology &amp; trust</h2>
-    <details>
-      <summary>Formula, assumptions, rounding, and limitations</summary>
-      <div class="answer">
+  <div class="hf-chips-wrap" id="rent-next" aria-label="You might also need">
+    <div class="hf-cap">You might also need</div>
+    <div class="hf-chips" role="list">
+      <a class="hf-chip" href="/mortgage-calculator/" role="listitem">Mortgage</a>
+      <a class="hf-chip" href="/compound-interest-calculator/" role="listitem">Compound Interest</a>
+      <a class="hf-chip" href="/loan-calculator/" role="listitem">Loan Calculator</a>
+    </div>
+  </div>
+
+  <div class="hf-chips-wrap">
+    <div class="hf-cap">Quick examples</div>
+    <div class="hf-chips" role="list">
+      <button type="button" class="hf-chip" data-inc="3000" data-debt="0"    data-rule="30" role="listitem">$3k/mo &middot; no debt</button>
+      <button type="button" class="hf-chip" data-inc="5000" data-debt="400"  data-rule="30" role="listitem">$5k/mo &middot; $400 debt</button>
+      <button type="button" class="hf-chip" data-inc="8000" data-debt="1000" data-rule="30" role="listitem">$8k/mo &middot; $1k debt</button>
+    </div>
+  </div>
+
+  <div class="hf-method-wrap">
+    <div class="hf-cap">How this is calculated</div>
+    <div class="hf-method-block">
+      <div class="formula">max rent = income &times; (rule &divide; 100) &minus; (debts &times; 0.5)</div>
+      <div class="formula">conservative = income &times; 0.20</div>
+      <div class="formula">stretch = income &times; ((rule + 5) &divide; 100)</div>
+      <p>The 30% rule comes from a 1969 US housing law, not financial science. In high-cost cities (NYC, San Francisco, London), median renters often spend 40&ndash;50%+. <strong>Estimate to inform your search. Landlord approval and what you can comfortably afford will differ.</strong></p>
+      <p class="hf-muted hf-tiny">Updated May 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
+
+      <details class="method-details">
+        <summary>Formula, assumptions, rounding &amp; limitations</summary>
+
         <h3>Formula</h3>
         <ul>
-          <li><code>max rent = income × (rule ÷ 100) − (debts × 0.5)</code></li>
-          <li><code>conservative = income × 0.20</code></li>
-          <li><code>stretch = income × ((rule + 5) ÷ 100)</code></li>
+          <li><code>max rent = income &times; (rule &divide; 100) &minus; (debts &times; 0.5)</code></li>
+          <li><code>conservative = income &times; 0.20</code></li>
+          <li><code>stretch = income &times; ((rule + 5) &divide; 100)</code></li>
         </ul>
 
         <h3>Assumptions</h3>
@@ -159,72 +180,247 @@
         <h3>Limitations</h3>
         <ul>
           <li>Utilities, internet, renters insurance, parking, transit, groceries, and other monthly expenses are not subtracted.</li>
-          <li>Landlord criteria (commonly income ≥ 2.5–4× rent), credit score, employment history, and rental history are not evaluated.</li>
+          <li>Landlord criteria (commonly income &ge; 2.5&ndash;4&times; rent), credit score, employment history, and rental history are not evaluated.</li>
           <li>Local rent control, security deposit caps, broker fees, pet rent, and utilities-included leases are not modelled.</li>
           <li>Estimate to inform your search. Landlord approval and what you can comfortably afford will differ.</li>
         </ul>
-
-        <p class="byline"><em>Built and maintained by Lukáš, an architect in Prague. Last updated May 2026.</em></p>
-      </div>
-    </details>
-  </section>
-
-  <section class="faq">
-    <h2>Frequently asked questions</h2>
-    <details>
-      <summary>Should I use gross or net income?</summary>
-      <div class="answer"><p>The 30% rule traditionally uses gross (pre-tax). This calculator works with whichever you enter — but using net income gives a more realistic ceiling because that's what actually hits your account.</p></div>
-    </details>
-    <details>
-      <summary>Why does this subtract half of my debts and not all?</summary>
-      <div class="answer"><p>Because debt payments aren't going up if you sign a lease — they're already in your budget. The half-adjustment is a heuristic to leave room for the part of debt servicing that competes with rent for the same monthly cash. Landlords often use a stricter "30% of (income − all debts)" calculation.</p></div>
-    </details>
-    <details>
-      <summary>What do most landlords actually require?</summary>
-      <div class="answer"><p>The common landlord rule is gross monthly income ≥ 3× rent (so rent ≤ 33% of income). Some require 2.5× or 4×. Your credit score and rental history matter more than which exact ratio you fit.</p></div>
-    </details>
-    <details>
-      <summary>Why does the 30% rule break in big cities?</summary>
-      <div class="answer"><p>Because rent is set by local supply and demand, not by national averages. In NYC, San Francisco, or central London, the median renter spends 40–50%. The rule is an old guideline, not a law of physics — the calculator gives you the math, you decide what fits your life.</p></div>
-    </details>
-  </section>
-
-  <section class="related">
-    <h2>Related tools</h2>
-    <div class="related-grid">
-      <a href="/mortgage-calculator/">Mortgage Calculator</a>
-      <a href="/loan-calculator/">Loan Calculator</a>
-      <a href="/percentage-calculator/">Percentage Calculator</a>
-      <a href="/compound-interest-calculator/">Compound Interest</a>
+      </details>
     </div>
-  </section>
+  </div>
 
-  <footer class="colophon">
-    <span>TinyUseful · Issue No. 1 · 2026</span>
-    <span>
-      <a href="/">Home</a> &nbsp; <a href="/about.html">About</a> &nbsp; <a href="/changelog.html">Changelog</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp;
-      <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode"><span class="icon-light" aria-hidden="true">☀</span><span class="icon-dark" aria-hidden="true">☾</span> Theme</button>
+  <div class="hf-ad" aria-label="Advertisement">
+    <div class="ad-label">Advertisement</div>
+    <div class="ad-slot" id="rent-ad-slot"></div>
+  </div>
+
+  <div class="hf-stack">
+
+    <section class="hf-step s1" data-step="faq">
+      <header class="step-head">
+        <div>
+          <div class="step-title">FAQ</div>
+          <div class="step-meta">gross vs net &middot; half-debt rule &middot; landlord ratios &middot; 30% rule in big cities</div>
+        </div>
+        <span class="step-chev" aria-hidden="true">&#8599;</span>
+      </header>
+      <div class="step-body">
+        <details class="step-q">
+          <summary>Should I use gross or net income?</summary>
+          <div class="answer"><p>The 30% rule traditionally uses gross (pre-tax). This calculator works with whichever you enter &mdash; but using net income gives a more realistic ceiling because that&rsquo;s what actually hits your account.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>Why does this subtract half of my debts and not all?</summary>
+          <div class="answer"><p>Because debt payments aren&rsquo;t going up if you sign a lease &mdash; they&rsquo;re already in your budget. The half-adjustment is a heuristic to leave room for the part of debt servicing that competes with rent for the same monthly cash. Landlords often use a stricter &ldquo;30% of (income &minus; all debts)&rdquo; calculation.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>What do most landlords actually require?</summary>
+          <div class="answer"><p>The common landlord rule is gross monthly income &ge; 3&times; rent (so rent &le; 33% of income). Some require 2.5&times; or 4&times;. Your credit score and rental history matter more than which exact ratio you fit.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>Why does the 30% rule break in big cities?</summary>
+          <div class="answer"><p>Because rent is set by local supply and demand, not by national averages. In NYC, San Francisco, or central London, the median renter spends 40&ndash;50%. The rule is an old guideline, not a law of physics &mdash; the calculator gives you the math, you decide what fits your life.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <section class="hf-step s2" data-step="related">
+      <header class="step-head">
+        <div>
+          <div class="step-title">RELATED</div>
+          <div class="step-meta">Mortgage &middot; Loan &middot; Percentage &middot; Compound</div>
+        </div>
+        <span class="step-chev" aria-hidden="true">&#8599;</span>
+      </header>
+      <nav class="step-related" aria-label="Related calculators">
+        <a href="/mortgage-calculator/">Mortgage Calculator</a>
+        <a href="/loan-calculator/">Loan Calculator</a>
+        <a href="/percentage-calculator/">Percentage Calculator</a>
+        <a href="/compound-interest-calculator/">Compound Interest</a>
+      </nav>
+    </section>
+
+  </div>
+
+  <div class="hf-trust">No accounts &middot; runs in your browser &middot; ads &amp; analytics may use cookies</div>
+
+  <footer class="hf-foot">
+    <span class="foot-links">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/changelog.html">Changelog</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
     </span>
+    <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode">&#9728; / &#9790;</button>
   </footer>
+
   <script src="/theme.js" defer></script>
 
 </main>
 
 <script>
   const $ = id => document.getElementById(id);
-  const fmt0 = n => n.toLocaleString(undefined, {maximumFractionDigits: 0});
-  function rentCalc() {
-    const inc=parseLocaleNumber($('rent-inc').value), debt=parseLocaleNumber($('rent-debt').value), rule=parseLocaleNumber($('rent-rule').value);
-    // Phase 53b: validity guard — keep last valid result if any input is incomplete/invalid.
-    // debt can be 0 (no debts), but inc and rule must be positive.
-    if (!Number.isFinite(inc) || !Number.isFinite(debt) || !Number.isFinite(rule) || inc<=0 || rule<=0) return;
-    const adjusted = inc*rule/100 - debt*0.5;
-    setOut('rent-out','Suggested max rent','$'+fmt0(Math.max(0,adjusted)),
-      `Conservative $${fmt0(inc*0.20)} · Stretch $${fmt0(inc*(rule+5)/100)} · Based on the ${rule}% rule`);
-    document.getElementById('rent-next').hidden = false;
+  const fmt0 = n => n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+
+  // Defaults match legacy state
+  const DEFAULTS = { inc: '6500', debt: '450', rule: '30' };
+
+  function rentRender(state) {
+    const valEl  = $('rent-val');
+    const lblEl  = $('rent-lbl');
+    const brkEl  = $('rent-break');
+    const whyEl  = $('rent-why');
+
+    if (!state.valid) {
+      lblEl.textContent = 'Suggested max rent';
+      valEl.textContent = '—';
+      brkEl.innerHTML = '<span>' + (state.message || 'Complete all fields') + '</span><span class="v">—</span>';
+      whyEl.textContent = 'Enter monthly income, monthly debts, and a percent rule above.';
+      return;
+    }
+
+    const { inc, debt, rule, maxRent, conservative, stretch } = state;
+    lblEl.textContent = 'Suggested max rent';
+    valEl.textContent = fmt0(maxRent);
+    brkEl.innerHTML =
+      '<span>Income</span><span class="v">$' + fmt0(inc) + '</span>' +
+      '<span>Conservative (20%)</span><span class="v">$' + fmt0(conservative) + '</span>' +
+      '<span>Stretch (' + (rule + 5) + '%)</span><span class="v">$' + fmt0(stretch) + '</span>' +
+      '<span>Suggested max</span><span class="v">$' + fmt0(maxRent) + '</span>';
+    whyEl.innerHTML =
+      '$' + fmt0(inc) + ' × ' + rule + '% − $' + fmt0(debt) + ' × 0.5 = <b>$' +
+      fmt0(maxRent) + '/mo max rent</b>';
   }
+
+  // Public name rentCalc preserved per freeze list
+  function rentCalc() {
+    const inc = parseLocaleNumber($('rent-inc').value);
+    const debt = parseLocaleNumber($('rent-debt').value);
+    const rule = parseLocaleNumber($('rent-rule').value);
+
+    if (!Number.isFinite(inc) || !Number.isFinite(debt) || !Number.isFinite(rule)) {
+      rentRender({ valid: false, message: 'Complete all fields' });
+      return;
+    }
+    if (inc <= 0) {
+      rentRender({ valid: false, message: 'Enter a positive monthly income' });
+      return;
+    }
+    if (rule <= 0) {
+      rentRender({ valid: false, message: 'Enter a positive percentage rule' });
+      return;
+    }
+
+    // Formula preserved verbatim from legacy, including Math.max(0, ...) floor
+    const adjusted = inc * rule / 100 - debt * 0.5;
+    const maxRent = Math.max(0, adjusted);
+    const conservative = inc * 0.20;
+    const stretch = inc * (rule + 5) / 100;
+
+    rentRender({ valid: true, inc, debt, rule, maxRent, conservative, stretch });
+  }
+
+  // Copy + copied state
+  (function () {
+    const copyBtn = $('rent-copy');
+    const out = $('rent-out');
+    const lblEl = $('rent-lbl');
+    const valEl = $('rent-val');
+    let origLblText = lblEl ? lblEl.textContent : 'Suggested max rent';
+    let revertTimer = null;
+
+    function setCopied(on) {
+      if (!out) return;
+      out.classList.toggle('copied', on);
+      if (lblEl && on) {
+        origLblText = lblEl.textContent;
+        lblEl.textContent = 'Copied to clipboard';
+      }
+      if (lblEl && !on && origLblText) {
+        lblEl.textContent = origLblText;
+      }
+      if (copyBtn) copyBtn.textContent = on ? '✓ Copied' : 'Copy result';
+    }
+
+    if (copyBtn) copyBtn.addEventListener('click', function () {
+      if (!valEl || valEl.textContent === '—') return;
+      const currentLbl = lblEl ? lblEl.textContent : 'Suggested max rent';
+      const text = currentLbl + ': $' + valEl.textContent;
+      const finalize = function () {
+        setCopied(true);
+        if (revertTimer) clearTimeout(revertTimer);
+        revertTimer = setTimeout(function () { setCopied(false); }, 1600);
+      };
+      if (!navigator.clipboard) {
+        copyBtn.textContent = 'Copy unavailable';
+        setTimeout(function () { setCopied(false); }, 1500);
+        return;
+      }
+      navigator.clipboard.writeText(text).then(finalize).catch(function () {
+        copyBtn.textContent = 'Copy failed';
+        setTimeout(function () { setCopied(false); }, 1500);
+      });
+    });
+  })();
+
+  // Reset
+  (function () {
+    const resetBtn = $('rent-reset');
+    if (!resetBtn) return;
+    resetBtn.addEventListener('click', function () {
+      $('rent-inc').value = DEFAULTS.inc;
+      $('rent-debt').value = DEFAULTS.debt;
+      $('rent-rule').value = DEFAULTS.rule;
+      $('rent-inc').dispatchEvent(new Event('input', { bubbles: true }));
+    });
+  })();
+
+  // Required + focus + quick example chips
+  (function () {
+    const incInput = $('rent-inc');
+    const incReq = $('rent-inc-req');
+    const incWrap = $('rent-inc-wrap');
+
+    function syncRequired() {
+      if (!incReq || !incInput) return;
+      const v = String(incInput.value || '').trim();
+      const empty = v === '' || !Number.isFinite(parseLocaleNumber(v));
+      if (incWrap) incWrap.classList.toggle('error', empty);
+    }
+
+    if (incInput) {
+      incInput.addEventListener('input', syncRequired);
+      incInput.addEventListener('focus', function () { if (incWrap) incWrap.classList.add('focus'); });
+      incInput.addEventListener('blur',  function () { if (incWrap) incWrap.classList.remove('focus'); });
+    }
+
+    document.querySelectorAll('.hf-chip[data-inc]').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        const i = chip.getAttribute('data-inc');
+        const d = chip.getAttribute('data-debt');
+        const r = chip.getAttribute('data-rule');
+        if (i !== null) $('rent-inc').value = i;
+        if (d !== null) $('rent-debt').value = d;
+        if (r !== null) $('rent-rule').value = r;
+        $('rent-inc').dispatchEvent(new Event('input', { bubbles: true }));
+      });
+    });
+
+    syncRequired();
+  })();
+
+  // Initial render + live recalc
   rentCalc();
-  attachLiveCalc('.tool-form', rentCalc);
+  if (typeof attachLiveCalc === 'function') {
+    attachLiveCalc('.tool-form', rentCalc);
+  } else {
+    let t;
+    const handler = function () { clearTimeout(t); t = setTimeout(rentCalc, 80); };
+    document.querySelectorAll('.tool-form input').forEach(function (el) {
+      el.addEventListener('input', handler);
+      el.addEventListener('change', handler);
+    });
+  }
 </script>
 
 </body>
