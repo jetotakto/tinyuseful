@@ -68,7 +68,7 @@
   "sameAs": ["https://github.com/jetotakto/tinyuseful"]
 }
 </script>
-<!-- Structured data: ItemList (catalog of tools) -->
+<!-- Structured data: ItemList (catalog of tools, ordered per visible homepage) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -77,13 +77,13 @@
   "numberOfItems": 11,
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "Percentage Calculator", "url": "https://www.tinyuseful.app/percentage-calculator/"},
-    {"@type": "ListItem", "position": 2, "name": "Sales Tax Calculator", "url": "https://www.tinyuseful.app/sales-tax-calculator/"},
-    {"@type": "ListItem", "position": 3, "name": "Mortgage Calculator", "url": "https://www.tinyuseful.app/mortgage-calculator/"},
-    {"@type": "ListItem", "position": 4, "name": "Loan Calculator", "url": "https://www.tinyuseful.app/loan-calculator/"},
-    {"@type": "ListItem", "position": 5, "name": "Compound Interest Calculator", "url": "https://www.tinyuseful.app/compound-interest-calculator/"},
-    {"@type": "ListItem", "position": 6, "name": "Rent Affordability Calculator", "url": "https://www.tinyuseful.app/rent-affordability-calculator/"},
-    {"@type": "ListItem", "position": 7, "name": "Tip Calculator", "url": "https://www.tinyuseful.app/tip-calculator/"},
-    {"@type": "ListItem", "position": 8, "name": "Discount Calculator", "url": "https://www.tinyuseful.app/discount-calculator/"},
+    {"@type": "ListItem", "position": 2, "name": "Discount Calculator", "url": "https://www.tinyuseful.app/discount-calculator/"},
+    {"@type": "ListItem", "position": 3, "name": "Sales Tax Calculator", "url": "https://www.tinyuseful.app/sales-tax-calculator/"},
+    {"@type": "ListItem", "position": 4, "name": "Mortgage Calculator", "url": "https://www.tinyuseful.app/mortgage-calculator/"},
+    {"@type": "ListItem", "position": 5, "name": "Loan Calculator", "url": "https://www.tinyuseful.app/loan-calculator/"},
+    {"@type": "ListItem", "position": 6, "name": "Compound Interest Calculator", "url": "https://www.tinyuseful.app/compound-interest-calculator/"},
+    {"@type": "ListItem", "position": 7, "name": "Rent Affordability Calculator", "url": "https://www.tinyuseful.app/rent-affordability-calculator/"},
+    {"@type": "ListItem", "position": 8, "name": "Tip Calculator", "url": "https://www.tinyuseful.app/tip-calculator/"},
     {"@type": "ListItem", "position": 9, "name": "Unit Converter", "url": "https://www.tinyuseful.app/unit-converter/"},
     {"@type": "ListItem", "position": 10, "name": "Date Calculator", "url": "https://www.tinyuseful.app/date-calculator/"},
     {"@type": "ListItem", "position": 11, "name": "Time Zone Converter", "url": "https://www.tinyuseful.app/time-zone-converter/"}
@@ -92,190 +92,141 @@
 </script>
 </head>
 
-<body>
-<div class="page">
+<body class="ui-hifi">
+<a class="skip-link" href="#main">Skip to main content</a>
+<main id="main" class="hf hf-home">
 
-  <!-- ─── MASTHEAD ─── -->
-  <header class="masthead">
-    <a class="wordmark" href="/">
-      <span class="knife" aria-hidden="true"></span>
-      TinyUseful
+  <header class="hf-header">
+    <a class="hf-wordmark" href="/" aria-label="TinyUseful home">
+      <span class="stack"><span>TINY</span><span>USEFUL</span></span>
     </a>
-    <span class="issue">No. 1 — April 2026</span>
+    <nav class="hf-topnav" aria-label="Primary">
+      <a href="/" class="active" aria-current="page"><span class="dash" aria-hidden="true">—</span>Home</a>
+      <a href="#all-calculators">All Calculators</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/about.html">About</a>
+    </nav>
+    <span class="hf-menu-btn" aria-hidden="true">
+      <span></span><span></span>
+    </span>
   </header>
 
-  <!-- ─── MANIFESTO ─── -->
-  <section class="manifesto">
-    <h1>Small tools for<br>everyday <span class="red">questions</span>.</h1>
-    <p class="subtitle">Small tools<span class="dot">·</span>No accounts<span class="dot">·</span>No AI</p>
-    <p class="lede">
-      Eleven small tools on their own pages — money, units, dates, time zones.
-      That's it.
-      <strong>For when you don't need a chat &mdash; just the answer.</strong>
-    </p>
-    <div class="promises">
-      <span>No account</span>
-      <span>Inputs stay in your browser</span>
-      <span>No AI</span>
-      <span>Browser-based</span>
-    </div>
+  <section class="hf-hero" aria-labelledby="hero-h">
+    <h1 class="hf-display-xl" id="hero-h">TINY&nbsp;TOOLS<br>BIG&nbsp;ANSWERS.</h1>
+    <p class="hf-hero-lede">One calculator per page. No accounts. No AI. Calculations run in your browser &mdash; your inputs never leave the device.</p>
+    <dl class="hf-stat-row">
+      <div class="stat"><dt>Calculators</dt><dd>11</dd></div>
+      <div class="stat"><dt>Runs</dt><dd>Browser</dd></div>
+      <div class="stat"><dt>Accounts</dt><dd>None</dd></div>
+    </dl>
   </section>
 
-  <!-- ─── 01 MONEY (catalog) ─── -->
-  <section class="catalog-section">
-    <div class="catalog-head">
-      <span class="num">§ 01</span>
-      <h2>Money</h2>
-      <span class="desc">Math you actually do — deterministic, computed in your browser.</span>
+  <aside class="hf-featured-tile" aria-labelledby="featured-h">
+    <div class="featured-head">
+      <span class="featured-cap" id="featured-h">&mdash; MOST USED</span>
+      <span class="featured-slug">/tip-calculator</span>
     </div>
-    <div class="catalog-grid">
-      <a class="catalog-card first-row" href="/percentage-calculator/">
-        <span class="card-symbol" aria-hidden="true">%</span>
-        <span class="card-body">
-          <h3>Percentage</h3>
-          <span class="card-num">No. 01</span>
-          <p class="card-desc">% of, X is what % of Y, % change.</p>
-        </span>
-      </a>
-      <a class="catalog-card first-row" href="/sales-tax-calculator/">
-        <span class="card-symbol" aria-hidden="true">+</span>
-        <span class="card-body">
-          <h3>Sales Tax / VAT</h3>
-          <span class="card-num">No. 02</span>
-          <p class="card-desc">Add tax to a price, or remove it.</p>
-        </span>
-      </a>
-      <a class="catalog-card first-row" href="/mortgage-calculator/">
-        <span class="card-symbol" aria-hidden="true">⌂</span>
-        <span class="card-body">
-          <h3>Mortgage</h3>
-          <span class="card-num">No. 03</span>
-          <p class="card-desc">Monthly principal &amp; interest.</p>
-        </span>
-      </a>
-      <a class="catalog-card first-row" href="/loan-calculator/">
-        <span class="card-symbol" aria-hidden="true">$</span>
-        <span class="card-body">
-          <h3>Loan</h3>
-          <span class="card-num">No. 04</span>
-          <p class="card-desc">Auto, student, personal — fixed rate.</p>
-        </span>
-      </a>
-      <a class="catalog-card" href="/compound-interest-calculator/">
-        <span class="card-symbol" aria-hidden="true">Σ</span>
-        <span class="card-body">
-          <h3>Compound Interest</h3>
-          <span class="card-num">No. 05</span>
-          <p class="card-desc">Future value with monthly contributions.</p>
-        </span>
-      </a>
-      <a class="catalog-card" href="/rent-affordability-calculator/">
-        <span class="card-symbol" aria-hidden="true">⅓</span>
-        <span class="card-body">
-          <h3>Rent Affordability</h3>
-          <span class="card-num">No. 06</span>
-          <p class="card-desc">The 30%-rule, adjusted for debts.</p>
-        </span>
-      </a>
-      <a class="catalog-card" href="/tip-calculator/">
-        <span class="card-symbol" aria-hidden="true">⊕</span>
-        <span class="card-body">
-          <h3>Tip Calculator</h3>
-          <span class="card-num">No. 07</span>
-          <p class="card-desc">Restaurant tip, optional split.</p>
-        </span>
-      </a>
-      <a class="catalog-card" href="/discount-calculator/">
-        <span class="card-symbol" aria-hidden="true">−</span>
-        <span class="card-body">
-          <h3>Discount</h3>
-          <span class="card-num">No. 08</span>
-          <p class="card-desc">X% off — final price and savings.</p>
-        </span>
-      </a>
+    <div class="featured-body">
+      <div class="featured-num"><span class="cur">$</span><span class="val">13.20</span></div>
+      <div class="featured-sub">/ person, 4 ways</div>
+      <div class="featured-meta">$48 bill &middot; 10% tip &middot; split 4 ways &middot; example</div>
     </div>
+    <a class="featured-cta" href="/tip-calculator/" aria-label="Open Tip Calculator">
+      <span>Try a tip calc</span>
+      <span class="arrow" aria-hidden="true">&#8599;</span>
+    </a>
+  </aside>
+
+  <section class="hf-launcher" id="all-calculators" aria-labelledby="launcher-h">
+    <header class="hf-launcher-head">
+      <h2 class="hf-launcher-title" id="launcher-h">ALL&nbsp;CALCULATORS</h2>
+      <span class="hf-launcher-meta">11 tools &middot; ordered by use</span>
+    </header>
+
+    <nav class="hf-launcher-stack" aria-label="All calculators">
+      <a class="hf-launcher-row l1" href="/percentage-calculator/">
+        <span class="row-title">PERCENT</span>
+        <span class="row-desc">x% of y &middot; what % is x of y &middot; percentage change &middot; part of total</span>
+        <span class="row-url">/percentage-calculator/</span>
+        <span class="row-arrow" aria-hidden="true">&#8599;</span>
+      </a>
+      <a class="hf-launcher-row l2" href="/discount-calculator/">
+        <span class="row-title">DISCOUNT</span>
+        <span class="row-desc">price after % off &middot; multiple discounts &middot; final saving</span>
+        <span class="row-url">/discount-calculator/</span>
+        <span class="row-arrow" aria-hidden="true">&#8599;</span>
+      </a>
+      <a class="hf-launcher-row l1" href="/sales-tax-calculator/">
+        <span class="row-title">SALES&nbsp;TAX</span>
+        <span class="row-desc">add or subtract VAT / sales tax &middot; by US state or custom rate</span>
+        <span class="row-url">/sales-tax-calculator/</span>
+        <span class="row-arrow" aria-hidden="true">&#8599;</span>
+      </a>
+      <a class="hf-launcher-row l2" href="/mortgage-calculator/">
+        <span class="row-title">MORTGAGE</span>
+        <span class="row-desc">monthly payment &middot; amortization schedule &middot; total interest &middot; extra payments</span>
+        <span class="row-url">/mortgage-calculator/</span>
+        <span class="row-arrow" aria-hidden="true">&#8599;</span>
+      </a>
+      <a class="hf-launcher-row l3" href="/loan-calculator/">
+        <span class="row-title">LOAN</span>
+        <span class="row-desc">payment &middot; interest &middot; schedule &middot; early payoff</span>
+        <span class="row-url">/loan-calculator/</span>
+        <span class="row-arrow" aria-hidden="true">&#8599;</span>
+      </a>
+      <a class="hf-launcher-row l3" href="/compound-interest-calculator/">
+        <span class="row-title">COMPOUND</span>
+        <span class="row-desc">savings growth &middot; monthly contribution &middot; inflation-adjusted</span>
+        <span class="row-url">/compound-interest-calculator/</span>
+        <span class="row-arrow" aria-hidden="true">&#8599;</span>
+      </a>
+      <a class="hf-launcher-row l1" href="/rent-affordability-calculator/">
+        <span class="row-title">RENT</span>
+        <span class="row-desc">30% rule &middot; adjusted for debts &middot; what rent you can afford</span>
+        <span class="row-url">/rent-affordability-calculator/</span>
+        <span class="row-arrow" aria-hidden="true">&#8599;</span>
+      </a>
+      <a class="hf-launcher-row l2" href="/tip-calculator/">
+        <span class="row-title">TIP</span>
+        <span class="row-desc">restaurant tip &middot; bill split &middot; per-person amount</span>
+        <span class="row-url">/tip-calculator/</span>
+        <span class="row-arrow" aria-hidden="true">&#8599;</span>
+      </a>
+      <a class="hf-launcher-row l3" href="/unit-converter/">
+        <span class="row-title">UNITS</span>
+        <span class="row-desc">length &middot; weight &middot; temperature &middot; metric and imperial</span>
+        <span class="row-url">/unit-converter/</span>
+        <span class="row-arrow" aria-hidden="true">&#8599;</span>
+      </a>
+      <a class="hf-launcher-row l2" href="/date-calculator/">
+        <span class="row-title">DATE</span>
+        <span class="row-desc">days between dates &middot; days from today &middot; weekday lookup</span>
+        <span class="row-url">/date-calculator/</span>
+        <span class="row-arrow" aria-hidden="true">&#8599;</span>
+      </a>
+      <a class="hf-launcher-row l1" href="/time-zone-converter/">
+        <span class="row-title">TIME&nbsp;ZONE</span>
+        <span class="row-desc">convert time between major world zones</span>
+        <span class="row-url">/time-zone-converter/</span>
+        <span class="row-arrow" aria-hidden="true">&#8599;</span>
+      </a>
+    </nav>
   </section>
 
-  <!-- ─── AD BLOCK ─── -->
-  <div class="ad-block">
-    <div class="placeholder">728 × 90 leaderboard placement</div>
-  </div>
+  <p class="hf-trust">Calculations run in your browser &middot; we do not require an account &middot; ads &amp; analytics may use cookies where applicable</p>
 
-  <!-- ─── 02 CONVERSIONS (catalog) ─── -->
-  <section class="catalog-section">
-    <div class="catalog-head">
-      <span class="num">§ 02</span>
-      <h2>Conversions</h2>
-      <span class="desc">Units, dates, time zones — everyday translations.</span>
-    </div>
-    <div class="catalog-grid">
-      <a class="catalog-card first-row" href="/unit-converter/">
-        <span class="card-symbol" aria-hidden="true">↔</span>
-        <span class="card-body">
-          <h3>Unit Converter</h3>
-          <span class="card-num">No. 09</span>
-          <p class="card-desc">Length, weight, temperature — metric ↔ imperial.</p>
-        </span>
-      </a>
-      <a class="catalog-card first-row" href="/date-calculator/">
-        <span class="card-symbol" aria-hidden="true">▦</span>
-        <span class="card-body">
-          <h3>Date Calculator</h3>
-          <span class="card-num">No. 10</span>
-          <p class="card-desc">Days between dates, or days from today.</p>
-        </span>
-      </a>
-      <a class="catalog-card first-row" href="/time-zone-converter/">
-        <span class="card-symbol" aria-hidden="true">⊙</span>
-        <span class="card-body">
-          <h3>Time Zone Converter</h3>
-          <span class="card-num">No. 11</span>
-          <p class="card-desc">Convert time between major world zones.</p>
-        </span>
-      </a>
-    </div>
-  </section>
-
-  <!-- ─── DISCLOSURE / MANIFEST TAIL ─── -->
-  <section class="disclosure" id="how">
-    <div>
-      <h4>How it works</h4>
-      <p>
-        Every tool uses simple deterministic formulas, computed entirely in your browser using JavaScript.
-        No external lookup, no API call. The math behind the money tools is the standard textbook
-        amortization and percentage formulas used for fixed-rate loan estimates.
-      </p>
-    </div>
-    <div id="why">
-      <h4>Why no AI</h4>
-      <p>
-        AI is useful for messy questions. These tools are for questions with one clear answer:
-        a tax amount, a tip, a date, a monthly payment.
-        The formulas are deterministic, run in your browser, and do not guess.
-      </p>
-    </div>
-    <div>
-      <h4>What we sell</h4>
-      <p>
-        One advertisement, declared. No fingerprinting, no email gates, no popups.
-        We sell attention to advertisers in one clearly labelled box. That is the entire business model.
-        Calculator inputs are not saved by TinyUseful. Ads and related services may use cookies where applicable —
-        full disclosure on the <a href="/privacy.html">Privacy page</a>.
-      </p>
-    </div>
-  </section>
-
-  <!-- ─── COLOPHON ─── -->
-  <footer class="colophon">
-    <span>TinyUseful · Issue No. 1 · April 2026 · Made for the open web</span>
-    <span>
-      <a href="/about.html">About</a> &nbsp; <a href="/changelog.html">Changelog</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp; <a href="mailto:contact@tinyuseful.app">Contact</a> &nbsp;
-      <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode"><span class="icon-light" aria-hidden="true">☀</span><span class="icon-dark" aria-hidden="true">☾</span> Theme</button>
-      &nbsp; v0.7
+  <footer class="hf-foot">
+    <span class="foot-links">
+      <a href="/about.html">About</a>
+      <a href="/changelog.html">Changelog</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="mailto:contact@tinyuseful.app">Contact</a>
     </span>
+    <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode">&#9728; / &#9790;</button>
   </footer>
 
-</div>
+</main>
 <script src="/theme.js" defer></script>
 </body>
 </html>
