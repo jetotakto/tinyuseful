@@ -29,137 +29,145 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260509a">
+<link rel="stylesheet" href="/style.css?v=20260514-hotfix2">
 <script src="/js/helpers.js?v=20260504e"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Mortgage Calculator",
-  "applicationCategory": "FinanceApplication",
-  "operatingSystem": "Any (browser-based)",
-  "description": "Calculate monthly mortgage payment and total interest using the standard amortization formula.",
-  "url": "https://www.tinyuseful.app/mortgage-calculator/",
-  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
-  "publisher": {"@type": "Organization", "name": "TinyUseful", "url": "https://www.tinyuseful.app/"}
-}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Mortgage Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any (browser-based)","description":"Calculate monthly mortgage payment and total interest using the standard amortization formula.","url":"https://www.tinyuseful.app/mortgage-calculator/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"TinyUseful","url":"https://www.tinyuseful.app/"}}
 </script>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {"@type": "ListItem", "position": 1, "name": "TinyUseful", "item": "https://www.tinyuseful.app/"},
-    {"@type": "ListItem", "position": 2, "name": "Mortgage Calculator", "item": "https://www.tinyuseful.app/mortgage-calculator/"}
-  ]
-}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TinyUseful","item":"https://www.tinyuseful.app/"},{"@type":"ListItem","position":2,"name":"Mortgage Calculator","item":"https://www.tinyuseful.app/mortgage-calculator/"}]}
 </script>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {"@type": "Question", "name": "How is a mortgage payment calculated?",
-     "acceptedAnswer": {"@type": "Answer", "text": "The standard amortization formula is M = P × [r(1+r)^n] / [(1+r)^n − 1], where P is the loan amount, r is the monthly interest rate (annual rate divided by 12), and n is the total number of monthly payments (years × 12). The result M is the fixed monthly payment that fully repays the loan with interest."}},
-    {"@type": "Question", "name": "What is the difference between APR and interest rate?",
-     "acceptedAnswer": {"@type": "Answer", "text": "The interest rate is the cost of borrowing the principal. The APR (Annual Percentage Rate) includes the interest rate plus other lender fees expressed as a yearly cost. APR is always equal to or higher than the interest rate. This calculator uses the interest rate, not APR."}},
-    {"@type": "Question", "name": "Should I choose a 15-year or 30-year mortgage?",
-     "acceptedAnswer": {"@type": "Answer", "text": "A 15-year mortgage has higher monthly payments but you pay much less total interest and own the home sooner. A 30-year mortgage has lower monthly payments but you pay more interest overall. Run both numbers in the calculator and compare the total interest column."}},
-    {"@type": "Question", "name": "Why is my first payment mostly interest?",
-     "acceptedAnswer": {"@type": "Answer", "text": "Mortgage interest is calculated on the remaining balance. At the start, the balance is highest, so most of your payment goes to interest. As the principal shrinks, more of each payment goes to principal. By the end, almost all of each payment is principal. This pattern is called amortization."}},
-    {"@type": "Question", "name": "Does this calculator include taxes and insurance?",
-     "acceptedAnswer": {"@type": "Answer", "text": "No. This is principal and interest only (P&I). Property taxes, homeowners insurance, PMI, and HOA fees vary by location and lender, and are not part of the loan formula. Your full monthly housing payment will be higher than the number shown here."}}
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How is a mortgage payment calculated?","acceptedAnswer":{"@type":"Answer","text":"The standard amortization formula is M = P × [r(1+r)^n] / [(1+r)^n − 1], where P is the loan amount, r is the monthly interest rate (annual rate divided by 12), and n is the total number of monthly payments (years × 12). The result M is the fixed monthly payment that fully repays the loan with interest."}},
+{"@type":"Question","name":"What is the difference between APR and interest rate?","acceptedAnswer":{"@type":"Answer","text":"The interest rate is the cost of borrowing the principal. The APR (Annual Percentage Rate) includes the interest rate plus other lender fees expressed as a yearly cost. APR is always equal to or higher than the interest rate. This calculator uses the interest rate, not APR."}},
+{"@type":"Question","name":"Should I choose a 15-year or 30-year mortgage?","acceptedAnswer":{"@type":"Answer","text":"A 15-year mortgage has higher monthly payments but you pay much less total interest and own the home sooner. A 30-year mortgage has lower monthly payments but you pay more interest overall. Run both numbers in the calculator and compare the total interest column."}},
+{"@type":"Question","name":"Why is my first payment mostly interest?","acceptedAnswer":{"@type":"Answer","text":"Mortgage interest is calculated on the remaining balance. At the start, the balance is highest, so most of your payment goes to interest. As the principal shrinks, more of each payment goes to principal. By the end, almost all of each payment is principal. This pattern is called amortization."}},
+{"@type":"Question","name":"Does this calculator include taxes and insurance?","acceptedAnswer":{"@type":"Answer","text":"No. This is principal and interest only (P&I). Property taxes, homeowners insurance, PMI, and HOA fees vary by location and lender, and are not part of the loan formula. Your full monthly housing payment will be higher than the number shown here."}}
+]}
 </script>
 </head>
 
-<body>
+<body class="ui-hifi">
 <a class="skip-link" href="#main">Skip to main content</a>
-<main id="main" class="page">
+<main id="main" class="hf">
 
-  <header class="masthead">
-    <a class="wordmark" href="/">
-      <span class="knife" aria-hidden="true"></span>
-      TinyUseful
+  <header class="hf-header">
+    <a class="hf-wordmark" href="/" aria-label="TinyUseful home">
+      <span class="stack"><span>TINY</span><span>USEFUL</span></span>
     </a>
-    <span class="issue">No. 1 — April 2026</span>
+    <span class="hf-menu-btn" aria-hidden="true">
+      <span></span><span></span>
+    </span>
   </header>
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">TinyUseful</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">Mortgage Calculator</span>
+  <nav class="hf-crumb" aria-label="Breadcrumb">
+    / mortgage calculator <span class="crumb-marker" aria-hidden="true"><span class="crumb-star">&#9733;</span> No.&nbsp;03</span>
   </nav>
 
-  <section class="tools">
-    <div class="section-head">
-      <span class="section-num">No. 03</span>
-      <h1>Mortgage Calculator</h1>
-      <span class="desc">Monthly principal &amp; interest using the standard amortization formula.</span>
-    </div>
-    <div class="tool" data-tool="mortgage">
-      <div class="tool-meta">
-        <h2>Inputs</h2>
-        <p class="desc">Enter your loan amount, interest rate, and term in years. The calculator runs the standard amortization formula in your browser. Nothing is saved or sent.</p>
-      </div>
-      <div class="tool-form">
-        <div class="row">
-          <label>Loan ($)<input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="mtg-loan" value="450000"></label>
-          <label>Rate %<input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="mtg-rate" value="6.75"></label>
-          <label>Years<input type="text" inputmode="numeric" autocomplete="off" enterkeyhint="done" id="mtg-years" value="30"></label>
-        </div>
-        <button type="button" onclick="mtgCalc()">Calculate</button>
-        <div class="out" id="mtg-out" role="status" aria-live="polite"><span class="label">Monthly payment</span><span class="big">$2,919</span><span class="breakdown">Total interest $600,765 · Total paid $1,050,765</span></div>
-        <div class="next-task" id="mtg-next" hidden>
-          <p class="hint">↓ You might also need</p>
-          <div class="next-tools">
-            <a href="/loan-calculator/" class="next-link" data-symbol="$">Loan Calculator</a>
-            <a href="/compound-interest-calculator/" class="next-link" data-symbol="Σ">Compound Interest</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="ad-block">
-    <div class="placeholder">728 × 90 leaderboard placement</div>
+  <h1 class="hf-display">MORTGAGE CALCULATOR</h1>
+  <div class="hf-sub">
+    <span>Monthly principal &amp; interest using the standard amortization formula.</span>
   </div>
 
-  <section class="explainer">
-    <h2>How it works</h2>
-    <p>
-      A fixed-rate mortgage is repaid in equal monthly installments over the term you choose.
-      Each payment covers some interest on the remaining balance plus some principal repayment.
-      In the early years, most of every payment is interest; in the later years, most of it is principal.
-      This pattern is called <em>amortization</em>.
-    </p>
-    <p>
-      The formula is: <strong>M = P × [r(1+r)<sup>n</sup>] / [(1+r)<sup>n</sup> − 1]</strong>,
-      where <strong>P</strong> is the loan amount, <strong>r</strong> is the monthly interest rate
-      (annual rate divided by 12), and <strong>n</strong> is the total number of monthly payments
-      (years × 12). It is a standard amortization formula used for fixed-rate loan estimates. There is one correct answer.
-    </p>
-    <h2>What this does not include</h2>
-    <p>
-      This calculator shows <strong>principal and interest only</strong>. Your real monthly housing
-      payment usually also includes property tax, homeowners insurance, sometimes PMI (private
-      mortgage insurance) when your down payment is below 20%, and HOA fees if applicable.
-      These vary by location and lender — check your loan estimate document for the full picture.
-    </p>
+  <div class="hf-fields tool-form" data-tool="mortgage">
+
+    <div class="hf-field">
+      <div class="lbl">
+        <span>Loan</span>
+        <span class="req" id="mtg-loan-req">required</span>
+      </div>
+      <div class="hf-input focus" id="mtg-loan-wrap">
+        <span class="pre" aria-hidden="true">$</span>
+        <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="mtg-loan" value="450000" aria-label="Loan amount in dollars">
+      </div>
+    </div>
+
+    <div class="hf-field">
+      <div class="lbl">
+        <span>Rate</span>
+        <span aria-hidden="true">%</span>
+      </div>
+      <div class="hf-input">
+        <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="mtg-rate" value="6.75" aria-label="Annual interest rate as percentage">
+        <span class="suf" aria-hidden="true">%</span>
+      </div>
+    </div>
+
+    <div class="hf-field">
+      <div class="lbl">
+        <span>Years</span>
+      </div>
+      <div class="hf-input">
+        <input type="text" inputmode="numeric" autocomplete="off" enterkeyhint="done" id="mtg-years" value="30" aria-label="Loan term in years">
+        <span class="suf" aria-hidden="true">years</span>
+      </div>
+    </div>
+
+  </div>
+
+  <section class="hf-result" id="mtg-out" role="status" aria-live="polite" aria-atomic="true">
+    <div class="r-lbl">
+      <span class="r-lbl-text" id="mtg-lbl">Monthly payment</span>
+      <span class="hf-tiny hf-muted" aria-hidden="true">aria-live</span>
+    </div>
+    <div class="r-num">
+      <span class="cur" aria-hidden="true">$</span><span class="val" id="mtg-val">2,918</span>
+    </div>
+    <div class="r-break" id="mtg-break">
+      <span>Loan</span><span class="v">$450,000</span>
+      <span>Total interest</span><span class="v">$600,425</span>
+      <span>Total paid</span><span class="v">$1,050,425</span>
+      <span>Monthly</span><span class="v">$2,918</span>
+    </div>
+    <div class="r-actions">
+      <button type="button" class="hf-btn accent" id="mtg-copy" aria-label="Copy result to clipboard">Copy result</button>
+      <button type="button" class="hf-btn ghost" id="mtg-reset" aria-label="Reset to defaults">Reset</button>
+    </div>
+    <div class="why-line" id="mtg-why">
+      $2,918/mo &times; 360 = $1,050,425 total ($600,425 interest)
+    </div>
   </section>
 
-  <section class="methodology" aria-labelledby="methodology-title">
-    <h2 id="methodology-title">Methodology &amp; trust</h2>
-    <details>
-      <summary>Formula, assumptions, rounding, and limitations</summary>
-      <div class="answer">
+  <div class="hf-chips-wrap" id="mtg-next" aria-label="You might also need">
+    <div class="hf-cap">You might also need</div>
+    <div class="hf-chips" role="list">
+      <a class="hf-chip" href="/loan-calculator/" role="listitem">Loan Calculator</a>
+      <a class="hf-chip" href="/compound-interest-calculator/" role="listitem">Compound Interest</a>
+      <a class="hf-chip" href="/rent-affordability-calculator/" role="listitem">Rent Affordability</a>
+    </div>
+  </div>
+
+  <div class="hf-chips-wrap">
+    <div class="hf-cap">Quick examples</div>
+    <div class="hf-chips" role="list">
+      <button type="button" class="hf-chip" data-loan="450000" data-rate="6.75" data-years="30" role="listitem">$450k &middot; 6.75% &middot; 30y</button>
+      <button type="button" class="hf-chip" data-loan="450000" data-rate="6.75" data-years="15" role="listitem">$450k &middot; 6.75% &middot; 15y</button>
+      <button type="button" class="hf-chip" data-loan="300000" data-rate="5"    data-years="30" role="listitem">$300k &middot; 5% &middot; 30y</button>
+    </div>
+  </div>
+
+  <div class="hf-method-wrap">
+    <div class="hf-cap">How this is calculated</div>
+    <div class="hf-method-block">
+      <div class="formula">M = P &times; [r(1+r)<sup>n</sup>] &divide; [(1+r)<sup>n</sup> &minus; 1]</div>
+      <div class="formula">total interest = (M &times; n) &minus; P</div>
+      <div class="formula">total paid = M &times; n</div>
+      <p>A fixed-rate mortgage is repaid in equal monthly installments over the term you choose. Each payment covers some interest on the remaining balance plus some principal repayment. In the early years, most of every payment is interest; in the later years, most of it is principal. This pattern is called <em>amortization</em>.</p>
+      <p><strong>This calculator shows principal and interest only.</strong> Your real monthly housing payment usually also includes property tax, homeowners insurance, sometimes PMI (private mortgage insurance) when your down payment is below 20%, and HOA fees if applicable. These vary by location and lender &mdash; check your loan estimate document for the full picture. <strong>Estimate only. Actual lender quotes, regional taxes, insurance, and qualifying rules will differ.</strong></p>
+      <p class="hf-muted hf-tiny">Updated May 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
+
+      <details class="method-details">
+        <summary>Formula, assumptions, rounding &amp; limitations</summary>
+
         <h3>Formula</h3>
         <ul>
-          <li><code>M = P × [r(1+r)^n] / [(1+r)^n − 1]</code></li>
-          <li><code>total interest = (M × n) − P</code></li>
-          <li><code>total paid = M × n</code></li>
+          <li><code>M = P &times; [r(1+r)^n] &divide; [(1+r)^n &minus; 1]</code></li>
+          <li><code>total interest = (M &times; n) &minus; P</code></li>
+          <li><code>total paid = M &times; n</code></li>
         </ul>
 
         <h3>Assumptions</h3>
@@ -176,86 +184,262 @@
 
         <h3>Limitations</h3>
         <ul>
-          <li>Principal and interest only — does not include all costs unless entered. Property tax, homeowners insurance, PMI, HOA, escrow, points, lender fees, and closing costs are not modelled.</li>
+          <li>Principal and interest only &mdash; does not include all costs unless entered. Property tax, homeowners insurance, PMI, HOA, escrow, points, lender fees, and closing costs are not modelled.</li>
           <li>Uses the interest rate you enter, not APR. Real lender quotes use APR, which includes fees.</li>
           <li>Adjustable-rate mortgages (ARMs), rate resets, recasting, refinancing, prepayment, and extra principal payments are not modelled.</li>
           <li>Estimate only. Actual lender quotes, regional taxes, insurance, and qualifying rules will differ.</li>
         </ul>
-
-        <p class="byline"><em>Built and maintained by Lukáš, an architect in Prague. Last updated May 2026.</em></p>
-      </div>
-    </details>
-  </section>
-
-  <section class="faq">
-    <h2>Frequently asked questions</h2>
-    <details>
-      <summary>How is a mortgage payment calculated?</summary>
-      <div class="answer">
-        <p>The standard amortization formula is <strong>M = P × [r(1+r)<sup>n</sup>] / [(1+r)<sup>n</sup> − 1]</strong>, where P is the loan amount, r is the monthly interest rate (annual rate ÷ 12), and n is the total number of monthly payments (years × 12). The result M is the fixed monthly payment that fully repays the loan with interest.</p>
-      </div>
-    </details>
-    <details>
-      <summary>What is the difference between APR and interest rate?</summary>
-      <div class="answer">
-        <p>The interest rate is the cost of borrowing the principal. The APR (Annual Percentage Rate) includes the interest rate plus other lender fees expressed as a yearly cost. APR is always equal to or higher than the interest rate. This calculator uses the interest rate, not APR.</p>
-      </div>
-    </details>
-    <details>
-      <summary>Should I choose a 15-year or 30-year mortgage?</summary>
-      <div class="answer">
-        <p>A 15-year mortgage has higher monthly payments but you pay much less total interest and own the home sooner. A 30-year mortgage has lower monthly payments but you pay more interest overall. Run both numbers in the calculator above and compare the total interest line.</p>
-      </div>
-    </details>
-    <details>
-      <summary>Why is my first payment mostly interest?</summary>
-      <div class="answer">
-        <p>Mortgage interest is calculated on the remaining balance. At the start, the balance is highest, so most of your payment goes to interest. As the principal shrinks, more of each payment goes to principal. By the end, almost all of each payment is principal. This pattern is called amortization.</p>
-      </div>
-    </details>
-    <details>
-      <summary>Does this calculator include taxes and insurance?</summary>
-      <div class="answer">
-        <p>No. This is principal and interest only (P&amp;I). Property taxes, homeowners insurance, PMI, and HOA fees vary by location and lender and are not part of the loan formula. Your full monthly housing payment will be higher than the number shown here.</p>
-      </div>
-    </details>
-  </section>
-
-  <section class="related">
-    <h2>Related tools</h2>
-    <div class="related-grid">
-      <a href="/loan-calculator/">Loan Calculator</a>
-      <a href="/compound-interest-calculator/">Compound Interest</a>
-      <a href="/rent-affordability-calculator/">Rent Affordability</a>
-      <a href="/percentage-calculator/">Percentage Calculator</a>
+      </details>
     </div>
-  </section>
+  </div>
 
-  <footer class="colophon">
-    <span>TinyUseful · Issue No. 1 · 2026 · Made for the open web</span>
-    <span>
-      <a href="/">Home</a> &nbsp; <a href="/about.html">About</a> &nbsp; <a href="/changelog.html">Changelog</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp;
-      <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode"><span class="icon-light" aria-hidden="true">☀</span><span class="icon-dark" aria-hidden="true">☾</span> Theme</button>
+  <div class="hf-ad" aria-label="Advertisement">
+    <div class="ad-label">Advertisement</div>
+    <div class="ad-slot" id="mtg-ad-slot"></div>
+  </div>
+
+  <div class="hf-stack">
+
+    <section class="hf-step s1" data-step="faq">
+      <header class="step-head">
+        <div>
+          <div class="step-title">FAQ</div>
+          <div class="step-meta">amortization &middot; APR vs rate &middot; 15y vs 30y &middot; interest-heavy start &middot; taxes/insurance</div>
+        </div>
+        <span class="step-chev" aria-hidden="true">&#8599;</span>
+      </header>
+      <div class="step-body">
+        <details class="step-q">
+          <summary>How is a mortgage payment calculated?</summary>
+          <div class="answer"><p>The standard amortization formula is <strong>M = P &times; [r(1+r)<sup>n</sup>] &divide; [(1+r)<sup>n</sup> &minus; 1]</strong>, where P is the loan amount, r is the monthly interest rate (annual rate &divide; 12), and n is the total number of monthly payments (years &times; 12). The result M is the fixed monthly payment that fully repays the loan with interest.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>What is the difference between APR and interest rate?</summary>
+          <div class="answer"><p>The interest rate is the cost of borrowing the principal. The APR (Annual Percentage Rate) includes the interest rate plus other lender fees expressed as a yearly cost. APR is always equal to or higher than the interest rate. This calculator uses the interest rate, not APR.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>Should I choose a 15-year or 30-year mortgage?</summary>
+          <div class="answer"><p>A 15-year mortgage has higher monthly payments but you pay much less total interest and own the home sooner. A 30-year mortgage has lower monthly payments but you pay more interest overall. Run both numbers in the calculator above and compare the total interest line.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>Why is my first payment mostly interest?</summary>
+          <div class="answer"><p>Mortgage interest is calculated on the remaining balance. At the start, the balance is highest, so most of your payment goes to interest. As the principal shrinks, more of each payment goes to principal. By the end, almost all of each payment is principal. This pattern is called amortization.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>Does this calculator include taxes and insurance?</summary>
+          <div class="answer"><p>No. This is principal and interest only (P&amp;I). Property taxes, homeowners insurance, PMI, and HOA fees vary by location and lender and are not part of the loan formula. Your full monthly housing payment will be higher than the number shown here.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <section class="hf-step s2" data-step="related">
+      <header class="step-head">
+        <div>
+          <div class="step-title">RELATED</div>
+          <div class="step-meta">Loan &middot; Compound &middot; Rent Affordability &middot; Percentage</div>
+        </div>
+        <span class="step-chev" aria-hidden="true">&#8599;</span>
+      </header>
+      <nav class="step-related" aria-label="Related calculators">
+        <a href="/loan-calculator/">Loan Calculator</a>
+        <a href="/compound-interest-calculator/">Compound Interest</a>
+        <a href="/rent-affordability-calculator/">Rent Affordability</a>
+        <a href="/percentage-calculator/">Percentage Calculator</a>
+      </nav>
+    </section>
+
+  </div>
+
+  <div class="hf-trust">No accounts &middot; runs in your browser &middot; ads &amp; analytics may use cookies</div>
+
+  <footer class="hf-foot">
+    <span class="foot-links">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/changelog.html">Changelog</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
     </span>
+    <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode">&#9728; / &#9790;</button>
   </footer>
+
   <script src="/theme.js" defer></script>
 
 </main>
 
 <script>
   const $ = id => document.getElementById(id);
-  const fmt0 = n => n.toLocaleString(undefined, {maximumFractionDigits: 0});
-  function mtgCalc() {
-    const P=parseLocaleNumber($('mtg-loan').value), r=parseLocaleNumber($('mtg-rate').value)/100/12, n=parseLocaleNumber($('mtg-years').value)*12;
-    // Phase 53b: validity guard — keep last valid result if any input is incomplete/invalid
-    if (!Number.isFinite(P) || !Number.isFinite(r) || !Number.isFinite(n) || P<=0 || n<=0) return;
-    const M = r===0 ? P/n : P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
-    if (!Number.isFinite(M)) return;
-    setOut('mtg-out','Monthly payment','$'+fmt0(M),`Total interest $${fmt0(M*n-P)} · Total paid $${fmt0(M*n)}`);
-    document.getElementById('mtg-next').hidden = false;
+  const fmt0 = n => n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+
+  // Defaults match legacy state
+  const DEFAULTS = { loan: '450000', rate: '6.75', years: '30' };
+
+  function mtgRender(state) {
+    const valEl  = $('mtg-val');
+    const lblEl  = $('mtg-lbl');
+    const brkEl  = $('mtg-break');
+    const whyEl  = $('mtg-why');
+
+    if (!state.valid) {
+      lblEl.textContent = 'Monthly payment';
+      valEl.textContent = '—';
+      brkEl.innerHTML = '<span>' + (state.message || 'Complete all fields') + '</span><span class="v">—</span>';
+      whyEl.textContent = 'Enter loan amount, rate, and number of years above.';
+      return;
+    }
+
+    const { P, n, M, totalInterest, totalPaid } = state;
+    lblEl.textContent = 'Monthly payment';
+    valEl.textContent = fmt0(M);
+    brkEl.innerHTML =
+      '<span>Loan</span><span class="v">$' + fmt0(P) + '</span>' +
+      '<span>Total interest</span><span class="v">$' + fmt0(totalInterest) + '</span>' +
+      '<span>Total paid</span><span class="v">$' + fmt0(totalPaid) + '</span>' +
+      '<span>Monthly</span><span class="v">$' + fmt0(M) + '</span>';
+    whyEl.innerHTML =
+      '$' + fmt0(M) + '/mo × ' + n + ' = $' + fmt0(totalPaid) +
+      ' total ($' + fmt0(totalInterest) + ' interest)';
   }
+
+  // Public name mtgCalc preserved per freeze list
+  // Closed-form amortization formula preserved verbatim, including r === 0 edge case
+  function mtgCalc() {
+    const P = parseLocaleNumber($('mtg-loan').value);
+    const aprPct = parseLocaleNumber($('mtg-rate').value);
+    const years = parseLocaleNumber($('mtg-years').value);
+
+    if (!Number.isFinite(P) || !Number.isFinite(aprPct) || !Number.isFinite(years)) {
+      mtgRender({ valid: false, message: 'Complete all fields' });
+      return;
+    }
+    if (P <= 0) {
+      mtgRender({ valid: false, message: 'Enter a positive loan amount' });
+      return;
+    }
+    if (years <= 0) {
+      mtgRender({ valid: false, message: 'Enter a positive number of years' });
+      return;
+    }
+
+    const r = aprPct / 100 / 12;
+    const n = years * 12;
+
+    // r === 0 edge case preserved verbatim from legacy
+    const M = r === 0
+      ? P / n
+      : P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+
+    if (!Number.isFinite(M)) {
+      mtgRender({ valid: false, message: 'Result out of range' });
+      return;
+    }
+
+    const totalPaid = M * n;
+    const totalInterest = totalPaid - P;
+    mtgRender({ valid: true, P, n, M, totalInterest, totalPaid });
+  }
+
+  // Copy + copied state
+  (function () {
+    const copyBtn = $('mtg-copy');
+    const out = $('mtg-out');
+    const lblEl = $('mtg-lbl');
+    const valEl = $('mtg-val');
+    let origLblText = lblEl ? lblEl.textContent : 'Monthly payment';
+    let revertTimer = null;
+
+    function setCopied(on) {
+      if (!out) return;
+      out.classList.toggle('copied', on);
+      if (lblEl && on) {
+        origLblText = lblEl.textContent;
+        lblEl.textContent = 'Copied to clipboard';
+      }
+      if (lblEl && !on && origLblText) {
+        lblEl.textContent = origLblText;
+      }
+      if (copyBtn) copyBtn.textContent = on ? '✓ Copied' : 'Copy result';
+    }
+
+    if (copyBtn) copyBtn.addEventListener('click', function () {
+      if (!valEl || valEl.textContent === '—') return;
+      const currentLbl = lblEl ? lblEl.textContent : 'Monthly payment';
+      const text = currentLbl + ': $' + valEl.textContent;
+      const finalize = function () {
+        setCopied(true);
+        if (revertTimer) clearTimeout(revertTimer);
+        revertTimer = setTimeout(function () { setCopied(false); }, 1600);
+      };
+      if (!navigator.clipboard) {
+        copyBtn.textContent = 'Copy unavailable';
+        setTimeout(function () { setCopied(false); }, 1500);
+        return;
+      }
+      navigator.clipboard.writeText(text).then(finalize).catch(function () {
+        copyBtn.textContent = 'Copy failed';
+        setTimeout(function () { setCopied(false); }, 1500);
+      });
+    });
+  })();
+
+  // Reset
+  (function () {
+    const resetBtn = $('mtg-reset');
+    if (!resetBtn) return;
+    resetBtn.addEventListener('click', function () {
+      $('mtg-loan').value = DEFAULTS.loan;
+      $('mtg-rate').value = DEFAULTS.rate;
+      $('mtg-years').value = DEFAULTS.years;
+      $('mtg-loan').dispatchEvent(new Event('input', { bubbles: true }));
+    });
+  })();
+
+  // Required + focus + quick example chips
+  (function () {
+    const loanInput = $('mtg-loan');
+    const loanReq = $('mtg-loan-req');
+    const loanWrap = $('mtg-loan-wrap');
+
+    function syncRequired() {
+      if (!loanReq || !loanInput) return;
+      const v = String(loanInput.value || '').trim();
+      const empty = v === '' || !Number.isFinite(parseLocaleNumber(v));
+      if (loanWrap) loanWrap.classList.toggle('error', empty);
+    }
+
+    if (loanInput) {
+      loanInput.addEventListener('input', syncRequired);
+      loanInput.addEventListener('focus', function () { if (loanWrap) loanWrap.classList.add('focus'); });
+      loanInput.addEventListener('blur',  function () { if (loanWrap) loanWrap.classList.remove('focus'); });
+    }
+
+    document.querySelectorAll('.hf-chip[data-loan]').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        const l = chip.getAttribute('data-loan');
+        const r = chip.getAttribute('data-rate');
+        const y = chip.getAttribute('data-years');
+        if (l !== null) $('mtg-loan').value = l;
+        if (r !== null) $('mtg-rate').value = r;
+        if (y !== null) $('mtg-years').value = y;
+        $('mtg-loan').dispatchEvent(new Event('input', { bubbles: true }));
+      });
+    });
+
+    syncRequired();
+  })();
+
+  // Initial render + live recalc
   mtgCalc();
-  attachLiveCalc('.tool-form', mtgCalc);
+  if (typeof attachLiveCalc === 'function') {
+    attachLiveCalc('.tool-form', mtgCalc);
+  } else {
+    let t;
+    const handler = function () { clearTimeout(t); t = setTimeout(mtgCalc, 80); };
+    document.querySelectorAll('.tool-form input').forEach(function (el) {
+      el.addEventListener('input', handler);
+      el.addEventListener('change', handler);
+    });
+  }
 </script>
 
 </body>
