@@ -2255,6 +2255,23 @@ body.ui-hifi .hf-launcher-row.l4 .row-arrow { color: var(--paper); }
 body.ui-hifi .hf-launcher-row.l4 .row-desc,
 body.ui-hifi .hf-launcher-row.l4 .row-url { color: rgba(255,255,255,0.7); }
 
+/* Patch U — arrow hover color (CSS-only)
+   Hover na šipce ↗ uvnitř launcher row → orange.
+   Hover na šipce v yellow tile CTA → white.
+   Per Lukáš: hover scope = jen na šipce, ne na celé řádce. */
+body.ui-hifi .hf-launcher-row .row-arrow:hover {
+  color: var(--accent);
+  transition: color 120ms ease;
+}
+body.ui-hifi .hf-launcher-row.l4 .row-arrow:hover {
+  color: #fff;
+  transition: color 120ms ease;
+}
+body.ui-hifi .hf-featured-tile .featured-cta .arrow:hover {
+  color: #fff;
+  transition: color 120ms ease;
+}
+
 /* Trust + footer on homepage variant (use existing Tip pilot styles, no override needed) */
 
 /* Mobile compact for homepage */
