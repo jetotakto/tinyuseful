@@ -25,7 +25,7 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260509a">
+<link rel="stylesheet" href="/style.css?v=20260514-toolwidth">
 <script src="/js/helpers.js?v=20260504e"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
@@ -45,100 +45,122 @@
 </script>
 </head>
 
-<body>
+<body class="ui-hifi">
 <a class="skip-link" href="#main">Skip to main content</a>
-<main id="main" class="page">
+<main id="main" class="hf">
 
-  <header class="masthead">
-    <a class="wordmark" href="/"><span class="knife" aria-hidden="true"></span>TinyUseful</a>
-    <span class="issue">No. 1 — April 2026</span>
+  <header class="hf-header">
+    <a class="hf-wordmark" href="/" aria-label="TinyUseful home">
+      <span class="stack"><span>TINY</span><span>USEFUL</span></span>
+    </a>
+    <span class="hf-menu-btn" aria-hidden="true">
+      <span></span><span></span>
+    </span>
   </header>
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">TinyUseful</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">Loan Calculator</span>
+  <nav class="hf-crumb" aria-label="Breadcrumb">
+    / loan calculator <span class="crumb-marker" aria-hidden="true"><span class="crumb-star">&#9733;</span> No.&nbsp;04</span>
   </nav>
 
-  <section class="tools">
-    <div class="section-head">
-      <span class="section-num">No. 04</span>
-      <h1>Loan Calculator</h1>
-      <span class="desc">Auto, student, or personal — fixed-rate, fully amortized.</span>
-    </div>
-    <div class="tool" data-tool="loan">
-      <div class="tool-meta">
-        <h2>Inputs</h2>
-        <p class="desc">Enter loan amount, APR, and term in months. Same amortization formula as a mortgage, just shorter.</p>
-      </div>
-      <div class="tool-form">
-        <div class="row">
-          <label>Amount ($)<input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="loan-amt" value="25000"></label>
-          <label>APR %<input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="loan-apr" value="7.5"></label>
-          <label>Months<input type="text" inputmode="numeric" autocomplete="off" enterkeyhint="done" id="loan-months" value="60"></label>
-        </div>
-        <button type="button" onclick="loanCalc()">Calculate</button>
-        <div class="out" id="loan-out" role="status" aria-live="polite"><span class="label">Monthly</span><span class="big">$501</span><span class="breakdown">Total interest $5,059 · Total paid $30,059</span></div>
-        <div class="next-task" id="loan-next" hidden>
-          <p class="hint">↓ You might also need</p>
-          <div class="next-tools">
-            <a href="/mortgage-calculator/" class="next-link" data-symbol="⌂">Mortgage</a>
-            <a href="/compound-interest-calculator/" class="next-link" data-symbol="Σ">Compound Interest</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="ad-block">
-    <div class="placeholder">728 × 90 leaderboard placement</div>
+  <h1 class="hf-display">LOAN&nbsp;CALCULATOR</h1>
+  <div class="hf-sub">
+    <span>Auto, student, or personal &mdash; fixed-rate, fully amortized.</span>
   </div>
 
-  <section class="explainer">
-    <h2>How to calculate a loan payment manually</h2>
-    <ol>
-      <li>Convert APR to monthly rate: divide by 12 and by 100 (7.5% APR → 0.00625).</li>
-      <li>Compute (1 + monthly rate) raised to the power of total months.</li>
-      <li>Apply the amortization formula: <code>M = P × [r(1+r)^n] / [(1+r)^n − 1]</code>.</li>
-    </ol>
-    <p><strong>Example:</strong> $25,000 loan, 7.5% APR, 60 months → monthly payment ≈ <strong>$501</strong>.</p>
+  <div class="hf-fields tool-form" data-tool="loan">
 
-    <h2>Quick examples</h2>
-    <ul class="examples">
-      <li>$25,000 auto loan, 7.5% APR, 60 mo = <strong>$501/mo</strong></li>
-      <li>$15,000 personal loan, 9% APR, 36 mo = <strong>$477/mo</strong></li>
-      <li>$50,000 student loan, 5% APR, 120 mo = <strong>$530/mo</strong></li>
-      <li>Same $25,000 over 36 mo instead of 60 mo = <strong>$777/mo</strong> (saves ~$2.5k interest)</li>
-    </ul>
+    <div class="hf-field">
+      <div class="lbl">
+        <span>Amount</span>
+        <span class="req" id="loan-amt-req">required</span>
+      </div>
+      <div class="hf-input focus" id="loan-amt-wrap">
+        <span class="pre" aria-hidden="true">$</span>
+        <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="loan-amt" value="25000" aria-label="Loan amount in dollars">
+      </div>
+    </div>
 
-    <h2>Formulas used</h2>
-    <p class="formula"><code>monthly rate = APR ÷ 12 ÷ 100</code></p>
-    <p class="formula"><code>M = P × [r(1+r)^n] / [(1+r)^n − 1]</code></p>
-    <p class="formula"><code>total interest = (M × n) − P</code></p>
-    <p>
-      Auto loans typically run 3–7 years, student loans 10–20 years, personal loans 2–7 years.
-      Shorter term = higher monthly payment but less total interest. Run both and compare.
-    </p>
+    <div class="hf-field">
+      <div class="lbl">
+        <span>APR</span>
+        <span aria-hidden="true">%</span>
+      </div>
+      <div class="hf-input">
+        <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="loan-apr" value="7.5" aria-label="Annual percentage rate">
+        <span class="suf" aria-hidden="true">%</span>
+      </div>
+    </div>
 
-    <h2>Common uses</h2>
-    <ul>
-      <li>Comparing auto loan offers from different dealers or banks</li>
-      <li>Choosing between 36 and 60 month terms (interest vs. cash flow trade-off)</li>
-      <li>Estimating monthly payment before applying for a personal loan</li>
-      <li>Planning student loan repayment after graduation</li>
-      <li>Refinancing decision: new APR vs. current monthly payment</li>
-    </ul>
+    <div class="hf-field">
+      <div class="lbl">
+        <span>Months</span>
+      </div>
+      <div class="hf-input">
+        <input type="text" inputmode="numeric" autocomplete="off" enterkeyhint="done" id="loan-months" value="60" aria-label="Loan term in months">
+        <span class="suf" aria-hidden="true">months</span>
+      </div>
+    </div>
+
+  </div>
+
+  <section class="hf-result" id="loan-out" role="status" aria-live="polite" aria-atomic="true">
+    <div class="r-lbl">
+      <span class="r-lbl-text" id="loan-lbl">Monthly</span>
+      <span class="hf-tiny hf-muted" aria-hidden="true">aria-live</span>
+    </div>
+    <div class="r-num">
+      <span class="cur" aria-hidden="true">$</span><span class="val" id="loan-val">501</span>
+    </div>
+    <div class="r-break" id="loan-break">
+      <span>Amount</span><span class="v">$25,000</span>
+      <span>Total interest</span><span class="v">$5,058</span>
+      <span>Total paid</span><span class="v">$30,058</span>
+      <span>Monthly</span><span class="v">$501</span>
+    </div>
+    <div class="r-actions">
+      <button type="button" class="hf-btn accent" id="loan-copy" aria-label="Copy result to clipboard">Copy result</button>
+      <button type="button" class="hf-btn ghost" id="loan-reset" aria-label="Reset to defaults">Reset</button>
+    </div>
+    <div class="why-line" id="loan-why">
+      $501/mo &times; 60 = $30,058 total ($5,058 interest)
+    </div>
   </section>
 
-  <section class="methodology" aria-labelledby="methodology-title">
-    <h2 id="methodology-title">Methodology &amp; trust</h2>
-    <details>
-      <summary>Formula, assumptions, rounding, and limitations</summary>
-      <div class="answer">
+  <div class="hf-chips-wrap" id="loan-next" aria-label="You might also need">
+    <div class="hf-cap">You might also need</div>
+    <div class="hf-chips" role="list">
+      <a class="hf-chip" href="/mortgage-calculator/" role="listitem">Mortgage</a>
+      <a class="hf-chip" href="/compound-interest-calculator/" role="listitem">Compound Interest</a>
+      <a class="hf-chip" href="/rent-affordability-calculator/" role="listitem">Rent Affordability</a>
+    </div>
+  </div>
+
+  <div class="hf-chips-wrap">
+    <div class="hf-cap">Quick examples</div>
+    <div class="hf-chips" role="list">
+      <button type="button" class="hf-chip" data-amt="25000" data-apr="7.5" data-months="60"  role="listitem">$25k &middot; 7.5% &middot; 60mo</button>
+      <button type="button" class="hf-chip" data-amt="15000" data-apr="9"   data-months="36"  role="listitem">$15k &middot; 9% &middot; 36mo</button>
+      <button type="button" class="hf-chip" data-amt="50000" data-apr="5"   data-months="120" role="listitem">$50k &middot; 5% &middot; 120mo</button>
+    </div>
+  </div>
+
+  <div class="hf-method-wrap">
+    <div class="hf-cap">How this is calculated</div>
+    <div class="hf-method-block">
+      <div class="formula">monthly rate = APR &divide; 12 &divide; 100</div>
+      <div class="formula">M = P &times; [r(1+r)<sup>n</sup>] &divide; [(1+r)<sup>n</sup> &minus; 1]</div>
+      <p><strong>Estimate only. Lender underwriting, qualification, and final terms will differ.</strong> Auto loans typically run 3&ndash;7 years, student loans 10&ndash;20 years, personal loans 2&ndash;7 years. Shorter term = higher monthly payment but less total interest.</p>
+      <p class="hf-muted hf-tiny">Updated May 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
+
+      <details class="method-details">
+        <summary>Formula, assumptions, rounding &amp; limitations</summary>
+
         <h3>Formula</h3>
         <ul>
-          <li><code>monthly rate = APR ÷ 12 ÷ 100</code></li>
-          <li><code>M = P × [r(1+r)^n] / [(1+r)^n − 1]</code></li>
-          <li><code>total interest = (M × n) − P</code></li>
-          <li><code>total paid = M × n</code></li>
+          <li><code>monthly rate = APR &divide; 12 &divide; 100</code></li>
+          <li><code>M = P &times; [r(1+r)<sup>n</sup>] &divide; [(1+r)<sup>n</sup> &minus; 1]</code></li>
+          <li><code>total interest = (M &times; n) &minus; P</code></li>
+          <li><code>total paid = M &times; n</code></li>
         </ul>
 
         <h3>Assumptions</h3>
@@ -158,70 +180,255 @@
           <li>Origination fees, points, prepayment penalties, late fees, and other lender charges are not modelled.</li>
           <li>Variable-rate loans, deferment, forbearance, income-driven repayment, and grace periods are not handled.</li>
           <li>Extra principal payments and bi-weekly schedules are not modelled.</li>
-          <li>The APR shown is what you enter — comparing real loan offers requires each lender's official APR disclosure.</li>
+          <li>The APR shown is what you enter &mdash; comparing real loan offers requires each lender&rsquo;s official APR disclosure.</li>
           <li>Estimate only. Lender underwriting, qualification, and final terms will differ.</li>
         </ul>
-
-        <p class="byline"><em>Built and maintained by Lukáš, an architect in Prague. Last updated May 2026.</em></p>
-      </div>
-    </details>
-  </section>
-
-  <section class="faq">
-    <h2>Frequently asked questions</h2>
-    <details>
-      <summary>What's the difference between APR and interest rate on a loan?</summary>
-      <div class="answer"><p>Interest rate is the cost of borrowing the principal. APR also includes lender fees expressed as a yearly cost, so APR is always equal to or higher than the interest rate. Always compare loans on APR, not just rate.</p></div>
-    </details>
-    <details>
-      <summary>Should I take a longer loan to lower the monthly payment?</summary>
-      <div class="answer"><p>The monthly payment drops, but total interest paid usually rises a lot. A 60-month vs 36-month auto loan can mean thousands more in interest. Use the calculator to see the trade-off explicitly before deciding.</p></div>
-    </details>
-    <details>
-      <summary>Does this calculator account for extra payments?</summary>
-      <div class="answer"><p>No, this is a basic amortization calculator with one fixed payment. Extra principal payments shorten the term and reduce total interest, but the math is iterative — try different P or n values to see the effect.</p></div>
-    </details>
-    <details>
-      <summary>What about variable-rate loans?</summary>
-      <div class="answer"><p>This tool assumes a fixed rate for the full term. For variable-rate loans (some private student loans, some personal loans), the rate can change, so the monthly payment shown is only correct for the period the rate stays fixed.</p></div>
-    </details>
-  </section>
-
-  <section class="related">
-    <h2>Related tools</h2>
-    <div class="related-grid">
-      <a href="/mortgage-calculator/">Mortgage Calculator</a>
-      <a href="/compound-interest-calculator/">Compound Interest</a>
-      <a href="/percentage-calculator/">Percentage Calculator</a>
-      <a href="/rent-affordability-calculator/">Rent Affordability</a>
+      </details>
     </div>
-  </section>
+  </div>
 
-  <footer class="colophon">
-    <span>TinyUseful · Issue No. 1 · 2026</span>
-    <span>
-      <a href="/">Home</a> &nbsp; <a href="/about.html">About</a> &nbsp; <a href="/changelog.html">Changelog</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp;
-      <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode"><span class="icon-light" aria-hidden="true">☀</span><span class="icon-dark" aria-hidden="true">☾</span> Theme</button>
+  <div class="hf-ad" aria-label="Advertisement">
+    <div class="ad-label">Advertisement</div>
+    <div class="ad-slot" id="loan-ad-slot"></div>
+  </div>
+
+  <div class="hf-stack">
+
+    <section class="hf-step s1" data-step="faq">
+      <header class="step-head">
+        <div>
+          <div class="step-title">FAQ</div>
+          <div class="step-meta">APR vs rate &middot; longer term trade-off &middot; extra payments &middot; variable rates</div>
+        </div>
+        <span class="step-chev" aria-hidden="true">&#8599;</span>
+      </header>
+      <div class="step-body">
+        <details class="step-q">
+          <summary>What&rsquo;s the difference between APR and interest rate on a loan?</summary>
+          <div class="answer"><p>Interest rate is the cost of borrowing the principal. APR also includes lender fees expressed as a yearly cost, so APR is always equal to or higher than the interest rate. Always compare loans on APR, not just rate.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>Should I take a longer loan to lower the monthly payment?</summary>
+          <div class="answer"><p>The monthly payment drops, but total interest paid usually rises a lot. A 60-month vs 36-month auto loan can mean thousands more in interest. Use the calculator to see the trade-off explicitly before deciding.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>Does this calculator account for extra payments?</summary>
+          <div class="answer"><p>No, this is a basic amortization calculator with one fixed payment. Extra principal payments shorten the term and reduce total interest, but the math is iterative &mdash; try different P or n values to see the effect.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>What about variable-rate loans?</summary>
+          <div class="answer"><p>This tool assumes a fixed rate for the full term. For variable-rate loans (some private student loans, some personal loans), the rate can change, so the monthly payment shown is only correct for the period the rate stays fixed.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <section class="hf-step s2" data-step="related">
+      <header class="step-head">
+        <div>
+          <div class="step-title">RELATED</div>
+          <div class="step-meta">Mortgage &middot; Compound &middot; Percentage &middot; Rent Affordability</div>
+        </div>
+        <span class="step-chev" aria-hidden="true">&#8599;</span>
+      </header>
+      <nav class="step-related" aria-label="Related calculators">
+        <a href="/mortgage-calculator/">Mortgage Calculator</a>
+        <a href="/compound-interest-calculator/">Compound Interest</a>
+        <a href="/percentage-calculator/">Percentage Calculator</a>
+        <a href="/rent-affordability-calculator/">Rent Affordability</a>
+      </nav>
+    </section>
+
+  </div>
+
+  <div class="hf-trust">No accounts &middot; runs in your browser &middot; ads &amp; analytics may use cookies</div>
+
+  <footer class="hf-foot">
+    <span class="foot-links">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/changelog.html">Changelog</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
     </span>
+    <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode">&#9728; / &#9790;</button>
   </footer>
+
   <script src="/theme.js" defer></script>
 
 </main>
 
 <script>
   const $ = id => document.getElementById(id);
-  const fmt0 = n => n.toLocaleString(undefined, {maximumFractionDigits: 0});
-  function loanCalc() {
-    const P=parseLocaleNumber($('loan-amt').value), r=parseLocaleNumber($('loan-apr').value)/100/12, n=parseLocaleNumber($('loan-months').value);
-    // Phase 53b: validity guard — keep last valid result if any input is incomplete/invalid
-    if (!Number.isFinite(P) || !Number.isFinite(r) || !Number.isFinite(n) || P<=0 || n<=0) return;
-    const M = r===0 ? P/n : P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
-    if (!Number.isFinite(M)) return;
-    setOut('loan-out','Monthly','$'+fmt0(M),`Total interest $${fmt0(M*n-P)} · Total paid $${fmt0(M*n)}`);
-    document.getElementById('loan-next').hidden = false;
+  const fmt0 = n => n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+
+  // Defaults match legacy state
+  const DEFAULTS = { amt: '25000', apr: '7.5', months: '60' };
+
+  function loanRender(state) {
+    const valEl  = $('loan-val');
+    const lblEl  = $('loan-lbl');
+    const brkEl  = $('loan-break');
+    const whyEl  = $('loan-why');
+
+    if (!state.valid) {
+      lblEl.textContent = 'Monthly';
+      valEl.textContent = '—';
+      brkEl.innerHTML = '<span>' + (state.message || 'Complete all fields') + '</span><span class="v">—</span>';
+      whyEl.textContent = 'Enter loan amount, APR, and number of months above.';
+      return;
+    }
+
+    const { P, n, M, totalInterest, totalPaid } = state;
+    lblEl.textContent = 'Monthly';
+    valEl.textContent = fmt0(M);
+    brkEl.innerHTML =
+      '<span>Amount</span><span class="v">$' + fmt0(P) + '</span>' +
+      '<span>Total interest</span><span class="v">$' + fmt0(totalInterest) + '</span>' +
+      '<span>Total paid</span><span class="v">$' + fmt0(totalPaid) + '</span>' +
+      '<span>Monthly</span><span class="v">$' + fmt0(M) + '</span>';
+    whyEl.innerHTML =
+      '$' + fmt0(M) + '/mo × ' + n + ' = $' + fmt0(totalPaid) +
+      ' total ($' + fmt0(totalInterest) + ' interest)';
   }
+
+  // Public name loanCalc preserved per freeze list
+  // Closed-form amortization formula preserved verbatim, including r === 0 edge case
+  function loanCalc() {
+    const P = parseLocaleNumber($('loan-amt').value);
+    const aprPct = parseLocaleNumber($('loan-apr').value);
+    const n = parseLocaleNumber($('loan-months').value);
+
+    if (!Number.isFinite(P) || !Number.isFinite(aprPct) || !Number.isFinite(n)) {
+      loanRender({ valid: false, message: 'Complete all fields' });
+      return;
+    }
+    if (P <= 0) {
+      loanRender({ valid: false, message: 'Enter a positive loan amount' });
+      return;
+    }
+    if (n <= 0) {
+      loanRender({ valid: false, message: 'Enter a positive number of months' });
+      return;
+    }
+
+    const r = aprPct / 100 / 12;
+
+    // r === 0 edge case (zero APR loan) preserved verbatim from legacy
+    const M = r === 0
+      ? P / n
+      : P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+
+    if (!Number.isFinite(M)) {
+      loanRender({ valid: false, message: 'Result out of range' });
+      return;
+    }
+
+    const totalPaid = M * n;
+    const totalInterest = totalPaid - P;
+    loanRender({ valid: true, P, n, M, totalInterest, totalPaid });
+  }
+
+  // Copy + copied state
+  (function () {
+    const copyBtn = $('loan-copy');
+    const out = $('loan-out');
+    const lblEl = $('loan-lbl');
+    const valEl = $('loan-val');
+    let origLblText = lblEl ? lblEl.textContent : 'Monthly';
+    let revertTimer = null;
+
+    function setCopied(on) {
+      if (!out) return;
+      out.classList.toggle('copied', on);
+      if (lblEl && on) {
+        origLblText = lblEl.textContent;
+        lblEl.textContent = 'Copied to clipboard';
+      }
+      if (lblEl && !on && origLblText) {
+        lblEl.textContent = origLblText;
+      }
+      if (copyBtn) copyBtn.textContent = on ? '✓ Copied' : 'Copy result';
+    }
+
+    if (copyBtn) copyBtn.addEventListener('click', function () {
+      if (!valEl || valEl.textContent === '—') return;
+      const currentLbl = lblEl ? lblEl.textContent : 'Monthly';
+      const text = currentLbl + ': $' + valEl.textContent;
+      const finalize = function () {
+        setCopied(true);
+        if (revertTimer) clearTimeout(revertTimer);
+        revertTimer = setTimeout(function () { setCopied(false); }, 1600);
+      };
+      if (!navigator.clipboard) {
+        copyBtn.textContent = 'Copy unavailable';
+        setTimeout(function () { setCopied(false); }, 1500);
+        return;
+      }
+      navigator.clipboard.writeText(text).then(finalize).catch(function () {
+        copyBtn.textContent = 'Copy failed';
+        setTimeout(function () { setCopied(false); }, 1500);
+      });
+    });
+  })();
+
+  // Reset
+  (function () {
+    const resetBtn = $('loan-reset');
+    if (!resetBtn) return;
+    resetBtn.addEventListener('click', function () {
+      $('loan-amt').value = DEFAULTS.amt;
+      $('loan-apr').value = DEFAULTS.apr;
+      $('loan-months').value = DEFAULTS.months;
+      $('loan-amt').dispatchEvent(new Event('input', { bubbles: true }));
+    });
+  })();
+
+  // Required + focus + quick example chips
+  (function () {
+    const amtInput = $('loan-amt');
+    const amtReq = $('loan-amt-req');
+    const amtWrap = $('loan-amt-wrap');
+
+    function syncRequired() {
+      if (!amtReq || !amtInput) return;
+      const v = String(amtInput.value || '').trim();
+      const empty = v === '' || !Number.isFinite(parseLocaleNumber(v));
+      if (amtWrap) amtWrap.classList.toggle('error', empty);
+    }
+
+    if (amtInput) {
+      amtInput.addEventListener('input', syncRequired);
+      amtInput.addEventListener('focus', function () { if (amtWrap) amtWrap.classList.add('focus'); });
+      amtInput.addEventListener('blur',  function () { if (amtWrap) amtWrap.classList.remove('focus'); });
+    }
+
+    document.querySelectorAll('.hf-chip[data-amt]').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        const a = chip.getAttribute('data-amt');
+        const r = chip.getAttribute('data-apr');
+        const m = chip.getAttribute('data-months');
+        if (a !== null) $('loan-amt').value = a;
+        if (r !== null) $('loan-apr').value = r;
+        if (m !== null) $('loan-months').value = m;
+        $('loan-amt').dispatchEvent(new Event('input', { bubbles: true }));
+      });
+    });
+
+    syncRequired();
+  })();
+
+  // Initial render + live recalc
   loanCalc();
-  attachLiveCalc('.tool-form', loanCalc);
+  if (typeof attachLiveCalc === 'function') {
+    attachLiveCalc('.tool-form', loanCalc);
+  } else {
+    let t;
+    const handler = function () { clearTimeout(t); t = setTimeout(loanCalc, 80); };
+    document.querySelectorAll('.tool-form input').forEach(function (el) {
+      el.addEventListener('input', handler);
+      el.addEventListener('change', handler);
+    });
+  }
 </script>
 
 </body>
