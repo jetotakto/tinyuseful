@@ -25,7 +25,7 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260504d">
+<link rel="stylesheet" href="/style.css?v=20260514-hotfix2">
 <script src="/js/helpers.js?v=20260504d"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
@@ -45,177 +45,434 @@
 </script>
 </head>
 
-<body>
-<div class="page">
+<body class="ui-hifi">
+<a class="skip-link" href="#main">Skip to main content</a>
+<main id="main" class="hf">
 
-  <header class="masthead">
-    <a class="wordmark" href="/"><span class="knife" aria-hidden="true"></span>TinyUseful</a>
-    <span class="issue">No. 1 — April 2026</span>
+  <header class="hf-header">
+    <a class="hf-wordmark" href="/" aria-label="TinyUseful home">
+      <span class="stack"><span>TINY</span><span>USEFUL</span></span>
+    </a>
+    <span class="hf-menu-btn" aria-hidden="true">
+      <span></span><span></span>
+    </span>
   </header>
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">TinyUseful</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">Date Calculator</span>
+  <nav class="hf-crumb" aria-label="Breadcrumb">
+    / date calculator <span class="crumb-marker" aria-hidden="true"><span class="crumb-star">&#9733;</span> No.&nbsp;10</span>
   </nav>
 
-  <section class="tools">
-    <div class="section-head">
-      <span class="section-num">No. 10</span>
-      <h1>Date Calculator</h1>
-      <span class="desc">Days between two dates, or a date X days from today.</span>
-    </div>
-    <div class="tool" data-tool="date">
-      <div class="tool-meta">
-        <h3>Inputs</h3>
-        <p class="desc">Pick a mode. "Days between" needs two dates. "Days from today" takes a positive or negative number.</p>
-      </div>
-      <div class="tool-form">
-        <div class="row">
-          <label>Mode
-            <select id="date-mode" onchange="dateUpdateUI()">
-              <option value="between">Days between</option>
-              <option value="addto">Days from today</option>
-            </select>
-          </label>
-        </div>
-        <div class="row" id="date-row-between">
-          <label>From<input type="date" id="date-from"></label>
-          <label>To<input type="date" id="date-to"></label>
-        </div>
-        <div class="row" id="date-row-addto" style="display:none;">
-          <label>Days (+/−)<input type="text" inputmode="numeric" autocomplete="off" enterkeyhint="done" id="date-days" value="100"></label>
-        </div>
-        <button type="button" onclick="dateCalc()">Calculate</button>
-        <div class="out" id="date-out" role="status" aria-live="polite"><span class="label">Result</span><span class="big">—</span><span class="breakdown">Pick dates and press Calculate.</span></div>
-        <div class="next-task" id="date-next" hidden>
-          <p class="hint">↓ You might also need</p>
-          <div class="next-tools">
-            <a href="/time-zone-converter/" class="next-link" data-symbol="⊙">Time Zone</a>
-            <a href="/unit-converter/" class="next-link" data-symbol="↔">Unit Converter</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="ad-block">
-    <div class="placeholder">728 × 90 leaderboard placement</div>
+  <h1 class="hf-display">DATE CALCULATOR</h1>
+  <div class="hf-sub">
+    <span>Days between two dates, or a date X days from today.</span>
   </div>
 
-  <section class="explainer">
-    <h3>How to calculate days between two dates manually</h3>
-    <ol>
-      <li>Count whole years between the dates and multiply by 365.</li>
-      <li>Add 1 day for each leap year (years divisible by 4, except centuries not divisible by 400).</li>
-      <li>Add or subtract the leftover months and days.</li>
-    </ol>
-    <p><strong>Example:</strong> From 1 Jan 2024 to 1 Jan 2026 = 2 years × 365 + 1 leap day (2024) = <strong>731 days</strong>.</p>
+  <div class="hf-fields tool-form" data-tool="date">
 
-    <h3>Quick examples</h3>
-    <ul class="examples">
-      <li>Days from today to next Christmas — varies by current date</li>
-      <li>30 days from today — typical invoice due date</li>
-      <li>60 days from today — extended payment terms</li>
-      <li>90 days from today — contract notice period</li>
-      <li>Days between your birthday this year and next = <strong>365 or 366</strong></li>
-    </ul>
+    <div class="hf-field">
+      <div class="lbl">
+        <span>Mode</span>
+      </div>
+      <div class="hf-input hf-input-select">
+        <select id="date-mode" aria-label="Calculation mode">
+          <option value="between">Days between</option>
+          <option value="addto">Days from today</option>
+        </select>
+      </div>
+    </div>
 
-    <h3>Formulas used</h3>
-    <p class="formula"><code>days between = (end − start) ÷ 86,400,000 ms</code></p>
-    <p class="formula"><code>date from today = today + N days</code></p>
-    <p class="formula"><code>~years = days ÷ 365.25</code></p>
-    <p>
-      The browser handles leap years and month lengths automatically. Negative results in
-      "between" mode mean the end date is earlier than the start. Negative numbers in
-      "from today" mode go backward in time.
-    </p>
+    <div class="hf-field" id="date-field-from">
+      <div class="lbl">
+        <span>From</span>
+        <span class="req" id="date-from-req">required</span>
+      </div>
+      <div class="hf-input focus" id="date-from-wrap">
+        <input type="date" id="date-from" aria-label="Start date">
+      </div>
+    </div>
 
-    <h3>Common uses</h3>
-    <ul>
-      <li>Project deadlines, contract expiry, and notice periods</li>
-      <li>Counting down to a holiday, birthday, or vacation</li>
-      <li>Working out a baby's due date or a return-by date</li>
-      <li>Calculating age in days, months, or approximate years</li>
-      <li>Verifying a 30/60/90-day payment term on an invoice</li>
-    </ul>
-  </section>
+    <div class="hf-field" id="date-field-to">
+      <div class="lbl">
+        <span>To</span>
+      </div>
+      <div class="hf-input">
+        <input type="date" id="date-to" aria-label="End date">
+      </div>
+    </div>
 
-  <section class="faq">
-    <h3>Frequently asked questions</h3>
-    <details>
-      <summary>Does this count weekends and holidays?</summary>
-      <div class="answer"><p>Yes — it counts all calendar days. For business days only (Mon–Fri, excluding holidays), this tool is not the right one. The math is more complex and depends on country.</p></div>
-    </details>
-    <details>
-      <summary>Is the start day included or excluded?</summary>
-      <div class="answer"><p>Excluded. From Monday to Tuesday is 1 day. If you need "inclusive" counting (sometimes used for project days), add 1 to the result.</p></div>
-    </details>
-    <details>
-      <summary>Why is "approximately X years" only an estimate?</summary>
-      <div class="answer"><p>Because a year is not exactly 365 days — it averages 365.25 (leap years). The "years" line uses this average. For exact age in years, months, and days, use a dedicated date-of-birth calculator.</p></div>
-    </details>
-    <details>
-      <summary>What time zone does "today" use?</summary>
-      <div class="answer"><p>Your browser's local time zone. If you're traveling and your device is set to local time, "today" follows along. The calculation itself doesn't care about time zones — only the calendar date.</p></div>
-    </details>
-  </section>
+    <div class="hf-field" id="date-field-days" hidden>
+      <div class="lbl">
+        <span>Days</span>
+        <span aria-hidden="true">+/−</span>
+      </div>
+      <div class="hf-input">
+        <input type="text" inputmode="numeric" autocomplete="off" enterkeyhint="done" id="date-days" value="100" aria-label="Number of days from today, positive or negative">
+        <span class="suf" aria-hidden="true">days</span>
+      </div>
+    </div>
 
-  <section class="related">
-    <h3>Related tools</h3>
-    <div class="related-grid">
-      <a href="/time-zone-converter/">Time Zone Converter</a>
-      <a href="/unit-converter/">Unit Converter</a>
-      <a href="/percentage-calculator/">Percentage Calculator</a>
-      <a href="/compound-interest-calculator/">Compound Interest</a>
+  </div>
+
+  <section class="hf-result" id="date-out" role="status" aria-live="polite" aria-atomic="true">
+    <div class="r-lbl">
+      <span class="r-lbl-text" id="date-lbl">Days</span>
+      <span class="hf-tiny hf-muted" aria-hidden="true">aria-live</span>
+    </div>
+    <div class="r-num">
+      <span class="val" id="date-val">+30</span>
+    </div>
+    <div class="r-break" id="date-break">
+      <span>From</span><span class="v" id="date-break-from">today</span>
+      <span>To</span><span class="v" id="date-break-to">today + 30</span>
+      <span>Days</span><span class="v">30</span>
+      <span>~ Years</span><span class="v">0.08</span>
+    </div>
+    <div class="r-actions">
+      <button type="button" class="hf-btn accent" id="date-copy" aria-label="Copy result to clipboard">Copy result</button>
+      <button type="button" class="hf-btn ghost" id="date-reset" aria-label="Reset to defaults">Reset</button>
+    </div>
+    <div class="why-line" id="date-why">
+      From today to today + 30 = <b>+30 days</b> (~0.08 years)
     </div>
   </section>
 
-  <footer class="colophon">
-    <span>TinyUseful · Issue No. 1 · 2026</span>
-    <span>
-      <a href="/">Home</a> &nbsp; <a href="/about.html">About</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp;
-      <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode"><span class="icon-light" aria-hidden="true">☀</span><span class="icon-dark" aria-hidden="true">☾</span> Theme</button>
+  <div class="hf-chips-wrap" id="date-next" aria-label="You might also need">
+    <div class="hf-cap">You might also need</div>
+    <div class="hf-chips" role="list">
+      <a class="hf-chip" href="/time-zone-converter/" role="listitem">Time Zone</a>
+      <a class="hf-chip" href="/unit-converter/" role="listitem">Unit Converter</a>
+      <a class="hf-chip" href="/percentage-calculator/" role="listitem">Percentage</a>
+    </div>
+  </div>
+
+  <div class="hf-chips-wrap">
+    <div class="hf-cap">Quick examples</div>
+    <div class="hf-chips" role="list">
+      <button type="button" class="hf-chip" data-mode="addto" data-days="30"  role="listitem">30 days from today</button>
+      <button type="button" class="hf-chip" data-mode="addto" data-days="90"  role="listitem">90 days from today</button>
+      <button type="button" class="hf-chip" data-mode="addto" data-days="-7"  role="listitem">&minus;7 days (last week)</button>
+    </div>
+  </div>
+
+  <div class="hf-method-wrap">
+    <div class="hf-cap">How this is calculated</div>
+    <div class="hf-method-block">
+      <div class="formula">days between = (end &minus; start) &divide; 86,400,000 ms</div>
+      <div class="formula">date from today = today + N days</div>
+      <div class="formula">~years = days &divide; 365.25</div>
+      <p>The browser handles leap years and month lengths automatically. Negative results in &ldquo;between&rdquo; mode mean the end date is earlier than the start. Negative numbers in &ldquo;from today&rdquo; mode go backward in time.</p>
+      <p class="hf-muted hf-tiny">Updated May 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
+
+      <details class="method-details">
+        <summary>Formula, assumptions, rounding &amp; limitations</summary>
+
+        <h3>Formula</h3>
+        <ul>
+          <li><code>days between = (end &minus; start) &divide; 86,400,000 ms</code></li>
+          <li><code>date from today = today + N days</code></li>
+          <li><code>~years = days &divide; 365.25</code></li>
+        </ul>
+
+        <h3>Assumptions</h3>
+        <ul>
+          <li>Dates are entered as ISO calendar dates (YYYY-MM-DD) via the native date picker.</li>
+          <li>Days are whole calendar days; time of day is not considered.</li>
+          <li>Leap years and varying month lengths are handled by the browser&rsquo;s built-in date arithmetic.</li>
+          <li>&ldquo;Today&rdquo; follows your browser&rsquo;s local time zone.</li>
+        </ul>
+
+        <h3>Rounding</h3>
+        <ul>
+          <li>Day differences are rounded to the nearest whole day.</li>
+          <li>Approximate years use a 365.25-day average; for exact year/month/day breakdowns use a dedicated date-of-birth calculator.</li>
+        </ul>
+
+        <h3>Limitations</h3>
+        <ul>
+          <li>Business days only (Mon&ndash;Fri, excluding holidays) are not modelled. The math differs by country.</li>
+          <li>Holidays, vacation days, and country-specific work calendars are not subtracted.</li>
+          <li>Time-zone offsets between two dates are not relevant &mdash; only calendar date difference is computed.</li>
+        </ul>
+      </details>
+    </div>
+  </div>
+
+  <div class="hf-ad" aria-label="Advertisement">
+    <div class="ad-label">Advertisement</div>
+    <div class="ad-slot" id="date-ad-slot"></div>
+  </div>
+
+  <div class="hf-stack">
+
+    <section class="hf-step s1" data-step="faq">
+      <header class="step-head">
+        <div>
+          <div class="step-title">FAQ</div>
+          <div class="step-meta">weekends &amp; holidays &middot; start day &middot; approx years &middot; today timezone</div>
+        </div>
+        <span class="step-chev" aria-hidden="true">&#8599;</span>
+      </header>
+      <div class="step-body">
+        <details class="step-q">
+          <summary>Does this count weekends and holidays?</summary>
+          <div class="answer"><p>Yes &mdash; it counts all calendar days. For business days only (Mon&ndash;Fri, excluding holidays), this tool is not the right one. The math is more complex and depends on country.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>Is the start day included or excluded?</summary>
+          <div class="answer"><p>Excluded. From Monday to Tuesday is 1 day. If you need &ldquo;inclusive&rdquo; counting (sometimes used for project days), add 1 to the result.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>Why is &ldquo;approximately X years&rdquo; only an estimate?</summary>
+          <div class="answer"><p>Because a year is not exactly 365 days &mdash; it averages 365.25 (leap years). The &ldquo;years&rdquo; line uses this average. For exact age in years, months, and days, use a dedicated date-of-birth calculator.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>What time zone does &ldquo;today&rdquo; use?</summary>
+          <div class="answer"><p>Your browser&rsquo;s local time zone. If you&rsquo;re traveling and your device is set to local time, &ldquo;today&rdquo; follows along. The calculation itself doesn&rsquo;t care about time zones &mdash; only the calendar date.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <section class="hf-step s2" data-step="related">
+      <header class="step-head">
+        <div>
+          <div class="step-title">RELATED</div>
+          <div class="step-meta">Time Zone &middot; Unit &middot; Percentage &middot; Compound</div>
+        </div>
+        <span class="step-chev" aria-hidden="true">&#8599;</span>
+      </header>
+      <nav class="step-related" aria-label="Related calculators">
+        <a href="/time-zone-converter/">Time Zone Converter</a>
+        <a href="/unit-converter/">Unit Converter</a>
+        <a href="/percentage-calculator/">Percentage Calculator</a>
+        <a href="/compound-interest-calculator/">Compound Interest</a>
+      </nav>
+    </section>
+
+  </div>
+
+  <div class="hf-trust">No accounts &middot; runs in your browser &middot; ads &amp; analytics may use cookies</div>
+
+  <footer class="hf-foot">
+    <span class="foot-links">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/changelog.html">Changelog</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
     </span>
+    <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode">&#9728; / &#9790;</button>
   </footer>
+
   <script src="/theme.js" defer></script>
 
-</div>
+</main>
 
 <script>
   const $ = id => document.getElementById(id);
-  const fmt = (n, d=2) => n.toLocaleString(undefined, {minimumFractionDigits: d, maximumFractionDigits: d});
-  const fmt0 = n => n.toLocaleString(undefined, {maximumFractionDigits: 0});
+  const fmt = (n, d=2) => n.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+  const fmt0 = n => n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+
+  // Toggle hf-field visibility based on mode (preserves dateUpdateUI legacy behavior)
   function dateUpdateUI() {
     const mode = $('date-mode').value;
-    $('date-row-between').style.display = mode==='between' ? '' : 'none';
-    $('date-row-addto').style.display   = mode==='addto'   ? '' : 'none';
+    const fromField = $('date-field-from');
+    const toField   = $('date-field-to');
+    const daysField = $('date-field-days');
+    if (mode === 'between') {
+      if (fromField) fromField.hidden = false;
+      if (toField)   toField.hidden = false;
+      if (daysField) daysField.hidden = true;
+    } else {
+      if (fromField) fromField.hidden = true;
+      if (toField)   toField.hidden = true;
+      if (daysField) daysField.hidden = false;
+    }
   }
+
+  function dateRender(state) {
+    const valEl = $('date-val');
+    const lblEl = $('date-lbl');
+    const brkEl = $('date-break');
+    const whyEl = $('date-why');
+
+    if (!state.valid) {
+      lblEl.textContent = state.label || 'Result';
+      valEl.textContent = '—';
+      brkEl.innerHTML = '<span>' + (state.message || 'Complete all fields') + '</span><span class="v">—</span>';
+      whyEl.textContent = state.whyMessage || 'Pick dates or enter a day count above.';
+      return;
+    }
+
+    if (state.mode === 'between') {
+      const { from, to, days, years } = state;
+      const sign = days >= 0 ? '+' : '';
+      const absDays = Math.abs(days);
+      lblEl.textContent = 'Days';
+      valEl.textContent = sign + fmt0(days);
+      brkEl.innerHTML =
+        '<span>From</span><span class="v">' + from + '</span>' +
+        '<span>To</span><span class="v">' + to + '</span>' +
+        '<span>Days</span><span class="v">' + fmt0(absDays) + '</span>' +
+        '<span>~ Years</span><span class="v">' + fmt(years) + '</span>';
+      whyEl.innerHTML =
+        'From ' + from + ' to ' + to + ' = <b>' + sign + fmt0(days) +
+        ' day' + (absDays === 1 ? '' : 's') + '</b> (~' + fmt(years) + ' years)';
+    } else {
+      // addto
+      const { iso, weekday, d } = state;
+      const sign = d >= 0 ? '+' : '';
+      const absD = Math.abs(d);
+      lblEl.textContent = 'Date';
+      valEl.textContent = iso;
+      brkEl.innerHTML =
+        '<span>From</span><span class="v">today</span>' +
+        '<span>Offset</span><span class="v">' + sign + fmt0(d) + ' day' + (absD === 1 ? '' : 's') + '</span>' +
+        '<span>Result</span><span class="v">' + iso + '</span>' +
+        '<span>Weekday</span><span class="v">' + weekday + '</span>';
+      whyEl.innerHTML =
+        'Today ' + sign + ' ' + fmt0(absD) + ' day' + (absD === 1 ? '' : 's') +
+        ' = <b>' + iso + '</b> (' + weekday + ')';
+    }
+  }
+
+  // Public name dateCalc preserved per freeze list
   function dateCalc() {
     const mode = $('date-mode').value;
-    if (mode==='between') {
-      const f=$('date-from').value, t=$('date-to').value;
-      if (!f || !t) { setOut('date-out','Result','—','Pick both dates.'); return; }
+    if (mode === 'between') {
+      const f = $('date-from').value;
+      const t = $('date-to').value;
+      if (!f || !t) {
+        dateRender({ valid: false, label: 'Days', message: 'Pick both dates', whyMessage: 'Pick a From and To date above.' });
+        return;
+      }
       const days = Math.round((new Date(t) - new Date(f)) / 86400000);
-      const years = Math.abs(days)/365.25;
-      setOut('date-out','Days', `${days>=0?'+':''}${fmt0(days)}`,
-        `${Math.abs(days)} day${Math.abs(days)===1?'':'s'} · ~${fmt(years,2)} year${years===1?'':'s'}`);
+      const years = Math.abs(days) / 365.25;
+      dateRender({ valid: true, mode: 'between', from: f, to: t, days, years });
     } else {
-      const d=Math.floor(parseLocaleNumber($('date-days').value))||0;
+      const d = Math.floor(parseLocaleNumber($('date-days').value)) || 0;
       const result = new Date();
       result.setDate(result.getDate() + d);
-      const iso = result.toISOString().slice(0,10);
-      const weekday = result.toLocaleDateString('en-US', {weekday:'long'});
-      setOut('date-out','Date', iso, `${weekday} · ${d>=0?'+':''}${d} day${Math.abs(d)===1?'':'s'} from today`);
+      const iso = result.toISOString().slice(0, 10);
+      const weekday = result.toLocaleDateString('en-US', { weekday: 'long' });
+      dateRender({ valid: true, mode: 'addto', iso, weekday, d });
     }
-    document.getElementById('date-next').hidden = false;
   }
-  (function initDate(){
-    const today = new Date().toISOString().slice(0,10);
-    if ($('date-from')) $('date-from').value = today;
-    const t = new Date(); t.setDate(t.getDate()+30);
-    if ($('date-to')) $('date-to').value = t.toISOString().slice(0,10);
+
+  // Init defaults: between mode, from=today, to=today+30
+  (function initDate() {
+    const today = new Date();
+    const todayISO = today.toISOString().slice(0, 10);
+    const plus30 = new Date(today);
+    plus30.setDate(today.getDate() + 30);
+    const plus30ISO = plus30.toISOString().slice(0, 10);
+    if ($('date-from')) $('date-from').value = todayISO;
+    if ($('date-to'))   $('date-to').value = plus30ISO;
+    dateUpdateUI();
     dateCalc();
   })();
-  attachLiveCalc('.tool-form', dateCalc);
+
+  // Copy + copied state
+  (function () {
+    const copyBtn = $('date-copy');
+    const out = $('date-out');
+    const lblEl = $('date-lbl');
+    const valEl = $('date-val');
+    let origLblText = lblEl ? lblEl.textContent : 'Days';
+    let revertTimer = null;
+
+    function setCopied(on) {
+      if (!out) return;
+      out.classList.toggle('copied', on);
+      if (lblEl && on) {
+        origLblText = lblEl.textContent;
+        lblEl.textContent = 'Copied to clipboard';
+      }
+      if (lblEl && !on && origLblText) {
+        lblEl.textContent = origLblText;
+      }
+      if (copyBtn) copyBtn.textContent = on ? '✓ Copied' : 'Copy result';
+    }
+
+    if (copyBtn) copyBtn.addEventListener('click', function () {
+      if (!valEl || valEl.textContent === '—') return;
+      const currentLbl = lblEl ? lblEl.textContent : 'Result';
+      const text = currentLbl + ': ' + valEl.textContent;
+      const finalize = function () {
+        setCopied(true);
+        if (revertTimer) clearTimeout(revertTimer);
+        revertTimer = setTimeout(function () { setCopied(false); }, 1600);
+      };
+      if (!navigator.clipboard) {
+        copyBtn.textContent = 'Copy unavailable';
+        setTimeout(function () { setCopied(false); }, 1500);
+        return;
+      }
+      navigator.clipboard.writeText(text).then(finalize).catch(function () {
+        copyBtn.textContent = 'Copy failed';
+        setTimeout(function () { setCopied(false); }, 1500);
+      });
+    });
+  })();
+
+  // Reset
+  (function () {
+    const resetBtn = $('date-reset');
+    if (!resetBtn) return;
+    resetBtn.addEventListener('click', function () {
+      $('date-mode').value = 'between';
+      const today = new Date();
+      const plus30 = new Date(today);
+      plus30.setDate(today.getDate() + 30);
+      if ($('date-from')) $('date-from').value = today.toISOString().slice(0, 10);
+      if ($('date-to'))   $('date-to').value = plus30.toISOString().slice(0, 10);
+      if ($('date-days')) $('date-days').value = '100';
+      dateUpdateUI();
+      dateCalc();
+    });
+  })();
+
+  // Mode change handler
+  (function () {
+    const modeSel = $('date-mode');
+    if (!modeSel) return;
+    modeSel.addEventListener('change', function () {
+      dateUpdateUI();
+      dateCalc();
+    });
+  })();
+
+  // Required focus state on From input (only when between mode)
+  (function () {
+    const fromInput = $('date-from');
+    const fromWrap = $('date-from-wrap');
+    if (!fromInput) return;
+    fromInput.addEventListener('focus', function () { if (fromWrap) fromWrap.classList.add('focus'); });
+    fromInput.addEventListener('blur',  function () { if (fromWrap) fromWrap.classList.remove('focus'); });
+  })();
+
+  // Quick example chips (all addto mode)
+  document.querySelectorAll('.hf-chip[data-mode]').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      const m = chip.getAttribute('data-mode');
+      const d = chip.getAttribute('data-days');
+      if (m !== null) $('date-mode').value = m;
+      if (d !== null && $('date-days')) $('date-days').value = d;
+      dateUpdateUI();
+      dateCalc();
+    });
+  });
+
+  // Live recalc on input/change for all inputs in the form
+  if (typeof attachLiveCalc === 'function') {
+    attachLiveCalc('.tool-form', dateCalc);
+  } else {
+    let t;
+    const handler = function () { clearTimeout(t); t = setTimeout(dateCalc, 80); };
+    document.querySelectorAll('.tool-form input, .tool-form select').forEach(function (el) {
+      el.addEventListener('input', handler);
+      el.addEventListener('change', handler);
+    });
+  }
 </script>
 
 </body>
