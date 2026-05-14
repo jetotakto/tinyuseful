@@ -25,7 +25,7 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260504d">
+<link rel="stylesheet" href="/style.css?v=20260514-hotfix2">
 <script src="/js/helpers.js?v=20260504d"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
@@ -45,173 +45,460 @@
 </script>
 </head>
 
-<body>
-<div class="page">
+<body class="ui-hifi">
+<a class="skip-link" href="#main">Skip to main content</a>
+<main id="main" class="hf">
 
-  <header class="masthead">
-    <a class="wordmark" href="/"><span class="knife" aria-hidden="true"></span>TinyUseful</a>
-    <span class="issue">No. 1 — April 2026</span>
+  <header class="hf-header">
+    <a class="hf-wordmark" href="/" aria-label="TinyUseful home">
+      <span class="stack"><span>TINY</span><span>USEFUL</span></span>
+    </a>
+    <span class="hf-menu-btn" aria-hidden="true">
+      <span></span><span></span>
+    </span>
   </header>
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">TinyUseful</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">Time Zone Converter</span>
+  <nav class="hf-crumb" aria-label="Breadcrumb">
+    / time zone converter <span class="crumb-marker" aria-hidden="true"><span class="crumb-star">&#9733;</span> No.&nbsp;11</span>
   </nav>
 
-  <section class="tools">
-    <div class="section-head">
-      <span class="section-num">No. 11</span>
-      <h1>Time Zone Converter</h1>
-      <span class="desc">Convert a time between major world time zones.</span>
-    </div>
-    <div class="tool" data-tool="timezone">
-      <div class="tool-meta">
-        <h3>Inputs</h3>
-        <p class="desc">Pick a time, source zone, and target zone. The conversion uses today's date and accounts for daylight saving time automatically.</p>
-      </div>
-      <div class="tool-form">
-        <div class="row">
-          <label>Time (HH:MM)<input type="time" id="tz-time" value="14:00"></label>
-          <label>From
-            <select id="tz-from">
-              <option value="UTC">UTC</option>
-              <option value="America/New_York">New York (ET)</option>
-              <option value="America/Los_Angeles">Los Angeles (PT)</option>
-              <option value="Europe/London">London (GMT/BST)</option>
-              <option value="Europe/Prague" selected>Prague (CET/CEST)</option>
-              <option value="Asia/Dubai">Dubai (GST)</option>
-              <option value="Asia/Tokyo">Tokyo (JST)</option>
-              <option value="Australia/Sydney">Sydney (AET)</option>
-            </select>
-          </label>
-          <label>To
-            <select id="tz-to">
-              <option value="UTC">UTC</option>
-              <option value="America/New_York" selected>New York (ET)</option>
-              <option value="America/Los_Angeles">Los Angeles (PT)</option>
-              <option value="Europe/London">London (GMT/BST)</option>
-              <option value="Europe/Prague">Prague (CET/CEST)</option>
-              <option value="Asia/Dubai">Dubai (GST)</option>
-              <option value="Asia/Tokyo">Tokyo (JST)</option>
-              <option value="Australia/Sydney">Sydney (AET)</option>
-            </select>
-          </label>
-        </div>
-        <button type="button" onclick="tzCalc()">Convert</button>
-        <div class="out" id="tz-out" role="status" aria-live="polite"><span class="label">Time in target zone</span><span class="big">—</span><span class="breakdown">Press Convert.</span></div>
-        <div class="next-task" id="tz-next" hidden>
-          <p class="hint">↓ You might also need</p>
-          <div class="next-tools">
-            <a href="/date-calculator/" class="next-link" data-symbol="▦">Date Calculator</a>
-            <a href="/unit-converter/" class="next-link" data-symbol="↔">Unit Converter</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="ad-block">
-    <div class="placeholder">728 × 90 leaderboard placement</div>
+  <h1 class="hf-display">TIME ZONE CONVERTER</h1>
+  <div class="hf-sub">
+    <span>Convert a time between major world time zones.</span>
   </div>
 
-  <section class="explainer">
-    <h3>How to convert time zones manually</h3>
-    <ol>
-      <li>Find each zone's current UTC offset (varies with daylight saving).</li>
-      <li>Subtract source offset from the source time to get UTC.</li>
-      <li>Add target offset to UTC to get the target time.</li>
-    </ol>
-    <p><strong>Example:</strong> 9:00 AM in New York (UTC−4 in summer) → 13:00 UTC → <strong>15:00 in Berlin</strong> (UTC+2 in summer).</p>
+  <div class="hf-fields tool-form" data-tool="timezone">
 
-    <h3>Quick examples</h3>
-    <ul class="examples">
-      <li>9:00 AM New York → <strong>15:00 Berlin</strong> (summer)</li>
-      <li>9:00 AM New York → <strong>22:00 Tokyo</strong> (same day)</li>
-      <li>5:00 PM London → <strong>9:00 AM Los Angeles</strong> (winter)</li>
-      <li>10:00 AM Sydney → <strong>00:00 UTC</strong> (midnight)</li>
-      <li>Noon UTC → <strong>1:00 PM London (summer) / Noon (winter)</strong></li>
-    </ul>
+    <div class="hf-field">
+      <div class="lbl">
+        <span>Time</span>
+        <span class="req" id="tz-time-req">required</span>
+      </div>
+      <div class="hf-input focus" id="tz-time-wrap">
+        <input type="time" id="tz-time" value="14:00" aria-label="Source time in HH:MM 24-hour format">
+      </div>
+    </div>
 
-    <h3>Formulas used</h3>
-    <p class="formula"><code>UTC = source time − source offset</code></p>
-    <p class="formula"><code>target time = UTC + target offset</code></p>
-    <p class="formula"><code>(uses browser Intl API for IANA database)</code></p>
-    <p>
-      Eight major zones are included: UTC, US Eastern, US Pacific, London, Central Europe, Dubai,
-      Tokyo, and Sydney. They cover the bulk of business time-zone questions for North America,
-      Europe, Middle East, and Asia-Pacific. Daylight saving is handled automatically.
-    </p>
+    <div class="hf-field">
+      <div class="lbl">
+        <span>From</span>
+      </div>
+      <div class="hf-input hf-input-select">
+        <select id="tz-from" aria-label="Source time zone">
+          <option value="UTC">UTC</option>
+          <option value="America/New_York">New York (ET)</option>
+          <option value="America/Los_Angeles">Los Angeles (PT)</option>
+          <option value="Europe/London">London (GMT/BST)</option>
+          <option value="Europe/Prague" selected>Prague (CET/CEST)</option>
+          <option value="Asia/Dubai">Dubai (GST)</option>
+          <option value="Asia/Tokyo">Tokyo (JST)</option>
+          <option value="Australia/Sydney">Sydney (AET)</option>
+        </select>
+      </div>
+    </div>
 
-    <h3>Common uses</h3>
-    <ul>
-      <li>Scheduling meetings with international colleagues</li>
-      <li>Joining a webinar or live event in another country</li>
-      <li>Calling family abroad without waking them up</li>
-      <li>Booking flights and figuring out arrival time at destination</li>
-      <li>Coordinating remote work across continents</li>
-    </ul>
-  </section>
+    <div class="hf-field">
+      <div class="lbl">
+        <span>To</span>
+      </div>
+      <div class="hf-input hf-input-select">
+        <select id="tz-to" aria-label="Target time zone">
+          <option value="UTC">UTC</option>
+          <option value="America/New_York" selected>New York (ET)</option>
+          <option value="America/Los_Angeles">Los Angeles (PT)</option>
+          <option value="Europe/London">London (GMT/BST)</option>
+          <option value="Europe/Prague">Prague (CET/CEST)</option>
+          <option value="Asia/Dubai">Dubai (GST)</option>
+          <option value="Asia/Tokyo">Tokyo (JST)</option>
+          <option value="Australia/Sydney">Sydney (AET)</option>
+        </select>
+      </div>
+    </div>
 
-  <section class="faq">
-    <h3>Frequently asked questions</h3>
-    <details>
-      <summary>Does it handle daylight saving time?</summary>
-      <div class="answer"><p>Yes. The browser's Intl API knows when each zone switches between standard and summer time, so the conversion is correct on any date in the current year. The calculation always uses today's date.</p></div>
-    </details>
-    <details>
-      <summary>Why isn't my city in the list?</summary>
-      <div class="answer"><p>We kept the list to eight major zones to stay simple. Most cities share a zone with a listed one (e.g., Berlin = Prague, Paris = Prague, Hong Kong ≈ Tokyo + 1h, Mumbai = Dubai + 1.5h). For full city coverage you can use a dedicated tool like timeanddate.com.</p></div>
-    </details>
-    <details>
-      <summary>How do I figure out a meeting time across three zones?</summary>
-      <div class="answer"><p>Pick the source (your zone) and run the conversion to each target separately. There's no three-way view here — that's a different kind of tool, often called a "world clock" or "team scheduler."</p></div>
-    </details>
-    <details>
-      <summary>Why does the same time give a different result tomorrow?</summary>
-      <div class="answer"><p>Because the conversion uses today's date. If a daylight saving change happens between today and the target date, the offset changes by one hour. For dates far in the future, double-check around DST switch days (March and November in most places).</p></div>
-    </details>
-  </section>
+  </div>
 
-  <section class="related">
-    <h3>Related tools</h3>
-    <div class="related-grid">
-      <a href="/date-calculator/">Date Calculator</a>
-      <a href="/unit-converter/">Unit Converter</a>
-      <a href="/percentage-calculator/">Percentage Calculator</a>
-      <a href="/mortgage-calculator/">Mortgage Calculator</a>
+  <section class="hf-result" id="tz-out" role="status" aria-live="polite" aria-atomic="true">
+    <div class="r-lbl">
+      <span class="r-lbl-text" id="tz-lbl">Time in target zone</span>
+      <span class="hf-tiny hf-muted" aria-hidden="true">aria-live</span>
+    </div>
+    <div class="r-num">
+      <span class="val" id="tz-val">&mdash;</span>
+    </div>
+    <div class="r-break" id="tz-break">
+      <span>Source time</span><span class="v">14:00</span>
+      <span>Source zone</span><span class="v">Prague</span>
+      <span>Target zone</span><span class="v">New York</span>
+      <span>Target time</span><span class="v">&mdash;</span>
+    </div>
+    <div class="r-actions">
+      <button type="button" class="hf-btn accent" id="tz-copy" aria-label="Copy result to clipboard">Copy result</button>
+      <button type="button" class="hf-btn ghost" id="tz-reset" aria-label="Reset to defaults">Reset</button>
+    </div>
+    <div class="why-line" id="tz-why">
+      Calculating&hellip;
     </div>
   </section>
 
-  <footer class="colophon">
-    <span>TinyUseful · Issue No. 1 · 2026</span>
-    <span>
-      <a href="/">Home</a> &nbsp; <a href="/about.html">About</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp;
-      <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode"><span class="icon-light" aria-hidden="true">☀</span><span class="icon-dark" aria-hidden="true">☾</span> Theme</button>
+  <div class="hf-chips-wrap" id="tz-next" aria-label="You might also need">
+    <div class="hf-cap">You might also need</div>
+    <div class="hf-chips" role="list">
+      <a class="hf-chip" href="/date-calculator/" role="listitem">Date Calculator</a>
+      <a class="hf-chip" href="/unit-converter/" role="listitem">Unit Converter</a>
+      <a class="hf-chip" href="/percentage-calculator/" role="listitem">Percentage</a>
+    </div>
+  </div>
+
+  <div class="hf-chips-wrap">
+    <div class="hf-cap">Quick examples</div>
+    <div class="hf-chips" role="list">
+      <button type="button" class="hf-chip" data-time="14:00" data-from="Europe/Prague"    data-to="America/New_York" role="listitem">14:00 Prague &rarr; NY</button>
+      <button type="button" class="hf-chip" data-time="09:00" data-from="America/New_York" data-to="Europe/London"    role="listitem">09:00 NY &rarr; London</button>
+      <button type="button" class="hf-chip" data-time="12:00" data-from="UTC"               data-to="Asia/Tokyo"        role="listitem">12:00 UTC &rarr; Tokyo</button>
+    </div>
+  </div>
+
+  <div class="hf-method-wrap">
+    <div class="hf-cap">How this is calculated</div>
+    <div class="hf-method-block">
+      <div class="formula">UTC = source time &minus; source offset</div>
+      <div class="formula">target time = UTC + target offset</div>
+      <div class="formula">(uses browser Intl API for IANA database)</div>
+      <p>Eight major zones are included: UTC, US Eastern, US Pacific, London, Central Europe, Dubai, Tokyo, and Sydney. They cover the bulk of business time-zone questions for North America, Europe, Middle East, and Asia-Pacific. Daylight saving is handled automatically.</p>
+      <p class="hf-muted hf-tiny">Updated May 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
+
+      <details class="method-details">
+        <summary>Formula, assumptions, rounding &amp; limitations</summary>
+
+        <h3>Formula</h3>
+        <ul>
+          <li><code>UTC = source time &minus; source offset</code></li>
+          <li><code>target time = UTC + target offset</code></li>
+          <li>Offsets are looked up via the browser&rsquo;s <code>Intl.DateTimeFormat</code> API (IANA time zone database).</li>
+        </ul>
+
+        <h3>Assumptions</h3>
+        <ul>
+          <li>The conversion always uses today&rsquo;s calendar date in your browser&rsquo;s clock.</li>
+          <li>Daylight saving transitions are applied automatically based on each zone&rsquo;s current rules.</li>
+          <li>Time input uses 24-hour HH:MM format.</li>
+        </ul>
+
+        <h3>Rounding</h3>
+        <ul>
+          <li>Conversions are exact to the minute. Seconds and milliseconds are not modelled.</li>
+        </ul>
+
+        <h3>Limitations</h3>
+        <ul>
+          <li>Only eight major time zones are listed. For other cities, use a zone in the same area or a dedicated world-clock tool.</li>
+          <li>Conversions for dates far in the future may be slightly off around DST transitions, because the lookup uses today&rsquo;s date.</li>
+          <li>Historical DST rules (years past) are not modelled by this tool.</li>
+        </ul>
+      </details>
+    </div>
+  </div>
+
+  <div class="hf-ad" aria-label="Advertisement">
+    <div class="ad-label">Advertisement</div>
+    <div class="ad-slot" id="tz-ad-slot"></div>
+  </div>
+
+  <div class="hf-stack">
+
+    <section class="hf-step s1" data-step="faq">
+      <header class="step-head">
+        <div>
+          <div class="step-title">FAQ</div>
+          <div class="step-meta">DST handling &middot; missing city &middot; 3-zone meeting &middot; same time tomorrow</div>
+        </div>
+        <span class="step-chev" aria-hidden="true">&#8599;</span>
+      </header>
+      <div class="step-body">
+        <details class="step-q">
+          <summary>Does it handle daylight saving time?</summary>
+          <div class="answer"><p>Yes. The browser&rsquo;s Intl API knows when each zone switches between standard and summer time, so the conversion is correct on any date in the current year. The calculation always uses today&rsquo;s date.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>Why isn&rsquo;t my city in the list?</summary>
+          <div class="answer"><p>We kept the list to eight major zones to stay simple. Most cities share a zone with a listed one (e.g., Berlin = Prague, Paris = Prague, Hong Kong &asymp; Tokyo + 1h, Mumbai = Dubai + 1.5h). For full city coverage you can use a dedicated tool like timeanddate.com.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>How do I figure out a meeting time across three zones?</summary>
+          <div class="answer"><p>Pick the source (your zone) and run the conversion to each target separately. There&rsquo;s no three-way view here &mdash; that&rsquo;s a different kind of tool, often called a &ldquo;world clock&rdquo; or &ldquo;team scheduler.&rdquo;</p></div>
+        </details>
+        <details class="step-q">
+          <summary>Why does the same time give a different result tomorrow?</summary>
+          <div class="answer"><p>Because the conversion uses today&rsquo;s date. If a daylight saving change happens between today and the target date, the offset changes by one hour. For dates far in the future, double-check around DST switch days (March and November in most places).</p></div>
+        </details>
+      </div>
+    </section>
+
+    <section class="hf-step s2" data-step="related">
+      <header class="step-head">
+        <div>
+          <div class="step-title">RELATED</div>
+          <div class="step-meta">Date &middot; Unit &middot; Percentage &middot; Mortgage</div>
+        </div>
+        <span class="step-chev" aria-hidden="true">&#8599;</span>
+      </header>
+      <nav class="step-related" aria-label="Related calculators">
+        <a href="/date-calculator/">Date Calculator</a>
+        <a href="/unit-converter/">Unit Converter</a>
+        <a href="/percentage-calculator/">Percentage Calculator</a>
+        <a href="/mortgage-calculator/">Mortgage Calculator</a>
+      </nav>
+    </section>
+
+  </div>
+
+  <div class="hf-trust">No accounts &middot; runs in your browser &middot; ads &amp; analytics may use cookies</div>
+
+  <footer class="hf-foot">
+    <span class="foot-links">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/changelog.html">Changelog</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
     </span>
+    <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode">&#9728; / &#9790;</button>
   </footer>
+
   <script src="/theme.js" defer></script>
 
-</div>
+</main>
 
 <script>
   const $ = id => document.getElementById(id);
+
+  const DEFAULTS = { time: '14:00', from: 'Europe/Prague', to: 'America/New_York' };
+
+  // Extract short city name from IANA TZ string: "America/New_York" → "New York"
+  function tzShortName(tz) {
+    return tz.split('/').pop().replace(/_/g, ' ');
+  }
+
+  // Compute timezone offset in minutes for a given UTC moment and IANA zone.
+  // Uses Intl.DateTimeFormat parsing trick (legacy algorithm preserved).
+  function tzOffsetMinutes(utcMs, tz) {
+    const localStr = new Date(utcMs).toLocaleString('en-US', {
+      timeZone: tz, hour12: false,
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit'
+    });
+    const m = localStr.match(/(\d+)\/(\d+)\/(\d+),?\s+(\d+):(\d+)/);
+    if (!m) return 0;
+    const asUTC = Date.UTC(+m[3], +m[1] - 1, +m[2], +m[4], +m[5]);
+    return (asUTC - utcMs) / 60000;
+  }
+
+  function fmtOffset(min) {
+    const sign = min >= 0 ? '+' : '−';
+    const a = Math.abs(min);
+    const h = Math.floor(a / 60);
+    const mm = a % 60;
+    if (mm === 0) return 'UTC' + sign + h;
+    return 'UTC' + sign + h + ':' + String(mm).padStart(2, '0');
+  }
+
+  function tzRender(state) {
+    const valEl = $('tz-val');
+    const lblEl = $('tz-lbl');
+    const brkEl = $('tz-break');
+    const whyEl = $('tz-why');
+
+    if (!state.valid) {
+      lblEl.textContent = 'Time in target zone';
+      valEl.textContent = '—';
+      brkEl.innerHTML = '<span>' + (state.message || 'Complete all fields') + '</span><span class="v">—</span>';
+      whyEl.textContent = state.whyMessage || 'Pick a time and source/target zones above.';
+      return;
+    }
+
+    const { sourceTime, sourceTZ, targetTZ, targetTime, targetDateStr, offsetDiffMin } = state;
+    const sourceName = tzShortName(sourceTZ);
+    const targetName = tzShortName(targetTZ);
+
+    lblEl.textContent = 'Time in target zone';
+    valEl.textContent = targetTime;
+    brkEl.innerHTML =
+      '<span>Source time</span><span class="v">' + sourceTime + ' ' + sourceName + '</span>' +
+      '<span>Source zone</span><span class="v">' + sourceName + '</span>' +
+      '<span>Target zone</span><span class="v">' + targetName + '</span>' +
+      '<span>Target time</span><span class="v">' + targetDateStr + '</span>';
+
+    // Offset summary why-line
+    if (offsetDiffMin === 0) {
+      whyEl.innerHTML = sourceTime + ' ' + sourceName + ' = <b>' + targetTime + ' ' + targetName + '</b> (same zone)';
+    } else {
+      const sign = offsetDiffMin > 0 ? '+' : '−';
+      const a = Math.abs(offsetDiffMin);
+      const h = Math.floor(a / 60);
+      const mm = a % 60;
+      const diffStr = mm === 0 ? (sign + h + 'h') : (sign + h + 'h ' + mm + 'm');
+      whyEl.innerHTML =
+        sourceTime + ' ' + sourceName + ' &rarr; <b>' + targetTime + ' ' + targetName + '</b> (offset ' + diffStr + ')';
+    }
+  }
+
+  // Preserved legacy public name tzCalc with same algorithm
   function tzCalc() {
-    const time = $('tz-time').value, fromTZ = $('tz-from').value, toTZ = $('tz-to').value;
-    if (!time) { setOut('tz-out','Time in target zone','—','Pick a time.'); return; }
+    const time = $('tz-time').value;
+    const fromTZ = $('tz-from').value;
+    const toTZ = $('tz-to').value;
+
+    if (!time) {
+      tzRender({ valid: false, message: 'Pick a time', whyMessage: 'Pick a time and source/target zones above.' });
+      return;
+    }
+
     const today = new Date();
     const [hh, mm] = time.split(':').map(Number);
+    if (!Number.isFinite(hh) || !Number.isFinite(mm)) {
+      tzRender({ valid: false, message: 'Invalid time format' });
+      return;
+    }
     const baseUTC = Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate(), hh, mm);
-    const fromLocal = new Date(baseUTC).toLocaleString('en-US', {timeZone: fromTZ, hour12:false, year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit'});
+
+    // Legacy algorithm: find what source TZ would call baseUTC, derive offset
+    const fromLocal = new Date(baseUTC).toLocaleString('en-US', {
+      timeZone: fromTZ, hour12: false,
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit'
+    });
     const m = fromLocal.match(/(\d+)\/(\d+)\/(\d+),?\s+(\d+):(\d+)/);
-    const fromAsUTC = Date.UTC(+m[3], +m[1]-1, +m[2], +m[4], +m[5]);
+    if (!m) {
+      tzRender({ valid: false, message: 'Time zone parsing failed' });
+      return;
+    }
+    const fromAsUTC = Date.UTC(+m[3], +m[1] - 1, +m[2], +m[4], +m[5]);
     const offsetMs = fromAsUTC - baseUTC;
     const realUTC = baseUTC - offsetMs;
-    const targetStr = new Date(realUTC).toLocaleString('en-US', {timeZone: toTZ, hour12:false, weekday:'short', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'});
-    const targetTime = new Date(realUTC).toLocaleTimeString('en-US', {timeZone: toTZ, hour12:false, hour:'2-digit', minute:'2-digit'});
-    setOut('tz-out','Time in target zone', targetTime, `${time} ${fromTZ.split('/').pop().replace(/_/g,' ')} → ${targetStr} (${toTZ.split('/').pop().replace(/_/g,' ')})`);
-    document.getElementById('tz-next').hidden = false;
+
+    const targetTime = new Date(realUTC).toLocaleTimeString('en-US', {
+      timeZone: toTZ, hour12: false, hour: '2-digit', minute: '2-digit'
+    });
+    const targetDateStr = new Date(realUTC).toLocaleString('en-US', {
+      timeZone: toTZ, hour12: false,
+      weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+    });
+
+    // Offset diff in minutes for why-line summary
+    const fromOffsetMin = tzOffsetMinutes(realUTC, fromTZ);
+    const toOffsetMin = tzOffsetMinutes(realUTC, toTZ);
+    const offsetDiffMin = toOffsetMin - fromOffsetMin;
+
+    tzRender({
+      valid: true,
+      sourceTime: time, sourceTZ: fromTZ, targetTZ: toTZ,
+      targetTime, targetDateStr, offsetDiffMin
+    });
   }
+
+  // Copy + copied state
+  (function () {
+    const copyBtn = $('tz-copy');
+    const out = $('tz-out');
+    const lblEl = $('tz-lbl');
+    const valEl = $('tz-val');
+    let origLblText = lblEl ? lblEl.textContent : 'Time in target zone';
+    let revertTimer = null;
+
+    function setCopied(on) {
+      if (!out) return;
+      out.classList.toggle('copied', on);
+      if (lblEl && on) {
+        origLblText = lblEl.textContent;
+        lblEl.textContent = 'Copied to clipboard';
+      }
+      if (lblEl && !on && origLblText) {
+        lblEl.textContent = origLblText;
+      }
+      if (copyBtn) copyBtn.textContent = on ? '✓ Copied' : 'Copy result';
+    }
+
+    if (copyBtn) copyBtn.addEventListener('click', function () {
+      if (!valEl || valEl.textContent === '—') return;
+      const currentLbl = lblEl ? lblEl.textContent : 'Time in target zone';
+      const text = currentLbl + ': ' + valEl.textContent;
+      const finalize = function () {
+        setCopied(true);
+        if (revertTimer) clearTimeout(revertTimer);
+        revertTimer = setTimeout(function () { setCopied(false); }, 1600);
+      };
+      if (!navigator.clipboard) {
+        copyBtn.textContent = 'Copy unavailable';
+        setTimeout(function () { setCopied(false); }, 1500);
+        return;
+      }
+      navigator.clipboard.writeText(text).then(finalize).catch(function () {
+        copyBtn.textContent = 'Copy failed';
+        setTimeout(function () { setCopied(false); }, 1500);
+      });
+    });
+  })();
+
+  // Reset
+  (function () {
+    const resetBtn = $('tz-reset');
+    if (!resetBtn) return;
+    resetBtn.addEventListener('click', function () {
+      $('tz-time').value = DEFAULTS.time;
+      $('tz-from').value = DEFAULTS.from;
+      $('tz-to').value = DEFAULTS.to;
+      tzCalc();
+    });
+  })();
+
+  // Required + focus on Time input
+  (function () {
+    const timeInput = $('tz-time');
+    const timeReq = $('tz-time-req');
+    const timeWrap = $('tz-time-wrap');
+
+    function syncRequired() {
+      if (!timeReq || !timeInput) return;
+      const v = String(timeInput.value || '').trim();
+      const empty = v === '';
+      if (timeWrap) timeWrap.classList.toggle('error', empty);
+    }
+
+    if (timeInput) {
+      timeInput.addEventListener('input', syncRequired);
+      timeInput.addEventListener('focus', function () { if (timeWrap) timeWrap.classList.add('focus'); });
+      timeInput.addEventListener('blur',  function () { if (timeWrap) timeWrap.classList.remove('focus'); });
+    }
+    syncRequired();
+  })();
+
+  // Quick example chips
+  document.querySelectorAll('.hf-chip[data-time]').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      const t = chip.getAttribute('data-time');
+      const f = chip.getAttribute('data-from');
+      const to = chip.getAttribute('data-to');
+      if (t !== null) $('tz-time').value = t;
+      if (f !== null) $('tz-from').value = f;
+      if (to !== null) $('tz-to').value = to;
+      tzCalc();
+    });
+  });
+
+  // Initial render
   tzCalc();
-  attachLiveCalc('.tool-form', tzCalc);
+
+  // Live recalc
+  if (typeof attachLiveCalc === 'function') {
+    attachLiveCalc('.tool-form', tzCalc);
+  } else {
+    let t;
+    const handler = function () { clearTimeout(t); t = setTimeout(tzCalc, 80); };
+    document.querySelectorAll('.tool-form input, .tool-form select').forEach(function (el) {
+      el.addEventListener('input', handler);
+      el.addEventListener('change', handler);
+    });
+  }
 </script>
 
 </body>
