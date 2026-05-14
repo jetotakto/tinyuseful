@@ -1349,6 +1349,31 @@ body.ui-hifi .hf-input input {
   -webkit-appearance: none; appearance: none;
 }
 
+/* Native <select> inside .hf-input wrapper (Sales Tax mode dropdown).
+   Scoped so other hf inputs are unaffected. Keeps native control accessible. */
+body.ui-hifi .hf-input select {
+  flex: 1;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.1;
+  color: var(--ink);
+  background: transparent;
+  border: 0; outline: none;
+  padding: 0 24px 0 0; margin: 0;
+  min-width: 0; width: 100%;
+  cursor: pointer;
+  -webkit-appearance: none; appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%),
+                    linear-gradient(135deg, var(--ink) 50%, transparent 50%);
+  background-position: calc(100% - 12px) 55%, calc(100% - 6px) 55%;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+body.ui-hifi .hf-input select:focus {
+  outline: none;
+}
+
 body.ui-hifi .hf-error {
   margin-top: 8px;
   font-size: 12px;

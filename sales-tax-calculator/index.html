@@ -25,7 +25,7 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260509a">
+<link rel="stylesheet" href="/style.css?v=20260514-tax">
 <script src="/js/helpers.js?v=20260504d"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
@@ -45,117 +45,130 @@
 </script>
 </head>
 
-<body>
+<body class="ui-hifi">
 <a class="skip-link" href="#main">Skip to main content</a>
-<main id="main" class="page">
+<main id="main" class="hf">
 
-  <header class="masthead">
-    <a class="wordmark" href="/"><span class="knife" aria-hidden="true"></span>TinyUseful</a>
-    <span class="issue">No. 1 — April 2026</span>
+  <header class="hf-header">
+    <a class="hf-wordmark" href="/" aria-label="TinyUseful home">
+      <span class="stack"><span>TINY</span><span>USEFUL</span></span>
+    </a>
+    <span class="hf-menu-btn" aria-hidden="true">
+      <span></span><span></span>
+    </span>
   </header>
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">TinyUseful</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">Sales Tax Calculator</span>
+  <nav class="hf-crumb" aria-label="Breadcrumb">
+    / sales tax calculator <span class="crumb-marker" aria-hidden="true"><span class="crumb-star">&#9733;</span> No.&nbsp;02</span>
   </nav>
 
-  <section class="tools">
-    <div class="section-head">
-      <span class="section-num">No. 02</span>
-      <h1>Sales Tax / VAT Calculator</h1>
-      <span class="desc">Add tax to a net price, or remove tax to find the original.</span>
-    </div>
-    <div class="tool" data-tool="vat">
-      <div class="tool-meta">
-        <h2>Inputs</h2>
-        <p class="desc">Enter price, tax rate, and pick add or remove. The default rate (8.875%) is New York City. Replace with your local rate.</p>
-      </div>
-      <div class="tool-form">
-        <div class="row">
-          <label>Price<input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="vat-price" value="100"></label>
-          <label>Rate %<input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="done" id="vat-rate" value="8.875"></label>
-          <label>Mode
-            <select id="vat-mode">
-              <option value="add">Add tax</option>
-              <option value="remove">Remove tax</option>
-            </select>
-          </label>
-        </div>
-        <button type="button" onclick="vatCalc()">Calculate</button>
-        <div class="out" id="vat-out" role="status" aria-live="polite"><span class="label">After tax</span><span class="big">$108.88</span><span class="breakdown">Tax amount $8.88</span></div>
-        <div class="next-task" id="vat-next" hidden>
-          <p class="hint">↓ You might also need</p>
-          <div class="next-tools">
-            <a href="/tip-calculator/" class="next-link" data-symbol="⊕">Tip Calculator</a>
-            <a href="/percentage-calculator/" class="next-link" data-symbol="%">Percentage</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="ad-block">
-    <div class="placeholder">728 × 90 leaderboard placement</div>
+  <h1 class="hf-display">SALES&nbsp;TAX&nbsp;CALCULATOR</h1>
+  <div class="hf-sub">
+    <span>Add or remove sales tax &mdash; works for VAT too.</span>
   </div>
 
-  <section class="explainer">
-    <h2>How to calculate sales tax manually</h2>
-    <ol>
-      <li>Convert the tax rate to a decimal (8.875% → 0.08875).</li>
-      <li>Multiply the price by the decimal to get the tax amount.</li>
-      <li>Add the tax amount to the price for the gross total.</li>
-    </ol>
-    <p><strong>Example:</strong> $100 with 8% tax → 100 × 0.08 = $8.00 tax → <strong>$108.00 gross</strong>.</p>
+  <div class="hf-fields tool-form" data-tool="vat">
 
-    <h2>Quick examples</h2>
-    <ul class="examples">
-      <li>$100 with 8% sales tax = <strong>$108.00</strong></li>
-      <li>$54.99 with 7.25% tax = <strong>$58.98</strong></li>
-      <li>$200 with 9.55% tax = <strong>$219.10</strong></li>
-      <li>Remove 8% tax from $108 = <strong>$100.00</strong></li>
-      <li>Remove 20% VAT from £120 = <strong>£100.00</strong></li>
-    </ul>
+    <div class="hf-field">
+      <div class="lbl">
+        <span>Price</span>
+        <span class="req" id="vat-price-req">required</span>
+      </div>
+      <div class="hf-input focus" id="vat-price-wrap">
+        <span class="pre" aria-hidden="true">$</span>
+        <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="vat-price" value="100" aria-label="Price in dollars">
+      </div>
+    </div>
 
-    <h2>Formulas used</h2>
-    <p class="formula"><code>add tax: gross = net × (1 + rate ÷ 100)</code></p>
-    <p class="formula"><code>remove tax: net = gross ÷ (1 + rate ÷ 100)</code></p>
-    <p class="formula"><code>tax amount = gross − net</code></p>
-    <p>
-      US state sales tax varies widely: Oregon, Montana, New Hampshire, Alaska, and Delaware have
-      no statewide sales tax. California (7.25%) and Tennessee (≈9.55% combined) are at the high end.
-      In the EU and UK, VAT is typically 19–25% and is usually included in displayed prices, so the
-      <em>remove tax</em> mode is the common case.
-    </p>
-    <p>
-      <strong>Disclaimer:</strong> Enter your local tax rate. Sales tax rates vary by state, city,
-      and product type. This calculator does not look up rates by location.
-    </p>
+    <div class="hf-field">
+      <div class="lbl">
+        <span>Rate</span>
+        <span aria-hidden="true">%</span>
+      </div>
+      <div class="hf-input">
+        <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="vat-rate" value="8.875" aria-label="Sales tax rate as percentage">
+        <span class="suf" aria-hidden="true">%</span>
+      </div>
+    </div>
 
-    <h2>Common uses</h2>
-    <ul>
-      <li>Estimating the final price of a US online purchase before checkout</li>
-      <li>Removing VAT from an EU/UK price to see the net amount</li>
-      <li>Reverse-calculating tax on a receipt to verify a charge</li>
-      <li>Budgeting purchases when only the pre-tax sticker price is shown</li>
-      <li>Converting between gross and net for invoicing or expense reports</li>
-    </ul>
+    <div class="hf-field">
+      <div class="lbl">
+        <span>Mode</span>
+      </div>
+      <div class="hf-input hf-input-select">
+        <select id="vat-mode" aria-label="Calculation mode">
+          <option value="add">Add tax</option>
+          <option value="remove">Remove tax</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+  <section class="hf-result" id="vat-out" role="status" aria-live="polite" aria-atomic="true">
+    <div class="r-lbl">
+      <span class="r-lbl-text" id="vat-lbl">After tax</span>
+      <span class="hf-tiny hf-muted" aria-hidden="true">aria-live</span>
+    </div>
+    <div class="r-num">
+      <span class="cur" aria-hidden="true">$</span><span class="val" id="vat-val">108.88</span>
+    </div>
+    <div class="r-break" id="vat-break">
+      <span>Net</span><span class="v">$100.00</span>
+      <span>Rate</span><span class="v">8.875%</span>
+      <span>Tax amount</span><span class="v">$8.88</span>
+      <span>After tax</span><span class="v">$108.88</span>
+    </div>
+    <div class="r-actions">
+      <button type="button" class="hf-btn accent" id="vat-copy" aria-label="Copy result to clipboard">Copy result</button>
+      <button type="button" class="hf-btn ghost" id="vat-reset" aria-label="Reset to defaults">Reset</button>
+    </div>
+    <div class="why-line" id="vat-why">
+      $100.00 &times; 8.875% = $8.88 tax &rarr; <b>$108.88 gross</b>
+    </div>
   </section>
 
-  <section class="methodology" aria-labelledby="methodology-title">
-    <h2 id="methodology-title">Methodology &amp; trust</h2>
-    <details>
-      <summary>Formula, assumptions, rounding, and limitations</summary>
-      <div class="answer">
+  <div class="hf-chips-wrap" id="vat-next" aria-label="You might also need">
+    <div class="hf-cap">You might also need</div>
+    <div class="hf-chips" role="list">
+      <a class="hf-chip" href="/tip-calculator/" role="listitem">Tip Calculator</a>
+      <a class="hf-chip" href="/percentage-calculator/" role="listitem">Percentage Calculator</a>
+      <a class="hf-chip" href="/discount-calculator/" role="listitem">Discount Calculator</a>
+    </div>
+  </div>
+
+  <div class="hf-chips-wrap">
+    <div class="hf-cap">Quick examples</div>
+    <div class="hf-chips" role="list">
+      <button type="button" class="hf-chip" data-price="100"   data-rate="8"     data-mode="add"    role="listitem">$100 + 8%</button>
+      <button type="button" class="hf-chip" data-price="54.99" data-rate="7.25"  data-mode="add"    role="listitem">$54.99 + 7.25%</button>
+      <button type="button" class="hf-chip" data-price="108"   data-rate="8"     data-mode="remove" role="listitem">Remove 8% from $108</button>
+    </div>
+  </div>
+
+  <div class="hf-method-wrap">
+    <div class="hf-cap">How this is calculated</div>
+    <div class="hf-method-block">
+      <div class="formula">add tax: gross = net &times; (1 + rate &divide; 100)</div>
+      <div class="formula">remove tax: net = gross &divide; (1 + rate &divide; 100)</div>
+      <p>$100.00 &times; 8.875% = $8.88 tax. Gross $108.88. Two-decimal rounding.
+        <strong>Enter your local tax rate.</strong> Rates vary by state, city, and product type. This calculator does not look up rates by location.</p>
+      <p class="hf-muted hf-tiny">Updated May 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
+
+      <details class="method-details">
+        <summary>Formula, assumptions, rounding &amp; limitations</summary>
+
         <h3>Formula</h3>
         <ul>
-          <li>Add tax: <code>gross = net × (1 + rate ÷ 100)</code></li>
-          <li>Remove tax: <code>net = gross ÷ (1 + rate ÷ 100)</code></li>
-          <li><code>tax amount = gross − net</code></li>
+          <li>Add tax: <code>gross = net &times; (1 + rate &divide; 100)</code></li>
+          <li>Remove tax: <code>net = gross &divide; (1 + rate &divide; 100)</code></li>
+          <li><code>tax amount = gross &minus; net</code></li>
         </ul>
 
         <h3>Assumptions</h3>
         <ul>
           <li>The rate you enter is the combined rate (state + county + city + any special district), expressed as a percentage.</li>
-          <li>The same rate applies to the entire price — no per-line mix.</li>
+          <li>The same rate applies to the entire price &mdash; no per-line mix.</li>
           <li>Both decimal comma (8,875) and decimal point (8.875) are accepted.</li>
         </ul>
 
@@ -171,70 +184,267 @@
           <li>Category-specific rates (food, clothing, prescriptions in some US states; reduced VAT bands in the EU) are not modelled.</li>
           <li>Sales-tax holidays and exemptions are not detected.</li>
         </ul>
-
-        <p class="byline"><em>Built and maintained by Lukáš, an architect in Prague. Last updated May 2026.</em></p>
-      </div>
-    </details>
-  </section>
-
-  <section class="faq">
-    <h2>Frequently asked questions</h2>
-    <details>
-      <summary>What's the sales tax rate in my state?</summary>
-      <div class="answer"><p>This calculator does not look up rates by location — you enter the rate yourself. Combined state + local rates in the US range from 0% (NH, OR, MT, AK, DE) to roughly 9.55% (TN). City and county add-ons vary; the receipt or your state's tax site has the exact number.</p></div>
-    </details>
-    <details>
-      <summary>Why do I get a slightly different number than the receipt?</summary>
-      <div class="answer"><p>Most often it's rounding. Stores round each line item, so the receipt total can differ by a cent or two from a calculation done on the subtotal. Some jurisdictions also tax certain categories (food, clothing) at different rates than general goods.</p></div>
-    </details>
-    <details>
-      <summary>How do I remove tax from a total that includes it?</summary>
-      <div class="answer"><p>Switch the calculator to "Remove tax" mode. If you paid $108 at an 8% rate, the original was $108 ÷ 1.08 = $100, and the tax was $8.</p></div>
-    </details>
-    <details>
-      <summary>Is sales tax the same as VAT?</summary>
-      <div class="answer"><p>Mathematically yes — both are a percentage added to a price. The legal and accounting differences (who collects, who can reclaim, when it's due) are different, but for figuring out a final price the formula is identical.</p></div>
-    </details>
-  </section>
-
-  <section class="related">
-    <h2>Related tools</h2>
-    <div class="related-grid">
-      <a href="/percentage-calculator/">Percentage Calculator</a>
-      <a href="/discount-calculator/">Discount Calculator</a>
-      <a href="/tip-calculator/">Tip Calculator</a>
-      <a href="/unit-converter/">Unit Converter</a>
+      </details>
     </div>
-  </section>
+  </div>
 
-  <footer class="colophon">
-    <span>TinyUseful · Issue No. 1 · 2026</span>
-    <span>
-      <a href="/">Home</a> &nbsp; <a href="/about.html">About</a> &nbsp; <a href="/changelog.html">Changelog</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp;
-      <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode"><span class="icon-light" aria-hidden="true">☀</span><span class="icon-dark" aria-hidden="true">☾</span> Theme</button>
+  <div class="hf-ad" aria-label="Advertisement">
+    <div class="ad-label">Advertisement</div>
+    <div class="ad-slot" id="vat-ad-slot"></div>
+  </div>
+
+  <div class="hf-stack">
+
+    <section class="hf-step s1" data-step="faq">
+      <header class="step-head">
+        <div>
+          <div class="step-title">FAQ</div>
+          <div class="step-meta">state rate &middot; receipt mismatch &middot; remove tax &middot; sales tax vs VAT</div>
+        </div>
+        <span class="step-chev" aria-hidden="true">&#8599;</span>
+      </header>
+      <div class="step-body">
+        <details class="step-q">
+          <summary>What&rsquo;s the sales tax rate in my state?</summary>
+          <div class="answer"><p>This calculator does not look up rates by location &mdash; you enter the rate yourself. Combined state + local rates in the US range from 0% (NH, OR, MT, AK, DE) to roughly 9.55% (TN). City and county add-ons vary; the receipt or your state&rsquo;s tax site has the exact number.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>Why do I get a slightly different number than the receipt?</summary>
+          <div class="answer"><p>Most often it&rsquo;s rounding. Stores round each line item, so the receipt total can differ by a cent or two from a calculation done on the subtotal. Some jurisdictions also tax certain categories (food, clothing) at different rates than general goods.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>How do I remove tax from a total that includes it?</summary>
+          <div class="answer"><p>Switch the calculator to &ldquo;Remove tax&rdquo; mode. If you paid $108 at an 8% rate, the original was $108 &divide; 1.08 = $100, and the tax was $8.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>Is sales tax the same as VAT?</summary>
+          <div class="answer"><p>Mathematically yes &mdash; both are a percentage added to a price. The legal and accounting differences (who collects, who can reclaim, when it&rsquo;s due) are different, but for figuring out a final price the formula is identical.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <section class="hf-step s2" data-step="related">
+      <header class="step-head">
+        <div>
+          <div class="step-title">RELATED</div>
+          <div class="step-meta">Percentage &middot; Discount &middot; Tip &middot; Units</div>
+        </div>
+        <span class="step-chev" aria-hidden="true">&#8599;</span>
+      </header>
+      <nav class="step-related" aria-label="Related calculators">
+        <a href="/percentage-calculator/">Percentage Calculator</a>
+        <a href="/discount-calculator/">Discount Calculator</a>
+        <a href="/tip-calculator/">Tip Calculator</a>
+        <a href="/unit-converter/">Unit Converter</a>
+      </nav>
+    </section>
+
+  </div>
+
+  <div class="hf-trust">No accounts &middot; runs in your browser &middot; ads &amp; analytics may use cookies</div>
+
+  <footer class="hf-foot">
+    <span class="foot-links">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/changelog.html">Changelog</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
     </span>
+    <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode">&#9728; / &#9790;</button>
   </footer>
+
   <script src="/theme.js" defer></script>
 
 </main>
 
 <script>
   const $ = id => document.getElementById(id);
-  const fmt = (n, d=2) => n.toLocaleString(undefined, {minimumFractionDigits: d, maximumFractionDigits: d});
-  function vatCalc() {
-    const price=parseLocaleNumber($('vat-price').value), rate=parseLocaleNumber($('vat-rate').value), mode=$('vat-mode').value;
-    if (!Number.isFinite(price) || !Number.isFinite(rate)) {
-      setOut('vat-out','Result','—','Complete all fields.');
+  const fmt = (n, d=2) => n.toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
+  // Format a rate value for display: strip trailing zeros but keep significant decimals.
+  // 8.875 -> "8.875", 8.0 -> "8", 7.25 -> "7.25"
+  function fmtRate(n) {
+    if (!Number.isFinite(n)) return '—';
+    const s = n.toLocaleString('en-US', { maximumFractionDigits: 4, useGrouping: false });
+    return s;
+  }
+
+  // Defaults match legacy state
+  const DEFAULTS = { price: '100', rate: '8.875', mode: 'add' };
+
+  function vatRender(state) {
+    const valEl  = $('vat-val');
+    const lblEl  = $('vat-lbl');
+    const brkEl  = $('vat-break');
+    const whyEl  = $('vat-why');
+
+    if (!state.valid) {
+      lblEl.textContent = 'Result';
+      valEl.textContent = '—';
+      brkEl.innerHTML = '<span>Complete all fields</span><span class="v">—</span>';
+      whyEl.textContent = 'Enter a price and tax rate above.';
       return;
     }
-    if (mode === 'add') { const tax=price*rate/100, gross=price+tax;
-      setOut('vat-out','After tax','$'+fmt(gross),`Tax amount $${fmt(tax)} · Net $${fmt(price)}`); }
-    else { const net=price/(1+rate/100), tax=price-net;
-      setOut('vat-out','Before tax','$'+fmt(net),`Tax amount $${fmt(tax)} · Total $${fmt(price)}`); }
-    document.getElementById('vat-next').hidden = false;
+
+    const { price, rate, mode } = state;
+    const rateStr = fmtRate(rate);
+
+    if (mode === 'add') {
+      const tax = price * rate / 100;
+      const gross = price + tax;
+      lblEl.textContent = 'After tax';
+      valEl.textContent = fmt(gross);
+      brkEl.innerHTML =
+        '<span>Net</span><span class="v">$' + fmt(price) + '</span>' +
+        '<span>Rate</span><span class="v">' + rateStr + '%</span>' +
+        '<span>Tax amount</span><span class="v">$' + fmt(tax) + '</span>' +
+        '<span>After tax</span><span class="v">$' + fmt(gross) + '</span>';
+      whyEl.innerHTML =
+        '$' + fmt(price) + ' × ' + rateStr + '% = $' + fmt(tax) +
+        ' tax → <b>$' + fmt(gross) + ' gross</b>';
+    } else {
+      // remove
+      const divisor = 1 + rate / 100;
+      const net = price / divisor;
+      const tax = price - net;
+      lblEl.textContent = 'Before tax';
+      valEl.textContent = fmt(net);
+      brkEl.innerHTML =
+        '<span>Total</span><span class="v">$' + fmt(price) + '</span>' +
+        '<span>Rate</span><span class="v">' + rateStr + '%</span>' +
+        '<span>Tax amount</span><span class="v">$' + fmt(tax) + '</span>' +
+        '<span>Before tax</span><span class="v">$' + fmt(net) + '</span>';
+      // Trim divisor to short form: 8% -> 1.08, 8.875% -> 1.08875 (max 5 decimals)
+      const divisorStr = divisor.toLocaleString('en-US', { maximumFractionDigits: 5, useGrouping: false });
+      whyEl.innerHTML =
+        '$' + fmt(price) + ' ÷ ' + divisorStr + ' = $' + fmt(net) +
+        ' net + $' + fmt(tax) + ' tax';
+    }
   }
+
+  // Public name vatCalc preserved per freeze list
+  function vatCalc() {
+    const price = parseLocaleNumber($('vat-price').value);
+    const rate  = parseLocaleNumber($('vat-rate').value);
+    const mode  = $('vat-mode').value;
+
+    if (!Number.isFinite(price) || !Number.isFinite(rate)) {
+      vatRender({ valid: false });
+      return;
+    }
+    vatRender({ valid: true, price, rate, mode });
+  }
+
+  // Copy + copied state (matches Tip/Discount pattern)
+  (function () {
+    const copyBtn = $('vat-copy');
+    const out = $('vat-out');
+    const lblEl = $('vat-lbl');
+    let origLblText = lblEl ? lblEl.textContent : 'After tax';
+    let revertTimer = null;
+
+    function setCopied(on) {
+      if (!out) return;
+      out.classList.toggle('copied', on);
+      // Restore current mode-aware label after copy state ends
+      if (lblEl && !on) {
+        // Let vatCalc set the right label by triggering a render
+        // origLblText snapshot may be stale across mode changes; just trigger recalc
+      }
+      if (lblEl && on) {
+        origLblText = lblEl.textContent; // capture current label before swap
+        lblEl.textContent = 'Copied to clipboard';
+      }
+      if (lblEl && !on && origLblText) {
+        lblEl.textContent = origLblText;
+      }
+      if (copyBtn) copyBtn.textContent = on ? '✓ Copied' : 'Copy result';
+    }
+
+    if (copyBtn) copyBtn.addEventListener('click', function () {
+      const valEl = $('vat-val');
+      if (!valEl || valEl.textContent === '—') return;
+      const currentLbl = lblEl ? lblEl.textContent : 'Result';
+      const text = currentLbl + ': $' + valEl.textContent;
+      const finalize = function () {
+        setCopied(true);
+        if (revertTimer) clearTimeout(revertTimer);
+        revertTimer = setTimeout(function () { setCopied(false); }, 1600);
+      };
+      if (!navigator.clipboard) {
+        copyBtn.textContent = 'Copy unavailable';
+        setTimeout(function () { setCopied(false); }, 1500);
+        return;
+      }
+      navigator.clipboard.writeText(text).then(finalize).catch(function () {
+        copyBtn.textContent = 'Copy failed';
+        setTimeout(function () { setCopied(false); }, 1500);
+      });
+    });
+  })();
+
+  // Reset
+  (function () {
+    const resetBtn = $('vat-reset');
+    if (!resetBtn) return;
+    resetBtn.addEventListener('click', function () {
+      $('vat-price').value = DEFAULTS.price;
+      $('vat-rate').value = DEFAULTS.rate;
+      $('vat-mode').value = DEFAULTS.mode;
+      $('vat-price').dispatchEvent(new Event('input', { bubbles: true }));
+      $('vat-rate').dispatchEvent(new Event('input', { bubbles: true }));
+      $('vat-mode').dispatchEvent(new Event('change', { bubbles: true }));
+    });
+  })();
+
+  // Required + focus state on price + quick example chips
+  (function () {
+    const priceInput = $('vat-price');
+    const priceReq = $('vat-price-req');
+    const priceWrap = $('vat-price-wrap');
+
+    function syncRequired() {
+      if (!priceReq || !priceInput) return;
+      const v = String(priceInput.value || '').trim();
+      const empty = v === '' || !Number.isFinite(parseLocaleNumber(v));
+      if (priceWrap) priceWrap.classList.toggle('error', empty);
+    }
+
+    if (priceInput) {
+      priceInput.addEventListener('input', syncRequired);
+      priceInput.addEventListener('focus', function () { if (priceWrap) priceWrap.classList.add('focus'); });
+      priceInput.addEventListener('blur',  function () { if (priceWrap) priceWrap.classList.remove('focus'); });
+    }
+
+    document.querySelectorAll('.hf-chip[data-price]').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        const p = chip.getAttribute('data-price');
+        const r = chip.getAttribute('data-rate');
+        const m = chip.getAttribute('data-mode');
+        if (p) $('vat-price').value = p;
+        if (r) $('vat-rate').value = r;
+        if (m) $('vat-mode').value = m;
+        $('vat-price').dispatchEvent(new Event('input', { bubbles: true }));
+        $('vat-mode').dispatchEvent(new Event('change', { bubbles: true }));
+      });
+    });
+
+    syncRequired();
+  })();
+
+  // Initial render + live recalc (keeps attachLiveCalc on .tool-form per freeze list)
   vatCalc();
-  attachLiveCalc('.tool-form', vatCalc);
+  if (typeof attachLiveCalc === 'function') {
+    attachLiveCalc('.tool-form', vatCalc);
+  } else {
+    // fallback live recalc
+    let t;
+    const handler = function () { clearTimeout(t); t = setTimeout(vatCalc, 80); };
+    document.querySelectorAll('.tool-form input, .tool-form select').forEach(function (el) {
+      el.addEventListener('input', handler);
+      el.addEventListener('change', handler);
+    });
+  }
 </script>
 
 </body>
