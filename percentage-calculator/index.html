@@ -25,7 +25,7 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260506b">
+<link rel="stylesheet" href="/style.css?v=20260514-pct">
 <script src="/js/helpers.js?v=20260504d"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
@@ -45,113 +45,114 @@
 </script>
 </head>
 
-<body>
+<body class="ui-hifi">
 <a class="skip-link" href="#main">Skip to main content</a>
-<main id="main" class="page">
+<main id="main" class="hf">
 
-  <header class="masthead">
-    <a class="wordmark" href="/"><span class="knife" aria-hidden="true"></span>TinyUseful</a>
-    <span class="issue">No. 1 — April 2026</span>
+  <header class="hf-header">
+    <a class="hf-wordmark" href="/" aria-label="TinyUseful home">
+      <span class="stack"><span>TINY</span><span>USEFUL</span></span>
+    </a>
+    <span class="hf-menu-btn" aria-hidden="true">
+      <span></span><span></span>
+    </span>
   </header>
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">TinyUseful</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">Percentage Calculator</span>
+  <nav class="hf-crumb" aria-label="Breadcrumb">
+    / percentage calculator <span class="crumb-marker" aria-hidden="true"><span class="crumb-star">&#9733;</span> No.&nbsp;01</span>
   </nav>
 
-  <section class="tools">
-    <div class="section-head">
-      <span class="section-num">No. 01</span>
-      <h1>Percentage Calculator</h1>
-      <span class="desc">Three percentage problems, one tool.</span>
-    </div>
-    <div class="tool" data-tool="percentage">
-      <div class="tool-meta">
-        <h2>Inputs</h2>
-        <p class="desc">Pick the mode that matches your problem. Computed in your browser, nothing saved.</p>
-      </div>
-      <div class="tool-form">
-        <div class="row">
-          <label>X<input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="pct-x" value="15"></label>
-          <label>Mode
-            <select id="pct-mode">
-              <option value="of">% of Y</option>
-              <option value="isof">X is what % of Y</option>
-              <option value="change">% change Y → X</option>
-            </select>
-          </label>
-          <label>Y<input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="done" id="pct-y" value="80"></label>
-        </div>
-        <button type="button" onclick="pctCalc()">Calculate</button>
-        <div class="out" id="pct-out" role="status" aria-live="polite"><span class="label">Result</span><span class="big">12</span></div>
-        <div class="next-task" id="pct-next" hidden>
-          <p class="hint">↓ You might also need</p>
-          <div class="next-tools">
-            <a href="/sales-tax-calculator/" class="next-link" data-symbol="+">Sales Tax</a>
-            <a href="/discount-calculator/" class="next-link" data-symbol="−">Discount</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="ad-block">
-    <div class="placeholder">728 × 90 leaderboard placement</div>
+  <h1 class="hf-display">PERCENTAGE&nbsp;CALCULATOR</h1>
+  <div class="hf-sub">
+    <span>Three percentage problems, one tool.</span>
   </div>
 
-  <section class="explainer">
-    <h2>What this tool answers</h2>
-    <p>
-      This calculator handles the three classic percentage questions:
-      <strong>what is X percent of Y</strong>, <strong>X is what percent of Y</strong>
-      (also phrased as &ldquo;what percentage of Y is X&rdquo;), and
-      <strong>percentage change from one number to another</strong>. Pick the matching mode
-      above and the answer appears in your browser — no account required.
-    </p>
+  <div class="hf-fields tool-form" data-tool="percentage">
 
-    <h2>How to calculate a percentage manually</h2>
-    <ol>
-      <li>Convert the percentage to a decimal &mdash; move the decimal point two places left (15% → 0.15).</li>
-      <li>Multiply the decimal by the base number (0.15 × 80).</li>
-      <li>The result is the percentage value (12).</li>
-    </ol>
-    <p><strong>Example:</strong> 15% of 80 = 0.15 × 80 = <strong>12</strong>.</p>
+    <div class="hf-field">
+      <div class="lbl">
+        <span>X</span>
+        <span class="req" id="pct-x-req">required</span>
+      </div>
+      <div class="hf-input focus" id="pct-x-wrap">
+        <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="pct-x" value="15" aria-label="X value">
+      </div>
+    </div>
 
-    <h2>Quick examples</h2>
-    <ul class="examples">
-      <li>15% of 80 = <strong>12</strong></li>
-      <li>20% off $50 = <strong>$40</strong></li>
-      <li>30 is what percent of 120? = <strong>25%</strong></li>
-      <li>Change from 80 to 100 = <strong>+25%</strong></li>
-      <li>Change from 200 to 150 = <strong>&minus;25%</strong></li>
-    </ul>
+    <div class="hf-field">
+      <div class="lbl">
+        <span>Mode</span>
+      </div>
+      <div class="hf-input hf-input-select">
+        <select id="pct-mode" aria-label="Calculation mode">
+          <option value="of">% of Y</option>
+          <option value="isof">X is what % of Y</option>
+          <option value="change">% change Y &rarr; X</option>
+        </select>
+      </div>
+    </div>
 
-    <h2>Formulas used</h2>
-    <p class="formula"><code>X% of Y = (X ÷ 100) × Y</code></p>
-    <p class="formula"><code>X is what % of Y = (X ÷ Y) × 100</code></p>
-    <p class="formula"><code>% change Y → X = ((X &minus; Y) ÷ Y) × 100</code></p>
-    <p>
-      All three calculations run in your browser using basic arithmetic. No probability,
-      no estimate, no API call.
-    </p>
+    <div class="hf-field">
+      <div class="lbl">
+        <span>Y</span>
+      </div>
+      <div class="hf-input">
+        <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="done" id="pct-y" value="80" aria-label="Y value">
+      </div>
+    </div>
 
-    <h2>Common uses</h2>
-    <ul>
-      <li>What is X percent of Y? (e.g. what is 15% of 80?)</li>
-      <li>X is what percent of Y? (e.g. 30 is what percent of 120?)</li>
-      <li>What percentage of X is Y? (the reverse phrasing of the above)</li>
-      <li>Calculating a tip, discount, or sales tax on a receipt</li>
-      <li>Tracking weight, fitness, or savings change over time</li>
-      <li>Understanding interest rates, APR, and investment returns</li>
-      <li>Reading news headlines about percentage points vs. percent change</li>
-      <li>Working out grades, test scores, or commission</li>
-    </ul>
+  </div>
+
+  <section class="hf-result" id="pct-out" role="status" aria-live="polite" aria-atomic="true">
+    <div class="r-lbl">
+      <span class="r-lbl-text" id="pct-lbl">15% of 80</span>
+      <span class="hf-tiny hf-muted" aria-hidden="true">aria-live</span>
+    </div>
+    <div class="r-num">
+      <span class="val" id="pct-val">12.00</span><span class="per" id="pct-per"></span>
+    </div>
+    <div class="r-break" id="pct-break">
+      <span>15% &times; 80</span><span class="v">12.00</span>
+    </div>
+    <div class="r-actions">
+      <button type="button" class="hf-btn accent" id="pct-copy" aria-label="Copy result to clipboard">Copy result</button>
+      <button type="button" class="hf-btn ghost" id="pct-reset" aria-label="Reset to defaults">Reset</button>
+    </div>
+    <div class="why-line" id="pct-why">
+      15% &times; 80 = <b>12.00</b>
+    </div>
   </section>
 
-  <section class="methodology" aria-labelledby="methodology-title">
-    <h2 id="methodology-title">Methodology &amp; trust</h2>
-    <details>
-      <summary>Assumptions, rounding, and privacy</summary>
-      <div class="answer">
+  <div class="hf-chips-wrap" id="pct-next" aria-label="You might also need">
+    <div class="hf-cap">You might also need</div>
+    <div class="hf-chips" role="list">
+      <a class="hf-chip" href="/sales-tax-calculator/" role="listitem">Sales Tax</a>
+      <a class="hf-chip" href="/discount-calculator/" role="listitem">Discount</a>
+      <a class="hf-chip" href="/tip-calculator/" role="listitem">Tip Calculator</a>
+    </div>
+  </div>
+
+  <div class="hf-chips-wrap">
+    <div class="hf-cap">Quick examples</div>
+    <div class="hf-chips" role="list">
+      <button type="button" class="hf-chip" data-x="15"  data-y="80"  data-mode="of"     role="listitem">15% of 80</button>
+      <button type="button" class="hf-chip" data-x="30"  data-y="120" data-mode="isof"   role="listitem">30 is what % of 120</button>
+      <button type="button" class="hf-chip" data-x="100" data-y="80"  data-mode="change" role="listitem">80 &rarr; 100</button>
+    </div>
+  </div>
+
+  <div class="hf-method-wrap">
+    <div class="hf-cap">How this is calculated</div>
+    <div class="hf-method-block">
+      <div class="formula">X% of Y = (X &divide; 100) &times; Y</div>
+      <div class="formula">X is what % of Y = (X &divide; Y) &times; 100</div>
+      <div class="formula">% change Y &rarr; X = ((X &minus; Y) &divide; Y) &times; 100</div>
+      <p>15% of 80 = 0.15 &times; 80 = 12. All three calculations run in your browser using basic arithmetic. No probability, no estimate, no API call. Numbers you enter are not sent to a server.</p>
+      <p class="hf-muted hf-tiny">Updated May 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
+
+      <details class="method-details">
+        <summary>Assumptions, rounding &amp; privacy</summary>
+
         <h3>Assumptions</h3>
         <ul>
           <li>Percentages are calculated from the values entered in the form.</li>
@@ -168,71 +169,266 @@
         <ul>
           <li>This calculation runs in your browser. The numbers you enter here are not sent to a server.</li>
         </ul>
-
-        <p class="byline"><em>Built and maintained by Lukáš, an architect in Prague. Last updated May 2026.</em></p>
-      </div>
-    </details>
-  </section>
-
-  <section class="faq">
-    <h2>Frequently asked questions</h2>
-    <details>
-      <summary>How do I calculate 15% of a number in my head?</summary>
-      <div class="answer"><p>Take 10% (move the decimal one place left), then add half of that. For 15% of 80: 10% is 8, half of 8 is 4, so 15% is 8 + 4 = 12. The same trick works for 18% tip: 10% + 5% + 3% (≈ 10% + half + a third of half).</p></div>
-    </details>
-    <details>
-      <summary>What's the difference between percentage and percentage points?</summary>
-      <div class="answer"><p>If a rate goes from 5% to 7%, that's a change of <strong>2 percentage points</strong>, but a <strong>40% increase</strong> (because 2 ÷ 5 = 0.4). News headlines often confuse these. Use percent change mode for the relative number, plain subtraction for percentage points.</p></div>
-    </details>
-    <details>
-      <summary>Why does "X is what % of Y" sometimes give over 100%?</summary>
-      <div class="answer"><p>Because X is bigger than Y. If you scored 110 on a test out of 100, you got 110%. Nothing is broken — percentages can exceed 100% whenever the part is larger than the whole.</p></div>
-    </details>
-    <details>
-      <summary>How do I reverse a percentage to find the original?</summary>
-      <div class="answer"><p>If a final price after 25% off is $60, the original is $60 ÷ (1 − 0.25) = $80. For tax, $108 after 8% tax means original $108 ÷ 1.08 = $100. Use the <a href="/discount-calculator/">Discount Calculator</a> or <a href="/sales-tax-calculator/">Sales Tax Calculator</a> for these reverse cases.</p></div>
-    </details>
-  </section>
-
-  <section class="related">
-    <h2>Related tools</h2>
-    <div class="related-grid">
-      <a href="/sales-tax-calculator/">Sales Tax Calculator</a>
-      <a href="/discount-calculator/">Discount Calculator</a>
-      <a href="/tip-calculator/">Tip Calculator</a>
-      <a href="/compound-interest-calculator/">Compound Interest</a>
+      </details>
     </div>
-  </section>
+  </div>
 
-  <footer class="colophon">
-    <span>TinyUseful · Issue No. 1 · 2026</span>
-    <span>
-      <a href="/">Home</a> &nbsp; <a href="/about.html">About</a> &nbsp; <a href="/changelog.html">Changelog</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a> &nbsp;
-      <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode"><span class="icon-light" aria-hidden="true">☀</span><span class="icon-dark" aria-hidden="true">☾</span> Theme</button>
+  <div class="hf-ad" aria-label="Advertisement">
+    <div class="ad-label">Advertisement</div>
+    <div class="ad-slot" id="pct-ad-slot"></div>
+  </div>
+
+  <div class="hf-stack">
+
+    <section class="hf-step s1" data-step="faq">
+      <header class="step-head">
+        <div>
+          <div class="step-title">FAQ</div>
+          <div class="step-meta">15% in head &middot; points vs percent &middot; over 100% &middot; reverse percentage</div>
+        </div>
+        <span class="step-chev" aria-hidden="true">&#8599;</span>
+      </header>
+      <div class="step-body">
+        <details class="step-q">
+          <summary>How do I calculate 15% of a number in my head?</summary>
+          <div class="answer"><p>Take 10% (move the decimal one place left), then add half of that. For 15% of 80: 10% is 8, half of 8 is 4, so 15% is 8 + 4 = 12. The same trick works for 18% tip: 10% + 5% + 3% (&asymp; 10% + half + a third of half).</p></div>
+        </details>
+        <details class="step-q">
+          <summary>What&rsquo;s the difference between percentage and percentage points?</summary>
+          <div class="answer"><p>If a rate goes from 5% to 7%, that&rsquo;s a change of <strong>2 percentage points</strong>, but a <strong>40% increase</strong> (because 2 &divide; 5 = 0.4). News headlines often confuse these. Use percent change mode for the relative number, plain subtraction for percentage points.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>Why does &ldquo;X is what % of Y&rdquo; sometimes give over 100%?</summary>
+          <div class="answer"><p>Because X is bigger than Y. If you scored 110 on a test out of 100, you got 110%. Nothing is broken &mdash; percentages can exceed 100% whenever the part is larger than the whole.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>How do I reverse a percentage to find the original?</summary>
+          <div class="answer"><p>If a final price after 25% off is $60, the original is $60 &divide; (1 &minus; 0.25) = $80. For tax, $108 after 8% tax means original $108 &divide; 1.08 = $100. Use the <a href="/discount-calculator/">Discount Calculator</a> or <a href="/sales-tax-calculator/">Sales Tax Calculator</a> for these reverse cases.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <section class="hf-step s2" data-step="related">
+      <header class="step-head">
+        <div>
+          <div class="step-title">RELATED</div>
+          <div class="step-meta">Sales Tax &middot; Discount &middot; Tip &middot; Compound</div>
+        </div>
+        <span class="step-chev" aria-hidden="true">&#8599;</span>
+      </header>
+      <nav class="step-related" aria-label="Related calculators">
+        <a href="/sales-tax-calculator/">Sales Tax Calculator</a>
+        <a href="/discount-calculator/">Discount Calculator</a>
+        <a href="/tip-calculator/">Tip Calculator</a>
+        <a href="/compound-interest-calculator/">Compound Interest</a>
+      </nav>
+    </section>
+
+  </div>
+
+  <div class="hf-trust">No accounts &middot; runs in your browser &middot; ads &amp; analytics may use cookies</div>
+
+  <footer class="hf-foot">
+    <span class="foot-links">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/changelog.html">Changelog</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
     </span>
+    <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode">&#9728; / &#9790;</button>
   </footer>
+
   <script src="/theme.js" defer></script>
 
 </main>
 
 <script>
   const $ = id => document.getElementById(id);
-  const fmt = (n, d=2) => n.toLocaleString(undefined, {minimumFractionDigits: d, maximumFractionDigits: d});
-  function pctCalc() {
-    const x = parseLocaleNumber($('pct-x').value), y = parseLocaleNumber($('pct-y').value), mode = $('pct-mode').value;
-    if (!Number.isFinite(x) || !Number.isFinite(y)) {
-      setOut('pct-out', 'Result', '—', 'Complete all fields.');
+  const fmt = (n, d=2) => n.toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
+  // Compact number for label/breakdown expressions (strip trailing zeros).
+  // 15 -> "15", 15.5 -> "15.5", 0.15 -> "0.15"
+  function fmtCompact(n) {
+    if (!Number.isFinite(n)) return '—';
+    return n.toLocaleString('en-US', { maximumFractionDigits: 4, useGrouping: false });
+  }
+
+  // Defaults match legacy state
+  const DEFAULTS = { x: '15', y: '80', mode: 'of' };
+
+  function pctRender(state) {
+    const valEl  = $('pct-val');
+    const perEl  = $('pct-per');
+    const lblEl  = $('pct-lbl');
+    const brkEl  = $('pct-break');
+    const whyEl  = $('pct-why');
+
+    if (!state.valid) {
+      lblEl.textContent = 'Result';
+      valEl.textContent = '—';
+      perEl.textContent = '';
+      brkEl.innerHTML = '<span>Complete all fields</span><span class="v">—</span>';
+      whyEl.textContent = 'Enter X and Y above.';
       return;
     }
-    let label, big, br='';
-    if (mode === 'of')      { const r = x/100*y; label = `${x}% of ${y}`; big = fmt(r); }
-    else if (mode==='isof') { const r = y===0?0:(x/y)*100; label = `${x} is what % of ${y}`; big = fmt(r,2)+' %'; }
-    else                    { const r = y===0?0:((x-y)/y)*100; label = `${y} → ${x}`; big = (r>=0?'+':'')+fmt(r,2)+' %'; br = `Absolute change: ${fmt(x-y)}`; }
-    setOut('pct-out', label, big, br);
-    document.getElementById('pct-next').hidden = false;
+
+    const { x, y, mode } = state;
+    const xs = fmtCompact(x);
+    const ys = fmtCompact(y);
+
+    if (mode === 'of') {
+      // X% of Y → (X/100) * Y
+      const r = x / 100 * y;
+      lblEl.textContent = xs + '% of ' + ys;
+      valEl.textContent = fmt(r);
+      perEl.textContent = '';
+      brkEl.innerHTML =
+        '<span>' + xs + '% × ' + ys + '</span><span class="v">' + fmt(r) + '</span>';
+      whyEl.innerHTML =
+        xs + '% × ' + ys + ' = <b>' + fmt(r) + '</b>';
+    } else if (mode === 'isof') {
+      // X is what % of Y → (X/Y) * 100; guard y=0
+      const r = (y === 0) ? 0 : (x / y) * 100;
+      lblEl.textContent = xs + ' is what % of ' + ys;
+      valEl.textContent = fmt(r);
+      perEl.textContent = '%';
+      brkEl.innerHTML =
+        '<span>' + xs + ' ÷ ' + ys + ' × 100</span><span class="v">' + fmt(r) + '%</span>';
+      whyEl.innerHTML =
+        xs + ' ÷ ' + ys + ' × 100 = <b>' + fmt(r) + '%</b>';
+    } else {
+      // change Y → X: ((X-Y)/Y) * 100; guard y=0
+      const r = (y === 0) ? 0 : ((x - y) / y) * 100;
+      const sign = r >= 0 ? '+' : '';   // negative number already has '−' via toLocaleString
+      lblEl.textContent = ys + ' → ' + xs;
+      valEl.textContent = sign + fmt(r);
+      perEl.textContent = '%';
+      brkEl.innerHTML =
+        '<span>Absolute change</span><span class="v">' + fmt(x - y) + '</span>';
+      whyEl.innerHTML =
+        '(' + xs + ' − ' + ys + ') ÷ ' + ys + ' × 100 = <b>' + sign + fmt(r) + '%</b>';
+    }
   }
+
+  // Public name pctCalc preserved per freeze list
+  function pctCalc() {
+    const x = parseLocaleNumber($('pct-x').value);
+    const y = parseLocaleNumber($('pct-y').value);
+    const mode = $('pct-mode').value;
+
+    if (!Number.isFinite(x) || !Number.isFinite(y)) {
+      pctRender({ valid: false });
+      return;
+    }
+    pctRender({ valid: true, x, y, mode });
+  }
+
+  // Copy + copied state
+  (function () {
+    const copyBtn = $('pct-copy');
+    const out = $('pct-out');
+    const lblEl = $('pct-lbl');
+    const valEl = $('pct-val');
+    const perEl = $('pct-per');
+    let origLblText = lblEl ? lblEl.textContent : 'Result';
+    let revertTimer = null;
+
+    function setCopied(on) {
+      if (!out) return;
+      out.classList.toggle('copied', on);
+      if (lblEl && on) {
+        origLblText = lblEl.textContent;
+        lblEl.textContent = 'Copied to clipboard';
+      }
+      if (lblEl && !on && origLblText) {
+        lblEl.textContent = origLblText;
+      }
+      if (copyBtn) copyBtn.textContent = on ? '✓ Copied' : 'Copy result';
+    }
+
+    if (copyBtn) copyBtn.addEventListener('click', function () {
+      if (!valEl || valEl.textContent === '—') return;
+      const currentLbl = lblEl ? lblEl.textContent : 'Result';
+      const perStr = perEl ? perEl.textContent : '';
+      const text = currentLbl + ': ' + valEl.textContent + perStr;
+      const finalize = function () {
+        setCopied(true);
+        if (revertTimer) clearTimeout(revertTimer);
+        revertTimer = setTimeout(function () { setCopied(false); }, 1600);
+      };
+      if (!navigator.clipboard) {
+        copyBtn.textContent = 'Copy unavailable';
+        setTimeout(function () { setCopied(false); }, 1500);
+        return;
+      }
+      navigator.clipboard.writeText(text).then(finalize).catch(function () {
+        copyBtn.textContent = 'Copy failed';
+        setTimeout(function () { setCopied(false); }, 1500);
+      });
+    });
+  })();
+
+  // Reset
+  (function () {
+    const resetBtn = $('pct-reset');
+    if (!resetBtn) return;
+    resetBtn.addEventListener('click', function () {
+      $('pct-x').value = DEFAULTS.x;
+      $('pct-y').value = DEFAULTS.y;
+      $('pct-mode').value = DEFAULTS.mode;
+      $('pct-x').dispatchEvent(new Event('input', { bubbles: true }));
+      $('pct-y').dispatchEvent(new Event('input', { bubbles: true }));
+      $('pct-mode').dispatchEvent(new Event('change', { bubbles: true }));
+    });
+  })();
+
+  // Required + focus + quick example chips
+  (function () {
+    const xInput = $('pct-x');
+    const xReq = $('pct-x-req');
+    const xWrap = $('pct-x-wrap');
+
+    function syncRequired() {
+      if (!xReq || !xInput) return;
+      const v = String(xInput.value || '').trim();
+      const empty = v === '' || !Number.isFinite(parseLocaleNumber(v));
+      if (xWrap) xWrap.classList.toggle('error', empty);
+    }
+
+    if (xInput) {
+      xInput.addEventListener('input', syncRequired);
+      xInput.addEventListener('focus', function () { if (xWrap) xWrap.classList.add('focus'); });
+      xInput.addEventListener('blur',  function () { if (xWrap) xWrap.classList.remove('focus'); });
+    }
+
+    document.querySelectorAll('.hf-chip[data-x]').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        const x = chip.getAttribute('data-x');
+        const y = chip.getAttribute('data-y');
+        const m = chip.getAttribute('data-mode');
+        if (x !== null) $('pct-x').value = x;
+        if (y !== null) $('pct-y').value = y;
+        if (m !== null) $('pct-mode').value = m;
+        $('pct-x').dispatchEvent(new Event('input', { bubbles: true }));
+        $('pct-mode').dispatchEvent(new Event('change', { bubbles: true }));
+      });
+    });
+
+    syncRequired();
+  })();
+
+  // Initial render + live recalc
   pctCalc();
-  attachLiveCalc('.tool-form', pctCalc);
+  if (typeof attachLiveCalc === 'function') {
+    attachLiveCalc('.tool-form', pctCalc);
+  } else {
+    let t;
+    const handler = function () { clearTimeout(t); t = setTimeout(pctCalc, 80); };
+    document.querySelectorAll('.tool-form input, .tool-form select').forEach(function (el) {
+      el.addEventListener('input', handler);
+      el.addEventListener('change', handler);
+    });
+  }
 </script>
 
 </body>
