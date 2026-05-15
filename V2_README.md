@@ -1,3 +1,9 @@
+> **ARCHIVED 2026-05-15** — pre-rollout branch description. Claims in this
+> document ("v2 NOT YET DEPLOYED", "Tip Calculator v2: not started",
+> "Master Plan pending") are historical and no longer accurate. Current state:
+> v2 hf system fully deployed (homepage + 11/11 tools).
+> See [TINYUSEFUL_STATUS_2026-05-15.md](TINYUSEFUL_STATUS_2026-05-15.md).
+
 # TinyUseful v2 — rebuild branch
 
 > **Status:** v2-rebuild branch, NOT YET DEPLOYED. Live verze běží z `main` branch.

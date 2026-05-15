@@ -1,3 +1,9 @@
+> **ARCHIVED 2026-05-15** — pre-rollout workflow. The 10-step order of operations
+> in this document is completed (v2 deployed, 11/11 tools migrated).
+> Active code rules now live in [CLAUDE.md](../CLAUDE.md); 18 binding principles
+> in [V2_NON_NEGOTIABLES.md](V2_NON_NEGOTIABLES.md).
+> See [TINYUSEFUL_STATUS_2026-05-15.md](../TINYUSEFUL_STATUS_2026-05-15.md).
+
 # v2 rebuild workflow rules
 
 **Locked:** 2026-05-08 (per GPT round 5 controlled-scaffold guidance)
