@@ -1,3 +1,7 @@
+> **ARCHIVED 2026-05-15** — pre-rollout planning document, kept for context.
+> Current state: v2 hf system deployed (homepage + 11/11 tools).
+> See [TINYUSEFUL_STATUS_2026-05-15.md](../TINYUSEFUL_STATUS_2026-05-15.md).
+
 # TinyUseful — Strategie Master Concept v2: diskusní podklad mezi GPT, Gemini a Claude
 
 **Datum:** 2026-05-07 (čtvrtek), Praha CEST

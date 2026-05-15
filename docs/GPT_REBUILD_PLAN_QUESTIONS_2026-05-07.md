@@ -1,3 +1,7 @@
+> **ARCHIVED 2026-05-15** — pre-rollout planning document, kept for context.
+> Current state: v2 hf system deployed (homepage + 11/11 tools).
+> See [TINYUSEFUL_STATUS_2026-05-15.md](../TINYUSEFUL_STATUS_2026-05-15.md).
+
 # Rebuild plán otázky pro GPT — strukturovaný framework
 
 **Pro Lukase:** Toto jsou otázky, na které potřebuješ od GPT dostat odpovědi pro comprehensive rebuild plán. Pošli GPT v dávkách (po 5-7 otázek), aby každá odpověď byla detailní.

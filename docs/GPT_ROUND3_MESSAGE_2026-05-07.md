@@ -1,3 +1,7 @@
+> **ARCHIVED 2026-05-15** — pre-rollout planning document, kept for context.
+> Current state: v2 hf system deployed (homepage + 11/11 tools).
+> See [TINYUSEFUL_STATUS_2026-05-15.md](../TINYUSEFUL_STATUS_2026-05-15.md).
+
 # Message pro GPT — Round 3 verification
 
 **Kontext pro Lukase:** Toto je hotový text pro GPT. Zkopíruj a pošli, nebo uprav.

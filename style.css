@@ -1913,7 +1913,7 @@ body.ui-hifi .hf-foot button.theme-toggle {
 
 /* ───── dark mode ───── */
 @media (prefers-color-scheme: dark) {
-  body.ui-hifi {
+  html:not([data-theme="light"]) body.ui-hifi {
     --bg:       #18171a;
     --paper:    #1e1d20;
     --paper-2:  #2a282c;
