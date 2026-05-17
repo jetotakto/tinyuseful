@@ -2755,3 +2755,36 @@ body.ui-hifi .hf-notfound .section-label {
 
 /* END V2 prose / doc pages ────────────────────────────────────── */
 
+/* ─── HOMEPAGE FEATURED TILE — whole-card click target (2026-05-17) ────
+   Stretched-link pattern: the inner <a class="featured-cta"> gets an
+   absolutely-positioned ::after that overlays the entire .hf-featured-tile
+   (which already has position: relative). The yellow card becomes one
+   click target on both mouse and touch, without changing markup.
+
+   Accessibility:
+   - the <a> keeps its accessible name (aria-label="Open Tip Calculator")
+   - keyboard focus still lands on the <a>; :focus-within outlines the
+     whole tile so keyboard users see the same affordance as mouse hover
+   - cursor: pointer on the tile signals the entire surface is clickable
+
+   Scope: only .hf-featured-tile, which exists exclusively on the homepage.
+   Tool and support pages are unaffected. */
+body.ui-hifi .hf-featured-tile { cursor: pointer; }
+body.ui-hifi .hf-featured-tile .featured-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  z-index: 1;
+}
+body.ui-hifi .hf-featured-tile:hover .featured-cta .arrow,
+body.ui-hifi .hf-featured-tile:focus-within .featured-cta .arrow {
+  color: var(--accent);
+}
+body.ui-hifi .hf-featured-tile:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* END homepage featured tile click target ─────────────────────── */
+
