@@ -70,10 +70,10 @@
   <div class="hf-fields tool-form" data-tool="vat">
 
     <div class="hf-field">
-      <div class="lbl">
+      <label class="lbl" for="vat-price">
         <span>Price</span>
         <span class="req" id="vat-price-req">required</span>
-      </div>
+      </label>
       <div class="hf-input focus" id="vat-price-wrap">
         <span class="pre" aria-hidden="true">$</span>
         <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="vat-price" value="100" aria-label="Price in dollars">
@@ -81,10 +81,10 @@
     </div>
 
     <div class="hf-field">
-      <div class="lbl">
+      <label class="lbl" for="vat-rate">
         <span>Rate</span>
         <span aria-hidden="true">%</span>
-      </div>
+      </label>
       <div class="hf-input">
         <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="vat-rate" value="8.875" aria-label="Sales tax rate as percentage">
         <span class="suf" aria-hidden="true">%</span>
@@ -92,9 +92,9 @@
     </div>
 
     <div class="hf-field">
-      <div class="lbl">
+      <label class="lbl" for="vat-mode">
         <span>Mode</span>
-      </div>
+      </label>
       <div class="hf-input hf-input-select">
         <select id="vat-mode" aria-label="Calculation mode">
           <option value="add">Add tax</option>
