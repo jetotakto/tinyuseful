@@ -25,8 +25,8 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260514-hotfix2">
-<script src="/js/helpers.js?v=20260504e"></script>
+<link rel="stylesheet" href="/style.css?v=20260515-v2">
+<script src="/js/helpers.js?v=20260515-v2"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <script type="application/ld+json">
@@ -70,10 +70,10 @@
   <div class="hf-fields tool-form" data-tool="compound">
 
     <div class="hf-field">
-      <div class="lbl">
+      <label class="lbl" for="ci-start">
         <span>Start</span>
         <span class="req" id="ci-start-req">required</span>
-      </div>
+      </label>
       <div class="hf-input focus" id="ci-start-wrap">
         <span class="pre" aria-hidden="true">$</span>
         <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="ci-start" value="10000" aria-label="Starting balance in dollars">
@@ -81,9 +81,9 @@
     </div>
 
     <div class="hf-field">
-      <div class="lbl">
+      <label class="lbl" for="ci-monthly">
         <span>Monthly</span>
-      </div>
+      </label>
       <div class="hf-input">
         <span class="pre" aria-hidden="true">$</span>
         <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="ci-monthly" value="500" aria-label="Monthly contribution in dollars">
@@ -91,10 +91,10 @@
     </div>
 
     <div class="hf-field">
-      <div class="lbl">
+      <label class="lbl" for="ci-apr">
         <span>APR</span>
         <span aria-hidden="true">%</span>
-      </div>
+      </label>
       <div class="hf-input">
         <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="ci-apr" value="7" aria-label="Annual percentage rate">
         <span class="suf" aria-hidden="true">%</span>
@@ -102,9 +102,9 @@
     </div>
 
     <div class="hf-field">
-      <div class="lbl">
+      <label class="lbl" for="ci-years">
         <span>Years</span>
-      </div>
+      </label>
       <div class="hf-input">
         <input type="text" inputmode="numeric" autocomplete="off" enterkeyhint="done" id="ci-years" value="20" aria-label="Number of years">
         <span class="suf" aria-hidden="true">years</span>

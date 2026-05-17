@@ -25,8 +25,8 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260514-hotfix2">
-<script src="/js/helpers.js?v=20260504d"></script>
+<link rel="stylesheet" href="/style.css?v=20260515-v2">
+<script src="/js/helpers.js?v=20260515-v2"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <script type="application/ld+json">
@@ -70,9 +70,9 @@
   <div class="hf-fields tool-form" data-tool="unit">
 
     <div class="hf-field">
-      <div class="lbl">
+      <label class="lbl" for="unit-cat">
         <span>Category</span>
-      </div>
+      </label>
       <div class="hf-input hf-input-select">
         <select id="unit-cat" aria-label="Unit category">
           <option value="length">Length</option>
@@ -83,28 +83,28 @@
     </div>
 
     <div class="hf-field">
-      <div class="lbl">
+      <label class="lbl" for="unit-val">
         <span>Value</span>
         <span class="req" id="unit-val-req">required</span>
-      </div>
+      </label>
       <div class="hf-input focus" id="unit-val-wrap">
         <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="unit-val" value="1" aria-label="Value to convert">
       </div>
     </div>
 
     <div class="hf-field">
-      <div class="lbl">
+      <label class="lbl" for="unit-from">
         <span>From</span>
-      </div>
+      </label>
       <div class="hf-input hf-input-select">
         <select id="unit-from" aria-label="Convert from unit"></select>
       </div>
     </div>
 
     <div class="hf-field">
-      <div class="lbl">
+      <label class="lbl" for="unit-to">
         <span>To</span>
-      </div>
+      </label>
       <div class="hf-input hf-input-select">
         <select id="unit-to" aria-label="Convert to unit"></select>
       </div>

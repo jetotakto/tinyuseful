@@ -20,6 +20,12 @@ TINYUSEFUL_REVIEW_BRIEFING.md
 # Preview/mockup files — local-only experiments, never deploy to production
 _preview-*.html
 
+# Pre-patch backup snapshots — local-only checkpoints from iterative edits
+# (e.g. style.css.pre-patchA-2026-05-13, index.html.pre-homepage-2026-05-13)
+# Existing tracked backups are not affected by this rule; only untracked
+# new backups will be ignored going forward.
+*.pre-*
+
 # Review ZIP archivy a kontrolni slozky — nikdy do live webu
 tinyuseful-review-*.zip
 kontrola GPT a Geminy/

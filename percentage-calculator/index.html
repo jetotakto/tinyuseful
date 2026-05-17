@@ -25,8 +25,8 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260514-hotfix2">
-<script src="/js/helpers.js?v=20260504d"></script>
+<link rel="stylesheet" href="/style.css?v=20260515-v2">
+<script src="/js/helpers.js?v=20260515-v2"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <script type="application/ld+json">
@@ -70,19 +70,19 @@
   <div class="hf-fields tool-form" data-tool="percentage">
 
     <div class="hf-field">
-      <div class="lbl">
+      <label class="lbl" for="pct-x">
         <span>X</span>
         <span class="req" id="pct-x-req">required</span>
-      </div>
+      </label>
       <div class="hf-input focus" id="pct-x-wrap">
         <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="pct-x" value="15" aria-label="X value">
       </div>
     </div>
 
     <div class="hf-field">
-      <div class="lbl">
+      <label class="lbl" for="pct-mode">
         <span>Mode</span>
-      </div>
+      </label>
       <div class="hf-input hf-input-select">
         <select id="pct-mode" aria-label="Calculation mode">
           <option value="of">% of Y</option>
@@ -93,9 +93,9 @@
     </div>
 
     <div class="hf-field">
-      <div class="lbl">
+      <label class="lbl" for="pct-y">
         <span>Y</span>
-      </div>
+      </label>
       <div class="hf-input">
         <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="done" id="pct-y" value="80" aria-label="Y value">
       </div>

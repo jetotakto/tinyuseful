@@ -2585,3 +2585,173 @@ body.ui-hifi .hf-launcher-row.l4:hover .row-arrow {
 
 /* END Patch P mobile block ────────────────────────────────────── */
 
+/* ─── V2 PROSE / DOC PAGES (Phase 1a, 2026-05-15) ───────────────
+   Used by support pages (about, privacy, terms, changelog, 404).
+   Wider shell than calculator artboard (720px vs 420px), readable
+   body type. Scoped entirely under body.ui-hifi so calculator
+   tool pages are unaffected unless they explicitly add .hf-prose. */
+
+body.ui-hifi main.hf.hf-doc {
+  max-width: 720px;
+}
+
+body.ui-hifi .hf-prose {
+  padding: 28px 24px 32px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+body.ui-hifi .hf-prose h1 {
+  font-family: 'Archivo', 'Barlow Condensed', 'Inter', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(34px, 4.4vw, 48px);
+  line-height: 1.05;
+  letter-spacing: -0.018em;
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+body.ui-hifi .hf-prose .lede {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 19px;
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 0 0 28px;
+  max-width: 60ch;
+}
+body.ui-hifi .hf-prose .lastmod {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 28px;
+}
+body.ui-hifi .hf-prose h2 {
+  font-family: 'Archivo', 'Barlow Condensed', 'Inter', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  margin: 32px 0 10px;
+  color: var(--ink);
+}
+body.ui-hifi .hf-prose p {
+  margin: 0 0 14px;
+  max-width: 64ch;
+}
+body.ui-hifi .hf-prose p strong { font-weight: 600; }
+body.ui-hifi .hf-prose ul {
+  margin: 0 0 14px 22px;
+  max-width: 64ch;
+}
+body.ui-hifi .hf-prose ul li { margin-bottom: 6px; }
+body.ui-hifi .hf-prose a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--ink-3);
+  padding-bottom: 1px;
+}
+body.ui-hifi .hf-prose a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+body.ui-hifi .hf-prose .mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+}
+
+/* Changelog entry block (lives inside .hf-prose) */
+body.ui-hifi .hf-prose .entry {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--rule);
+}
+body.ui-hifi .hf-prose .entry:last-of-type { border-bottom: 0; }
+body.ui-hifi .hf-prose .entry .date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 6px;
+}
+body.ui-hifi .hf-prose .entry p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+  max-width: none;
+}
+
+/* 404 — centered hero variant (lives inside main.hf.hf-doc) */
+body.ui-hifi .hf-notfound {
+  padding: 56px 24px 32px;
+  text-align: center;
+}
+body.ui-hifi .hf-notfound .code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 18px;
+}
+body.ui-hifi .hf-notfound h1 {
+  font-family: 'Archivo', 'Barlow Condensed', 'Inter', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(40px, 5.4vw, 60px);
+  line-height: 1.05;
+  letter-spacing: -0.018em;
+  margin: 0 0 22px;
+  color: var(--ink);
+}
+body.ui-hifi .hf-notfound .lede {
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--ink-2);
+  max-width: 50ch;
+  margin: 0 auto 28px;
+}
+body.ui-hifi .hf-notfound .actions {
+  display: inline-flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+body.ui-hifi .hf-notfound .actions a {
+  display: inline-block;
+  padding: 8px 14px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--ink);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: transparent;
+}
+body.ui-hifi .hf-notfound .actions a:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+body.ui-hifi .hf-notfound .section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 28px 0 12px;
+}
+
+/* Prose mobile compact */
+@media (max-width: 720px) {
+  body.ui-hifi .hf-prose {
+    padding: 20px 18px 24px;
+  }
+  body.ui-hifi .hf-notfound {
+    padding: 36px 18px 24px;
+  }
+}
+
+/* END V2 prose / doc pages ────────────────────────────────────── */
+

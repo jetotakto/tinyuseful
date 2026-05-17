@@ -25,8 +25,8 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260514-hotfix2">
-<script src="/js/helpers.js?v=20260504e"></script>
+<link rel="stylesheet" href="/style.css?v=20260515-v2">
+<script src="/js/helpers.js?v=20260515-v2"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <script type="application/ld+json">
@@ -70,10 +70,10 @@
   <div class="hf-fields tool-form" data-tool="rent">
 
     <div class="hf-field">
-      <div class="lbl">
+      <label class="lbl" for="rent-inc">
         <span>Income / month</span>
         <span class="req" id="rent-inc-req">required</span>
-      </div>
+      </label>
       <div class="hf-input focus" id="rent-inc-wrap">
         <span class="pre" aria-hidden="true">$</span>
         <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="rent-inc" value="6500" aria-label="Monthly income in dollars">
@@ -81,9 +81,9 @@
     </div>
 
     <div class="hf-field">
-      <div class="lbl">
+      <label class="lbl" for="rent-debt">
         <span>Debts / month</span>
-      </div>
+      </label>
       <div class="hf-input">
         <span class="pre" aria-hidden="true">$</span>
         <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="rent-debt" value="450" aria-label="Monthly debt payments in dollars">
@@ -91,10 +91,10 @@
     </div>
 
     <div class="hf-field">
-      <div class="lbl">
+      <label class="lbl" for="rent-rule">
         <span>Rule</span>
         <span aria-hidden="true">%</span>
-      </div>
+      </label>
       <div class="hf-input">
         <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="done" id="rent-rule" value="30" aria-label="Percent of income rule">
         <span class="suf" aria-hidden="true">%</span>
