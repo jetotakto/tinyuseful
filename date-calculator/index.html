@@ -70,9 +70,9 @@
   <div class="hf-fields tool-form" data-tool="date">
 
     <div class="hf-field">
-      <div class="lbl">
+      <label class="lbl" for="date-mode">
         <span>Mode</span>
-      </div>
+      </label>
       <div class="hf-input hf-input-select">
         <select id="date-mode" aria-label="Calculation mode">
           <option value="between">Days between</option>
@@ -82,29 +82,29 @@
     </div>
 
     <div class="hf-field" id="date-field-from">
-      <div class="lbl">
+      <label class="lbl" for="date-from">
         <span>From</span>
         <span class="req" id="date-from-req">required</span>
-      </div>
+      </label>
       <div class="hf-input focus" id="date-from-wrap">
         <input type="date" id="date-from" aria-label="Start date">
       </div>
     </div>
 
     <div class="hf-field" id="date-field-to">
-      <div class="lbl">
+      <label class="lbl" for="date-to">
         <span>To</span>
-      </div>
+      </label>
       <div class="hf-input">
         <input type="date" id="date-to" aria-label="End date">
       </div>
     </div>
 
     <div class="hf-field" id="date-field-days" hidden>
-      <div class="lbl">
+      <label class="lbl" for="date-days">
         <span>Days</span>
         <span aria-hidden="true">+/−</span>
-      </div>
+      </label>
       <div class="hf-input">
         <input type="text" inputmode="numeric" autocomplete="off" enterkeyhint="done" id="date-days" value="100" aria-label="Number of days from today, positive or negative">
         <span class="suf" aria-hidden="true">days</span>
