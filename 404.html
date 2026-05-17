@@ -15,93 +15,40 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260504d">
+<link rel="stylesheet" href="/style.css?v=20260515-v2">
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
-
-<style>
-  .notfound {
-    padding: 80px 0 60px;
-    text-align: center;
-    border-bottom: 1px solid var(--rule);
-  }
-  .notfound .code {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px; letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 18px;
-  }
-  .notfound h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-    font-size: clamp(40px, 5.4vw, 64px);
-    line-height: 1.05;
-    letter-spacing: -0.018em;
-    margin-bottom: 22px;
-  }
-  .notfound .lede {
-    font-size: clamp(17px, 1.4vw, 19px);
-    line-height: 1.5;
-    color: var(--ink-2);
-    max-width: 50ch;
-    margin: 0 auto 32px;
-  }
-  .notfound .actions {
-    display: inline-flex;
-    gap: 14px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .notfound .actions a {
-    display: inline-block;
-    padding: 10px 18px;
-    border: 1px solid var(--ink);
-    text-decoration: none;
-    color: var(--ink);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    transition: background 0.15s, color 0.15s;
-  }
-  .notfound .actions a:hover {
-    background: var(--ink);
-    color: var(--paper);
-  }
-  .notfound .section-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--red);
-    margin-top: 32px;
-    margin-bottom: 14px;
-    text-align: center;
-  }
-</style>
 </head>
 
-<body>
-<div class="page">
+<body class="ui-hifi">
+<a class="skip-link" href="#main">Skip to main content</a>
+<main id="main" class="hf hf-doc">
 
-  <header class="masthead">
-    <a class="wordmark" href="/">
-      <span class="knife" aria-hidden="true"></span>
-      TinyUseful
+  <header class="hf-header">
+    <a class="hf-wordmark" href="/" aria-label="TinyUseful home">
+      <span class="stack"><span>TINY</span><span>USEFUL</span></span>
     </a>
-    <span class="issue">404</span>
+    <span class="hf-menu-btn" aria-hidden="true">
+      <span></span><span></span>
+    </span>
   </header>
 
-  <section class="notfound">
-    <p class="code">Error 404 — Page not found</p>
-    <h1>This article<br>was never <span class="red">printed</span>.</h1>
+  <nav class="hf-crumb" aria-label="Breadcrumb">
+    / 404 <span class="crumb-marker" aria-hidden="true"><span class="crumb-star">&#9733;</span> not found</span>
+  </nav>
+
+  <section class="hf-notfound">
+    <p class="code">Error 404 &mdash; Page not found</p>
+    <h1>This article<br>was never printed.</h1>
     <p class="lede">
-      The URL you followed doesn't exist on TinyUseful.
+      The URL you followed doesn&rsquo;t exist on TinyUseful.
       Maybe a typo, maybe a link that aged badly.
       Either way: pick one of the eleven small calculators below.
     </p>
+
     <div class="actions">
       <a href="/">Back to index</a>
     </div>
+
     <p class="section-label">Money</p>
     <div class="actions">
       <a href="/percentage-calculator/">Percentage</a>
@@ -113,6 +60,7 @@
       <a href="/tip-calculator/">Tip</a>
       <a href="/discount-calculator/">Discount</a>
     </div>
+
     <p class="section-label">Conversions</p>
     <div class="actions">
       <a href="/unit-converter/">Unit Converter</a>
@@ -121,11 +69,19 @@
     </div>
   </section>
 
-  <footer class="colophon">
-    <span>TinyUseful · Issue No. 1 · 2026 · Made for the open web</span>
-    <span><a href="/about.html">About</a> &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="/terms.html">Terms</a></span>
+  <div class="hf-trust">No accounts &middot; runs in your browser &middot; ads &amp; analytics may use cookies</div>
+
+  <footer class="hf-foot">
+    <span class="foot-links">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </span>
+    <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode">&#9728; / &#9790;</button>
   </footer>
 
-</div>
+</main>
+<script src="/theme.js" defer></script>
 </body>
 </html>
