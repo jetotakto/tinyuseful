@@ -27,7 +27,7 @@ Time Zone Converter
 - Self-hosted fonts (Montserrat, Inter, JetBrains Mono — all SIL OFL)
 - Static deploy on Cloudflare Pages from `main` branch
 - One declared advertising slot per page (Google AdSense)
-- No tracking pixels, no analytics with personal identifiers, no cookies
+- No account required. Calculations run in your browser. Ads and analytics may use cookies where applicable.
 
 ## Why no AI
 
