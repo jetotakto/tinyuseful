@@ -1,6 +1,6 @@
 # TinyUseful
 
-> Tiny calculators for everyday decisions. No account. Inputs stay in your browser. No AI.
+> Tiny calculators for everyday decisions. No account. No AI. Calculations run in your browser — and each one shows the formula, assumptions, and limitations so you can check the result.
 
 **Live:** [tinyuseful.app](https://www.tinyuseful.app)
 
@@ -54,6 +54,12 @@ If you want to build something similar, please don't copy — build your own
 small useful site. The world has room for more of those.
 
 Fonts are SIL Open Font License. Site copy and design are © TinyUseful 2026.
+
+## Who built it
+
+Built and maintained by Lukáš, an architect in Prague — as a counterweight to
+bloated, ad-heavy, AI-everywhere calculator sites. No accounts, no chat
+interface, no AI-generated answers. Just the answer, and the math behind it.
 
 ## Contact
 
