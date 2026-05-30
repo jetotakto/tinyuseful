@@ -37,6 +37,7 @@
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I add sales tax to a price?","acceptedAnswer":{"@type":"Answer","text":"Multiply the price by 1 plus the tax rate as a decimal: final price = price × (1 + rate ÷ 100). For $100 at 8% tax, $100 × 1.08 = $108. Set the calculator to Add tax mode (the default) and enter your local rate. To find the pre-tax price from a tax-included total, switch to Remove tax mode."}},
 {"@type":"Question","name":"What's the sales tax rate in my state?","acceptedAnswer":{"@type":"Answer","text":"This calculator does not look up rates by location — you enter the rate yourself. Combined state and local rates in the US range from 0% (NH, OR, MT, AK, DE) to roughly 9.55% (TN). City and county add-ons vary; the receipt or your state tax site has the exact number."}},
 {"@type":"Question","name":"Why do I get a slightly different number than the receipt?","acceptedAnswer":{"@type":"Answer","text":"Most often it's rounding. Stores round each line item, so the receipt total can differ by a cent or two from a calculation done on the subtotal. Some jurisdictions also tax certain categories (food, clothing) at different rates."}},
 {"@type":"Question","name":"How do I remove tax from a total that includes it?","acceptedAnswer":{"@type":"Answer","text":"Switch the calculator to Remove tax mode. If you paid $108 at an 8% rate, the original was $108 ÷ 1.08 = $100, and the tax was $8."}},
@@ -199,11 +200,15 @@
       <header class="step-head">
         <div>
           <div class="step-title">FAQ</div>
-          <div class="step-meta">state rate &middot; receipt mismatch &middot; remove tax &middot; sales tax vs VAT</div>
+          <div class="step-meta">add tax &middot; state rate &middot; receipt mismatch &middot; remove tax &middot; VAT</div>
         </div>
         <span class="step-chev" aria-hidden="true">&#8599;</span>
       </header>
       <div class="step-body">
+        <details class="step-q">
+          <summary>How do I add sales tax to a price?</summary>
+          <div class="answer"><p>Multiply the price by 1 plus the tax rate as a decimal: <strong>final price = price &times; (1 + rate &divide; 100)</strong>. For $100 at 8% tax, $100 &times; 1.08 = $108. Set the calculator to &ldquo;Add tax&rdquo; mode (the default) and enter your local rate. To go the other way &mdash; find the pre-tax price from a tax-included total &mdash; switch to &ldquo;Remove tax&rdquo; mode.</p></div>
+        </details>
         <details class="step-q">
           <summary>What&rsquo;s the sales tax rate in my state?</summary>
           <div class="answer"><p>This calculator does not look up rates by location &mdash; you enter the rate yourself. Combined state + local rates in the US range from 0% (NH, OR, MT, AK, DE) to roughly 9.55% (TN). City and county add-ons vary; the receipt or your state&rsquo;s tax site has the exact number.</p></div>
