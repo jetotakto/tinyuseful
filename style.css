@@ -1559,7 +1559,7 @@ body.ui-hifi .hf-result .r-break .v {
   text-align: right;
 }
 
-body.ui-hifi .hf-result .r-actions { display: flex; gap: 8px; margin-top: 16px; }
+body.ui-hifi .hf-result .r-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
 
 body.ui-hifi .hf-result .why-line {
   margin-top: 18px;

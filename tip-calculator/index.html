@@ -25,7 +25,7 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260515-v2">
+<link rel="stylesheet" href="/style.css?v=20260610-share">
 <script src="/js/helpers.js?v=20260515-v2"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
@@ -128,6 +128,7 @@
     <div class="r-actions">
       <button type="button" class="hf-btn accent" id="tip-copy" aria-label="Copy result to clipboard">Copy result</button>
       <button type="button" class="hf-btn ghost" id="tip-reset" aria-label="Reset to defaults">Reset</button>
+      <button type="button" class="hf-btn ghost" id="tip-share" aria-label="Copy a shareable link with these values">Copy link</button>
     </div>
     <div class="why-line" id="tip-why">
       $48 × 10% = $4.80 → $52.80 ÷ 4 = <b>$13.20</b>
@@ -168,6 +169,7 @@
           <li>Tip is calculated on the bill amount you enter. If you tip on the post-tax total, enter the post-tax bill.</li>
           <li>Per-person split is even; each person pays the same share of total.</li>
           <li>Both decimal comma (18,5) and decimal point (18.5) are accepted.</li>
+          <li>Shared links keep the entered values in the URL fragment (after #), which is never sent to our server.</li>
         </ul>
 
         <h3>Rounding</h3>
@@ -361,6 +363,47 @@
       $('tip-bill').dispatchEvent(new Event('input', { bubbles: true }));
       $('tip-pct').dispatchEvent(new Event('input', { bubbles: true }));
       $('tip-split').dispatchEvent(new Event('input', { bubbles: true }));
+    });
+  })();
+
+  // Shareable result links: values live in the URL #fragment, never sent to the server
+  (function () {
+    // 1) Restore state from #bill=..&tip=..&split=..
+    try {
+      var h = location.hash.replace(/^#/, '');
+      if (h && h.indexOf('=') > -1) {
+        var p = new URLSearchParams(h);
+        var b = p.get('bill'), t = p.get('tip'), s = p.get('split');
+        if (b && Number.isFinite(parseLocaleNumber(b))) $('tip-bill').value = b;
+        if (t && Number.isFinite(parseLocaleNumber(t))) $('tip-pct').value = t;
+        if (s && Number.isFinite(parseLocaleNumber(s))) $('tip-split').value = s;
+      }
+    } catch (e) {}
+
+    // 2) Build + share the link on demand
+    var shareBtn = $('tip-share');
+    if (!shareBtn) return;
+    var useShare = !!navigator.share && window.matchMedia && matchMedia('(pointer: coarse)').matches;
+    var origLbl = useShare ? 'Share' : 'Copy link';
+    shareBtn.textContent = origLbl;
+
+    function shareUrl() {
+      return location.origin + location.pathname + '?s=1#' +
+        'bill=' + encodeURIComponent($('tip-bill').value.trim()) +
+        '&tip=' + encodeURIComponent($('tip-pct').value.trim()) +
+        '&split=' + encodeURIComponent($('tip-split').value.trim());
+    }
+
+    shareBtn.addEventListener('click', function () {
+      var valEl = $('tip-val');
+      if (!valEl || valEl.textContent === '—') return;
+      var u = shareUrl();
+      function revert(ms) { setTimeout(function () { shareBtn.textContent = origLbl; }, ms); }
+      if (useShare) { navigator.share({ url: u }).catch(function () {}); return; }
+      if (!navigator.clipboard) { shareBtn.textContent = 'Copy unavailable'; revert(1500); return; }
+      navigator.clipboard.writeText(u).then(function () {
+        shareBtn.textContent = '✓ Link copied'; revert(1600);
+      }).catch(function () { shareBtn.textContent = 'Copy failed'; revert(1500); });
     });
   })();
 
