@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Bill Split Calculator — Fair &amp; Uneven Split | TinyUseful</title>
+<meta name="description" content="Split a restaurant bill fairly when people ordered different amounts — shared items divided equally, tax and tip divided by each person's share. No account, no saved input, no AI." />
+<link rel="canonical" href="https://www.tinyuseful.app/bill-split-calculator/">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bill Split Calculator — TinyUseful">
+<meta property="og:description" content="Fair uneven bill split: shared items equal, personal orders personal, tax and tip proportional.">
+<meta property="og:url" content="https://www.tinyuseful.app/bill-split-calculator/">
+<meta property="og:site_name" content="TinyUseful">
+<meta property="og:image" content="https://www.tinyuseful.app/og-image04.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TinyUseful — small tools for everyday questions">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.tinyuseful.app/og-image04.png">
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="/style.css?v=20260612-unitprice">
+<script src="/js/helpers.js?v=20260611-parse"></script>
+<script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){var s=String(r==null?'':r).trim().replace(/[\s ]+/g,'');if(!s)return NaN;var c=(s.match(/,/g)||[]).length,d=(s.match(/\./g)||[]).length;if(c&&d){s=s.lastIndexOf(',')>s.lastIndexOf('.')?s.replace(/\./g,'').replace(',','.'):s.replace(/,/g,'');}else if(c>1){s=s.replace(/,/g,'');}else if(d>1){s=s.replace(/\./g,'');}else{s=s.replace(',','.');}return Number(s);};</script>
+<script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Bill Split Calculator","applicationCategory":"UtilityApplication","operatingSystem":"Any (browser-based)","description":"Split a restaurant bill fairly when people ordered different amounts — shared items equally, tax and tip proportionally.","url":"https://www.tinyuseful.app/bill-split-calculator/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"TinyUseful","url":"https://www.tinyuseful.app/"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TinyUseful","item":"https://www.tinyuseful.app/"},{"@type":"ListItem","position":2,"name":"Bill Split Calculator","item":"https://www.tinyuseful.app/bill-split-calculator/"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Why isn't an equal split always fair?","acceptedAnswer":{"@type":"Answer","text":"Because people order differently. If your meal was $18 and someone else had a $40 steak and cocktails, splitting equally means you pay for their dinner. A fair split divides shared items equally but keeps personal orders personal — tax and tip then follow each person's actual share."}},
+{"@type":"Question","name":"How are tax and tip split fairly?","acceptedAnswer":{"@type":"Answer","text":"Proportionally to what each person consumed, not equally. Someone who ordered 40% of the food pays 40% of the tax and 40% of the tip. When tip is entered as a percentage, it is calculated from the pre-tax subtotal."}},
+{"@type":"Question","name":"What about people who did not drink?","acceptedAnswer":{"@type":"Answer","text":"Put drinks into the personal amounts of the people who ordered them, and keep only genuinely shared food in the shared total. Non-drinkers then automatically pay nothing toward the alcohol — no separate toggle needed."}},
+{"@type":"Question","name":"What is the difference between a tip and a service charge?","acceptedAnswer":{"@type":"Answer","text":"A tip is voluntary and you choose it; a service charge is printed on the bill by the restaurant. Use the tip field for either one. This tool only shows the math; it does not decide whether a charge is required."}},
+{"@type":"Question","name":"Do you save the amounts?","acceptedAnswer":{"@type":"Answer","text":"No. The calculation runs in your browser and we do not save your inputs. The Copy link button stores the numbers only in the link itself (the part after #), which is never sent to our server."}}
+]}
+</script>
+</head>
+
+<body class="ui-hifi">
+<a class="skip-link" href="#main">Skip to main content</a>
+<main id="main" class="hf">
+
+  <header class="hf-header">
+    <a class="hf-wordmark" href="/" aria-label="TinyUseful home">
+      <span class="stack"><span>TINY</span><span>USEFUL</span></span>
+    </a>
+    <span class="hf-menu-btn" aria-hidden="true">
+      <span></span><span></span>
+    </span>
+  </header>
+
+  <nav class="hf-crumb" aria-label="Breadcrumb">
+    / bill split calculator <span class="crumb-marker" aria-hidden="true"><span class="crumb-star">&#9733;</span> No.&nbsp;13</span>
+  </nav>
+
+  <h1 class="hf-display">BILL SPLIT CALCULATOR</h1>
+  <div class="hf-sub">
+    <span>Split a restaurant bill fairly when people ordered different amounts.</span>
+  </div>
+
+  <div class="hf-fields tool-form" data-tool="billsplit">
+
+    <div class="hf-field">
+      <label class="lbl" for="bs-people">
+        <span>People</span>
+      </label>
+      <div class="hf-input hf-input-select">
+        <select id="bs-people" aria-label="Number of people">
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4" selected>4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="hf-field">
+      <label class="lbl" for="bs-shared">
+        <span>Shared items total</span>
+        <span class="req" id="bs-shared-req">required</span>
+      </label>
+      <div class="hf-input focus" id="bs-shared-wrap">
+        <span class="pre" aria-hidden="true">$</span>
+        <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="bs-shared" value="24.00" aria-label="Shared items total in dollars">
+      </div>
+    </div>
+
+    <fieldset class="hf-fieldset" id="bs-people-group">
+      <legend class="hf-cap">What each person ordered</legend>
+      <div id="bs-people-wrap">
+        <div class="hf-field">
+          <label class="lbl" for="bs-p-1"><span>Person 1 ordered</span></label>
+          <div class="hf-input">
+            <span class="pre" aria-hidden="true">$</span>
+            <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="bs-p-1" value="32" aria-label="Person 1 ordered in dollars">
+          </div>
+        </div>
+        <div class="hf-field">
+          <label class="lbl" for="bs-p-2"><span>Person 2 ordered</span></label>
+          <div class="hf-input">
+            <span class="pre" aria-hidden="true">$</span>
+            <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="bs-p-2" value="18" aria-label="Person 2 ordered in dollars">
+          </div>
+        </div>
+        <div class="hf-field">
+          <label class="lbl" for="bs-p-3"><span>Person 3 ordered</span></label>
+          <div class="hf-input">
+            <span class="pre" aria-hidden="true">$</span>
+            <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="bs-p-3" value="22" aria-label="Person 3 ordered in dollars">
+          </div>
+        </div>
+        <div class="hf-field">
+          <label class="lbl" for="bs-p-4"><span>Person 4 ordered</span></label>
+          <div class="hf-input">
+            <span class="pre" aria-hidden="true">$</span>
+            <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="bs-p-4" value="0" aria-label="Person 4 ordered in dollars">
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="hf-field">
+      <label class="lbl" for="bs-tax">
+        <span>Tax</span>
+      </label>
+      <div class="hf-input">
+        <span class="pre" aria-hidden="true">$</span>
+        <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="bs-tax" value="8.05" aria-label="Tax amount in dollars">
+      </div>
+    </div>
+
+    <div class="hf-field">
+      <label class="lbl" for="bs-tip">
+        <span>Tip / service charge</span>
+      </label>
+      <div class="hf-input">
+        <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="done" id="bs-tip" value="18" aria-label="Tip or service charge value">
+      </div>
+    </div>
+
+    <div class="hf-field">
+      <label class="lbl" for="bs-tip-unit">
+        <span>Tip as</span>
+      </label>
+      <div class="hf-input hf-input-select">
+        <select id="bs-tip-unit" aria-label="Tip entered as percent or dollars">
+          <option value="pct" selected>% of pre-tax subtotal</option>
+          <option value="usd">$ amount</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+  <section class="hf-result" id="bs-out" role="status" aria-live="polite" aria-atomic="true">
+    <div class="r-lbl">
+      <span class="r-lbl-text" id="bs-lbl">Fair split &mdash; highest share</span>
+      <span class="hf-tiny hf-muted" aria-hidden="true">aria-live</span>
+    </div>
+    <div class="r-num">
+      <span class="cur" aria-hidden="true" id="bs-cur">$</span><span class="val" id="bs-val">48.03</span><span class="per" id="bs-per"></span>
+    </div>
+    <div class="r-break" id="bs-break">
+      <span>Person 1</span><span class="v">$48.03</span>
+      <span>Person 2</span><span class="v">$30.33</span>
+      <span>Person 3</span><span class="v">$35.39</span>
+      <span>Person 4</span><span class="v">$7.58</span>
+      <span>Check</span><span class="v">$121.33 = bill total &#10003;</span>
+    </div>
+    <div class="r-actions">
+      <button type="button" class="hf-btn accent" id="bs-copy" aria-label="Copy result to clipboard">Copy result</button>
+      <button type="button" class="hf-btn ghost" id="bs-share" aria-label="Copy a shareable link with these values">Copy link</button>
+      <button type="button" class="hf-btn ghost" id="bs-reset" aria-label="Reset to defaults">Reset</button>
+    </div>
+    <div class="why-line" id="bs-why">
+      $96.00 food + $8.05 tax + $17.28 tip = <b>$121.33</b> &middot; split by each person&rsquo;s share
+    </div>
+  </section>
+
+  <div class="hf-chips-wrap" id="bs-next" aria-label="You might also need">
+    <div class="hf-cap">You might also need</div>
+    <div class="hf-chips" role="list">
+      <a class="hf-chip" href="/tip-calculator/" role="listitem">Tip Calculator</a>
+      <a class="hf-chip" href="/percentage-calculator/" role="listitem">Percentage</a>
+      <a class="hf-chip" href="/unit-price-calculator/" role="listitem">Unit Price</a>
+    </div>
+  </div>
+
+  <div class="hf-chips-wrap">
+    <div class="hf-cap">Quick examples</div>
+    <div class="hf-chips" role="list">
+      <button type="button" class="hf-chip" data-n="4" data-sh="24" data-p="32|18|22|0" data-tax="8.05" data-tip="18" data-tip-unit="pct" role="listitem">Dinner for 4 &middot; uneven</button>
+      <button type="button" class="hf-chip" data-n="3" data-sh="18" data-p="34|26|12" data-tax="6.40" data-tip="20" data-tip-unit="pct" role="listitem">One person didn&rsquo;t drink</button>
+      <button type="button" class="hf-chip" data-n="2" data-sh="0" data-p="45|35" data-tax="0" data-tip="12.5" data-tip-unit="pct" role="listitem">Service charge 12.5%</button>
+    </div>
+  </div>
+
+  <div class="hf-method-wrap">
+    <div class="hf-cap">How this is calculated</div>
+    <div class="hf-method-block">
+      <div class="formula">subtotal = personal + shared &divide; people</div>
+      <div class="formula">share of tax &amp; tip = subtotal &divide; sum of subtotals</div>
+      <div class="formula">total = subtotal + tax share + tip share</div>
+      <p>Shared items are divided equally; personal orders stay personal. Tax and tip follow each person&rsquo;s actual share of the food &mdash; someone who ordered 40% of the subtotal pays 40% of the tax and tip. When tip is entered as a percentage, it is calculated from the pre-tax subtotal.
+        <strong>Use the tip field for either a tip you choose or a service charge shown on the bill. This tool only shows the math; it does not decide whether a charge is required.</strong></p>
+      <p class="hf-muted hf-tiny">Updated June 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
+
+      <details class="method-details">
+        <summary>Formula, worked example, rounding &amp; limitations</summary>
+
+        <h3>Formula</h3>
+        <ul>
+          <li><code>subtotal_i = personal_i + shared &divide; N</code></li>
+          <li><code>share_i = subtotal_i &divide; sum of subtotals</code></li>
+          <li><code>tax_i = tax &times; share_i</code> &middot; <code>tip_i = tip &times; share_i</code></li>
+          <li><code>total_i = subtotal_i + tax_i + tip_i</code></li>
+          <li>When tip is entered as %, <code>tip = sum of subtotals &times; tip% &divide; 100</code> (pre-tax).</li>
+        </ul>
+
+        <h3>Worked example</h3>
+        <ul>
+          <li>4 people &middot; shared $24 &middot; personal $32 / $18 / $22 / $0 &middot; tax $8.05 &middot; tip 18%.</li>
+          <li>Subtotals: $38 / $24 / $28 / $6 (sum $96). Tip: 18% of $96 = $17.28.</li>
+          <li>Totals: <strong>$48.03 / $30.33 / $35.39 / $7.58</strong> &mdash; together exactly $121.33.</li>
+        </ul>
+
+        <h3>Rounding</h3>
+        <ul>
+          <li>Each person&rsquo;s total is rounded to cents. If rounding leaves a cent difference, the extra cent is assigned deterministically so the per-person totals add up exactly to the bill total.</li>
+          <li>Detail: leftover cents go to the largest fractional remainders first; ties go to the lower person number.</li>
+        </ul>
+
+        <h3>Limitations</h3>
+        <ul>
+          <li>Each person&rsquo;s order is entered as one amount &mdash; item-by-item entry is not modelled.</li>
+          <li>Shared items are split equally among all people at the table.</li>
+          <li>Whether a service charge is mandatory is not evaluated &mdash; only the math is shown.</li>
+          <li>Nothing is stored: no accounts, no history, no payments.</li>
+        </ul>
+      </details>
+    </div>
+  </div>
+
+  <div class="hf-ad" aria-label="Advertisement">
+    <div class="ad-label">Advertisement</div>
+    <div class="ad-slot" id="bs-ad-slot"></div>
+  </div>
+
+  <div class="hf-stack">
+
+    <section class="hf-step s1" data-step="faq">
+      <header class="step-head">
+        <div>
+          <div class="step-title">FAQ</div>
+          <div class="step-meta">equal vs fair &middot; tax &amp; tip share &middot; non-drinkers &middot; service charge &middot; privacy</div>
+        </div>
+        <span class="step-chev" aria-hidden="true">&#8599;</span>
+      </header>
+      <div class="step-body">
+        <details class="step-q">
+          <summary>Why isn&rsquo;t an equal split always fair?</summary>
+          <div class="answer"><p>Because people order differently. If your meal was $18 and someone else had a $40 steak and cocktails, splitting equally means you pay for their dinner. A fair split divides shared items equally but keeps personal orders personal &mdash; tax and tip then follow each person&rsquo;s actual share.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>How are tax and tip split fairly?</summary>
+          <div class="answer"><p>Proportionally to what each person consumed, not equally. Someone who ordered 40% of the food pays 40% of the tax and 40% of the tip. When tip is entered as a percentage, it is calculated from the pre-tax subtotal.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>What about people who did not drink?</summary>
+          <div class="answer"><p>Put drinks into the personal amounts of the people who ordered them, and keep only genuinely shared food in the shared total. Non-drinkers then automatically pay nothing toward the alcohol &mdash; no separate toggle needed.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>What is the difference between a tip and a service charge?</summary>
+          <div class="answer"><p>A tip is voluntary and you choose it; a service charge is printed on the bill by the restaurant. Use the tip field for either one. This tool only shows the math; it does not decide whether a charge is required.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>Do you save the amounts?</summary>
+          <div class="answer"><p>No. The calculation runs in your browser and we do not save your inputs. The Copy link button stores the numbers only in the link itself (the part after #), which is never sent to our server.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <section class="hf-step s2" data-step="related">
+      <header class="step-head">
+        <div>
+          <div class="step-title">RELATED</div>
+          <div class="step-meta">Tip &middot; Percentage &middot; Unit Price &middot; Sales Tax</div>
+        </div>
+        <span class="step-chev" aria-hidden="true">&#8599;</span>
+      </header>
+      <nav class="step-related" aria-label="Related calculators">
+        <a href="/tip-calculator/">Tip Calculator</a>
+        <a href="/percentage-calculator/">Percentage Calculator</a>
+        <a href="/unit-price-calculator/">Unit Price Calculator</a>
+        <a href="/sales-tax-calculator/">Sales Tax Calculator</a>
+      </nav>
+    </section>
+
+  </div>
+
+  <div class="hf-trust">No accounts &middot; runs in your browser &middot; ads &amp; analytics may use cookies</div>
+
+  <footer class="hf-foot">
+    <span class="foot-links">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/changelog">Changelog</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </span>
+    <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode">&#9728; / &#9790;</button>
+  </footer>
+
+  <script src="/theme.js" defer></script>
+
+</main>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const fmt2 = n => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  const DEFAULTS = { n: '4', shared: '24.00', p: ['32', '18', '22', '0'], tax: '8.05', tip: '18', tipUnit: 'pct' };
+
+  // Page-local sanitizer: strip a leading currency symbol before locale-aware parsing.
+  function parseField(id) {
+    const raw = String($(id).value == null ? '' : $(id).value).replace(/^[\s$€£]+/, '');
+    return parseLocaleNumber(raw);
+  }
+
+  // Pure split math with penny reconciliation (largest remainder, ties to lower index).
+  // Returns null when input combination is invalid for a meaningful split.
+  function bsCompute(n, shared, personal, tax, tipVal, tipUnit) {
+    const all = [shared, tax, tipVal].concat(personal);
+    if (!all.every(Number.isFinite)) return { error: 'incomplete' };
+    if (all.some(v => v < 0)) return { error: 'negative' };
+    const subs = personal.map(p => p + shared / n);
+    const sumSubs = subs.reduce((a, b) => a + b, 0);
+    if (sumSubs <= 0) return { error: 'empty' };
+    const tip = tipUnit === 'pct' ? sumSubs * tipVal / 100 : tipVal;
+    const billTotal = sumSubs + tax + tip;
+    const exact = subs.map(s => s + (tax + tip) * (s / sumSubs));
+    const targetCents = Math.round(billTotal * 100);
+    const floors = exact.map(v => Math.floor(v * 100 + 1e-9));
+    let leftover = targetCents - floors.reduce((a, b) => a + b, 0);
+    const order = exact
+      .map((v, i) => ({ i, r: (v * 100 + 1e-9) - Math.floor(v * 100 + 1e-9) }))
+      .sort((a, b) => b.r - a.r || a.i - b.i);
+    const cents = floors.slice();
+    let k = 0;
+    while (leftover > 0) { cents[order[k % n].i] += 1; leftover--; k++; }
+    return { cents, targetCents, sumSubs, tax, tip };
+  }
+
+  function bsRender(state) {
+    const lblEl = $('bs-lbl');
+    const curEl = $('bs-cur');
+    const valEl = $('bs-val');
+    const brkEl = $('bs-break');
+    const whyEl = $('bs-why');
+
+    if (!state.valid) {
+      lblEl.textContent = 'Result';
+      curEl.textContent = '';
+      valEl.textContent = '—';
+      brkEl.innerHTML = '<span>' + (state.message || 'Complete all fields') + '</span><span class="v">—</span>';
+      whyEl.textContent = state.whyMessage || 'Enter what each person ordered, shared items, tax, and tip above.';
+      return;
+    }
+
+    const { cents, targetCents, sumSubs, tax, tip } = state;
+    const highest = Math.max.apply(null, cents);
+    lblEl.innerHTML = 'Fair split &mdash; highest share';
+    curEl.textContent = '$';
+    valEl.textContent = fmt2(highest / 100);
+
+    let rows = '';
+    for (let i = 0; i < cents.length; i++) {
+      rows += '<span>Person ' + (i + 1) + '</span><span class="v">$' + fmt2(cents[i] / 100) + '</span>';
+    }
+    rows += '<span>Check</span><span class="v">$' + fmt2(targetCents / 100) + ' = bill total &#10003;</span>';
+    brkEl.innerHTML = rows;
+
+    whyEl.innerHTML =
+      '$' + fmt2(sumSubs) + ' food + $' + fmt2(tax) + ' tax + $' + fmt2(tip) +
+      ' tip = <b>$' + fmt2(targetCents / 100) + '</b> · split by each person’s share';
+  }
+
+  // Public name bsCalc
+  function bsCalc() {
+    const n = parseInt($('bs-people').value, 10);
+    const personal = [];
+    for (let i = 1; i <= n; i++) {
+      personal.push(parseField('bs-p-' + i));
+    }
+    const r = bsCompute(n, parseField('bs-shared'), personal, parseField('bs-tax'), parseField('bs-tip'), $('bs-tip-unit').value);
+    if (r.error === 'incomplete') { bsRender({ valid: false }); return; }
+    if (r.error === 'negative') { bsRender({ valid: false, message: 'Amounts must not be negative' }); return; }
+    if (r.error === 'empty') { bsRender({ valid: false, message: 'Enter at least one amount' }); return; }
+    bsRender({ valid: true, cents: r.cents, targetCents: r.targetCents, sumSubs: r.sumSubs, tax: r.tax, tip: r.tip });
+  }
+
+  // Rebuild person fields when People changes; preserve entered values where possible.
+  function bsRebuildPeople(n) {
+    const wrap = $('bs-people-wrap');
+    const old = [];
+    wrap.querySelectorAll('input').forEach(function (el, i) { old[i] = el.value; });
+    wrap.textContent = '';
+    for (let i = 1; i <= n; i++) {
+      const field = document.createElement('div');
+      field.className = 'hf-field';
+      const label = document.createElement('label');
+      label.className = 'lbl';
+      label.setAttribute('for', 'bs-p-' + i);
+      const span = document.createElement('span');
+      span.textContent = 'Person ' + i + ' ordered';
+      label.appendChild(span);
+      const box = document.createElement('div');
+      box.className = 'hf-input';
+      const pre = document.createElement('span');
+      pre.className = 'pre';
+      pre.setAttribute('aria-hidden', 'true');
+      pre.textContent = '$';
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.id = 'bs-p-' + i;
+      input.value = old[i - 1] !== undefined ? old[i - 1] : '0';
+      input.setAttribute('inputmode', 'decimal');
+      input.setAttribute('autocomplete', 'off');
+      input.setAttribute('enterkeyhint', 'next');
+      input.setAttribute('aria-label', 'Person ' + i + ' ordered in dollars');
+      box.appendChild(pre);
+      box.appendChild(input);
+      field.appendChild(label);
+      field.appendChild(box);
+      wrap.appendChild(field);
+    }
+  }
+
+  // Build the chat-friendly copy text from the current computed state.
+  function bsCopyText() {
+    const brk = $('bs-break');
+    if ($('bs-val').textContent === '—') return null;
+    const rows = brk.querySelectorAll('span.v');
+    const labels = brk.querySelectorAll('span:not(.v)');
+    let lines = ['Fair bill split:'];
+    for (let i = 0; i < rows.length; i++) {
+      const label = labels[i].textContent;
+      if (label === 'Check') {
+        lines.push('Check: ' + rows[i].textContent.replace(' = bill total ✓', '') + ' total');
+      } else {
+        lines.push(label + ' — ' + rows[i].textContent);
+      }
+    }
+    lines.push('Calculated with TinyUseful');
+    return lines.join('\n');
+  }
+
+  // Copy result + copied state (template pattern)
+  (function () {
+    const copyBtn = $('bs-copy');
+    const out = $('bs-out');
+    const lblEl = $('bs-lbl');
+    let origLblText = lblEl ? lblEl.textContent : 'Fair split — highest share';
+    let revertTimer = null;
+
+    function setCopied(on) {
+      if (!out) return;
+      out.classList.toggle('copied', on);
+      if (lblEl && on) {
+        origLblText = lblEl.textContent;
+        lblEl.textContent = 'Copied to clipboard';
+      }
+      if (lblEl && !on && origLblText) {
+        lblEl.textContent = origLblText;
+      }
+      if (copyBtn) copyBtn.textContent = on ? '✓ Copied' : 'Copy result';
+    }
+
+    if (copyBtn) copyBtn.addEventListener('click', function () {
+      const text = bsCopyText();
+      if (!text) return;
+      const finalize = function () {
+        setCopied(true);
+        if (revertTimer) clearTimeout(revertTimer);
+        revertTimer = setTimeout(function () { setCopied(false); }, 1600);
+      };
+      if (!navigator.clipboard) {
+        copyBtn.textContent = 'Copy unavailable';
+        setTimeout(function () { setCopied(false); }, 1500);
+        return;
+      }
+      navigator.clipboard.writeText(text).then(finalize).catch(function () {
+        copyBtn.textContent = 'Copy failed';
+        setTimeout(function () { setCopied(false); }, 1500);
+      });
+    });
+  })();
+
+  // Shareable link: values live in the URL #fragment, never sent to the server.
+  (function () {
+    // 1) Restore from #n=4&sh=24&p=32|18|22|0&tax=8.05&tip=18p
+    try {
+      const h = location.hash.replace(/^#/, '');
+      if (h && h.indexOf('=') > -1) {
+        const q = new URLSearchParams(h);
+        let n = parseInt(q.get('n'), 10);
+        if (Number.isFinite(n)) {
+          n = Math.min(8, Math.max(2, n));
+          $('bs-people').value = String(n);
+          bsRebuildPeople(n);
+        }
+        const p = q.get('p');
+        if (p) {
+          const vals = p.split('|');
+          for (let i = 0; i < vals.length && i < 8; i++) {
+            const el = $('bs-p-' + (i + 1));
+            if (el) el.value = decodeURIComponent(vals[i]);
+          }
+        }
+        if (q.get('sh') !== null) $('bs-shared').value = decodeURIComponent(q.get('sh'));
+        if (q.get('tax') !== null) $('bs-tax').value = decodeURIComponent(q.get('tax'));
+        const tip = q.get('tip');
+        if (tip) {
+          const m = tip.match(/^(.*?)([pd])$/);
+          if (m) {
+            $('bs-tip').value = decodeURIComponent(m[1]);
+            $('bs-tip-unit').value = m[2] === 'p' ? 'pct' : 'usd';
+          } else {
+            $('bs-tip').value = decodeURIComponent(tip);
+          }
+        }
+      }
+    } catch (e) {}
+
+    // 2) Build + share the link on demand
+    const shareBtn = $('bs-share');
+    if (!shareBtn) return;
+    const useShare = !!navigator.share && window.matchMedia && matchMedia('(pointer: coarse)').matches;
+    const origLbl = useShare ? 'Share' : 'Copy link';
+    shareBtn.textContent = origLbl;
+
+    function shareUrl() {
+      const n = parseInt($('bs-people').value, 10);
+      const pVals = [];
+      for (let i = 1; i <= n; i++) pVals.push(encodeURIComponent($('bs-p-' + i).value.trim()));
+      const tipSuffix = $('bs-tip-unit').value === 'pct' ? 'p' : 'd';
+      return location.origin + location.pathname + '?s=1#' +
+        'n=' + n +
+        '&sh=' + encodeURIComponent($('bs-shared').value.trim()) +
+        '&p=' + pVals.join('|') +
+        '&tax=' + encodeURIComponent($('bs-tax').value.trim()) +
+        '&tip=' + encodeURIComponent($('bs-tip').value.trim()) + tipSuffix;
+    }
+
+    shareBtn.addEventListener('click', function () {
+      if ($('bs-val').textContent === '—') return;
+      const u = shareUrl();
+      function revert(ms) { setTimeout(function () { shareBtn.textContent = origLbl; }, ms); }
+      if (useShare) { navigator.share({ url: u }).catch(function () {}); return; }
+      if (!navigator.clipboard) { shareBtn.textContent = 'Copy unavailable'; revert(1500); return; }
+      navigator.clipboard.writeText(u).then(function () {
+        shareBtn.textContent = '✓ Link copied'; revert(1600);
+      }).catch(function () { shareBtn.textContent = 'Copy failed'; revert(1500); });
+    });
+  })();
+
+  // Reset
+  (function () {
+    const resetBtn = $('bs-reset');
+    if (!resetBtn) return;
+    resetBtn.addEventListener('click', function () {
+      $('bs-people').value = DEFAULTS.n;
+      bsRebuildPeople(parseInt(DEFAULTS.n, 10));
+      for (let i = 0; i < DEFAULTS.p.length; i++) {
+        const el = $('bs-p-' + (i + 1));
+        if (el) el.value = DEFAULTS.p[i];
+      }
+      $('bs-shared').value = DEFAULTS.shared;
+      $('bs-tax').value = DEFAULTS.tax;
+      $('bs-tip').value = DEFAULTS.tip;
+      $('bs-tip-unit').value = DEFAULTS.tipUnit;
+      bsCalc();
+    });
+  })();
+
+  // People change → rebuild fields (preserving values), then recalc
+  (function () {
+    const peopleSel = $('bs-people');
+    if (!peopleSel) return;
+    peopleSel.addEventListener('change', function () {
+      bsRebuildPeople(parseInt(peopleSel.value, 10));
+      bsCalc();
+    });
+  })();
+
+  // Required + focus state on shared-total input
+  (function () {
+    const input = $('bs-shared');
+    const req = $('bs-shared-req');
+    const wrap = $('bs-shared-wrap');
+
+    function syncRequired() {
+      if (!req || !input) return;
+      const v = String(input.value || '').trim();
+      const empty = v === '' || !Number.isFinite(parseField('bs-shared'));
+      if (wrap) wrap.classList.toggle('error', empty);
+    }
+
+    if (input) {
+      input.addEventListener('input', syncRequired);
+      input.addEventListener('focus', function () { if (wrap) wrap.classList.add('focus'); });
+      input.addEventListener('blur',  function () { if (wrap) wrap.classList.remove('focus'); });
+    }
+    syncRequired();
+  })();
+
+  // Quick example chips
+  document.querySelectorAll('.hf-chip[data-n]').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      const n = parseInt(chip.getAttribute('data-n'), 10);
+      $('bs-people').value = String(n);
+      bsRebuildPeople(n);
+      const p = (chip.getAttribute('data-p') || '').split('|');
+      for (let i = 0; i < p.length; i++) {
+        const el = $('bs-p-' + (i + 1));
+        if (el) el.value = p[i];
+      }
+      $('bs-shared').value = chip.getAttribute('data-sh') || '0';
+      $('bs-tax').value = chip.getAttribute('data-tax') || '0';
+      $('bs-tip').value = chip.getAttribute('data-tip') || '0';
+      $('bs-tip-unit').value = chip.getAttribute('data-tip-unit') || 'pct';
+      bsCalc();
+    });
+  });
+
+  // Initial render + page-local delegated live recalc.
+  // Delegation (not attachLiveCalc) because person fields are created dynamically
+  // and must stay live after rebuild — same precedent as the tip page's local wiring.
+  bsCalc();
+  (function () {
+    const form = document.querySelector('.tool-form');
+    if (!form) return;
+    let t;
+    const handler = function () { clearTimeout(t); t = setTimeout(bsCalc, 80); };
+    form.addEventListener('input', handler);
+    form.addEventListener('change', handler);
+  })();
+</script>
+
+</body>
+</html>
