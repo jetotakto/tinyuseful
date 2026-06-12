@@ -5,12 +5,33 @@
 
 /* Parse locale-aware number string. Accepts both decimal dot and decimal comma.
    Strips ASCII spaces and non-breaking spaces (CZ/EU thousand separator).
-   Returns NaN for empty/invalid input — matches native Number() behavior so existing
-   calculator math (Math.max, Math.floor, *0, /n) keeps working unchanged. */
+   Grouping separators are stripped in unambiguous formats only:
+   1,234.56 · 1.234,56 (mixed — last separator is the decimal mark) and
+   1,234,567 · 1.234.567 (repeated groups). A single comma keeps its decimal
+   meaning (8,875 → 8.875), so a lone US-style group like 1,500 still parses
+   as 1.5 — disambiguating that needs per-field hints (variant B, not done).
+   Returns NaN for empty/invalid input — matches native Number() behavior so
+   existing calculator math (Math.max, Math.floor, *0, /n) keeps working. */
 window.parseLocaleNumber = function parseLocaleNumber(raw) {
   if (raw === null || raw === undefined) return NaN;
-  const cleaned = String(raw).trim().replace(/[\s ]+/g, '').replace(',', '.');
+  let cleaned = String(raw).trim().replace(/[\s ]+/g, '');
   if (!cleaned) return NaN;
+  const commas = (cleaned.match(/,/g) || []).length;
+  const dots = (cleaned.match(/\./g) || []).length;
+  if (commas > 0 && dots > 0) {
+    // Both separators present: the last one typed is the decimal mark
+    if (cleaned.lastIndexOf(',') > cleaned.lastIndexOf('.')) {
+      cleaned = cleaned.replace(/\./g, '').replace(',', '.');
+    } else {
+      cleaned = cleaned.replace(/,/g, '');
+    }
+  } else if (commas > 1) {
+    cleaned = cleaned.replace(/,/g, '');   // 1,234,567 — grouping commas
+  } else if (dots > 1) {
+    cleaned = cleaned.replace(/\./g, '');  // 1.234.567 — grouping dots
+  } else {
+    cleaned = cleaned.replace(',', '.');   // single comma stays the decimal mark
+  }
   return Number(cleaned);
 };
 
