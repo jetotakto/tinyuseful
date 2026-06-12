@@ -26,8 +26,8 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="/style.css?v=20260515-v2">
-<script src="/js/helpers.js?v=20260515-v2"></script>
-<script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
+<script src="/js/helpers.js?v=20260611-parse"></script>
+<script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){var s=String(r==null?'':r).trim().replace(/[\s ]+/g,'');if(!s)return NaN;var c=(s.match(/,/g)||[]).length,d=(s.match(/\./g)||[]).length;if(c&&d){s=s.lastIndexOf(',')>s.lastIndexOf('.')?s.replace(/\./g,'').replace(',','.'):s.replace(/,/g,'');}else if(c>1){s=s.replace(/,/g,'');}else if(d>1){s=s.replace(/\./g,'');}else{s=s.replace(',','.');}return Number(s);};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Percentage Calculator","applicationCategory":"UtilityApplication","operatingSystem":"Any (browser-based)","description":"Calculate percent of a number, percent change, and X is what percent of Y.","url":"https://www.tinyuseful.app/percentage-calculator/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"TinyUseful","url":"https://www.tinyuseful.app/"}}
@@ -37,10 +37,10 @@
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"How do I calculate 15% of a number in my head?","acceptedAnswer":{"@type":"Answer","text":"Take 10% (move the decimal one place left), then add half of that. For 15% of 80: 10% is 8, half of 8 is 4, so 15% is 8 + 4 = 12."}},
-{"@type":"Question","name":"What's the difference between percentage and percentage points?","acceptedAnswer":{"@type":"Answer","text":"If a rate goes from 5% to 7%, that's a change of 2 percentage points, but a 40% increase (because 2 ÷ 5 = 0.4). News headlines often confuse these."}},
-{"@type":"Question","name":"Why does X is what percent of Y sometimes give over 100%?","acceptedAnswer":{"@type":"Answer","text":"Because X is bigger than Y. If you scored 110 on a test out of 100, you got 110%. Percentages can exceed 100% whenever the part is larger than the whole."}},
-{"@type":"Question","name":"How do I reverse a percentage to find the original?","acceptedAnswer":{"@type":"Answer","text":"If a final price after 25% off is $60, the original is $60 ÷ (1 − 0.25) = $80. For tax, $108 after 8% tax means original $108 ÷ 1.08 = $100."}}
+{"@type":"Question","name":"How do I calculate 15% of a number in my head?","acceptedAnswer":{"@type":"Answer","text":"Take 10% (move the decimal one place left), then add half of that. For 15% of 80: 10% is 8, half of 8 is 4, so 15% is 8 + 4 = 12. The same trick works for 18% tip: 10% + 5% + 3% (≈ 10% + half + a third of half)."}},
+{"@type":"Question","name":"What's the difference between percentage and percentage points?","acceptedAnswer":{"@type":"Answer","text":"If a rate goes from 5% to 7%, that's a change of 2 percentage points, but a 40% increase (because 2 ÷ 5 = 0.4). News headlines often confuse these. Use percent change mode for the relative number, plain subtraction for percentage points."}},
+{"@type":"Question","name":"Why does “X is what % of Y” sometimes give over 100%?","acceptedAnswer":{"@type":"Answer","text":"Because X is bigger than Y. If you scored 110 on a test out of 100, you got 110%. Nothing is broken — percentages can exceed 100% whenever the part is larger than the whole."}},
+{"@type":"Question","name":"How do I reverse a percentage to find the original?","acceptedAnswer":{"@type":"Answer","text":"If a final price after 25% off is $60, the original is $60 ÷ (1 − 0.25) = $80. For tax, $108 after 8% tax means original $108 ÷ 1.08 = $100. Use the Discount Calculator or Sales Tax Calculator for these reverse cases."}}
 ]}
 </script>
 </head>
@@ -267,8 +267,8 @@
       lblEl.textContent = 'Result';
       valEl.textContent = '—';
       perEl.textContent = '';
-      brkEl.innerHTML = '<span>Complete all fields</span><span class="v">—</span>';
-      whyEl.textContent = 'Enter X and Y above.';
+      brkEl.innerHTML = '<span>' + (state.message || 'Complete all fields') + '</span><span class="v">—</span>';
+      whyEl.textContent = state.whyMessage || 'Enter X and Y above.';
       return;
     }
 
@@ -318,6 +318,10 @@
 
     if (!Number.isFinite(x) || !Number.isFinite(y)) {
       pctRender({ valid: false });
+      return;
+    }
+    if (mode !== 'of' && y === 0) {
+      pctRender({ valid: false, message: 'Y must not be zero', whyMessage: 'Division by zero — enter a non-zero Y.' });
       return;
     }
     pctRender({ valid: true, x, y, mode });
