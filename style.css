@@ -2788,3 +2788,20 @@ body.ui-hifi .hf-featured-tile:focus-within {
 
 /* END homepage featured tile click target ─────────────────────── */
 
+/* ───── native fieldset groups (scoped utility for tool pages) ─────
+   Class-scoped only — no global fieldset/legend element styling.
+   Legend carries .hf-cap for typography; rules below just neutralize
+   default fieldset chrome and legend quirks. */
+body.ui-hifi .hf-fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+body.ui-hifi .hf-fieldset > legend {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 14px 0 2px;
+}
+

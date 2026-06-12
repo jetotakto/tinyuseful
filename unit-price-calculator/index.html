@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Unit Price Calculator — Price per Unit, Shrinkflation | TinyUseful</title>
+<meta name="description" content="Compare two package sizes and see which is cheaper per unit — per ounce, pound, liter, or count. Includes an old-vs-new shrinkflation check. No account, no saved input, no AI." />
+<link rel="canonical" href="https://www.tinyuseful.app/unit-price-calculator/">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Unit Price Calculator — TinyUseful">
+<meta property="og:description" content="Which package is actually cheaper per unit? Compare two products or check shrinkflation.">
+<meta property="og:url" content="https://www.tinyuseful.app/unit-price-calculator/">
+<meta property="og:site_name" content="TinyUseful">
+<meta property="og:image" content="https://www.tinyuseful.app/og-image04.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TinyUseful — small tools for everyday questions">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.tinyuseful.app/og-image04.png">
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="/style.css?v=20260612-unitprice">
+<script src="/js/helpers.js?v=20260611-parse"></script>
+<script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){var s=String(r==null?'':r).trim().replace(/[\s ]+/g,'');if(!s)return NaN;var c=(s.match(/,/g)||[]).length,d=(s.match(/\./g)||[]).length;if(c&&d){s=s.lastIndexOf(',')>s.lastIndexOf('.')?s.replace(/\./g,'').replace(',','.'):s.replace(/,/g,'');}else if(c>1){s=s.replace(/,/g,'');}else if(d>1){s=s.replace(/\./g,'');}else{s=s.replace(',','.');}return Number(s);};</script>
+<script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Unit Price Calculator","applicationCategory":"UtilityApplication","operatingSystem":"Any (browser-based)","description":"Compare price per unit between two package sizes and check shrinkflation between an old and a new package.","url":"https://www.tinyuseful.app/unit-price-calculator/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"TinyUseful","url":"https://www.tinyuseful.app/"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TinyUseful","item":"https://www.tinyuseful.app/"},{"@type":"ListItem","position":2,"name":"Unit Price Calculator","item":"https://www.tinyuseful.app/unit-price-calculator/"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is a unit price?","acceptedAnswer":{"@type":"Answer","text":"The cost of one measurement unit of a product — one ounce, one pound, one liter, or one item. It is the price divided by the package quantity: a $4.99 pack of 12 oz costs $0.4158 per ounce. Comparing unit prices is the only reliable way to compare different package sizes."}},
+{"@type":"Question","name":"How do I compare ounces and pounds?","acceptedAnswer":{"@type":"Answer","text":"Pick oz for one product and lb for the other — the calculator converts them automatically (1 lb = 16 oz = 453.59237 g) and shows both prices in the first product's unit. Weight and volume can't be mixed: ounces measure weight, fluid ounces measure volume."}},
+{"@type":"Question","name":"Is a bigger package always cheaper per unit?","acceptedAnswer":{"@type":"Answer","text":"Usually, but not always — that's why it's worth checking. Promotions sometimes make the smaller pack cheaper per unit, and shrinkflation can quietly turn a “family size” into the worse deal. Only nine US states require stores to show unit prices on the shelf, so in most places you have to do this math yourself."}},
+{"@type":"Question","name":"How do I calculate shrinkflation?","acceptedAnswer":{"@type":"Answer","text":"Switch to “Old vs new package” mode. Enter the old price and size and the new price and size. The calculator shows how much the package shrank and how much the price per unit really increased — even when the sticker price stayed the same."}},
+{"@type":"Question","name":"Does this include sales tax or coupons?","acceptedAnswer":{"@type":"Answer","text":"No. It compares shelf prices per unit only. Compare discounted prices with the Discount Calculator and add tax with the Sales Tax Calculator."}}
+]}
+</script>
+</head>
+
+<body class="ui-hifi">
+<a class="skip-link" href="#main">Skip to main content</a>
+<main id="main" class="hf">
+
+  <header class="hf-header">
+    <a class="hf-wordmark" href="/" aria-label="TinyUseful home">
+      <span class="stack"><span>TINY</span><span>USEFUL</span></span>
+    </a>
+    <span class="hf-menu-btn" aria-hidden="true">
+      <span></span><span></span>
+    </span>
+  </header>
+
+  <nav class="hf-crumb" aria-label="Breadcrumb">
+    / unit price calculator <span class="crumb-marker" aria-hidden="true"><span class="crumb-star">&#9733;</span> No.&nbsp;12</span>
+  </nav>
+
+  <h1 class="hf-display">UNIT PRICE CALCULATOR</h1>
+  <div class="hf-sub">
+    <span>Compare two package sizes &mdash; which is cheaper per unit?</span>
+  </div>
+
+  <div class="hf-fields tool-form" data-tool="unitprice">
+
+    <div class="hf-field">
+      <label class="lbl" for="up-mode">
+        <span>Mode</span>
+      </label>
+      <div class="hf-input hf-input-select">
+        <select id="up-mode" aria-label="Calculation mode">
+          <option value="compare">Compare two products</option>
+          <option value="shrink">Old vs new package</option>
+        </select>
+      </div>
+    </div>
+
+    <fieldset class="hf-fieldset" id="up-group-a">
+      <legend class="hf-cap">Product A</legend>
+      <div class="hf-field">
+        <label class="lbl" for="up-a-price">
+          <span>Price</span>
+          <span class="req" id="up-a-price-req">required</span>
+        </label>
+        <div class="hf-input focus" id="up-a-price-wrap">
+          <span class="pre" aria-hidden="true">$</span>
+          <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="up-a-price" value="4.99" aria-label="Product A price in dollars">
+        </div>
+      </div>
+      <div class="hf-field">
+        <label class="lbl" for="up-a-qty">
+          <span>Quantity</span>
+        </label>
+        <div class="hf-input">
+          <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="up-a-qty" value="12" aria-label="Product A quantity">
+        </div>
+      </div>
+      <div class="hf-field">
+        <label class="lbl" for="up-a-unit">
+          <span>Unit</span>
+        </label>
+        <div class="hf-input hf-input-select">
+          <select id="up-a-unit" aria-label="Product A unit">
+            <optgroup label="Weight">
+              <option value="oz" selected>oz (ounce)</option>
+              <option value="lb">lb (pound)</option>
+              <option value="g">g (gram)</option>
+              <option value="kg">kg (kilogram)</option>
+            </optgroup>
+            <optgroup label="Volume">
+              <option value="floz">fl oz (fluid ounce)</option>
+              <option value="ml">ml (milliliter)</option>
+              <option value="l">l (liter)</option>
+            </optgroup>
+            <optgroup label="Count">
+              <option value="count">count (items)</option>
+              <option value="sheet">sheet</option>
+              <option value="roll">roll</option>
+              <option value="wash">wash / load</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="hf-fieldset" id="up-group-b">
+      <legend class="hf-cap">Product B</legend>
+      <div class="hf-field">
+        <label class="lbl" for="up-b-price">
+          <span>Price</span>
+        </label>
+        <div class="hf-input">
+          <span class="pre" aria-hidden="true">$</span>
+          <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="up-b-price" value="7.99" aria-label="Product B price in dollars">
+        </div>
+      </div>
+      <div class="hf-field">
+        <label class="lbl" for="up-b-qty">
+          <span>Quantity</span>
+        </label>
+        <div class="hf-input">
+          <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="up-b-qty" value="20" aria-label="Product B quantity">
+        </div>
+      </div>
+      <div class="hf-field">
+        <label class="lbl" for="up-b-unit">
+          <span>Unit</span>
+        </label>
+        <div class="hf-input hf-input-select">
+          <select id="up-b-unit" aria-label="Product B unit">
+            <optgroup label="Weight">
+              <option value="oz" selected>oz (ounce)</option>
+              <option value="lb">lb (pound)</option>
+              <option value="g">g (gram)</option>
+              <option value="kg">kg (kilogram)</option>
+            </optgroup>
+            <optgroup label="Volume">
+              <option value="floz">fl oz (fluid ounce)</option>
+              <option value="ml">ml (milliliter)</option>
+              <option value="l">l (liter)</option>
+            </optgroup>
+            <optgroup label="Count">
+              <option value="count">count (items)</option>
+              <option value="sheet">sheet</option>
+              <option value="roll">roll</option>
+              <option value="wash">wash / load</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="hf-fieldset" id="up-group-old" hidden>
+      <legend class="hf-cap">Old package</legend>
+      <div class="hf-field">
+        <label class="lbl" for="up-old-price">
+          <span>Old price</span>
+        </label>
+        <div class="hf-input">
+          <span class="pre" aria-hidden="true">$</span>
+          <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="up-old-price" value="5.99" aria-label="Old package price in dollars">
+        </div>
+      </div>
+      <div class="hf-field">
+        <label class="lbl" for="up-old-qty">
+          <span>Old size</span>
+        </label>
+        <div class="hf-input">
+          <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="up-old-qty" value="16" aria-label="Old package size">
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="hf-fieldset" id="up-group-new" hidden>
+      <legend class="hf-cap">New package</legend>
+      <div class="hf-field">
+        <label class="lbl" for="up-new-price">
+          <span>New price</span>
+        </label>
+        <div class="hf-input">
+          <span class="pre" aria-hidden="true">$</span>
+          <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="up-new-price" value="5.99" aria-label="New package price in dollars">
+        </div>
+      </div>
+      <div class="hf-field">
+        <label class="lbl" for="up-new-qty">
+          <span>New size</span>
+        </label>
+        <div class="hf-input">
+          <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" id="up-new-qty" value="14" aria-label="New package size">
+        </div>
+      </div>
+      <div class="hf-field">
+        <label class="lbl" for="up-s-unit">
+          <span>Unit</span>
+        </label>
+        <div class="hf-input hf-input-select">
+          <select id="up-s-unit" aria-label="Package unit">
+            <optgroup label="Weight">
+              <option value="oz" selected>oz (ounce)</option>
+              <option value="lb">lb (pound)</option>
+              <option value="g">g (gram)</option>
+              <option value="kg">kg (kilogram)</option>
+            </optgroup>
+            <optgroup label="Volume">
+              <option value="floz">fl oz (fluid ounce)</option>
+              <option value="ml">ml (milliliter)</option>
+              <option value="l">l (liter)</option>
+            </optgroup>
+            <optgroup label="Count">
+              <option value="count">count (items)</option>
+              <option value="sheet">sheet</option>
+              <option value="roll">roll</option>
+              <option value="wash">wash / load</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+  </div>
+
+  <section class="hf-result" id="up-out" role="status" aria-live="polite" aria-atomic="true">
+    <div class="r-lbl">
+      <span class="r-lbl-text" id="up-lbl">Cheaper: Product B</span>
+      <span class="hf-tiny hf-muted" aria-hidden="true">aria-live</span>
+    </div>
+    <div class="r-num">
+      <span class="cur" aria-hidden="true" id="up-cur">$</span><span class="val" id="up-val">0.40</span><span class="per" id="up-per">/ oz</span>
+    </div>
+    <div class="r-break" id="up-break">
+      <span>Product A</span><span class="v">$0.42 / oz</span>
+      <span>Product B</span><span class="v">$0.40 / oz</span>
+      <span>Difference</span><span class="v">3.9% cheaper</span>
+      <span>Compared per</span><span class="v">oz</span>
+    </div>
+    <div class="r-actions">
+      <button type="button" class="hf-btn accent" id="up-copy" aria-label="Copy result to clipboard">Copy result</button>
+      <button type="button" class="hf-btn ghost" id="up-reset" aria-label="Reset to defaults">Reset</button>
+    </div>
+    <div class="why-line" id="up-why">
+      A: $4.99 &divide; 12 oz = $0.4158 &middot; B: $7.99 &divide; 20 oz = $0.3995 &rarr; <b>B is 3.9% cheaper per oz</b>
+    </div>
+  </section>
+
+  <div class="hf-chips-wrap" id="up-next" aria-label="You might also need">
+    <div class="hf-cap">You might also need</div>
+    <div class="hf-chips" role="list">
+      <a class="hf-chip" href="/discount-calculator/" role="listitem">Discount</a>
+      <a class="hf-chip" href="/sales-tax-calculator/" role="listitem">Sales Tax</a>
+      <a class="hf-chip" href="/percentage-calculator/" role="listitem">Percentage</a>
+    </div>
+  </div>
+
+  <div class="hf-chips-wrap">
+    <div class="hf-cap">Quick examples</div>
+    <div class="hf-chips" role="list">
+      <button type="button" class="hf-chip" data-mode="compare" data-a-price="4.99" data-a-qty="12" data-a-unit="oz" data-b-price="7.99" data-b-qty="20" data-b-unit="oz" role="listitem">$4.99/12oz vs $7.99/20oz</button>
+      <button type="button" class="hf-chip" data-mode="compare" data-a-price="3" data-a-qty="1" data-a-unit="lb" data-b-price="0.25" data-b-qty="1" data-b-unit="oz" role="listitem">$3 per lb vs 25&cent; per oz</button>
+      <button type="button" class="hf-chip" data-mode="shrink" data-old-price="5.99" data-old-qty="16" data-new-price="5.99" data-new-qty="14" data-s-unit="oz" role="listitem">Shrinkflation: 16oz &rarr; 14oz</button>
+    </div>
+  </div>
+
+  <div class="hf-method-wrap">
+    <div class="hf-cap">How this is calculated</div>
+    <div class="hf-method-block">
+      <div class="formula">unit price = price &divide; quantity</div>
+      <div class="formula">percent cheaper = (higher &minus; lower) &divide; higher &times; 100</div>
+      <div class="formula">unit price change = (new &minus; old) &divide; old &times; 100</div>
+      <p>$4.99 &divide; 12 oz = $0.4158 per oz. If the two units differ, Product B&rsquo;s quantity is converted to Product A&rsquo;s unit first, so both prices are compared per the same unit. Weight and volume never mix.
+        <strong>This tool compares only the numbers you enter.</strong> It does not know product quality, coupons, taxes, loyalty pricing, or local store rules.</p>
+      <p class="hf-muted hf-tiny">Updated June 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
+
+      <details class="method-details">
+        <summary>Formula, assumptions, rounding &amp; limitations</summary>
+
+        <h3>Formula</h3>
+        <ul>
+          <li><code>unit price = price &divide; quantity</code></li>
+          <li>If units differ: <code>quantity B</code> is converted to Product A&rsquo;s unit first (Product A&rsquo;s unit is the comparison unit).</li>
+          <li><code>percent cheaper = (higher unit price &minus; lower unit price) &divide; higher unit price &times; 100</code></li>
+          <li><code>unit price change = (new unit price &minus; old unit price) &divide; old unit price &times; 100</code></li>
+          <li><code>size change = (new size &minus; old size) &divide; old size &times; 100</code></li>
+        </ul>
+
+        <h3>Assumptions</h3>
+        <ul>
+          <li>Exact conversion factors: 1 lb = 453.59237 g, 1 oz = 28.349523125 g, 1 fl oz = 29.5735295625 ml, 1 kg = 1000 g, 1 l = 1000 ml.</li>
+          <li>Weight and volume are separate categories and are never converted into each other.</li>
+          <li>Count-like units (count, sheet, roll, wash / load) only compare with the exact same unit.</li>
+          <li>Prices are compared as entered &mdash; before tax, coupons, or loyalty discounts.</li>
+          <li>Both decimal comma (4,99) and decimal point (4.99) are accepted; a leading $ is ignored.</li>
+        </ul>
+
+        <h3>Rounding</h3>
+        <ul>
+          <li>Unit prices display with 2 decimal places by default. If two different unit prices would round to the same value, the display expands to 3&ndash;4 decimals so the difference stays visible.</li>
+          <li>Percentage verdicts are always computed from full precision, not from the rounded display values.</li>
+          <li>The line under the result shows the math at 4-decimal precision.</li>
+        </ul>
+
+        <h3>Limitations</h3>
+        <ul>
+          <li>Cross-category comparisons (e.g. oz vs ml) are blocked &mdash; those units measure different things.</li>
+          <li>Sales tax is not added &mdash; use the <a href="/sales-tax-calculator/">Sales Tax Calculator</a> for the after-tax price.</li>
+          <li>Coupons and promotions are not applied &mdash; compare discounted prices with the <a href="/discount-calculator/">Discount Calculator</a> first.</li>
+          <li>Product quality, brand, and pack-size convenience are not part of the math.</li>
+        </ul>
+      </details>
+    </div>
+  </div>
+
+  <div class="hf-ad" aria-label="Advertisement">
+    <div class="ad-label">Advertisement</div>
+    <div class="ad-slot" id="up-ad-slot"></div>
+  </div>
+
+  <div class="hf-stack">
+
+    <section class="hf-step s1" data-step="faq">
+      <header class="step-head">
+        <div>
+          <div class="step-title">FAQ</div>
+          <div class="step-meta">unit price &middot; oz vs lb &middot; bigger pack &middot; shrinkflation &middot; tax &amp; coupons</div>
+        </div>
+        <span class="step-chev" aria-hidden="true">&#8599;</span>
+      </header>
+      <div class="step-body">
+        <details class="step-q">
+          <summary>What is a unit price?</summary>
+          <div class="answer"><p>The cost of one measurement unit of a product &mdash; one ounce, one pound, one liter, or one item. It is the price divided by the package quantity: a $4.99 pack of 12 oz costs $0.4158 per ounce. Comparing unit prices is the only reliable way to compare different package sizes.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>How do I compare ounces and pounds?</summary>
+          <div class="answer"><p>Pick oz for one product and lb for the other &mdash; the calculator converts them automatically (1 lb = 16 oz = 453.59237 g) and shows both prices in the first product&rsquo;s unit. Weight and volume can&rsquo;t be mixed: ounces measure weight, fluid ounces measure volume.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>Is a bigger package always cheaper per unit?</summary>
+          <div class="answer"><p>Usually, but not always &mdash; that&rsquo;s why it&rsquo;s worth checking. Promotions sometimes make the smaller pack cheaper per unit, and shrinkflation can quietly turn a &ldquo;family size&rdquo; into the worse deal. Only nine US states require stores to show unit prices on the shelf, so in most places you have to do this math yourself.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>How do I calculate shrinkflation?</summary>
+          <div class="answer"><p>Switch to &ldquo;Old vs new package&rdquo; mode. Enter the old price and size and the new price and size. The calculator shows how much the package shrank and how much the price per unit really increased &mdash; even when the sticker price stayed the same.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>Does this include sales tax or coupons?</summary>
+          <div class="answer"><p>No. It compares shelf prices per unit only. Compare discounted prices with the <a href="/discount-calculator/">Discount Calculator</a> and add tax with the <a href="/sales-tax-calculator/">Sales Tax Calculator</a>.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <section class="hf-step s2" data-step="related">
+      <header class="step-head">
+        <div>
+          <div class="step-title">RELATED</div>
+          <div class="step-meta">Discount &middot; Sales Tax &middot; Percentage</div>
+        </div>
+        <span class="step-chev" aria-hidden="true">&#8599;</span>
+      </header>
+      <nav class="step-related" aria-label="Related calculators">
+        <a href="/discount-calculator/">Discount Calculator</a>
+        <a href="/sales-tax-calculator/">Sales Tax Calculator</a>
+        <a href="/percentage-calculator/">Percentage Calculator</a>
+        <a href="/unit-converter/">Unit Converter</a>
+      </nav>
+    </section>
+
+  </div>
+
+  <div class="hf-trust">No accounts &middot; runs in your browser &middot; ads &amp; analytics may use cookies</div>
+
+  <footer class="hf-foot">
+    <span class="foot-links">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/changelog">Changelog</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </span>
+    <button type="button" class="theme-toggle" aria-label="Toggle light/dark mode">&#9728; / &#9790;</button>
+  </footer>
+
+  <script src="/theme.js" defer></script>
+
+</main>
+
+<script>
+  const $ = id => document.getElementById(id);
+
+  // Unit definitions: category wall is hard — weight and volume never convert
+  // into each other, and count-like units only match themselves.
+  const UNITS = {
+    oz:    { cat: 'weight', toBase: 28.349523125,  label: 'oz' },
+    lb:    { cat: 'weight', toBase: 453.59237,     label: 'lb' },
+    g:     { cat: 'weight', toBase: 1,             label: 'g' },
+    kg:    { cat: 'weight', toBase: 1000,          label: 'kg' },
+    floz:  { cat: 'volume', toBase: 29.5735295625, label: 'fl oz' },
+    ml:    { cat: 'volume', toBase: 1,             label: 'ml' },
+    l:     { cat: 'volume', toBase: 1000,          label: 'l' },
+    count: { cat: 'count',  toBase: 1,             label: 'count' },
+    sheet: { cat: 'sheet',  toBase: 1,             label: 'sheet' },
+    roll:  { cat: 'roll',   toBase: 1,             label: 'roll' },
+    wash:  { cat: 'wash',   toBase: 1,             label: 'wash / load' }
+  };
+
+  const DEFAULTS = {
+    mode: 'compare',
+    aPrice: '4.99', aQty: '12', aUnit: 'oz',
+    bPrice: '7.99', bQty: '20', bUnit: 'oz',
+    oldPrice: '5.99', oldQty: '16', newPrice: '5.99', newQty: '14', sUnit: 'oz'
+  };
+
+  // Page-local sanitizer: strip a leading currency symbol and trailing unit
+  // letters ("$5.99", "12 oz") before locale-aware parsing. helpers.js untouched.
+  function parseField(id) {
+    const raw = String($(id).value == null ? '' : $(id).value)
+      .replace(/^[\s$€£]+/, '')
+      .replace(/[a-z\s]+$/i, '');
+    return parseLocaleNumber(raw);
+  }
+
+  // Dynamic precision: 2 decimals by default; expand to 3–4 when two different
+  // unit prices would round to the same display value. Verdicts use full precision.
+  function unitPriceDecimals(a, b) {
+    if (a === b) return 2;
+    for (let d = 2; d <= 4; d++) {
+      if (a.toFixed(d) !== b.toFixed(d)) return d;
+    }
+    return 4;
+  }
+  const fmtP = (n, d) => n.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+  const fmt4 = n => n.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 4 });
+  const fmt1 = n => n.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 1 });
+
+  // Show/hide fieldsets per mode (date-calculator pattern)
+  function upUpdateUI() {
+    const mode = $('up-mode').value;
+    const compare = mode === 'compare';
+    $('up-group-a').hidden = !compare;
+    $('up-group-b').hidden = !compare;
+    $('up-group-old').hidden = compare;
+    $('up-group-new').hidden = compare;
+  }
+
+  function upRender(state) {
+    const lblEl = $('up-lbl');
+    const curEl = $('up-cur');
+    const valEl = $('up-val');
+    const perEl = $('up-per');
+    const brkEl = $('up-break');
+    const whyEl = $('up-why');
+
+    if (!state.valid) {
+      lblEl.textContent = 'Result';
+      curEl.textContent = '';
+      valEl.textContent = '—';
+      perEl.textContent = '';
+      brkEl.innerHTML = '<span>' + (state.message || 'Complete all fields') + '</span><span class="v">—</span>';
+      whyEl.textContent = state.whyMessage || 'Enter prices, quantities, and units above.';
+      return;
+    }
+
+    if (state.mode === 'compare') {
+      const { upA, upB, unitLabel, pct, winner, d } = state;
+      const winnerUP = winner === 'B' ? upB : upA;
+      if (winner === 'tie') {
+        lblEl.textContent = 'Same price per ' + unitLabel;
+      } else {
+        lblEl.textContent = 'Cheaper: Product ' + winner;
+      }
+      curEl.textContent = '$';
+      valEl.textContent = fmtP(winnerUP, d);
+      perEl.textContent = '/ ' + unitLabel;
+      brkEl.innerHTML =
+        '<span>Product A</span><span class="v">$' + fmtP(upA, d) + ' / ' + unitLabel + '</span>' +
+        '<span>Product B</span><span class="v">$' + fmtP(upB, d) + ' / ' + unitLabel + '</span>' +
+        '<span>Difference</span><span class="v">' + (winner === 'tie' ? '0%' : fmt1(pct) + '% cheaper') + '</span>' +
+        '<span>Compared per</span><span class="v">' + unitLabel + '</span>';
+      whyEl.innerHTML =
+        'A: $' + fmt4(state.priceA) + ' ÷ ' + fmt4(state.qtyA) + ' ' + state.unitALabel + ' = $' + fmt4(upA) +
+        ' · B: $' + fmt4(state.priceB) + ' ÷ ' + fmt4(state.qtyB) + ' ' + state.unitBLabel + ' = $' + fmt4(state.upBraw) +
+        (winner === 'tie'
+          ? ' → <b>same price per ' + unitLabel + '</b>'
+          : ' → <b>' + winner + ' is ' + fmt1(pct) + '% cheaper per ' + unitLabel + '</b>');
+    } else {
+      const { upOld, upNew, unitLabel, unitChange, sizeChange, priceChange, d } = state;
+      const sign = unitChange >= 0 ? '+' : '';
+      lblEl.textContent = 'Unit price change';
+      curEl.textContent = '';
+      valEl.textContent = sign + fmt1(unitChange);
+      perEl.textContent = '%';
+      brkEl.innerHTML =
+        '<span>Old</span><span class="v">$' + fmtP(upOld, d) + ' / ' + unitLabel + '</span>' +
+        '<span>New</span><span class="v">$' + fmtP(upNew, d) + ' / ' + unitLabel + '</span>' +
+        '<span>Unit price change</span><span class="v">' + sign + fmt1(unitChange) + '%</span>' +
+        '<span>Size change</span><span class="v">' + (sizeChange >= 0 ? '+' : '') + fmt1(sizeChange) + '%</span>' +
+        '<span>Price change</span><span class="v">' + (priceChange >= 0 ? '+' : '') + fmt1(priceChange) + '%</span>';
+      whyEl.innerHTML =
+        'Old: $' + fmt4(state.oldPrice) + ' ÷ ' + fmt4(state.oldQty) + ' ' + unitLabel + ' = $' + fmt4(upOld) +
+        ' · New: $' + fmt4(state.newPrice) + ' ÷ ' + fmt4(state.newQty) + ' ' + unitLabel + ' = $' + fmt4(upNew) +
+        ' → <b>' + sign + fmt1(unitChange) + '% per ' + unitLabel + '</b>';
+    }
+  }
+
+  // Public name upCalc
+  function upCalc() {
+    const mode = $('up-mode').value;
+
+    if (mode === 'compare') {
+      const priceA = parseField('up-a-price');
+      const qtyA = parseField('up-a-qty');
+      const priceB = parseField('up-b-price');
+      const qtyB = parseField('up-b-qty');
+      const unitA = UNITS[$('up-a-unit').value];
+      const unitB = UNITS[$('up-b-unit').value];
+
+      if (!Number.isFinite(priceA) || !Number.isFinite(qtyA) || !Number.isFinite(priceB) || !Number.isFinite(qtyB)) {
+        upRender({ valid: false });
+        return;
+      }
+      if (priceA < 0 || priceB < 0) {
+        upRender({ valid: false, message: 'Prices must not be negative' });
+        return;
+      }
+      if (qtyA <= 0 || qtyB <= 0) {
+        upRender({ valid: false, message: 'Enter a quantity greater than zero' });
+        return;
+      }
+      if (unitA.cat !== unitB.cat) {
+        upRender({
+          valid: false,
+          message: 'Units measure different things',
+          whyMessage: 'These units measure different things — pick comparable units.'
+        });
+        return;
+      }
+
+      // Comparison unit = Product A's unit
+      const qtyBInA = qtyB * unitB.toBase / unitA.toBase;
+      const upA = priceA / qtyA;
+      const upB = priceB / qtyBInA;
+      const upBraw = priceB / qtyB;
+
+      let winner, pct;
+      if (upA === upB) {
+        winner = 'tie'; pct = 0;
+      } else if (upB < upA) {
+        winner = 'B'; pct = (upA - upB) / upA * 100;
+      } else {
+        winner = 'A'; pct = (upB - upA) / upB * 100;
+      }
+      const d = unitPriceDecimals(upA, upB);
+
+      upRender({
+        valid: true, mode: 'compare',
+        priceA, qtyA, priceB, qtyB, upA, upB, upBraw, winner, pct, d,
+        unitLabel: unitA.label, unitALabel: unitA.label, unitBLabel: unitB.label
+      });
+    } else {
+      const oldPrice = parseField('up-old-price');
+      const oldQty = parseField('up-old-qty');
+      const newPrice = parseField('up-new-price');
+      const newQty = parseField('up-new-qty');
+      const unit = UNITS[$('up-s-unit').value];
+
+      if (!Number.isFinite(oldPrice) || !Number.isFinite(oldQty) || !Number.isFinite(newPrice) || !Number.isFinite(newQty)) {
+        upRender({ valid: false });
+        return;
+      }
+      if (oldPrice <= 0 || newPrice <= 0) {
+        upRender({ valid: false, message: 'Enter prices greater than zero' });
+        return;
+      }
+      if (oldQty <= 0 || newQty <= 0) {
+        upRender({ valid: false, message: 'Enter a quantity greater than zero' });
+        return;
+      }
+
+      const upOld = oldPrice / oldQty;
+      const upNew = newPrice / newQty;
+      const unitChange = (upNew - upOld) / upOld * 100;
+      const sizeChange = (newQty - oldQty) / oldQty * 100;
+      const priceChange = (newPrice - oldPrice) / oldPrice * 100;
+      const d = unitPriceDecimals(upOld, upNew);
+
+      upRender({
+        valid: true, mode: 'shrink',
+        oldPrice, oldQty, newPrice, newQty, upOld, upNew,
+        unitChange, sizeChange, priceChange, d,
+        unitLabel: unit.label
+      });
+    }
+  }
+
+  // Copy + copied state (template pattern)
+  (function () {
+    const copyBtn = $('up-copy');
+    const out = $('up-out');
+    const lblEl = $('up-lbl');
+    const valEl = $('up-val');
+    const curEl = $('up-cur');
+    const perEl = $('up-per');
+    let origLblText = lblEl ? lblEl.textContent : 'Result';
+    let revertTimer = null;
+
+    function setCopied(on) {
+      if (!out) return;
+      out.classList.toggle('copied', on);
+      if (lblEl && on) {
+        origLblText = lblEl.textContent;
+        lblEl.textContent = 'Copied to clipboard';
+      }
+      if (lblEl && !on && origLblText) {
+        lblEl.textContent = origLblText;
+      }
+      if (copyBtn) copyBtn.textContent = on ? '✓ Copied' : 'Copy result';
+    }
+
+    if (copyBtn) copyBtn.addEventListener('click', function () {
+      if (!valEl || valEl.textContent === '—') return;
+      const currentLbl = lblEl ? lblEl.textContent : 'Result';
+      const text = currentLbl + ': ' + (curEl ? curEl.textContent : '') + valEl.textContent + ' ' + (perEl ? perEl.textContent : '');
+      const finalize = function () {
+        setCopied(true);
+        if (revertTimer) clearTimeout(revertTimer);
+        revertTimer = setTimeout(function () { setCopied(false); }, 1600);
+      };
+      if (!navigator.clipboard) {
+        copyBtn.textContent = 'Copy unavailable';
+        setTimeout(function () { setCopied(false); }, 1500);
+        return;
+      }
+      navigator.clipboard.writeText(text).then(finalize).catch(function () {
+        copyBtn.textContent = 'Copy failed';
+        setTimeout(function () { setCopied(false); }, 1500);
+      });
+    });
+  })();
+
+  // Reset
+  (function () {
+    const resetBtn = $('up-reset');
+    if (!resetBtn) return;
+    resetBtn.addEventListener('click', function () {
+      $('up-mode').value = DEFAULTS.mode;
+      $('up-a-price').value = DEFAULTS.aPrice;
+      $('up-a-qty').value = DEFAULTS.aQty;
+      $('up-a-unit').value = DEFAULTS.aUnit;
+      $('up-b-price').value = DEFAULTS.bPrice;
+      $('up-b-qty').value = DEFAULTS.bQty;
+      $('up-b-unit').value = DEFAULTS.bUnit;
+      $('up-old-price').value = DEFAULTS.oldPrice;
+      $('up-old-qty').value = DEFAULTS.oldQty;
+      $('up-new-price').value = DEFAULTS.newPrice;
+      $('up-new-qty').value = DEFAULTS.newQty;
+      $('up-s-unit').value = DEFAULTS.sUnit;
+      upUpdateUI();
+      upCalc();
+    });
+  })();
+
+  // Mode change re-runs UI toggle + calc
+  (function () {
+    const modeSel = $('up-mode');
+    if (!modeSel) return;
+    modeSel.addEventListener('change', function () {
+      upUpdateUI();
+      upCalc();
+    });
+  })();
+
+  // Required + focus state on Product A price
+  (function () {
+    const priceInput = $('up-a-price');
+    const priceReq = $('up-a-price-req');
+    const priceWrap = $('up-a-price-wrap');
+
+    function syncRequired() {
+      if (!priceReq || !priceInput) return;
+      const v = String(priceInput.value || '').trim();
+      const empty = v === '' || !Number.isFinite(parseField('up-a-price'));
+      if (priceWrap) priceWrap.classList.toggle('error', empty);
+    }
+
+    if (priceInput) {
+      priceInput.addEventListener('input', syncRequired);
+      priceInput.addEventListener('focus', function () { if (priceWrap) priceWrap.classList.add('focus'); });
+      priceInput.addEventListener('blur',  function () { if (priceWrap) priceWrap.classList.remove('focus'); });
+    }
+    syncRequired();
+  })();
+
+  // Quick example chips
+  document.querySelectorAll('.hf-chip[data-mode]').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      const map = {
+        'data-mode': 'up-mode',
+        'data-a-price': 'up-a-price', 'data-a-qty': 'up-a-qty', 'data-a-unit': 'up-a-unit',
+        'data-b-price': 'up-b-price', 'data-b-qty': 'up-b-qty', 'data-b-unit': 'up-b-unit',
+        'data-old-price': 'up-old-price', 'data-old-qty': 'up-old-qty',
+        'data-new-price': 'up-new-price', 'data-new-qty': 'up-new-qty', 'data-s-unit': 'up-s-unit'
+      };
+      Object.keys(map).forEach(function (attr) {
+        const v = chip.getAttribute(attr);
+        if (v !== null && $(map[attr])) $(map[attr]).value = v;
+      });
+      upUpdateUI();
+      upCalc();
+    });
+  });
+
+  // Initial render + live recalc (attachLiveCalc per freeze list, with fallback)
+  upUpdateUI();
+  upCalc();
+  if (typeof attachLiveCalc === 'function') {
+    attachLiveCalc('.tool-form', upCalc);
+  } else {
+    let t;
+    const handler = function () { clearTimeout(t); t = setTimeout(upCalc, 80); };
+    document.querySelectorAll('.tool-form input, .tool-form select').forEach(function (el) {
+      el.addEventListener('input', handler);
+      el.addEventListener('change', handler);
+    });
+  }
+</script>
+
+</body>
+</html>
