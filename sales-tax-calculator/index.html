@@ -26,8 +26,8 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="/style.css?v=20260515-v2">
-<script src="/js/helpers.js?v=20260515-v2"></script>
-<script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
+<script src="/js/helpers.js?v=20260611-parse"></script>
+<script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){var s=String(r==null?'':r).trim().replace(/[\s ]+/g,'');if(!s)return NaN;var c=(s.match(/,/g)||[]).length,d=(s.match(/\./g)||[]).length;if(c&&d){s=s.lastIndexOf(',')>s.lastIndexOf('.')?s.replace(/\./g,'').replace(',','.'):s.replace(/,/g,'');}else if(c>1){s=s.replace(/,/g,'');}else if(d>1){s=s.replace(/\./g,'');}else{s=s.replace(',','.');}return Number(s);};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Sales Tax Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any (browser-based)","description":"Add or remove sales tax from a price.","url":"https://www.tinyuseful.app/sales-tax-calculator/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"TinyUseful","url":"https://www.tinyuseful.app/"}}
@@ -37,8 +37,8 @@
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"How do I add sales tax to a price?","acceptedAnswer":{"@type":"Answer","text":"Multiply the price by 1 plus the tax rate as a decimal: final price = price × (1 + rate ÷ 100). For $100 at 8% tax, $100 × 1.08 = $108. Set the calculator to Add tax mode (the default) and enter your local rate. To find the pre-tax price from a tax-included total, switch to Remove tax mode."}},
-{"@type":"Question","name":"What's the sales tax rate in my state?","acceptedAnswer":{"@type":"Answer","text":"This calculator does not look up rates by location — you enter the rate yourself. Combined state and local rates in the US range from 0% (NH, OR, MT, AK, DE) to roughly 9.55% (TN). City and county add-ons vary; the receipt or your state tax site has the exact number."}},
+{"@type":"Question","name":"How do I add sales tax to a price?","acceptedAnswer":{"@type":"Answer","text":"Multiply the price by 1 plus the tax rate as a decimal: final price = price × (1 + rate ÷ 100). For $100 at 8% tax, $100 × 1.08 = $108. Set the calculator to “Add tax” mode (the default) and enter your local rate. To go the other way — find the pre-tax price from a tax-included total — switch to “Remove tax” mode."}},
+{"@type":"Question","name":"What's the sales tax rate in my state?","acceptedAnswer":{"@type":"Answer","text":"This calculator does not look up rates by location — you enter the rate yourself. Combined state + local rates in the US range from 0% (NH, OR, MT, AK, DE) to roughly 9.55% (TN). City and county add-ons vary; the receipt or your state's tax site has the exact number."}},
 {"@type":"Question","name":"Why do I get a slightly different number than the receipt?","acceptedAnswer":{"@type":"Answer","text":"Most often it's rounding. Stores round each line item, so the receipt total can differ by a cent or two from a calculation done on the subtotal. Some jurisdictions also tax certain categories (food, clothing) at different rates than general goods."}},
 {"@type":"Question","name":"How do I remove tax from a total that includes it?","acceptedAnswer":{"@type":"Answer","text":"Switch the calculator to Remove tax mode. If you paid $108 at an 8% rate, the original was $108 ÷ 1.08 = $100, and the tax was $8."}},
 {"@type":"Question","name":"Is sales tax the same as VAT?","acceptedAnswer":{"@type":"Answer","text":"Mathematically yes — both are a percentage added to a price. The legal and accounting differences (who collects, who can reclaim, when it's due) are different, but for figuring out a final price the formula is identical."}}

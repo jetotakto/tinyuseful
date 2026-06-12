@@ -30,8 +30,8 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="/style.css?v=20260515-v2">
-<script src="/js/helpers.js?v=20260515-v2"></script>
-<script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
+<script src="/js/helpers.js?v=20260611-parse"></script>
+<script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){var s=String(r==null?'':r).trim().replace(/[\s ]+/g,'');if(!s)return NaN;var c=(s.match(/,/g)||[]).length,d=(s.match(/\./g)||[]).length;if(c&&d){s=s.lastIndexOf(',')>s.lastIndexOf('.')?s.replace(/\./g,'').replace(',','.'):s.replace(/,/g,'');}else if(c>1){s=s.replace(/,/g,'');}else if(d>1){s=s.replace(/\./g,'');}else{s=s.replace(',','.');}return Number(s);};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 
 <script type="application/ld+json">
@@ -42,9 +42,9 @@
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"How is a mortgage payment calculated?","acceptedAnswer":{"@type":"Answer","text":"The standard amortization formula is M = P × [r(1+r)^n] / [(1+r)^n − 1], where P is the loan amount, r is the monthly interest rate (annual rate divided by 12), and n is the total number of monthly payments (years × 12). The result M is the fixed monthly payment that fully repays the loan with interest."}},
+{"@type":"Question","name":"How is a mortgage payment calculated?","acceptedAnswer":{"@type":"Answer","text":"The standard amortization formula is M = P × [r(1+r)^n] / [(1+r)^n − 1], where P is the loan amount, r is the monthly interest rate (annual rate ÷ 12), and n is the total number of monthly payments (years × 12). The result M is the fixed monthly payment that fully repays the loan with interest."}},
 {"@type":"Question","name":"What is the difference between APR and interest rate?","acceptedAnswer":{"@type":"Answer","text":"The interest rate is the cost of borrowing the principal. The APR (Annual Percentage Rate) includes the interest rate plus other lender fees expressed as a yearly cost. APR is always equal to or higher than the interest rate. This calculator uses the interest rate, not APR."}},
-{"@type":"Question","name":"Should I choose a 15-year or 30-year mortgage?","acceptedAnswer":{"@type":"Answer","text":"A 15-year mortgage has higher monthly payments but you pay much less total interest and own the home sooner. A 30-year mortgage has lower monthly payments but you pay more interest overall. Run both numbers in the calculator and compare the total interest column."}},
+{"@type":"Question","name":"Should I choose a 15-year or 30-year mortgage?","acceptedAnswer":{"@type":"Answer","text":"A 15-year mortgage has higher monthly payments but you pay much less total interest and own the home sooner. A 30-year mortgage has lower monthly payments but you pay more interest overall. Run both numbers in the calculator above and compare the total interest line."}},
 {"@type":"Question","name":"Why is my first payment mostly interest?","acceptedAnswer":{"@type":"Answer","text":"Mortgage interest is calculated on the remaining balance. At the start, the balance is highest, so most of your payment goes to interest. As the principal shrinks, more of each payment goes to principal. By the end, almost all of each payment is principal. This pattern is called amortization."}},
 {"@type":"Question","name":"Does this calculator include taxes and insurance?","acceptedAnswer":{"@type":"Answer","text":"No. This is principal and interest only (P&I). Property taxes, homeowners insurance, PMI, and HOA fees vary by location and lender, and are not part of the loan formula. Your full monthly housing payment will be higher than the number shown here."}}
 ]}
