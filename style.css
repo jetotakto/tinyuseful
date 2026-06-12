@@ -1687,12 +1687,12 @@ body.ui-hifi .hf-method-block .method-details {
 }
 body.ui-hifi .hf-method-block .method-details summary {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11px; font-weight: 700;
+  font-size: 12px; font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-2);
   cursor: pointer;
-  padding: 2px 0;
+  padding: 12px 0;
 }
 body.ui-hifi .hf-method-block .method-details h3 {
   font-family: 'JetBrains Mono', monospace;
@@ -2521,7 +2521,7 @@ body.ui-hifi .hf-launcher-row.l4:hover .row-arrow {
     display: block !important;
     grid-column: 1;
     align-self: start;
-    font-size: 9px;
+    font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-family: 'JetBrains Mono', ui-monospace, monospace;
@@ -2803,5 +2803,24 @@ body.ui-hifi .hf-fieldset > legend {
   width: 100%;
   padding: 0;
   margin: 14px 0 2px;
+}
+
+/* ───── UX-MOBILE-1: real Tools link replaces the decorative menu button ─────
+   Tap targets grown via padding + negative margin so header height is unchanged. */
+body.ui-hifi .hf-tools-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  padding: 17px 0 17px 16px;
+  margin: -17px 0;
+}
+body.ui-hifi .hf-tools-link:hover { color: var(--accent); }
+body.ui-hifi .hf-wordmark { padding: 16px 16px 16px 0; margin: -16px 0; }
+@media (min-width: 1024px) {
+  body.ui-hifi .hf-home .hf-tools-link { display: none; }
 }
 
