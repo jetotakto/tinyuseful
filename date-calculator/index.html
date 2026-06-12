@@ -26,8 +26,8 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="/style.css?v=20260515-v2">
-<script src="/js/helpers.js?v=20260515-v2"></script>
-<script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){return Number(String(r||'').trim().replace(/[\s ]+/g,'').replace(',','.'));};</script>
+<script src="/js/helpers.js?v=20260611-parse"></script>
+<script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){var s=String(r==null?'':r).trim().replace(/[\s ]+/g,'');if(!s)return NaN;var c=(s.match(/,/g)||[]).length,d=(s.match(/\./g)||[]).length;if(c&&d){s=s.lastIndexOf(',')>s.lastIndexOf('.')?s.replace(/\./g,'').replace(',','.'):s.replace(/,/g,'');}else if(c>1){s=s.replace(/,/g,'');}else if(d>1){s=s.replace(/\./g,'');}else{s=s.replace(',','.');}return Number(s);};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Date Calculator","applicationCategory":"UtilityApplication","operatingSystem":"Any (browser-based)","description":"Calculate the number of days between two dates, or find a date X days from today.","url":"https://www.tinyuseful.app/date-calculator/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"TinyUseful","url":"https://www.tinyuseful.app/"}}
@@ -271,6 +271,11 @@
   const $ = id => document.getElementById(id);
   const fmt = (n, d=2) => n.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
   const fmt0 = n => n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+  // Local calendar date as YYYY-MM-DD. toISOString() uses UTC and would shift
+  // the date for users in negative-offset zones (US evenings = tomorrow in UTC).
+  function localISO(d) {
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
 
   // Toggle hf-field visibility based on mode (preserves dateUpdateUI legacy behavior)
   function dateUpdateUI() {
@@ -352,7 +357,7 @@
       const d = Math.floor(parseLocaleNumber($('date-days').value)) || 0;
       const result = new Date();
       result.setDate(result.getDate() + d);
-      const iso = result.toISOString().slice(0, 10);
+      const iso = localISO(result);
       const weekday = result.toLocaleDateString('en-US', { weekday: 'long' });
       dateRender({ valid: true, mode: 'addto', iso, weekday, d });
     }
@@ -361,10 +366,10 @@
   // Init defaults: between mode, from=today, to=today+30
   (function initDate() {
     const today = new Date();
-    const todayISO = today.toISOString().slice(0, 10);
+    const todayISO = localISO(today);
     const plus30 = new Date(today);
     plus30.setDate(today.getDate() + 30);
-    const plus30ISO = plus30.toISOString().slice(0, 10);
+    const plus30ISO = localISO(plus30);
     if ($('date-from')) $('date-from').value = todayISO;
     if ($('date-to'))   $('date-to').value = plus30ISO;
     dateUpdateUI();
@@ -423,8 +428,8 @@
       const today = new Date();
       const plus30 = new Date(today);
       plus30.setDate(today.getDate() + 30);
-      if ($('date-from')) $('date-from').value = today.toISOString().slice(0, 10);
-      if ($('date-to'))   $('date-to').value = plus30.toISOString().slice(0, 10);
+      if ($('date-from')) $('date-from').value = localISO(today);
+      if ($('date-to'))   $('date-to').value = localISO(plus30);
       if ($('date-days')) $('date-days').value = '100';
       dateUpdateUI();
       dateCalc();
