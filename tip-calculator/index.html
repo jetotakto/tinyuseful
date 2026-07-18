@@ -25,7 +25,7 @@
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260612-uxm2">
+<link rel="stylesheet" href="/style.css?v=20260718-b1">
 <script src="/js/helpers.js?v=20260611-parse"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){var s=String(r==null?'':r).trim().replace(/[\s ]+/g,'');if(!s)return NaN;var c=(s.match(/,/g)||[]).length,d=(s.match(/\./g)||[]).length;if(c&&d){s=s.lastIndexOf(',')>s.lastIndexOf('.')?s.replace(/\./g,'').replace(',','.'):s.replace(/,/g,'');}else if(c>1){s=s.replace(/,/g,'');}else if(d>1){s=s.replace(/\./g,'');}else{s=s.replace(',','.');}return Number(s);};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
@@ -91,7 +91,7 @@
       </div>
       <div class="hf-quickrow" role="group" aria-label="Quick tip percentages">
         <button type="button" class="hf-pill" data-pct="15">15%</button>
-        <button type="button" class="hf-pill active" data-pct="18">18%</button>
+        <button type="button" class="hf-pill" data-pct="18">18%</button>
         <button type="button" class="hf-pill" data-pct="20">20%</button>
       </div>
     </div>
@@ -112,7 +112,6 @@
   <section class="hf-result" id="tip-out" role="status" aria-live="polite" aria-atomic="true">
     <div class="r-lbl">
       <span class="r-lbl-text">Per person</span>
-      <span class="hf-tiny hf-muted" aria-hidden="true">aria-live</span>
     </div>
     <div class="r-num">
       <span class="cur" aria-hidden="true">$</span><span class="val" id="tip-val">13.20</span><span class="per" id="tip-per">/ person</span>
@@ -414,13 +413,11 @@
     const billWrap = $('tip-bill-wrap');
 
     function syncPills() {
-      // Visual parity: when input matches 15/18/20, activate that pill.
-      // When input is NOT a preset (e.g. 10), preserve markup-set active state (18 from canvas).
+      // Visual parity: a pill is active only when the input matches its value.
+      // Non-preset values (e.g. default 10) leave all pills inactive so the
+      // highlighted pill never contradicts the percentage actually used.
       if (!pillRow || !pctInput) return;
       const cur = parseLocaleNumber(pctInput.value);
-      const presets = [15, 18, 20];
-      const idx = presets.indexOf(cur);
-      if (idx < 0) return;  // not a preset; leave canvas state alone
       pillRow.querySelectorAll('.hf-pill').forEach(function (p) {
         p.classList.toggle('active', Number(p.dataset.pct) === cur);
       });

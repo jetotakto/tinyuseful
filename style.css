@@ -1734,6 +1734,10 @@ body.ui-hifi .hf-ad .ad-slot {
   text-transform: uppercase;
 }
 body.ui-hifi .hf-ad .ad-slot::before { content: 'Ad slot reserved'; }
+/* 2026-07-18: AdSense not yet approved — hide reserved ad containers so users
+   and reviewers don't see empty "Advertisement" boxes. Remove this one rule
+   (keep everything above) when AdSense approval lands and real ad units ship. */
+body.ui-hifi .hf-ad { display: none; }
 
 /* ───── stacked sections (hifi-theme.css L309-339) ───── */
 body.ui-hifi .hf-stack { display: flex; flex-direction: column; margin-top: 14px; }
