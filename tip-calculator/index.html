@@ -27,7 +27,7 @@
 
 <link rel="preload" href="/fonts/archivo-v1-latin/Archivo-VariableFont.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/jetbrains-mono-v24-latin/jetbrains-mono-v24-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/style.css?v=20260718-b1">
+<link rel="stylesheet" href="/style.css?v=20260718-b4">
 <script src="/js/helpers.js?v=20260611-parse"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){var s=String(r==null?'':r).trim().replace(/[\s ]+/g,'');if(!s)return NaN;var c=(s.match(/,/g)||[]).length,d=(s.match(/\./g)||[]).length;if(c&&d){s=s.lastIndexOf(',')>s.lastIndexOf('.')?s.replace(/\./g,'').replace(',','.'):s.replace(/,/g,'');}else if(c>1){s=s.replace(/,/g,'');}else if(d>1){s=s.replace(/\./g,'');}else{s=s.replace(',','.');}return Number(s);};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
@@ -180,6 +180,23 @@
           <li>Automatic service charges (common for large parties or in some countries) are not detected; check the receipt before adding a tip on top.</li>
           <li>Uneven splits are not modelled.</li>
         </ul>
+      </details>
+
+      <details class="method-details">
+        <summary>Quick reference &mdash; tip amounts for common bills</summary>
+        <table class="ref-table">
+          <caption>Tip &rarr; bill total. Formula: tip = bill &times; percent &divide; 100.</caption>
+          <tr><th scope="col">Bill</th><th scope="col">15%</th><th scope="col">18%</th><th scope="col">20%</th></tr>
+          <tr><th scope="row">$20.00</th><td>$3.00 &rarr; $23.00</td><td>$3.60 &rarr; $23.60</td><td>$4.00 &rarr; $24.00</td></tr>
+          <tr><th scope="row">$30.00</th><td>$4.50 &rarr; $34.50</td><td>$5.40 &rarr; $35.40</td><td>$6.00 &rarr; $36.00</td></tr>
+          <tr><th scope="row">$40.00</th><td>$6.00 &rarr; $46.00</td><td>$7.20 &rarr; $47.20</td><td>$8.00 &rarr; $48.00</td></tr>
+          <tr><th scope="row">$50.00</th><td>$7.50 &rarr; $57.50</td><td>$9.00 &rarr; $59.00</td><td>$10.00 &rarr; $60.00</td></tr>
+          <tr><th scope="row">$60.00</th><td>$9.00 &rarr; $69.00</td><td>$10.80 &rarr; $70.80</td><td>$12.00 &rarr; $72.00</td></tr>
+          <tr><th scope="row">$80.00</th><td>$12.00 &rarr; $92.00</td><td>$14.40 &rarr; $94.40</td><td>$16.00 &rarr; $96.00</td></tr>
+          <tr><th scope="row">$100.00</th><td>$15.00 &rarr; $115.00</td><td>$18.00 &rarr; $118.00</td><td>$20.00 &rarr; $120.00</td></tr>
+          <tr><th scope="row">$150.00</th><td>$22.50 &rarr; $172.50</td><td>$27.00 &rarr; $177.00</td><td>$30.00 &rarr; $180.00</td></tr>
+          <tr><th scope="row">$200.00</th><td>$30.00 &rarr; $230.00</td><td>$36.00 &rarr; $236.00</td><td>$40.00 &rarr; $240.00</td></tr>
+        </table>
       </details>
     </div>
   </div>
