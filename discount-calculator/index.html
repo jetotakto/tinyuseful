@@ -16,16 +16,18 @@
 <meta property="og:description" content="Final price after % off, plus what you save. Works for sale items and coupons.">
 <meta property="og:url" content="https://www.tinyuseful.app/discount-calculator/">
 <meta property="og:site_name" content="TinyUseful">
-<meta property="og:image" content="https://www.tinyuseful.app/og-image04.png">
+<meta property="og:image" content="https://www.tinyuseful.app/og-image05.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="TinyUseful — small tools for everyday questions">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://www.tinyuseful.app/og-image04.png">
+<meta name="twitter:image" content="https://www.tinyuseful.app/og-image05.jpg">
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260612-uxm2">
+<link rel="preload" href="/fonts/archivo-v1-latin/Archivo-VariableFont.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/jetbrains-mono-v24-latin/jetbrains-mono-v24-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css?v=20260718-b4">
 <script src="/js/helpers.js?v=20260611-parse"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){var s=String(r==null?'':r).trim().replace(/[\s ]+/g,'');if(!s)return NaN;var c=(s.match(/,/g)||[]).length,d=(s.match(/\./g)||[]).length;if(c&&d){s=s.lastIndexOf(',')>s.lastIndexOf('.')?s.replace(/\./g,'').replace(',','.'):s.replace(/,/g,'');}else if(c>1){s=s.replace(/,/g,'');}else if(d>1){s=s.replace(/\./g,'');}else{s=s.replace(',','.');}return Number(s);};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
@@ -36,12 +38,7 @@
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TinyUseful","item":"https://www.tinyuseful.app/"},{"@type":"ListItem","position":2,"name":"Discount Calculator","item":"https://www.tinyuseful.app/discount-calculator/"}]}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"If something is 50% off and I have a 20% coupon, what's the final discount?","acceptedAnswer":{"@type":"Answer","text":"60%, not 70%. The 20% comes off the already-discounted price. $100 → 50% off → $50 → 20% off → $40. Final price is 40% of original = 60% discount total."}},
-{"@type":"Question","name":"How do I find the original price from a sale price?","acceptedAnswer":{"@type":"Answer","text":"Original = final ÷ (1 − discount/100). If you paid $60 with 25% off, original was $60 ÷ 0.75 = $80. Useful for verifying the discount actually matches what's claimed."}},
-{"@type":"Question","name":"Is \"buy one get one free\" the same as 50% off?","acceptedAnswer":{"@type":"Answer","text":"Yes, mathematically — assuming you wanted both items. If you only wanted one, BOGO is 0% off (you're paying full price for the one you wanted). 50% off is straightforwardly cheaper for any quantity."}},
-{"@type":"Question","name":"Do these calculations include sales tax?","acceptedAnswer":{"@type":"Answer","text":"No. Discount is applied to the pre-tax price; tax is then added to the discounted total. Use the Sales Tax Calculator for the next step."}}
-]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"If something is 50% off and I have a 20% coupon, what's the final discount?","acceptedAnswer":{"@type":"Answer","text":"60%, not 70%. The 20% comes off the already-discounted price. $100 → 50% off → $50 → 20% off → $40. Final price is 40% of original = 60% discount total."}},{"@type":"Question","name":"How do I find the original price from a sale price?","acceptedAnswer":{"@type":"Answer","text":"Original = final ÷ (1 − discount/100). If you paid $60 with 25% off, original was $60 ÷ 0.75 = $80. Useful for verifying the discount actually matches what's claimed."}},{"@type":"Question","name":"Is \"buy one get one free\" the same as 50% off?","acceptedAnswer":{"@type":"Answer","text":"Yes, mathematically — assuming you wanted both items. If you only wanted one, BOGO is 0% off (you're paying full price for the one you wanted). 50% off is straightforwardly cheaper for any quantity."}},{"@type":"Question","name":"Do these calculations include sales tax?","acceptedAnswer":{"@type":"Answer","text":"No. Discount is applied to the pre-tax price; tax is then added to the discounted total. Use the Sales Tax Calculator for the next step."}},{"@type":"Question","name":"How much is 60% off?","acceptedAnswer":{"@type":"Answer","text":"You pay 40% of the original price: $25 → $10.00, $50 → $20.00, $100 → $40.00, $200 → $80.00. Formula: final = price × (1 − 60 ÷ 100). The same logic works for any percentage — enter the price and discount above."}}]}
 </script>
 </head>
 
@@ -94,7 +91,6 @@
   <section class="hf-result" id="disc-out" role="status" aria-live="polite" aria-atomic="true">
     <div class="r-lbl">
       <span class="r-lbl-text">Final price</span>
-      <span class="hf-tiny hf-muted" aria-hidden="true">aria-live</span>
     </div>
     <div class="r-num">
       <span class="cur" aria-hidden="true">$</span><span class="val" id="disc-val">60.00</span>
@@ -170,6 +166,22 @@
           <li>Buy-one-get-one and quantity-based promotions need to be entered as their effective per-item percentage.</li>
         </ul>
       </details>
+
+      <details class="method-details">
+        <summary>Quick reference &mdash; common discounts</summary>
+        <table class="ref-table">
+          <caption>Final price you pay. Formula: final = price &times; (1 &minus; discount &divide; 100).</caption>
+          <tr><th scope="col">Discount</th><th scope="col">$25</th><th scope="col">$50</th><th scope="col">$100</th><th scope="col">$200</th></tr>
+          <tr><th scope="row">10% off</th><td>$22.50</td><td>$45.00</td><td>$90.00</td><td>$180.00</td></tr>
+          <tr><th scope="row">20% off</th><td>$20.00</td><td>$40.00</td><td>$80.00</td><td>$160.00</td></tr>
+          <tr><th scope="row">25% off</th><td>$18.75</td><td>$37.50</td><td>$75.00</td><td>$150.00</td></tr>
+          <tr><th scope="row">30% off</th><td>$17.50</td><td>$35.00</td><td>$70.00</td><td>$140.00</td></tr>
+          <tr><th scope="row">40% off</th><td>$15.00</td><td>$30.00</td><td>$60.00</td><td>$120.00</td></tr>
+          <tr><th scope="row">50% off</th><td>$12.50</td><td>$25.00</td><td>$50.00</td><td>$100.00</td></tr>
+          <tr><th scope="row">60% off</th><td>$10.00</td><td>$20.00</td><td>$40.00</td><td>$80.00</td></tr>
+          <tr><th scope="row">70% off</th><td>$7.50</td><td>$15.00</td><td>$30.00</td><td>$60.00</td></tr>
+        </table>
+      </details>
     </div>
   </div>
 
@@ -204,6 +216,10 @@
         <details class="step-q">
           <summary>Do these calculations include sales tax?</summary>
           <div class="answer"><p>No. Discount is applied to the pre-tax price; tax is then added to the discounted total. Use the <a href="/sales-tax-calculator/">Sales Tax Calculator</a> for the next step.</p></div>
+        </details>
+        <details class="step-q">
+          <summary>How much is 60% off?</summary>
+          <div class="answer"><p>You pay 40% of the original price: $25 &rarr; $10.00, $50 &rarr; $20.00, $100 &rarr; $40.00, $200 &rarr; $80.00. Formula: final = price &times; (1 &minus; 60 &divide; 100). The same logic works for any percentage &mdash; enter the price and discount above.</p></div>
         </details>
       </div>
     </section>

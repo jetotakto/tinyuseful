@@ -16,16 +16,18 @@
 <meta property="og:description" content="Restaurant tip + split bill, instant per-person amount.">
 <meta property="og:url" content="https://www.tinyuseful.app/tip-calculator/">
 <meta property="og:site_name" content="TinyUseful">
-<meta property="og:image" content="https://www.tinyuseful.app/og-image04.png">
+<meta property="og:image" content="https://www.tinyuseful.app/og-image05.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="TinyUseful — small tools for everyday questions">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://www.tinyuseful.app/og-image04.png">
+<meta name="twitter:image" content="https://www.tinyuseful.app/og-image05.jpg">
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260612-uxm2">
+<link rel="preload" href="/fonts/archivo-v1-latin/Archivo-VariableFont.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/jetbrains-mono-v24-latin/jetbrains-mono-v24-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css?v=20260718-b4">
 <script src="/js/helpers.js?v=20260611-parse"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){var s=String(r==null?'':r).trim().replace(/[\s ]+/g,'');if(!s)return NaN;var c=(s.match(/,/g)||[]).length,d=(s.match(/\./g)||[]).length;if(c&&d){s=s.lastIndexOf(',')>s.lastIndexOf('.')?s.replace(/\./g,'').replace(',','.'):s.replace(/,/g,'');}else if(c>1){s=s.replace(/,/g,'');}else if(d>1){s=s.replace(/\./g,'');}else{s=s.replace(',','.');}return Number(s);};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
@@ -91,7 +93,7 @@
       </div>
       <div class="hf-quickrow" role="group" aria-label="Quick tip percentages">
         <button type="button" class="hf-pill" data-pct="15">15%</button>
-        <button type="button" class="hf-pill active" data-pct="18">18%</button>
+        <button type="button" class="hf-pill" data-pct="18">18%</button>
         <button type="button" class="hf-pill" data-pct="20">20%</button>
       </div>
     </div>
@@ -112,7 +114,6 @@
   <section class="hf-result" id="tip-out" role="status" aria-live="polite" aria-atomic="true">
     <div class="r-lbl">
       <span class="r-lbl-text">Per person</span>
-      <span class="hf-tiny hf-muted" aria-hidden="true">aria-live</span>
     </div>
     <div class="r-num">
       <span class="cur" aria-hidden="true">$</span><span class="val" id="tip-val">13.20</span><span class="per" id="tip-per">/ person</span>
@@ -179,6 +180,23 @@
           <li>Automatic service charges (common for large parties or in some countries) are not detected; check the receipt before adding a tip on top.</li>
           <li>Uneven splits are not modelled.</li>
         </ul>
+      </details>
+
+      <details class="method-details">
+        <summary>Quick reference &mdash; tip amounts for common bills</summary>
+        <table class="ref-table">
+          <caption>Tip &rarr; bill total. Formula: tip = bill &times; percent &divide; 100.</caption>
+          <tr><th scope="col">Bill</th><th scope="col">15%</th><th scope="col">18%</th><th scope="col">20%</th></tr>
+          <tr><th scope="row">$20.00</th><td>$3.00 &rarr; $23.00</td><td>$3.60 &rarr; $23.60</td><td>$4.00 &rarr; $24.00</td></tr>
+          <tr><th scope="row">$30.00</th><td>$4.50 &rarr; $34.50</td><td>$5.40 &rarr; $35.40</td><td>$6.00 &rarr; $36.00</td></tr>
+          <tr><th scope="row">$40.00</th><td>$6.00 &rarr; $46.00</td><td>$7.20 &rarr; $47.20</td><td>$8.00 &rarr; $48.00</td></tr>
+          <tr><th scope="row">$50.00</th><td>$7.50 &rarr; $57.50</td><td>$9.00 &rarr; $59.00</td><td>$10.00 &rarr; $60.00</td></tr>
+          <tr><th scope="row">$60.00</th><td>$9.00 &rarr; $69.00</td><td>$10.80 &rarr; $70.80</td><td>$12.00 &rarr; $72.00</td></tr>
+          <tr><th scope="row">$80.00</th><td>$12.00 &rarr; $92.00</td><td>$14.40 &rarr; $94.40</td><td>$16.00 &rarr; $96.00</td></tr>
+          <tr><th scope="row">$100.00</th><td>$15.00 &rarr; $115.00</td><td>$18.00 &rarr; $118.00</td><td>$20.00 &rarr; $120.00</td></tr>
+          <tr><th scope="row">$150.00</th><td>$22.50 &rarr; $172.50</td><td>$27.00 &rarr; $177.00</td><td>$30.00 &rarr; $180.00</td></tr>
+          <tr><th scope="row">$200.00</th><td>$30.00 &rarr; $230.00</td><td>$36.00 &rarr; $236.00</td><td>$40.00 &rarr; $240.00</td></tr>
+        </table>
       </details>
     </div>
   </div>
@@ -414,13 +432,11 @@
     const billWrap = $('tip-bill-wrap');
 
     function syncPills() {
-      // Visual parity: when input matches 15/18/20, activate that pill.
-      // When input is NOT a preset (e.g. 10), preserve markup-set active state (18 from canvas).
+      // Visual parity: a pill is active only when the input matches its value.
+      // Non-preset values (e.g. default 10) leave all pills inactive so the
+      // highlighted pill never contradicts the percentage actually used.
       if (!pillRow || !pctInput) return;
       const cur = parseLocaleNumber(pctInput.value);
-      const presets = [15, 18, 20];
-      const idx = presets.indexOf(cur);
-      if (idx < 0) return;  // not a preset; leave canvas state alone
       pillRow.querySelectorAll('.hf-pill').forEach(function (p) {
         p.classList.toggle('active', Number(p.dataset.pct) === cur);
       });

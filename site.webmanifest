@@ -1,7 +1,7 @@
 {
   "name": "TinyUseful",
   "short_name": "TinyUseful",
-  "description": "Small tools for everyday questions. Eleven calculators and converters. No account. Inputs stay in your browser. No AI.",
+  "description": "Small tools for everyday questions. Thirteen calculators and converters. No account. Inputs stay in your browser. No AI.",
   "start_url": "/",
   "display": "browser",
   "theme_color": "#C8102E",

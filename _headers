@@ -9,6 +9,8 @@
 # ─── OG IMAGE — versioned filename, never changes ───
 /og-image04.png
   Cache-Control: public, max-age=31536000, immutable
+/og-image05.jpg
+  Cache-Control: public, max-age=31536000, immutable
 
 # ─── FAVICON ASSETS — change rarely, week-long cache OK ───
 /favicon.svg
@@ -55,8 +57,16 @@
   Cache-Control: public, max-age=300
 
 # ─── DEFAULT — HTML index files served from directory roots ───
+# 2026-07-18 security additions (approved):
+# - HSTS: force HTTPS for a year incl. subdomains. If Cloudflare dashboard
+#   HSTS is also enabled, disable one of the two to avoid duplicate headers.
+# - CSP: deliberately minimal (no script-src/style-src — AdSense injects
+#   scripts/iframes and a strict CSP would break ad serving). This layer only
+#   blocks framing by other sites, plugin content, and <base> hijacking.
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Content-Security-Policy: frame-ancestors 'self'; object-src 'none'; base-uri 'self'

@@ -1,0 +1,300 @@
+{
+  "$comment": "Discount Calculator content asset. Single source of truth for visible page content + JSON-LD generation. NOT a legacy HTML patch — this file is consumed by the v2 build pipeline. Until v2 templates exist, this asset is a content draft for review only.",
+  "slug": "discount-calculator",
+  "url": "/discount-calculator/",
+  "phase": "58A",
+  "phaseLabel": "Phase 58A — Simple Tools Content Depth: Discount Calculator",
+  "phaseLabelHistory": "Previously called 58b-2 in older PHASE58_SPEC_2026-05-07.md; Master Plan v2.5 supersedes that naming.",
+  "cluster": "shopping-restaurant",
+  "tier": "simple",
+  "contentStatus": "draft",
+  "contentTarget": "AdSense low-value remediation + v2 content depth",
+  "sourceBrief": "Phase 58b-2 — Discount Calculator Content Depth (Revised v2, approved 2026-05-10)",
+  "lastDraftedISO": "2026-05-13",
+  "draftedBy": "Claude (Cowork)",
+  "wordCountApprox": 0,
+  "wordCountTarget": 350,
+  "wordCountTargetSource": "docs/PHASE58_SPEC_2026-05-07.md (58b-2 Shopping cluster)",
+  "doNotChange": [
+    "url",
+    "h1",
+    "title",
+    "metaDescription",
+    "canonical",
+    "ogTitle",
+    "ogDescription",
+    "twitterCard",
+    "calculatorLogic",
+    "helpers.js",
+    "style.css",
+    "theme.js",
+    "softwareApplicationSchema",
+    "breadcrumbListSchema",
+    "adsenseSettings",
+    "cloudflareConfig",
+    "robots.txt",
+    "ads.txt"
+  ],
+  "intentSignals": {
+    "$comment": "Query signals from GSC 28d (snapshot 2026-05-10) that justify content depth direction.",
+    "primaryQueries": [
+      {
+        "query": "discount calculator",
+        "impressions": 11
+      },
+      {
+        "query": "60 off calculator",
+        "impressions": 1
+      },
+      {
+        "query": "discount computation",
+        "impressions": 1
+      },
+      {
+        "query": "discount converter",
+        "impressions": 1
+      }
+    ],
+    "interpretation": "Long-tail signals point to two intents: (1) compute final price from list price + percent off, (2) reverse — recover original price from sale price + percent off. The asset deepens both."
+  },
+  "quickExamples": [
+    {
+      "label": "20% off $50",
+      "text": "20% off $50 = $40 (saves $10)",
+      "source": "existing"
+    },
+    {
+      "label": "30% off $120",
+      "text": "30% off $120 = $84 (saves $36)",
+      "source": "existing"
+    },
+    {
+      "label": "50% off $200",
+      "text": "50% off $200 = $100 (saves $100)",
+      "source": "existing"
+    },
+    {
+      "label": "50% then 20% off $100",
+      "text": "\"50% off then 20% off\" $100 = $40 (60% total, NOT 70%)",
+      "source": "existing"
+    },
+    {
+      "label": "BOGO 50% off",
+      "text": "Buy one get one 50% off (2 × $40) = $60 (25% effective discount)",
+      "source": "existing"
+    },
+    {
+      "label": "60% off $50",
+      "text": "60% off $50 = $20 (saves $30)",
+      "source": "new",
+      "addressesQuery": "60 off calculator"
+    },
+    {
+      "label": "Reverse from $60 at 25% off",
+      "text": "$60 after 25% off → original price was $80",
+      "source": "new",
+      "addressesQuery": "discount converter"
+    }
+  ],
+  "formulas": [
+    {
+      "expression": "savings = price × (discount ÷ 100)",
+      "note": "forward",
+      "source": "existing"
+    },
+    {
+      "expression": "final price = price − savings",
+      "note": "forward",
+      "source": "existing"
+    },
+    {
+      "expression": "final price = price × (1 − discount ÷ 100)",
+      "note": "forward (equivalent)",
+      "source": "existing"
+    },
+    {
+      "expression": "original price = final price ÷ (1 − discount ÷ 100)",
+      "note": "reverse",
+      "source": "new",
+      "addressesQuery": "discount converter"
+    }
+  ],
+  "explainerNotes": [
+    {
+      "$comment": "Free-form prose paragraphs that sit alongside the formulas block in the explainer section.",
+      "source": "existing",
+      "text": "Two discounts in sequence don't add up. 50% off then 20% off is not 70% off — it's 60% off (because the 20% comes off the already-reduced price). For coupon stacking and Black Friday markdowns, run each discount one at a time."
+    }
+  ],
+  "methodology": {
+    "formula": [
+      "savings = price × (discount ÷ 100)",
+      "final price = price − savings",
+      "final price = price × (1 − discount ÷ 100) (equivalent)"
+    ],
+    "assumptions": [
+      "Discount is applied to the original (pre-tax) price you enter.",
+      "Stacked discounts (e.g. 50% off then 20% off) are not 70% off — run them one at a time, since the second discount applies to the already-reduced price.",
+      "Both decimal comma (12,5) and decimal point (12.5) are accepted."
+    ],
+    "rounding": "Final price and savings are calculated from the raw input values and displayed to 2 decimal places. Rounding is applied only when the result is shown.",
+    "limitations": [
+      "Sales tax is not added — use the Sales Tax Calculator for the next step.",
+      "Shipping, minimum-order rules, and coupon eligibility are not modelled.",
+      "Buy-one-get-one and quantity-based promotions need to be entered as their effective per-item percentage.",
+      "Retail prices ending in .99 or .95 may show a one-cent discrepancy from a \"round\" discount — this is intentional, not a calculation error.",
+      "If a coupon and a sale apply together, order matters: the coupon usually applies to the already-discounted price, not the original."
+    ],
+    "byline": "Built and maintained by Lukáš, an architect in Prague. Last updated May 2026."
+  },
+  "commonUses": [
+    {
+      "text": "X percent off calculator — quick price-off check before checkout",
+      "source": "existing"
+    },
+    {
+      "text": "Black Friday and seasonal sale comparisons",
+      "source": "existing"
+    },
+    {
+      "text": "Stacking a coupon on top of a sale price",
+      "source": "existing"
+    },
+    {
+      "text": "Computing membership/loyalty discount on a final cart",
+      "source": "existing"
+    },
+    {
+      "text": "Verifying a \"X% off\" sticker against the receipt",
+      "source": "existing"
+    },
+    {
+      "text": "Negotiating discounts with a supplier or contractor",
+      "source": "existing"
+    },
+    {
+      "text": "Verifying a \"60% off\" Black Friday sticker on a marked-down $50 item",
+      "source": "new",
+      "addressesQuery": "60 off calculator"
+    }
+  ],
+  "faq": [
+    {
+      "$comment": "Single source of truth for both visible FAQ and FAQPage JSON-LD. Build pipeline generates JSON-LD from this array — never write a parallel faqSchema[] field.",
+      "id": "discount-stack-coupon",
+      "source": "existing",
+      "question": "If something is \"50% off\" and I have a 20% coupon, what's the final discount?",
+      "answerParagraphs": [
+        "60%, not 70%. The 20% comes off the already-discounted price. $100 → 50% off → $50 → 20% off → $40. Final price is 40% of original = 60% discount total."
+      ]
+    },
+    {
+      "id": "discount-reverse-original-price",
+      "source": "updated",
+      "addressesQuery": "discount converter",
+      "question": "How do I find the original price from a sale price?",
+      "answerParagraphs": [
+        "Use the reverse formula: original = final ÷ (1 − discount/100).",
+        "Example: if you paid $42 with 30% off, the original was $42 ÷ 0.70 = $60. If you paid $60 with 25% off, original was $60 ÷ 0.75 = $80.",
+        "This is the inverse of the standard discount formula and is useful when only the sale price and the % off are visible (for example on a tag), and you want to check that the listed discount matches what's actually being offered."
+      ]
+    },
+    {
+      "id": "discount-bogo-vs-50",
+      "source": "existing",
+      "question": "Is \"buy one get one free\" the same as 50% off?",
+      "answerParagraphs": [
+        "Yes, mathematically — assuming you wanted both items. If you only wanted one, BOGO is 0% off (you're paying full price for the one you wanted). 50% off is straightforwardly cheaper for any quantity."
+      ]
+    },
+    {
+      "id": "discount-and-sales-tax",
+      "source": "existing",
+      "question": "Do these calculations include sales tax?",
+      "answerParagraphs": [
+        "No. Discount is applied to the pre-tax price; tax is then added to the discounted total. Use the Sales Tax Calculator for the next step."
+      ]
+    }
+  ],
+  "relatedTools": [
+    {
+      "slug": "percentage-calculator",
+      "name": "Percentage Calculator",
+      "url": "/percentage-calculator/"
+    },
+    {
+      "slug": "sales-tax-calculator",
+      "name": "Sales Tax Calculator",
+      "url": "/sales-tax-calculator/"
+    },
+    {
+      "slug": "tip-calculator",
+      "name": "Tip Calculator",
+      "url": "/tip-calculator/"
+    },
+    {
+      "slug": "unit-converter",
+      "name": "Unit Converter",
+      "url": "/unit-converter/"
+    }
+  ],
+  "trustNotes": [
+    "Calculations run in your browser.",
+    "We do not require an account.",
+    "We do not save your inputs.",
+    "Ads and analytics may use cookies where applicable.",
+    "Built and maintained by Lukáš, an architect in Prague."
+  ],
+  "duplicationFlags": [
+    {
+      "$comment": "Triple-mention of stacking logic across explainerNotes, methodology.assumptions, and methodology.limitations is intentional (layered emphasis on a high-impact misunderstanding). Flagged here so future reviewers can re-evaluate if needed.",
+      "topic": "Stacked discounts / coupon-on-sale ordering",
+      "locations": [
+        "explainerNotes[0]",
+        "methodology.assumptions[1]",
+        "methodology.limitations[4]"
+      ],
+      "rationale": "Each instance frames the rule from a different angle (mathematical, modeling assumption, real-world limitation). Acceptable redundancy for a topic users commonly miscalculate.",
+      "decision": "keep"
+    }
+  ],
+  "followUpIssues": [
+    {
+      "$comment": "Discovered during read-only audit on 2026-05-13. NOT addressed in this asset — separate follow-up brief required.",
+      "id": "discount-faq-jsonld-mismatch",
+      "severity": "medium",
+      "scope": "out-of-current-batch",
+      "summary": "Legacy discount-calculator/index.html has two FAQ entries where the visible <summary> text and the FAQPage JSON-LD Question.name disagree.",
+      "details": [
+        "FAQ entry 3 — HTML summary: \"Is 'buy one get one free' the same as 50% off?\" vs JSON-LD name: \"Is 30% off really better than buy-one-get-one?\"",
+        "FAQ entry 4 — HTML summary: \"Do these calculations include sales tax?\" vs JSON-LD name: \"How do I compare two stores' discounts?\""
+      ],
+      "impact": "Google may show rich-result snippets for questions that don't actually appear on the page, hurting click-quality and trust.",
+      "recommendedAction": "Separate brief (e.g. \"Phase 58b-2 follow-up — Discount FAQ/JSON-LD reconciliation\"). NOT to be mixed into the current content depth batch.",
+      "doNotFixHere": true
+    },
+    {
+      "$comment": "Discovered during read-only audit on 2026-05-13.",
+      "id": "discount-content-word-count-below-spec",
+      "severity": "low",
+      "scope": "informational",
+      "summary": "Phase 58b-2 spec targets ~350 words of methodology content for Discount. This asset, when rendered, will sit roughly in the 230–280 word range — under target.",
+      "recommendedAction": "Decide whether to expand later (e.g. add a worked example walkthrough, a comparison block) or accept current scope as a minimal safe surgical patch. Owner: Lukáš."
+    }
+  ],
+  "renderingHints": {
+    "$comment": "Non-binding guidance for whichever v2 template later consumes this asset. Templates may ignore.",
+    "faqOrder": "preserve array order; reverse-original-price (id=discount-reverse-original-price) MUST be position 2 for narrative flow (stack/reverse/BOGO/tax).",
+    "jsonLdGeneration": "Generate FAQPage JSON-LD by mapping faq[].question → Question.name and joining faq[].answerParagraphs with ' ' (single space) into Answer.text. Do NOT introduce a parallel faqSchema[] field.",
+    "headingHierarchy": "h1 (page title) → h2 (Inputs, How to calculate, Quick examples, Formulas used, Common uses, Methodology & trust, Frequently asked questions, Related tools) → h3 (methodology sub-sections: Formula, Assumptions, Rounding, Limitations).",
+    "methodologyContainer": "Wrap methodology block in a native <details> with <summary>Formula, assumptions, rounding, and limitations</summary> per Phase 56 reference pattern."
+  },
+  "reviewChecklist": [
+    "Does any quick example or FAQ change a numeric value the user already sees on the page? (must be NO)",
+    "Is the rounding statement free of specific algorithm claims like 'banker's rounding' or 'half-away-from-zero'? (must be YES)",
+    "Does the reverse formula appear both in formulas[] and in the reverse-original-price FAQ? (must be YES — intentional layering, not duplication)",
+    "Are there any new FAQ entries beyond the original 4? (must be NO — only update of existing entry id=discount-reverse-original-price)",
+    "Is the FAQ count exactly 4? (must be YES)",
+    "Does followUpIssues capture the FAQ/JSON-LD mismatch? (must be YES)"
+  ]
+}

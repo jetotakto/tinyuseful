@@ -1734,6 +1734,35 @@ body.ui-hifi .hf-ad .ad-slot {
   text-transform: uppercase;
 }
 body.ui-hifi .hf-ad .ad-slot::before { content: 'Ad slot reserved'; }
+/* 2026-07-18: AdSense not yet approved — hide reserved ad containers so users
+   and reviewers don't see empty "Advertisement" boxes. Remove this one rule
+   (keep everything above) when AdSense approval lands and real ad units ship. */
+body.ui-hifi .hf-ad { display: none; }
+
+/* 2026-07-18 Batch 4: quick-reference tables inside method-details.
+   Native <table>, tabular numbers, design-token borders. */
+body.ui-hifi .ref-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 10px 0 4px;
+  font-variant-numeric: tabular-nums;
+  font-size: 14px;
+}
+body.ui-hifi .ref-table caption {
+  text-align: left;
+  font-size: 12px;
+  color: var(--ink-3);
+  padding-bottom: 6px;
+}
+body.ui-hifi .ref-table th,
+body.ui-hifi .ref-table td {
+  border: 1px solid var(--rule-soft);
+  padding: 6px 10px;
+  text-align: right;
+}
+body.ui-hifi .ref-table th { font-weight: 600; }
+body.ui-hifi .ref-table th:first-child,
+body.ui-hifi .ref-table td:first-child { text-align: left; }
 
 /* ───── stacked sections (hifi-theme.css L309-339) ───── */
 body.ui-hifi .hf-stack { display: flex; flex-direction: column; margin-top: 14px; }

@@ -16,16 +16,18 @@
 <meta property="og:description" content="Monthly payment for auto, student, or personal loans — fixed-rate amortization.">
 <meta property="og:url" content="https://www.tinyuseful.app/loan-calculator/">
 <meta property="og:site_name" content="TinyUseful">
-<meta property="og:image" content="https://www.tinyuseful.app/og-image04.png">
+<meta property="og:image" content="https://www.tinyuseful.app/og-image05.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="TinyUseful — small tools for everyday questions">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://www.tinyuseful.app/og-image04.png">
+<meta name="twitter:image" content="https://www.tinyuseful.app/og-image05.jpg">
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5316081427597729" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/style.css?v=20260612-uxm2">
+<link rel="preload" href="/fonts/archivo-v1-latin/Archivo-VariableFont.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/jetbrains-mono-v24-latin/jetbrains-mono-v24-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css?v=20260718-b4">
 <script src="/js/helpers.js?v=20260611-parse"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){var s=String(r==null?'':r).trim().replace(/[\s ]+/g,'');if(!s)return NaN;var c=(s.match(/,/g)||[]).length,d=(s.match(/\./g)||[]).length;if(c&&d){s=s.lastIndexOf(',')>s.lastIndexOf('.')?s.replace(/\./g,'').replace(',','.'):s.replace(/,/g,'');}else if(c>1){s=s.replace(/,/g,'');}else if(d>1){s=s.replace(/\./g,'');}else{s=s.replace(',','.');}return Number(s);};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
@@ -104,7 +106,6 @@
   <section class="hf-result" id="loan-out" role="status" aria-live="polite" aria-atomic="true">
     <div class="r-lbl">
       <span class="r-lbl-text" id="loan-lbl">Monthly</span>
-      <span class="hf-tiny hf-muted" aria-hidden="true">aria-live</span>
     </div>
     <div class="r-num">
       <span class="cur" aria-hidden="true">$</span><span class="val" id="loan-val">501</span>
