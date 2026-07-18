@@ -12,6 +12,8 @@ og-template.html
 
 # Claude instructions — local-only, never push to public repo
 CLAUDE.md
+AGENTS.md
+.claude/
 
 # Internal handoff documents between Cowork sessions — never push
 _handoff_*.md

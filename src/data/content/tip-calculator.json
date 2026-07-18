@@ -1,0 +1,317 @@
+{
+  "$comment": "Tip Calculator content asset. Single source of truth for visible page content + JSON-LD generation. NOT a legacy HTML patch — this file is consumed by the v2 build pipeline. Until v2 templates exist, this asset is a content draft for review only.",
+  "slug": "tip-calculator",
+  "url": "/tip-calculator/",
+  "phase": "58A",
+  "phaseLabel": "Phase 58A — Simple Tools Content Depth: Tip Calculator",
+  "phaseLabelHistory": "Original Master Plan v2.5 phase labeling. No prior naming to migrate.",
+  "cluster": "shopping-restaurant",
+  "tier": "simple",
+  "contentStatus": "draft",
+  "contentTarget": "AdSense low-value remediation + v2 content depth",
+  "sourceBrief": "Phase 58A — Simple Tools Content Depth: Tip Calculator (W5 controlled trim, approved 2026-05-13)",
+  "lastDraftedISO": "2026-05-13",
+  "draftedBy": "Claude (Cowork)",
+  "wordCountApprox": 0,
+  "wordCountTarget": 680,
+  "wordCountTargetSource": "W5 controlled trim — Lukáš decision 2026-05-13. Tip page already strong at ~622 words pre-patch; target 650–680 visible content after surgical updates.",
+  "futureSiblingTool": "split-bill-calculator",
+  "futureSiblingToolNote": "Internal metadata only. NEVER expose 'Split Bill Calculator is planned' as visible text on the page until the URL actually exists. No related-tools link to a non-existent URL.",
+  "doNotChange": [
+    "url",
+    "h1",
+    "title",
+    "metaDescription",
+    "canonical",
+    "ogTitle",
+    "ogDescription",
+    "twitterCard",
+    "calculatorLogic",
+    "tipCalc-function",
+    "default-input-values",
+    "helpers.js",
+    "style.css",
+    "theme.js",
+    "softwareApplicationSchema",
+    "breadcrumbListSchema",
+    "result-block-primary-output-Total",
+    "adsenseSettings",
+    "cloudflareConfig",
+    "robots.txt",
+    "ads.txt"
+  ],
+  "intentSignals": {
+    "$comment": "Query signals from GSC 3-month window (snapshot 2026-05-13) for /tip-calculator/. Weak overall signal (6 impressions, position 58.5, zero clicks). Split-bill intent NOT present in GSC for this page; split content is a Lukáš strategic priority, not a GSC-driven addition.",
+    "source": "gsc-3mo",
+    "snapshotISO": "2026-05-13",
+    "primaryQueries": [
+      {
+        "query": "restaurant tip calculator",
+        "impressions": 2
+      },
+      {
+        "query": "tip calculator nyc",
+        "impressions": 1
+      },
+      {
+        "query": "nyc tip calculator",
+        "impressions": 1
+      },
+      {
+        "query": "restaurant calculator tax and tip",
+        "impressions": 1
+      }
+    ],
+    "interpretation": "Three logical intent clusters: (1) restaurant tipping (dominant, 2 imp), (2) NYC / US-locale tipping (2 imp across token-reorder duplicates), (3) tip+tax combined (1 imp). All queries reflect US restaurant context. Split-bill / bill-splitter queries are absent — split content is a strategic priority, flagged separately in this asset.",
+    "splitBillSignal": "none in GSC for /tip-calculator/ over 3 months"
+  },
+  "quickExamples": [
+    {
+      "label": "15% on $45",
+      "text": "15% tip on $45 = $6.75",
+      "source": "existing"
+    },
+    {
+      "label": "18% on $50",
+      "text": "18% tip on $50 = $9.00",
+      "source": "existing"
+    },
+    {
+      "label": "20% on $60",
+      "text": "20% tip on $60 = $12.00",
+      "source": "existing"
+    },
+    {
+      "label": "22% on $80",
+      "text": "22% tip on $80 = $17.60",
+      "source": "existing"
+    },
+    {
+      "label": "Split with tip — $120 / 4",
+      "text": "$120 bill, 20% tip, split 4 ways = $36.00 each",
+      "source": "new",
+      "replacedExistingItem": "$90 bill + 20% split between 3 = $36.00 each",
+      "rationale": "Cleaner, rounder numbers; same per-person result; strategic priority for split-bill secondary use case (Lukáš). No GSC signal — flagged as strategic, not data-driven.",
+      "addressesIntent": "split-bill secondary use case (strategic)"
+    }
+  ],
+  "formulas": [
+    {
+      "expression": "tip = bill × (percent ÷ 100)",
+      "note": "primary",
+      "source": "existing"
+    },
+    {
+      "expression": "total = bill + tip",
+      "note": "primary",
+      "source": "existing"
+    },
+    {
+      "expression": "per person = total ÷ split",
+      "note": "secondary (split-bill)",
+      "source": "existing"
+    }
+  ],
+  "explainerNotes": [
+    {
+      "$comment": "Existing explainer prose paragraph; no change planned.",
+      "source": "existing",
+      "text": "For 15% tip in your head: take 10% (move the decimal one place left), then add half of that. $45 bill → 10% is $4.50 → half is $2.25 → 15% is about $6.75. For 20%: take 10% and double it. These mental tricks are close enough for restaurant decisions; the calculator above will give you the exact number."
+    }
+  ],
+  "methodology": {
+    "$comment": "Methodology block already exists on the page (Phase 58a tech rollout). This asset describes the post-patch state: rounding reworded for consistency with Discount, one new assumption (bill-as-entered), one new limitation (even-split-only).",
+    "formula": [
+      "tip = bill × (percent ÷ 100)",
+      "total = bill + tip",
+      "per person = total ÷ split"
+    ],
+    "assumptions": [
+      {
+        "text": "Tip is calculated on the bill amount you enter.",
+        "source": "existing",
+        "trimNote": "Trimmed 2026-05-13. Original text was: 'Tip is calculated on the bill amount you enter. If you tip on the post-tax total, enter the post-tax bill.'. Trim rationale: triple overlap with assumption[3] (bill-as-entered, explicit) and faq Q2 (pre-vs-post tax). Length reduction with no informational loss."
+      },
+      {
+        "text": "Per-person split is even; each person pays the same share of total.",
+        "source": "existing"
+      },
+      {
+        "text": "Both decimal comma (18,5) and decimal point (18.5) are accepted.",
+        "source": "existing"
+      },
+      {
+        "text": "The calculator uses the bill amount you enter. Enter the pre-tax subtotal if you want to tip before tax, or the after-tax total if you want tax included in the tip base.",
+        "source": "new",
+        "rationale": "Explicit boundary against Sales Tax Calculator drift. Addresses 'restaurant calculator tax and tip' GSC intent (1 imp) without turning Tip into a tax-rate lookup tool."
+      }
+    ],
+    "rounding": "Tip, total, and per-person amounts are calculated from the raw input values and displayed to 2 decimal places. Rounding is applied only when the result is shown.",
+    "roundingSource": "reworded — consistent with Discount asset pattern. No algorithm claims (no 'banker's rounding', no 'half-away-from-zero').",
+    "limitations": [
+      {
+        "text": "Local tipping conventions are not looked up — defaults reflect US sit-down norms.",
+        "source": "existing"
+      },
+      {
+        "text": "Automatic service charges (common for large parties or in some countries) are not detected; check the receipt before adding a tip on top.",
+        "source": "existing"
+      },
+      {
+        "text": "This calculator does an even split. It does not handle itemized or uneven splits where people ordered different amounts.",
+        "source": "new",
+        "replaces": "existing 'Uneven splits are not modelled' limitation",
+        "rationale": "Slightly longer, more explicit boundary. Prepares users for future /split-bill-calculator/ scope without naming it on-page."
+      }
+    ],
+    "byline": "Built and maintained by Lukáš, an architect in Prague. Last updated May 2026."
+  },
+  "commonUses": [
+    {
+      "text": "Restaurant and café service in the US (sit-down, 18–22%)",
+      "source": "existing"
+    },
+    {
+      "text": "Splitting a shared dinner bill between people",
+      "source": "existing"
+    },
+    {
+      "text": "Bartenders and baristas (typically $1–$2 or 15–20%)",
+      "source": "existing"
+    },
+    {
+      "text": "Hotel housekeeping and bellhop service",
+      "source": "existing"
+    },
+    {
+      "text": "Hairdresser, taxi, and food delivery (10–20%)",
+      "source": "existing"
+    }
+  ],
+  "faq": [
+    {
+      "$comment": "Single source of truth for both visible FAQ and FAQPage JSON-LD. Build pipeline generates JSON-LD from this array — never write a parallel faqSchema[] field.",
+      "id": "tip-mental-math",
+      "source": "existing",
+      "question": "How do I calculate a 15% or 18% tip in my head?",
+      "answerParagraphs": [
+        "For 15%: take 10% (move the decimal one place left), then add half of that. Bill of $40 → 10% is $4 → half is $2 → 15% is $6. For 18%: same trick, then add a bit more. For 20%: take 10% and double it."
+      ]
+    },
+    {
+      "id": "tip-pre-vs-post-tax",
+      "source": "existing",
+      "question": "Should I tip on the pre-tax or post-tax total?",
+      "answerParagraphs": [
+        "Pre-tax is the traditional standard in the US — you're tipping for service, not for tax. But many people tip on the post-tax total because it's what's printed on the receipt and it's easier. Both are common; the calculator works with whichever bill amount you enter."
+      ]
+    },
+    {
+      "id": "tip-2026-standard",
+      "source": "updated",
+      "addressesQuery": "tip calculator nyc, nyc tip calculator",
+      "question": "Is 20% standard in 2026?",
+      "answerParagraphs": [
+        "For many US sit-down restaurants, including places like NYC, 18–22% is a common tip range. Use the percentage that matches your situation. Counter-service and takeout are more flexible — 10% or a few dollars is common, sometimes 0% if it's true counter-service."
+      ],
+      "rewriteNote": "Trimmed prior 'tip creep' explanation to compensate for NYC mention. Net length similar to original."
+    },
+    {
+      "id": "tip-split-bill",
+      "source": "updated",
+      "addressesIntent": "split-bill secondary use case (strategic, no GSC signal)",
+      "previousQuestion": "How do I split a bill unevenly?",
+      "question": "How do I split a bill with tip?",
+      "answerParagraphs": [
+        "For an even split, use the formula per_person = (bill + tip) ÷ people. Example: $120 bill, 20% tip → tip is $24, total is $144, split 4 ways = $36 each. Enter your numbers in the calculator above for an instant per-person amount.",
+        "For uneven or itemized splits — when someone ordered more, or one person is paying a fixed share — ask the server to print separate checks (most US restaurants will), or calculate each person's share manually and add a flat tip percentage to each."
+      ],
+      "rewriteNote": "Question reframed from uneven-only to even-primary; even split formula + worked example added as paragraph 1; uneven boundary preserved as paragraph 2. No 'shared appetizer' content per W5 decision."
+    }
+  ],
+  "relatedTools": [
+    {
+      "slug": "percentage-calculator",
+      "name": "Percentage Calculator",
+      "url": "/percentage-calculator/"
+    },
+    {
+      "slug": "sales-tax-calculator",
+      "name": "Sales Tax Calculator",
+      "url": "/sales-tax-calculator/"
+    },
+    {
+      "slug": "discount-calculator",
+      "name": "Discount Calculator",
+      "url": "/discount-calculator/"
+    },
+    {
+      "slug": "unit-converter",
+      "name": "Unit Converter",
+      "url": "/unit-converter/"
+    }
+  ],
+  "trustNotes": [
+    "Calculations run in your browser.",
+    "We do not require an account.",
+    "We do not save your inputs.",
+    "Ads and analytics may use cookies where applicable.",
+    "Built and maintained by Lukáš, an architect in Prague."
+  ],
+  "duplicationFlags": [
+    {
+      "$comment": "Even-split content appears in quickExamples #5, formulas[2], methodology.assumptions[1], methodology.limitations[2], and FAQ Q4. This is layered emphasis on a single use case (Lukáš strategic priority), not accidental redundancy. Flagged so future reviewers can re-evaluate.",
+      "topic": "Even split-bill use case",
+      "locations": [
+        "quickExamples[5]",
+        "formulas[2]",
+        "methodology.assumptions[1]",
+        "methodology.limitations[2]",
+        "faq[3]"
+      ],
+      "rationale": "Split bill is a strategic priority (Lukáš direction 2026-05-13). Visible repetition is intentional layered emphasis to support the secondary use case without giving it a separate URL.",
+      "decision": "keep"
+    }
+  ],
+  "followUpIssues": [
+    {
+      "$comment": "Strategic placeholder for the future /split-bill-calculator/ sibling tool.",
+      "id": "split-bill-standalone-tool",
+      "severity": "info",
+      "scope": "post-tip-deploy",
+      "summary": "Lukáš (2026-05-13) flagged Split Bill Calculator as a #1 strategic priority. Decision per C-upravená: build Tip first with split as secondary use case; revisit standalone /split-bill-calculator/ after Tip is deployed and GSC has had time to surface split-related queries.",
+      "trigger": "After Tip patch is live on production for 2–4 weeks, review GSC for queries containing 'split bill', 'bill splitter', 'split check', 'per person bill', 'share dinner cost'. If signal appears, draft a separate brief for /split-bill-calculator/ standalone tool with distinct defaults (default people=3+, primary output = per-person, default tip% = 18).",
+      "doNotFixHere": true
+    },
+    {
+      "$comment": "GSC signal strength is weak across the Shopping cluster.",
+      "id": "tip-gsc-signal-weak",
+      "severity": "low",
+      "scope": "informational",
+      "summary": "Over 3 months, /tip-calculator/ accumulated only 6 impressions and zero clicks at average position 58.5. Content patch is justified by AdSense low-value remediation goal, not by ranking opportunity. Realistic timeline for visible ranking improvement: 60–90 days post-deploy, not 14.",
+      "recommendedAction": "Set expectation that this patch is a long-term content-depth investment. Do not gate next steps on short-term ranking response."
+    }
+  ],
+  "renderingHints": {
+    "$comment": "Non-binding guidance for whichever v2 template later consumes this asset. Templates may ignore.",
+    "faqOrder": "preserve array order; mental-math first, pre-vs-post-tax second, 2026-standard third, split-bill fourth (most relevant secondary use case last).",
+    "jsonLdGeneration": "Generate FAQPage JSON-LD by mapping faq[].question → Question.name and joining faq[].answerParagraphs with ' ' (single space) into Answer.text. Do NOT introduce a parallel faqSchema[] field.",
+    "headingHierarchy": "h1 (page title) → h2 (Inputs, How to calculate, Quick examples, Formulas used, Common uses, Methodology & trust, Frequently asked questions, Related tools) → h3 (methodology sub-sections: Formula, Assumptions, Rounding, Limitations).",
+    "methodologyContainer": "Wrap methodology block in a native <details> with <summary>Formula, assumptions, rounding, and limitations</summary> per Phase 56 reference pattern.",
+    "resultBlockPrimary": "Primary big number stays 'Total' (e.g. $59.00). Per-person amount stays in breakdown line. Do NOT swap to per-person as primary — that is reserved for the future /split-bill-calculator/ sibling.",
+    "splitBillVisibility": "Split-bill content is present throughout (quick example, formula, methodology, FAQ Q4). Do NOT add visible 'A dedicated Split Bill Calculator is planned' text. Do NOT add a relatedTools link to /split-bill-calculator/ until that URL exists."
+  },
+  "reviewChecklist": [
+    "Does any quick example or FAQ change a numeric value the user already sees on the page? (must be NO except for the deliberately replaced split example #5)",
+    "Is the rounding statement free of specific algorithm claims like 'banker's rounding' or 'half-away-from-zero'? (must be YES)",
+    "Is the FAQ count exactly 4? (must be YES)",
+    "Does followUpIssues capture the future split-bill standalone consideration? (must be YES)",
+    "Is the visible text free of any 'Split Bill Calculator is planned' phrasing? (must be YES)",
+    "Is relatedTools[] free of a /split-bill-calculator/ link? (must be YES — URL does not exist)",
+    "Does the NYC mention in FAQ Q3 avoid normative tipping prescriptions like 'practical baseline' or 'rare to tip below 18%'? (must be YES)",
+    "Does any quick example or FAQ require the calculator to look up a tax rate? (must be NO — bill is always 'as entered')",
+    "Is the primary result output still 'Total' rather than 'Per person'? (must be YES)",
+    "Is futureSiblingTool: 'split-bill-calculator' present as internal metadata only? (must be YES)",
+    "Does intentSignals correctly label source as 'gsc-3mo' (3 months) not 'gsc-28d'? (must be YES)"
+  ]
+}
