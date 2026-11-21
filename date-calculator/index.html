@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Date Calculator — Days Between Dates | TinyUseful</title>
-<meta name="description" content="Calculate the number of days between two dates, or find a date X days from today. Works for past or future. No account, no saved input, no AI." />
+<title>Date Calculator — Add Days to a Date or Count Days Between | TinyUseful</title>
+<meta name="description" content="Find the date 30, 60, or 90 days from any start date. Add or subtract calendar days, see the weekday, or count the days between two dates." />
 <link rel="canonical" href="https://www.tinyuseful.app/date-calculator/">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -13,7 +13,7 @@
 <meta name="robots" content="index, follow">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Date Calculator — TinyUseful">
-<meta property="og:description" content="Days between two dates, or a date X days from today.">
+<meta property="og:description" content="Add or subtract days from any date, or count the days between two dates.">
 <meta property="og:url" content="https://www.tinyuseful.app/date-calculator/">
 <meta property="og:site_name" content="TinyUseful">
 <meta property="og:image" content="https://www.tinyuseful.app/og-image05.jpg">
@@ -32,7 +32,7 @@
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){var s=String(r==null?'':r).trim().replace(/[\s ]+/g,'');if(!s)return NaN;var c=(s.match(/,/g)||[]).length,d=(s.match(/\./g)||[]).length;if(c&&d){s=s.lastIndexOf(',')>s.lastIndexOf('.')?s.replace(/\./g,'').replace(',','.'):s.replace(/,/g,'');}else if(c>1){s=s.replace(/,/g,'');}else if(d>1){s=s.replace(/\./g,'');}else{s=s.replace(',','.');}return Number(s);};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Date Calculator","applicationCategory":"UtilityApplication","operatingSystem":"Any (browser-based)","description":"Calculate the number of days between two dates, or find a date X days from today.","url":"https://www.tinyuseful.app/date-calculator/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"TinyUseful","url":"https://www.tinyuseful.app/"}}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Date Calculator","applicationCategory":"UtilityApplication","operatingSystem":"Any (browser-based)","description":"Add or subtract days from any date, or count the days between two dates.","url":"https://www.tinyuseful.app/date-calculator/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"TinyUseful","url":"https://www.tinyuseful.app/"}}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TinyUseful","item":"https://www.tinyuseful.app/"},{"@type":"ListItem","position":2,"name":"Date Calculator","item":"https://www.tinyuseful.app/date-calculator/"}]}
@@ -64,7 +64,7 @@
 
   <h1 class="hf-display">DATE CALCULATOR</h1>
   <div class="hf-sub">
-    <span>Days between two dates, or a date X days from today.</span>
+    <span>Add or subtract calendar days from any date, or count the days between two dates.</span>
   </div>
 
   <div class="hf-fields tool-form" data-tool="date">
@@ -75,15 +75,15 @@
       </label>
       <div class="hf-input hf-input-select">
         <select id="date-mode" aria-label="Calculation mode">
-          <option value="between">Days between</option>
-          <option value="addto">Days from today</option>
+          <option value="addto">Add or subtract days</option>
+          <option value="between">Days between dates</option>
         </select>
       </div>
     </div>
 
-    <div class="hf-field" id="date-field-from">
+    <div class="hf-field">
       <label class="lbl" for="date-from">
-        <span>From</span>
+        <span>Start date</span>
         <span class="req" id="date-from-req">required</span>
       </label>
       <div class="hf-input focus" id="date-from-wrap">
@@ -91,7 +91,7 @@
       </div>
     </div>
 
-    <div class="hf-field" id="date-field-to">
+    <div class="hf-field" id="date-field-to" hidden>
       <label class="lbl" for="date-to">
         <span>To</span>
       </label>
@@ -100,13 +100,13 @@
       </div>
     </div>
 
-    <div class="hf-field" id="date-field-days" hidden>
+    <div class="hf-field" id="date-field-days">
       <label class="lbl" for="date-days">
         <span>Days</span>
         <span aria-hidden="true">+/−</span>
       </label>
       <div class="hf-input">
-        <input type="text" inputmode="numeric" autocomplete="off" enterkeyhint="done" id="date-days" value="100" aria-label="Number of days from today, positive or negative">
+        <input type="text" inputmode="text" autocomplete="off" enterkeyhint="done" id="date-days" value="90" aria-label="Number of days from start date, positive or negative">
         <span class="suf" aria-hidden="true">days</span>
       </div>
     </div>
@@ -115,24 +115,17 @@
 
   <section class="hf-result" id="date-out" role="status" aria-live="polite" aria-atomic="true">
     <div class="r-lbl">
-      <span class="r-lbl-text" id="date-lbl">Days</span>
+      <span class="r-lbl-text" id="date-lbl">Date</span>
     </div>
     <div class="r-num">
-      <span class="val" id="date-val">+30</span>
+      <span class="val" id="date-val">&mdash;</span>
     </div>
-    <div class="r-break" id="date-break">
-      <span>From</span><span class="v" id="date-break-from">today</span>
-      <span>To</span><span class="v" id="date-break-to">today + 30</span>
-      <span>Days</span><span class="v">30</span>
-      <span>~ Years</span><span class="v">0.08</span>
-    </div>
+    <div class="r-break" id="date-break"></div>
     <div class="r-actions">
       <button type="button" class="hf-btn accent" id="date-copy" aria-label="Copy result to clipboard">Copy result</button>
       <button type="button" class="hf-btn ghost" id="date-reset" aria-label="Reset to defaults">Reset</button>
     </div>
-    <div class="why-line" id="date-why">
-      From today to today + 30 = <b>+30 days</b> (~0.08 years)
-    </div>
+    <div class="why-line" id="date-why"></div>
   </section>
 
   <div class="hf-chips-wrap" id="date-next" aria-label="You might also need">
@@ -157,10 +150,10 @@
     <div class="hf-cap">How this is calculated</div>
     <div class="hf-method-block">
       <div class="formula">days between = (end &minus; start) &divide; 86,400,000 ms</div>
-      <div class="formula">date from today = today + N days</div>
+      <div class="formula">result date = start date + N days</div>
       <div class="formula">~years = days &divide; 365.25</div>
-      <p>The browser handles leap years and month lengths automatically. Negative results in &ldquo;between&rdquo; mode mean the end date is earlier than the start. Negative numbers in &ldquo;from today&rdquo; mode go backward in time.</p>
-      <p class="hf-muted hf-tiny">Updated May 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
+      <p>For example, 90 days from November 11, 2026 is February 9, 2027. The calculation accounts for leap years and month lengths. Use a negative number to go backward from the start date.</p>
+      <p class="hf-muted hf-tiny">Updated November 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
 
       <details class="method-details">
         <summary>Formula, assumptions, rounding &amp; limitations</summary>
@@ -168,7 +161,7 @@
         <h3>Formula</h3>
         <ul>
           <li><code>days between = (end &minus; start) &divide; 86,400,000 ms</code></li>
-          <li><code>date from today = today + N days</code></li>
+          <li><code>result date = start date + N days</code></li>
           <li><code>~years = days &divide; 365.25</code></li>
         </ul>
 
@@ -182,7 +175,6 @@
 
         <h3>Rounding</h3>
         <ul>
-          <li>Day differences are rounded to the nearest whole day.</li>
           <li>Approximate years use a 365.25-day average; for exact year/month/day breakdowns use a dedicated date-of-birth calculator.</li>
         </ul>
 
@@ -276,21 +268,10 @@
     return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
   }
 
-  // Toggle hf-field visibility based on mode (preserves dateUpdateUI legacy behavior)
   function dateUpdateUI() {
-    const mode = $('date-mode').value;
-    const fromField = $('date-field-from');
-    const toField   = $('date-field-to');
-    const daysField = $('date-field-days');
-    if (mode === 'between') {
-      if (fromField) fromField.hidden = false;
-      if (toField)   toField.hidden = false;
-      if (daysField) daysField.hidden = true;
-    } else {
-      if (fromField) fromField.hidden = true;
-      if (toField)   toField.hidden = true;
-      if (daysField) daysField.hidden = false;
-    }
+    const between = $('date-mode').value === 'between';
+    $('date-field-to').hidden = !between;
+    $('date-field-days').hidden = between;
   }
 
   function dateRender(state) {
@@ -322,19 +303,18 @@
         'From ' + from + ' to ' + to + ' = <b>' + sign + fmt0(days) +
         ' day' + (absDays === 1 ? '' : 's') + '</b> (~' + fmt(years) + ' years)';
     } else {
-      // addto
-      const { iso, weekday, d } = state;
+      const { from, iso, weekday, d } = state;
       const sign = d >= 0 ? '+' : '';
       const absD = Math.abs(d);
       lblEl.textContent = 'Date';
       valEl.textContent = iso;
       brkEl.innerHTML =
-        '<span>From</span><span class="v">today</span>' +
+        '<span>From</span><span class="v">' + from + '</span>' +
         '<span>Offset</span><span class="v">' + sign + fmt0(d) + ' day' + (absD === 1 ? '' : 's') + '</span>' +
         '<span>Result</span><span class="v">' + iso + '</span>' +
         '<span>Weekday</span><span class="v">' + weekday + '</span>';
       whyEl.innerHTML =
-        'Today ' + sign + ' ' + fmt0(absD) + ' day' + (absD === 1 ? '' : 's') +
+        from + (d < 0 ? ' − ' : ' + ') + fmt0(absD) + ' day' + (absD === 1 ? '' : 's') +
         ' = <b>' + iso + '</b> (' + weekday + ')';
     }
   }
@@ -342,38 +322,52 @@
   // Public name dateCalc preserved per freeze list
   function dateCalc() {
     const mode = $('date-mode').value;
+    const from = $('date-from').value;
     if (mode === 'between') {
-      const f = $('date-from').value;
       const t = $('date-to').value;
-      if (!f || !t) {
+      if (!from || !t) {
         dateRender({ valid: false, label: 'Days', message: 'Pick both dates', whyMessage: 'Pick a From and To date above.' });
         return;
       }
-      const days = Math.round((new Date(t) - new Date(f)) / 86400000);
+      const days = (new Date(t) - new Date(from)) / 86400000;
+      if (!Number.isFinite(days)) {
+        dateRender({ valid: false, label: 'Days', message: 'Enter two valid dates' });
+        return;
+      }
       const years = Math.abs(days) / 365.25;
-      dateRender({ valid: true, mode: 'between', from: f, to: t, days, years });
+      dateRender({ valid: true, mode: 'between', from, to: t, days, years });
     } else {
-      const d = Math.floor(parseLocaleNumber($('date-days').value)) || 0;
-      const result = new Date();
-      result.setDate(result.getDate() + d);
-      const iso = localISO(result);
-      const weekday = result.toLocaleDateString('en-US', { weekday: 'long' });
-      dateRender({ valid: true, mode: 'addto', iso, weekday, d });
+      const d = parseLocaleNumber($('date-days').value.replace(/^\s*−/, '-'));
+      if (!from || !Number.isSafeInteger(d)) {
+        dateRender({ valid: false, label: 'Date', message: 'Enter a start date and a whole number of days' });
+        return;
+      }
+      // Date inputs give calendar dates. UTC avoids DST shifts between those dates.
+      const result = new Date(from);
+      result.setUTCDate(result.getUTCDate() + d);
+      const year = result.getUTCFullYear();
+      if (!Number.isFinite(year) || year < 1 || year > 9999) {
+        dateRender({ valid: false, label: 'Date', message: 'Result must be between years 1 and 9999' });
+        return;
+      }
+      const iso = result.toISOString().slice(0, 10);
+      const weekday = result.toLocaleDateString('en-US', { weekday: 'long', timeZone: 'UTC' });
+      dateRender({ valid: true, mode: 'addto', from, iso, weekday, d });
     }
   }
 
-  // Init defaults: between mode, from=today, to=today+30
-  (function initDate() {
+  function resetDate() {
+    $('date-mode').value = 'addto';
     const today = new Date();
-    const todayISO = localISO(today);
     const plus30 = new Date(today);
     plus30.setDate(today.getDate() + 30);
-    const plus30ISO = localISO(plus30);
-    if ($('date-from')) $('date-from').value = todayISO;
-    if ($('date-to'))   $('date-to').value = plus30ISO;
+    $('date-from').value = localISO(today);
+    $('date-to').value = localISO(plus30);
+    $('date-days').value = $('date-days').defaultValue;
     dateUpdateUI();
     dateCalc();
-  })();
+  }
+  resetDate();
 
   // Copy + copied state
   (function () {
@@ -418,22 +412,7 @@
     });
   })();
 
-  // Reset
-  (function () {
-    const resetBtn = $('date-reset');
-    if (!resetBtn) return;
-    resetBtn.addEventListener('click', function () {
-      $('date-mode').value = 'between';
-      const today = new Date();
-      const plus30 = new Date(today);
-      plus30.setDate(today.getDate() + 30);
-      if ($('date-from')) $('date-from').value = localISO(today);
-      if ($('date-to'))   $('date-to').value = localISO(plus30);
-      if ($('date-days')) $('date-days').value = '100';
-      dateUpdateUI();
-      dateCalc();
-    });
-  })();
+  $('date-reset').addEventListener('click', resetDate);
 
   // Mode change handler
   (function () {
@@ -461,6 +440,7 @@
       const d = chip.getAttribute('data-days');
       if (m !== null) $('date-mode').value = m;
       if (d !== null && $('date-days')) $('date-days').value = d;
+      $('date-from').value = localISO(new Date());
       dateUpdateUI();
       dateCalc();
     });

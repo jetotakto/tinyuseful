@@ -1632,6 +1632,26 @@ body.ui-hifi .hf-chip:hover { background: rgba(19,18,16,0.06); }
 body.ui-hifi .hf-chip:focus-visible {
   outline: 2px solid var(--accent); outline-offset: 3px;
 }
+body.ui-hifi .hf-chips.hf-home-shortcuts {
+  padding: 12px 0 0;
+}
+body.ui-hifi .hf-home-shortcuts .hf-chip {
+  min-height: 44px;
+  text-decoration: none;
+}
+body.ui-hifi .hf-pack-options {
+  margin: 12px 0;
+}
+body.ui-hifi .hf-pack-options summary {
+  cursor: pointer;
+  padding: 12px 0;
+  min-height: 44px;
+  font-weight: 700;
+}
+body.ui-hifi .hf-pack-options p {
+  margin: 0 0 12px;
+  color: var(--ink-2);
+}
 body.ui-hifi .hf-chip.hf-chip-static {
   cursor: default;
   color: var(--ink-3);

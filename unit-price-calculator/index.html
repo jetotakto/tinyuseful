@@ -27,7 +27,7 @@
 
 <link rel="preload" href="/fonts/archivo-v1-latin/Archivo-VariableFont.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/jetbrains-mono-v24-latin/jetbrains-mono-v24-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/style.css?v=20260718-b4">
+<link rel="stylesheet" href="/style.css?v=20261121-discovery">
 <script src="/js/helpers.js?v=20260611-parse"></script>
 <script>window.parseLocaleNumber=window.parseLocaleNumber||function(r){var s=String(r==null?'':r).trim().replace(/[\s ]+/g,'');if(!s)return NaN;var c=(s.match(/,/g)||[]).length,d=(s.match(/\./g)||[]).length;if(c&&d){s=s.lastIndexOf(',')>s.lastIndexOf('.')?s.replace(/\./g,'').replace(',','.'):s.replace(/,/g,'');}else if(c>1){s=s.replace(/,/g,'');}else if(d>1){s=s.replace(/\./g,'');}else{s=s.replace(',','.');}return Number(s);};</script>
 <script>try{var t=localStorage.getItem('tinyuseful-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
@@ -245,6 +245,22 @@
       </div>
     </fieldset>
 
+    <details class="hf-pack-options" id="up-pack-options">
+      <summary>Compare multipacks</summary>
+      <p>For each product, enter the total price and the quantity per pack above, then enter the number of packs below.</p>
+      <div class="hf-field">
+        <label class="lbl" for="up-a-packs"><span>Packs in Product A</span></label>
+        <div class="hf-input">
+          <input type="text" inputmode="numeric" autocomplete="off" id="up-a-packs" value="1">
+        </div>
+      </div>
+      <div class="hf-field">
+        <label class="lbl" for="up-b-packs"><span>Packs in Product B</span></label>
+        <div class="hf-input">
+          <input type="text" inputmode="numeric" autocomplete="off" id="up-b-packs" value="1">
+        </div>
+      </div>
+    </details>
   </div>
 
   <section class="hf-result" id="up-out" role="status" aria-live="polite" aria-atomic="true">
@@ -295,7 +311,7 @@
       <div class="formula">unit price change = (new &minus; old) &divide; old &times; 100</div>
       <p>$4.99 &divide; 12 oz = $0.4158 per oz. If the two units differ, Product B&rsquo;s quantity is converted to Product A&rsquo;s unit first, so both prices are compared per the same unit. Weight and volume never mix.
         <strong>This tool compares only the numbers you enter.</strong> It does not know product quality, coupons, taxes, loyalty pricing, or local store rules.</p>
-      <p class="hf-muted hf-tiny">Updated June 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
+      <p class="hf-muted hf-tiny">Updated November 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
 
       <details class="method-details">
         <summary>Formula, assumptions, rounding &amp; limitations</summary>
@@ -303,6 +319,8 @@
         <h3>Formula</h3>
         <ul>
           <li><code>unit price = price &divide; quantity</code></li>
+          <li>For a multipack, total quantity is the quantity per pack multiplied by the number of packs.</li>
+          <li>Savings are estimated at the higher-unit-price product&rsquo;s quantity. Actual purchases may require whole packs.</li>
           <li>If units differ: <code>quantity B</code> is converted to Product A&rsquo;s unit first (Product A&rsquo;s unit is the comparison unit).</li>
           <li><code>percent cheaper = (higher unit price &minus; lower unit price) &divide; higher unit price &times; 100</code></li>
           <li><code>unit price change = (new unit price &minus; old unit price) &divide; old unit price &times; 100</code></li>
@@ -466,6 +484,7 @@
     $('up-group-b').hidden = !compare;
     $('up-group-old').hidden = compare;
     $('up-group-new').hidden = compare;
+    $('up-pack-options').hidden = !compare;
   }
 
   function upRender(state) {
@@ -487,7 +506,7 @@
     }
 
     if (state.mode === 'compare') {
-      const { upA, upB, unitLabel, pct, winner, d } = state;
+      const { upA, upB, unitLabel, pct, winner, d, savings, savingsQuantity } = state;
       const winnerUP = winner === 'B' ? upB : upA;
       if (winner === 'tie') {
         lblEl.textContent = 'Same price per ' + unitLabel;
@@ -501,7 +520,10 @@
         '<span>Product A</span><span class="v">$' + fmtP(upA, d) + ' / ' + unitLabel + '</span>' +
         '<span>Product B</span><span class="v">$' + fmtP(upB, d) + ' / ' + unitLabel + '</span>' +
         '<span>Difference</span><span class="v">' + (winner === 'tie' ? '0%' : fmt1(pct) + '% cheaper') + '</span>' +
-        '<span>Compared per</span><span class="v">' + unitLabel + '</span>';
+        '<span>Compared per</span><span class="v">' + unitLabel + '</span>' +
+        (winner === 'tie' ? '' :
+          '<span>Estimated savings at ' + fmt4(savingsQuantity) + ' ' + unitLabel + '</span><span class="v">' +
+          (savings < 0.005 ? 'Less than $0.01' : '$' + fmtP(savings, 2)) + '</span>');
       whyEl.innerHTML =
         'A: $' + fmt4(state.priceA) + ' ÷ ' + fmt4(state.qtyA) + ' ' + state.unitALabel + ' = $' + fmt4(upA) +
         ' · B: $' + fmt4(state.priceB) + ' ÷ ' + fmt4(state.qtyB) + ' ' + state.unitBLabel + ' = $' + fmt4(state.upBraw) +
@@ -534,12 +556,18 @@
 
     if (mode === 'compare') {
       const priceA = parseField('up-a-price');
-      const qtyA = parseField('up-a-qty');
+      const packsA = parseLocaleNumber($('up-a-packs').value);
+      const qtyA = parseField('up-a-qty') * packsA;
       const priceB = parseField('up-b-price');
-      const qtyB = parseField('up-b-qty');
+      const packsB = parseLocaleNumber($('up-b-packs').value);
+      const qtyB = parseField('up-b-qty') * packsB;
       const unitA = UNITS[$('up-a-unit').value];
       const unitB = UNITS[$('up-b-unit').value];
 
+      if (!Number.isSafeInteger(packsA) || packsA < 1 || !Number.isSafeInteger(packsB) || packsB < 1) {
+        upRender({ valid: false, message: 'Enter a whole number of packs for each product' });
+        return;
+      }
       if (!Number.isFinite(priceA) || !Number.isFinite(qtyA) || !Number.isFinite(priceB) || !Number.isFinite(qtyB)) {
         upRender({ valid: false });
         return;
@@ -566,6 +594,10 @@
       const upA = priceA / qtyA;
       const upB = priceB / qtyBInA;
       const upBraw = priceB / qtyB;
+      if (qtyBInA <= 0 || ![qtyBInA, upA, upB, upBraw].every(Number.isFinite)) {
+        upRender({ valid: false, message: 'Choose prices and quantities within range' });
+        return;
+      }
 
       let winner, pct;
       if (upA === upB) {
@@ -576,10 +608,12 @@
         winner = 'A'; pct = (upB - upA) / upB * 100;
       }
       const d = unitPriceDecimals(upA, upB);
+      const savingsQuantity = winner === 'B' ? qtyA : qtyBInA;
+      const savings = (winner === 'B' ? priceA : priceB) * (pct / 100);
 
       upRender({
         valid: true, mode: 'compare',
-        priceA, qtyA, priceB, qtyB, upA, upB, upBraw, winner, pct, d,
+        priceA, qtyA, priceB, qtyB, upA, upB, upBraw, winner, pct, d, savings, savingsQuantity,
         unitLabel: unitA.label, unitALabel: unitA.label, unitBLabel: unitB.label
       });
     } else {
@@ -675,6 +709,9 @@
       $('up-b-price').value = DEFAULTS.bPrice;
       $('up-b-qty').value = DEFAULTS.bQty;
       $('up-b-unit').value = DEFAULTS.bUnit;
+      $('up-a-packs').value = $('up-a-packs').defaultValue;
+      $('up-b-packs').value = $('up-b-packs').defaultValue;
+      $('up-pack-options').open = false;
       $('up-old-price').value = DEFAULTS.oldPrice;
       $('up-old-qty').value = DEFAULTS.oldQty;
       $('up-new-price').value = DEFAULTS.newPrice;
@@ -730,6 +767,10 @@
         const v = chip.getAttribute(attr);
         if (v !== null && $(map[attr])) $(map[attr]).value = v;
       });
+      if ($('up-mode').value === 'compare') {
+        $('up-a-packs').value = $('up-a-packs').defaultValue;
+        $('up-b-packs').value = $('up-b-packs').defaultValue;
+      }
       upUpdateUI();
       upCalc();
     });
