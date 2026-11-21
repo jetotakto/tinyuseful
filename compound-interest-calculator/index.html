@@ -106,7 +106,7 @@
         <span>Years</span>
       </label>
       <div class="hf-input">
-        <input type="text" inputmode="numeric" autocomplete="off" enterkeyhint="done" id="ci-years" value="20" aria-label="Number of years">
+        <input type="text" inputmode="decimal" autocomplete="off" enterkeyhint="done" id="ci-years" value="20" aria-label="Number of years">
         <span class="suf" aria-hidden="true">years</span>
       </div>
     </div>
@@ -176,6 +176,7 @@
         <ul>
           <li>The annual rate you enter is fixed for the whole period.</li>
           <li>Monthly contribution is constant and applied at the end of each month.</li>
+          <li>Enter up to 1,000 years. A partial final month counts as a full month for both contributions and interest.</li>
           <li>Compounding is monthly &mdash; neither daily, quarterly, nor annual.</li>
           <li>Both decimal comma (7,0) and decimal point (7.0) are accepted.</li>
         </ul>
@@ -302,7 +303,6 @@
   }
 
   // Public name ciCalc preserved per freeze list
-  // Iterative monthly compounding preserved verbatim from legacy.
   function ciCalc() {
     const P = parseLocaleNumber($('ci-start').value);
     const m = parseLocaleNumber($('ci-monthly').value);
@@ -317,22 +317,26 @@
       ciRender({ valid: false, message: 'Enter a positive number of years' });
       return;
     }
+    if (years > 1000) {
+      ciRender({ valid: false, message: 'Enter a period of up to 1,000 years' });
+      return;
+    }
 
     const r = aprPct / 100 / 12;
-    const n = years * 12;
+    const n = Math.ceil(years * 12);
 
-    // Iterative monthly loop (legacy verbatim).
+    // At most 12,000 monthly contributions.
     let bal = P;
     for (let i = 0; i < n; i++) {
       bal = bal * (1 + r) + m;
     }
-    if (!Number.isFinite(bal)) {
+    const contrib = P + m * n;
+    const interest = bal - contrib;
+    if (![bal, contrib, interest].every(Number.isFinite)) {
       ciRender({ valid: false, message: 'Result out of range' });
       return;
     }
 
-    const contrib = P + m * n;
-    const interest = bal - contrib;
     ciRender({ valid: true, P, m, n, bal, contrib, interest });
   }
 

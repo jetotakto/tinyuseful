@@ -23,7 +23,7 @@ Time Zone Converter
 ## Stack
 
 - Vanilla HTML, CSS, and JavaScript
-- No framework, no build step, no bundler
+- No framework or bundler. Cloudflare Pages runs `node scripts/build-site.mjs` and publishes only `dist/`.
 - Self-hosted fonts (Montserrat, Inter, JetBrains Mono — all SIL OFL)
 - Static deploy on Cloudflare Pages from `main` branch
 - One declared advertising slot per page (Google AdSense)
@@ -44,8 +44,8 @@ Each tool lives at its own URL: `/<tool-slug>/index.html`. The shared stylesheet
 is `/style.css`. Theme toggle (light/dark) is in `/theme.js`. Schema markup,
 Open Graph, and meta tags are in each page's `<head>`.
 
-There is no JavaScript framework. There is no build artifact. What you see in
-the source is what runs in the browser.
+The publish step copies static files without transforming them. Internal project notes
+stay in the repository. Public tool routes come from the sitemap.
 
 ## License
 

@@ -244,6 +244,7 @@
 
         <h3>Limitations</h3>
         <ul>
+          <li>The maximum bill total, including tax and tip, is $1 billion.</li>
           <li>Each person&rsquo;s order is entered as one amount &mdash; item-by-item entry is not modelled.</li>
           <li>Shared items are split equally among all people at the table.</li>
           <li>Whether a service charge is mandatory is not evaluated &mdash; only the math is shown.</li>
@@ -340,26 +341,25 @@
   }
 
   // Pure split math with penny reconciliation (largest remainder, ties to lower index).
-  // Returns null when input combination is invalid for a meaningful split.
+  // Limit totals to a range where sub-cent remainders retain meaningful precision.
   function bsCompute(n, shared, personal, tax, tipVal, tipUnit) {
     const all = [shared, tax, tipVal].concat(personal);
     if (!all.every(Number.isFinite)) return { error: 'incomplete' };
     if (all.some(v => v < 0)) return { error: 'negative' };
     const subs = personal.map(p => p + shared / n);
-    const sumSubs = subs.reduce((a, b) => a + b, 0);
+    const sumSubs = personal.reduce((sum, amount) => sum + amount, shared);
     if (sumSubs <= 0) return { error: 'empty' };
     const tip = tipUnit === 'pct' ? sumSubs * tipVal / 100 : tipVal;
     const billTotal = sumSubs + tax + tip;
-    const exact = subs.map(s => s + (tax + tip) * (s / sumSubs));
-    const targetCents = Math.round(billTotal * 100);
-    const floors = exact.map(v => Math.floor(v * 100 + 1e-9));
-    let leftover = targetCents - floors.reduce((a, b) => a + b, 0);
-    const order = exact
-      .map((v, i) => ({ i, r: (v * 100 + 1e-9) - Math.floor(v * 100 + 1e-9) }))
-      .sort((a, b) => b.r - a.r || a.i - b.i);
-    const cents = floors.slice();
-    let k = 0;
-    while (leftover > 0) { cents[order[k % n].i] += 1; leftover--; k++; }
+    if (!Number.isFinite(billTotal) || billTotal > 1_000_000_000) return { error: 'range' };
+    const targetCents = Math.round((billTotal + Number.EPSILON * billTotal) * 100);
+    const exact = subs.map(s => (s + (s / sumSubs) * (tax + tip)) * 100);
+    const cents = exact.map(Math.floor);
+    const leftover = targetCents - cents.reduce((sum, value) => sum + value, 0);
+    if (!Number.isSafeInteger(leftover) || leftover < 0 || leftover > cents.length) return { error: 'range' };
+    const order = exact.map((value, i) => ({ i, remainder: value - cents[i] }))
+      .sort((a, b) => b.remainder - a.remainder || a.i - b.i);
+    for (const { i } of order.slice(0, leftover)) cents[i]++;
     return { cents, targetCents, sumSubs, tax, tip };
   }
 
@@ -408,6 +408,7 @@
     if (r.error === 'incomplete') { bsRender({ valid: false }); return; }
     if (r.error === 'negative') { bsRender({ valid: false, message: 'Amounts must not be negative' }); return; }
     if (r.error === 'empty') { bsRender({ valid: false, message: 'Enter at least one amount' }); return; }
+    if (r.error === 'range') { bsRender({ valid: false, message: 'Use a bill total of $1 billion or less' }); return; }
     bsRender({ valid: true, cents: r.cents, targetCents: r.targetCents, sumSubs: r.sumSubs, tax: r.tax, tip: r.tip });
   }
 

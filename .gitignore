@@ -44,6 +44,7 @@ tokeny.txt
 *.pem
 
 # OS / editor noise
+/dist/
 Thumbs.db
 .DS_Store
 *.swp
