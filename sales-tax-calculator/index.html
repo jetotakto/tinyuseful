@@ -147,7 +147,7 @@
       <div class="formula">remove tax: net = gross &divide; (1 + rate &divide; 100)</div>
       <p>$100.00 &times; 8.875% = $8.88 tax. Gross $108.88. Two-decimal rounding.
         <strong>Enter your local tax rate.</strong> Rates vary by state, city, and product type. This calculator does not look up rates by location.</p>
-      <p class="hf-muted hf-tiny">Updated July 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
+      <p class="hf-muted hf-tiny">Updated November 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
 
       <details class="method-details">
         <summary>Formula, assumptions, rounding &amp; limitations</summary>
@@ -357,22 +357,18 @@
     const copyBtn = $('vat-copy');
     const out = $('vat-out');
     const lblEl = $('vat-lbl');
+    const copiedMessage = 'Copied to clipboard';
     let origLblText = lblEl ? lblEl.textContent : 'After tax';
     let revertTimer = null;
 
     function setCopied(on) {
       if (!out) return;
       out.classList.toggle('copied', on);
-      // Restore current mode-aware label after copy state ends
-      if (lblEl && !on) {
-        // Let vatCalc set the right label by triggering a render
-        // origLblText snapshot may be stale across mode changes; just trigger recalc
+      if (lblEl && on && lblEl.textContent !== copiedMessage) {
+        origLblText = lblEl.textContent;
+        lblEl.textContent = copiedMessage;
       }
-      if (lblEl && on) {
-        origLblText = lblEl.textContent; // capture current label before swap
-        lblEl.textContent = 'Copied to clipboard';
-      }
-      if (lblEl && !on && origLblText) {
+      if (lblEl && !on && lblEl.textContent === copiedMessage) {
         lblEl.textContent = origLblText;
       }
       if (copyBtn) copyBtn.textContent = on ? '✓ Copied' : 'Copy result';
@@ -381,7 +377,7 @@
     if (copyBtn) copyBtn.addEventListener('click', function () {
       const valEl = $('vat-val');
       if (!valEl || valEl.textContent === '—') return;
-      const currentLbl = lblEl ? lblEl.textContent : 'Result';
+      const currentLbl = lblEl && lblEl.textContent !== copiedMessage ? lblEl.textContent : origLblText;
       const text = currentLbl + ': $' + valEl.textContent;
       const finalize = function () {
         setCopied(true);

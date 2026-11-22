@@ -473,17 +473,18 @@
     const copyBtn = $('bs-copy');
     const out = $('bs-out');
     const lblEl = $('bs-lbl');
+    const copiedMessage = 'Copied to clipboard';
     let origLblText = lblEl ? lblEl.textContent : 'Fair split — highest share';
     let revertTimer = null;
 
     function setCopied(on) {
       if (!out) return;
       out.classList.toggle('copied', on);
-      if (lblEl && on) {
+      if (lblEl && on && lblEl.textContent !== copiedMessage) {
         origLblText = lblEl.textContent;
-        lblEl.textContent = 'Copied to clipboard';
+        lblEl.textContent = copiedMessage;
       }
-      if (lblEl && !on && origLblText) {
+      if (lblEl && !on && lblEl.textContent === copiedMessage) {
         lblEl.textContent = origLblText;
       }
       if (copyBtn) copyBtn.textContent = on ? '✓ Copied' : 'Copy result';

@@ -149,7 +149,7 @@
       <div class="formula">monthly rate = APR &divide; 12 &divide; 100</div>
       <div class="formula">M = P &times; [r(1+r)<sup>n</sup>] &divide; [(1+r)<sup>n</sup> &minus; 1]</div>
       <p><strong>Estimate only. Lender underwriting, qualification, and final terms will differ.</strong> Auto loans typically run 3&ndash;7 years, student loans 10&ndash;20 years, personal loans 2&ndash;7 years. Shorter term = higher monthly payment but less total interest.</p>
-      <p class="hf-muted hf-tiny">Updated June 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
+      <p class="hf-muted hf-tiny">Updated November 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
 
       <details class="method-details">
         <summary>Formula, assumptions, rounding &amp; limitations</summary>
@@ -333,17 +333,18 @@
     const out = $('loan-out');
     const lblEl = $('loan-lbl');
     const valEl = $('loan-val');
+    const copiedMessage = 'Copied to clipboard';
     let origLblText = lblEl ? lblEl.textContent : 'Monthly';
     let revertTimer = null;
 
     function setCopied(on) {
       if (!out) return;
       out.classList.toggle('copied', on);
-      if (lblEl && on) {
+      if (lblEl && on && lblEl.textContent !== copiedMessage) {
         origLblText = lblEl.textContent;
-        lblEl.textContent = 'Copied to clipboard';
+        lblEl.textContent = copiedMessage;
       }
-      if (lblEl && !on && origLblText) {
+      if (lblEl && !on && lblEl.textContent === copiedMessage) {
         lblEl.textContent = origLblText;
       }
       if (copyBtn) copyBtn.textContent = on ? '✓ Copied' : 'Copy result';
@@ -351,7 +352,7 @@
 
     if (copyBtn) copyBtn.addEventListener('click', function () {
       if (!valEl || valEl.textContent === '—') return;
-      const currentLbl = lblEl ? lblEl.textContent : 'Monthly';
+      const currentLbl = lblEl && lblEl.textContent !== copiedMessage ? lblEl.textContent : origLblText;
       const text = currentLbl + ': $' + valEl.textContent;
       const finalize = function () {
         setCopied(true);

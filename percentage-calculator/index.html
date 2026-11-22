@@ -147,7 +147,7 @@
       <div class="formula">X is what % of Y = (X &divide; Y) &times; 100</div>
       <div class="formula">% change Y &rarr; X = ((X &minus; Y) &divide; Y) &times; 100</div>
       <p>15% of 80 = 0.15 &times; 80 = 12. All three calculations run in your browser using basic arithmetic. No probability, no estimate, no API call. Numbers you enter are not sent to a server.</p>
-      <p class="hf-muted hf-tiny">Updated June 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
+      <p class="hf-muted hf-tiny">Updated November 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
 
       <details class="method-details">
         <summary>Assumptions, rounding &amp; privacy</summary>
@@ -333,17 +333,18 @@
     const lblEl = $('pct-lbl');
     const valEl = $('pct-val');
     const perEl = $('pct-per');
+    const copiedMessage = 'Copied to clipboard';
     let origLblText = lblEl ? lblEl.textContent : 'Result';
     let revertTimer = null;
 
     function setCopied(on) {
       if (!out) return;
       out.classList.toggle('copied', on);
-      if (lblEl && on) {
+      if (lblEl && on && lblEl.textContent !== copiedMessage) {
         origLblText = lblEl.textContent;
-        lblEl.textContent = 'Copied to clipboard';
+        lblEl.textContent = copiedMessage;
       }
-      if (lblEl && !on && origLblText) {
+      if (lblEl && !on && lblEl.textContent === copiedMessage) {
         lblEl.textContent = origLblText;
       }
       if (copyBtn) copyBtn.textContent = on ? '✓ Copied' : 'Copy result';
@@ -351,7 +352,7 @@
 
     if (copyBtn) copyBtn.addEventListener('click', function () {
       if (!valEl || valEl.textContent === '—') return;
-      const currentLbl = lblEl ? lblEl.textContent : 'Result';
+      const currentLbl = lblEl && lblEl.textContent !== copiedMessage ? lblEl.textContent : origLblText;
       const perStr = perEl ? perEl.textContent : '';
       const text = currentLbl + ': ' + valEl.textContent + perStr;
       const finalize = function () {

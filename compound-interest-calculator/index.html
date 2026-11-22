@@ -376,17 +376,18 @@
     const out = $('ci-out');
     const lblEl = $('ci-lbl');
     const valEl = $('ci-val');
+    const copiedMessage = 'Copied to clipboard';
     let origLblText = lblEl ? lblEl.textContent : 'Future value';
     let revertTimer = null;
 
     function setCopied(on) {
       if (!out) return;
       out.classList.toggle('copied', on);
-      if (lblEl && on) {
+      if (lblEl && on && lblEl.textContent !== copiedMessage) {
         origLblText = lblEl.textContent;
-        lblEl.textContent = 'Copied to clipboard';
+        lblEl.textContent = copiedMessage;
       }
-      if (lblEl && !on && origLblText) {
+      if (lblEl && !on && lblEl.textContent === copiedMessage) {
         lblEl.textContent = origLblText;
       }
       if (copyBtn) copyBtn.textContent = on ? '✓ Copied' : 'Copy result';
@@ -394,7 +395,7 @@
 
     if (copyBtn) copyBtn.addEventListener('click', function () {
       if (!valEl || valEl.textContent === '—') return;
-      const currentLbl = lblEl ? lblEl.textContent : 'Future value';
+      const currentLbl = lblEl && lblEl.textContent !== copiedMessage ? lblEl.textContent : origLblText;
       const text = currentLbl + ': $' + valEl.textContent;
       const finalize = function () {
         setCopied(true);

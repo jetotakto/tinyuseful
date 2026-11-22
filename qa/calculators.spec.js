@@ -167,3 +167,42 @@ test('the uneven tip FAQ links to Bill Split and matches its search markup', asy
   await expect(page).toHaveURL(origin + '/bill-split-calculator/');
   await expect(page.locator('#bs-shared')).toBeVisible();
 });
+
+for (const tool of [
+  'bill-split-calculator', 'compound-interest-calculator', 'date-calculator',
+  'discount-calculator', 'loan-calculator', 'mortgage-calculator', 'percentage-calculator',
+  'rent-affordability-calculator', 'sales-tax-calculator', 'time-zone-converter',
+  'tip-calculator', 'unit-converter', 'unit-price-calculator'
+]) {
+  test('repeated copy preserves the result and its label on ' + tool, async ({ page }) => {
+    await page.addInitScript(() => {
+      window.copies = [];
+      Object.defineProperty(navigator, 'clipboard', {
+        value: { writeText: async text => { window.copies.push(text); } }
+      });
+    });
+    await page.clock.install();
+    await page.goto(origin + '/' + tool + '/');
+    await page.clock.runFor(250);
+    const headline = page.locator('.hf-result .r-lbl-text');
+    const copy = page.locator('.hf-result button[id$="-copy"]');
+    const original = await headline.textContent();
+    await copy.click();
+    await expect(headline).toHaveText('Copied to clipboard');
+    await copy.click();
+    const copies = await page.evaluate(() => window.copies);
+    expect(copies).toHaveLength(2);
+    expect(copies[0]).toBeTruthy();
+    expect(copies[1]).toBe(copies[0]);
+    await page.clock.fastForward(1800);
+    await expect(headline).toHaveText(original);
+
+    if (tool === 'date-calculator') {
+      await copy.click();
+      await page.locator('#date-mode').selectOption('between');
+      await expect(headline).toHaveText('Days');
+      await page.clock.fastForward(1800);
+      await expect(headline).toHaveText('Days');
+    }
+  });
+}

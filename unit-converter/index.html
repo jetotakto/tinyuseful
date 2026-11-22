@@ -160,7 +160,7 @@
       <div class="formula">&deg;F = &deg;C &times; 9/5 + 32</div>
       <div class="formula">K = &deg;C + 273.15</div>
       <p>All conversions run client-side using these constants. No API call, no rounding from the server, no precision loss in transit.</p>
-      <p class="hf-muted hf-tiny">Updated May 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
+      <p class="hf-muted hf-tiny">Updated November 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
 
       <details class="method-details">
         <summary>Formula, assumptions, rounding &amp; limitations</summary>
@@ -458,17 +458,18 @@
     const lblEl = $('unit-lbl');
     const valEl = $('unit-val-out');
     const perEl = $('unit-per');
+    const copiedMessage = 'Copied to clipboard';
     let origLblText = lblEl ? lblEl.textContent : 'Result';
     let revertTimer = null;
 
     function setCopied(on) {
       if (!out) return;
       out.classList.toggle('copied', on);
-      if (lblEl && on) {
+      if (lblEl && on && lblEl.textContent !== copiedMessage) {
         origLblText = lblEl.textContent;
-        lblEl.textContent = 'Copied to clipboard';
+        lblEl.textContent = copiedMessage;
       }
-      if (lblEl && !on && origLblText) {
+      if (lblEl && !on && lblEl.textContent === copiedMessage) {
         lblEl.textContent = origLblText;
       }
       if (copyBtn) copyBtn.textContent = on ? '✓ Copied' : 'Copy result';

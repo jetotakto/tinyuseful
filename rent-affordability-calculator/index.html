@@ -150,7 +150,7 @@
       <div class="formula">conservative = income &times; 0.20</div>
       <div class="formula">stretch = income &times; ((rule + 5) &divide; 100)</div>
       <p>The 30% rule comes from a 1969 US housing law, not financial science. In high-cost cities (NYC, San Francisco, London), median renters often spend 40&ndash;50%+. <strong>Estimate to inform your search. Landlord approval and what you can comfortably afford will differ.</strong></p>
-      <p class="hf-muted hf-tiny">Updated May 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
+      <p class="hf-muted hf-tiny">Updated November 2026 &middot; Built by Luk&aacute;&scaron;, an architect in Prague.</p>
 
       <details class="method-details">
         <summary>Formula, assumptions, rounding &amp; limitations</summary>
@@ -325,17 +325,18 @@
     const out = $('rent-out');
     const lblEl = $('rent-lbl');
     const valEl = $('rent-val');
+    const copiedMessage = 'Copied to clipboard';
     let origLblText = lblEl ? lblEl.textContent : 'Suggested max rent';
     let revertTimer = null;
 
     function setCopied(on) {
       if (!out) return;
       out.classList.toggle('copied', on);
-      if (lblEl && on) {
+      if (lblEl && on && lblEl.textContent !== copiedMessage) {
         origLblText = lblEl.textContent;
-        lblEl.textContent = 'Copied to clipboard';
+        lblEl.textContent = copiedMessage;
       }
-      if (lblEl && !on && origLblText) {
+      if (lblEl && !on && lblEl.textContent === copiedMessage) {
         lblEl.textContent = origLblText;
       }
       if (copyBtn) copyBtn.textContent = on ? '✓ Copied' : 'Copy result';
@@ -343,7 +344,7 @@
 
     if (copyBtn) copyBtn.addEventListener('click', function () {
       if (!valEl || valEl.textContent === '—') return;
-      const currentLbl = lblEl ? lblEl.textContent : 'Suggested max rent';
+      const currentLbl = lblEl && lblEl.textContent !== copiedMessage ? lblEl.textContent : origLblText;
       const text = currentLbl + ': $' + valEl.textContent;
       const finalize = function () {
         setCopied(true);
