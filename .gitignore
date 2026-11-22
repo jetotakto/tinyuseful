@@ -45,6 +45,8 @@ tokeny.txt
 
 # OS / editor noise
 /dist/
+/qa/node_modules/
+/qa/test-results/
 Thumbs.db
 .DS_Store
 *.swp

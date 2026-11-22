@@ -1,0 +1,12 @@
+{
+  "name": "tinyuseful-browser-checks",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "pretest": "node ../scripts/build-site.mjs",
+    "test": "playwright test calculators.spec.js --workers=1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.1"
+  }
+}
