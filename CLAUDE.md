@@ -85,6 +85,12 @@ Avoid:
 
 ## Workflow
 
+### Automatic deployment of small fixes
+
+The project records Lukáš's release decision in `AUTHORITY_TINYUSEFUL_AUTODEPLOY_SMALL_FIXES_20261122_v1.0.json` in the shared review policy folder. Codex prepares the change and runs the calculator tests on the exact revision. Claude independently reviews the base and head commits and records a PASS with the line `Třída: DROBNÁ OPRAVA` in the project mailbox.
+
+With these checks complete and no open blocker, publish the approved revision to `main` by fast-forward and verify the affected pages on the live site. If another release has advanced `main`, test the combined revision and obtain its review first. If a regression appears after release, revert the change and verify production again. Visual changes and new features require Lukáš's explicit approval.
+
 Before coding:
 1. Read relevant files.
 2. Summarize current architecture.

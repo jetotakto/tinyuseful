@@ -152,3 +152,18 @@ test('100 dollars split equally among three people preserves every cent', async 
     '$33.34', '$33.33', '$33.33', '$100.00 = bill total ✓'
   ]);
 });
+
+test('the uneven tip FAQ links to Bill Split and matches its search markup', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 740 });
+  await page.goto(origin + '/tip-calculator/');
+  const question = 'How do I split a bill unevenly?';
+  const faq = page.locator('details').filter({ has: page.getByText(question, { exact: true }) }).last();
+  await faq.locator('summary').click();
+  const markup = await page.locator('script[type="application/ld+json"]').allTextContents();
+  const questions = markup.map(JSON.parse).find(item => item['@type'] === 'FAQPage').mainEntity;
+  const answer = questions.find(item => item.name === question).acceptedAnswer.text;
+  await expect(faq.locator('.answer')).toHaveText(answer);
+  await faq.getByRole('link', { name: 'Bill Split Calculator' }).click();
+  await expect(page).toHaveURL(origin + '/bill-split-calculator/');
+  await expect(page.locator('#bs-shared')).toBeVisible();
+});
