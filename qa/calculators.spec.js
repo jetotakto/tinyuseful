@@ -118,6 +118,29 @@ for (const fallback of [false, true]) {
   });
 }
 
+test('the main balance exposes one accessible amount and copies the full wrapped value', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 800 });
+  await page.route('**/*.woff2', route => route.abort());
+  await page.addInitScript(() => Object.defineProperty(navigator, 'clipboard', {
+    value: { writeText: async text => { window.copiedText = text; } }
+  }));
+  await page.goto(origin + '/compound-interest-calculator/');
+  const status = page.getByRole('status');
+  const headline = status.locator('.r-num');
+  const start = page.locator('#ci-start');
+  await expect(headline).toMatchAriaSnapshot('- text: $300,851');
+  await start.fill('123456789012345');
+  await expect(headline).toMatchAriaSnapshot('- text: $498,609,730,215,218');
+  const layout = await readAmountLayout(page.locator('#ci-val'));
+  expect(layout.lines.length).toBeGreaterThan(1);
+  await page.getByRole('button', { name: 'Copy result to clipboard' }).click();
+  expect(await page.evaluate(() => window.copiedText)).toBe('Future value: $498,609,730,215,218');
+  await start.fill('');
+  await expect(headline).toMatchAriaSnapshot('- text: —');
+  await start.fill('10000');
+  await expect(headline).toMatchAriaSnapshot('- text: $300,851');
+});
+
 test('100 dollars split equally among three people preserves every cent', async ({ page }) => {
   await page.goto(origin + '/bill-split-calculator/');
   await page.locator('#bs-people').selectOption('3');

@@ -1526,6 +1526,16 @@ body.ui-hifi .hf-result .r-num .per {
   letter-spacing: 0;
 }
 
+/* Expose the complete currency amount as a single text node to screen readers. */
+#ci-readable {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  user-select: none;
+}
 /* Each thousands group stays together when a long compound-interest result wraps. */
 #ci-val {
   flex: 1;
