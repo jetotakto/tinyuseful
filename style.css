@@ -1526,14 +1526,13 @@ body.ui-hifi .hf-result .r-num .per {
   letter-spacing: 0;
 }
 
-/* Size the compound-interest amount to its result card, including when web fonts are unavailable. */
-#ci-out { container-type: inline-size; }
+/* Each thousands group stays together when a long compound-interest result wraps. */
 #ci-val {
+  flex: 1;
   min-width: 0;
-  font-size: min(1em, 17cqi);
   line-height: 1;
-  overflow-wrap: anywhere;
 }
+#ci-val > span { display: inline-block; }
 #ci-break .v, #ci-why { overflow-wrap: anywhere; }
 
 /* copied state (hifi-mobile.jsx HiFiResultCopied L398-419) */

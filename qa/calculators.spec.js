@@ -23,17 +23,37 @@ test.beforeEach(async ({ page }) => {
   });
 });
 
-async function checkSingleLineAmount(result) {
-  const bounds = await result.evaluate(el => {
+async function readAmountLayout(result) {
+  return result.evaluate(el => {
+    const lines = [];
+    const text = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
     const range = document.createRange();
-    range.selectNodeContents(el);
+    let right = 0;
+    let lastTop = null;
+    while (text.nextNode()) {
+      const node = text.currentNode;
+      for (let i = 0; i < node.length; i++) {
+        range.setStart(node, i);
+        range.setEnd(node, i + 1);
+        const rect = range.getBoundingClientRect();
+        if (lastTop === null || Math.abs(rect.top - lastTop) > 1) lines.push('');
+        lines[lines.length - 1] += node.data[i];
+        lastTop = rect.top;
+        right = Math.max(right, rect.right);
+      }
+    }
     return {
-      lines: range.getClientRects().length,
-      right: range.getBoundingClientRect().right,
+      lines,
+      right,
+      fontSize: parseFloat(getComputedStyle(el).fontSize),
       rowRight: el.parentElement.getBoundingClientRect().right
     };
   });
-  expect(bounds.lines).toBe(1);
+}
+
+async function checkSingleLineAmount(result) {
+  const bounds = await readAmountLayout(result);
+  expect(bounds.lines).toHaveLength(1);
   expect(bounds.right).toBeLessThanOrEqual(bounds.rowRight + 1);
 }
 
@@ -47,6 +67,9 @@ for (const width of [320, 360, 390, 1280]) {
     await apr.fill('0');
     await expect(result).toHaveText('130,000');
     await checkSingleLineAmount(result);
+    if (width === 390 || width === 1280) {
+      expect((await readAmountLayout(result)).fontSize).toBe(80);
+    }
 
     await page.locator('#ci-start').fill('123456789012345');
     await expect(result).toHaveText('123,456,789,132,345');
@@ -62,6 +85,38 @@ test('320 px fallback font keeps the default amount on one line', async ({ page 
   await page.evaluate(() => document.fonts.ready.then(() => true));
   await checkSingleLineAmount(page.locator('#ci-val'));
 });
+
+for (const fallback of [false, true]) {
+  test('results keep digit groups and regain their size after resizing, fallback=' + fallback, async ({ page }) => {
+    if (fallback) await page.route('**/*.woff2', route => route.abort());
+    await page.setViewportSize({ width: 390, height: 800 });
+    await page.goto(origin + '/compound-interest-calculator/');
+    await page.evaluate(() => document.fonts.ready.then(() => true));
+    const result = page.locator('#ci-val');
+    if (!fallback) expect((await readAmountLayout(result)).fontSize).toBe(80);
+    await page.locator('#ci-apr').fill('0');
+    await page.locator('#ci-monthly').fill('0');
+    for (const digits of ['202197406', '123456789012345']) {
+      await page.locator('#ci-start').fill(digits);
+      const formatted = Number(digits).toLocaleString('en-US');
+      await expect(result).toHaveText(formatted);
+      for (const width of [320, 360, 390, 1280]) {
+        await page.setViewportSize({ width, height: 800 });
+        await expect(async () => {
+          const layout = await readAmountLayout(result);
+          expect(layout.lines.join('')).toBe(formatted);
+          expect(layout.lines.slice(0, -1).every(line => line.endsWith(','))).toBe(true);
+          expect(layout.right).toBeLessThanOrEqual(layout.rowRight + 1);
+          expect(layout.fontSize).toBeGreaterThanOrEqual(34);
+        }).toPass({ timeout: 2000 });
+      }
+    }
+    await page.locator('#ci-start').fill('10');
+    await expect(result).toHaveText('10');
+    await page.setViewportSize({ width: 390, height: 800 });
+    await expect(result).toHaveCSS('font-size', '80px');
+  });
+}
 
 test('100 dollars split equally among three people preserves every cent', async ({ page }) => {
   await page.goto(origin + '/bill-split-calculator/');
